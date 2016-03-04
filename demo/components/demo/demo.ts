@@ -5,6 +5,7 @@ import {Plunker} from './playground/plunker';
 import {DemoBadges} from './components/badges/badges';
 import {DemoBreadcrumbs} from './components/breadcrumbs/breadcrumbs';
 import {DemoButtons} from './components/buttons/buttons';
+import {DemoDataTables} from './components/datatables/datatables';
 import {DemoIcons} from './components/icons/icons';
 import {DemoAvatars} from './components/images/images';
 import {DemoLookups} from './components/lookups/lookups';
@@ -28,7 +29,8 @@ export interface IComponent {
   ts?: string;
   tsRaw?: string;
   api?: string;
-};
+}
+;
 
 const components: any[] = [
   { key: 'badges', component: DemoBadges },
@@ -46,10 +48,12 @@ const components: any[] = [
   { key: 'sections', component: DemoSections },
   { key: 'spinners', component: DemoSpinners },
   { key: 'tabs', component: DemoTabs },
+  {key: 'datatables', component: DemoDataTables},
+
 ];
 
 const content = {};
-components.forEach(component => {
+components.forEach((component:IComponent) => {
   const { key } = component;
   const path = 'components/' + key + '/' + key;
   component.html = require('!!prismjs?lang=markup!./' + path + '.html');
@@ -68,7 +72,6 @@ components.forEach(component => {
   component.htmlRaw = require('!!raw!./' + path + '.html');
   component.tsRaw = require('!!raw!./' + path + '.ts');
 });
-
 
 @Component({
   template: require('./demo.jade')({ content, components }),
