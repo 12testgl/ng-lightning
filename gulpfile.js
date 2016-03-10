@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json');
+var argv = require('yargs').argv;
 
 var BUILD = tsProject.options.outDir;
 
@@ -50,6 +51,9 @@ gulp.task('build:watch', function() {
 
 function startKarmaServer(isTddMode, done) {
   var config = {configFile: __dirname + '/karma.conf.js', singleRun: !isTddMode, autoWatch: isTddMode};
+
+  var level = argv.logLevel;
+  if (isTddMode && level) config.logLevel = level;
 
   var karmaServer = require('karma').Server;
   new karmaServer(config, done).start();
