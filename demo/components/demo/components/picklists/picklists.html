@@ -1,0 +1,45 @@
+<span class="slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click" [nglDropdown]="items" [(open)]="open" (select)="onSelect($event)">
+  <button class="slds-button slds-button--neutral slds-picklist__label" nglDropdownTrigger>
+    <span class="slds-truncate" *ngIf="!multiple">Select an Option</span>
+    <span class="slds-truncate" *ngIf="multiple">Select some Options</span>
+    <svg aria-hidden="true" class="slds-icon">
+      <use xlink:href="assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+    </svg>
+  </button>
+  <div class="slds-dropdown slds-dropdown--left">
+    <ul class="dropdown__list" role="menu">
+      <li class="slds-dropdown__item" [nglDropdownItem]="'Item1'">
+        <a role="menuitem">
+          <p class="slds-truncate">
+            <svg aria-hidden="true" class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+            </svg>
+            Item1
+          </p>
+        </a>
+      </li>
+      <li class="slds-dropdown__item" [nglDropdownItem]="'Item2'">
+        <a role="menuitem">
+          <p class="slds-truncate">
+            <svg aria-hidden="true" class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+            </svg>
+            Item2
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</span>
+
+<span class="slds-form-element">
+  <div class="slds-form-element__control" style="display: inline-block; padding-left: 15px;">
+    <label class="slds-checkbox">
+      <input type="checkbox" name="options" [(ngModel)]="multiple" />
+      <span class="slds-checkbox--faux"></span>
+      <span class="slds-form-element__label">Select multiple</span>
+    </label>
+  </div>
+</span>
+
+<div *ngIf="items" style="padding-top: 200px;"><span class="slds-text-heading--label">You selected: </span>{{items.sort().join(', ')}}</div>
