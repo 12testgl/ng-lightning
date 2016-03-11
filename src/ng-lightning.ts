@@ -7,6 +7,9 @@ import {NglButtonState} from './buttons/button-state';
 import {NglButtonIcon} from './buttons/button-icon';
 import {NglIconButton} from './buttons/icon';
 import {NglIcon} from './icons/icon';
+import {NglDropdownTrigger} from './dropdowns/dropdown-trigger';
+import {NglDropdown} from './dropdowns/dropdown';
+import {NglDropdownItem} from './dropdowns/dropdown-item';
 import {NglModal} from './modals/modal';
 import {NglPagination} from './paginations/pagination';
 import {NglRating} from './ratings/rating';
@@ -21,6 +24,9 @@ export {NglButtonState} from './buttons/button-state';
 export {NglButtonIcon} from './buttons/button-icon';
 export {NglIconButton} from './buttons/icon';
 export {NglIcon} from './icons/icon';
+export {NglDropdownTrigger} from './dropdowns/dropdown-trigger';
+export {NglDropdown} from './dropdowns/dropdown';
+export {NglDropdownItem} from './dropdowns/dropdown-item';
 export {NglModal} from './modals/modal';
 export {NglPagination} from './paginations/pagination';
 export {NglRating} from './ratings/rating';
@@ -33,6 +39,7 @@ export const NGL_DIRECTIVES = [
   NglBadge,
   NglButton, NglButtonState, NglButtonIcon, NglIconButton,
   NglIcon,
+  NglDropdownTrigger, NglDropdown, NglDropdownItem,
   NglModal,
   NglPagination,
   NglRating,
@@ -41,3 +48,4 @@ export const NGL_DIRECTIVES = [
 ];
 
 export {provideNglConfig} from './config/config';
+export {NglPageClickService} from './common/page-click.service';
