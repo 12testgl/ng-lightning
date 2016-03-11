@@ -6,6 +6,9 @@ import {NglIcon} from '../icons/icon';
   selector: 'ngl-rating',
   changeDetection: ChangeDetectionStrategy.OnPush,
   directives: [NglIcon],
+  host: {
+    'style': 'outline: none; -moz-outline: none; -webkit-outline: none;',
+  },
   template: `
     <ngl-icon [icon]="icon" *ngFor="#r of range" [type]="r <= currentRate ? 'warning' : 'default'" (click)="update(r)" (mouseenter)="enter(r)"></ngl-icon>
   `,

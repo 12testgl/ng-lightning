@@ -101,6 +101,19 @@ describe('Rating Component', () => {
     done();
   }));
 
+  it('should not show the outline when focused', testAsync(({fixture, done}) => {
+    const { nativeElement } = fixture;
+    fixture.detectChanges();
+
+    const rating = nativeElement.querySelector('ngl-rating');
+    rating.focus();
+    fixture.detectChanges();
+
+    const outline = window.getComputedStyle(rating).getPropertyValue('outline-style');
+    expect(outline).toBe('none');
+    done();
+  }));
+
   describe('keyboard interaction', () => {
     it('will change value apropriately', testAsync(({fixture, done}) => {
       const { nativeElement, componentInstance } = fixture;
@@ -148,7 +161,7 @@ describe('Rating Component', () => {
 function testAsync(fn: Function, html: string = null) {
   return injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
     return new Promise((done: Function) => {
-      tcb.overrideTemplate(TestComponent, html).createAsync(TestComponent).then((fixture) => fn({ fixture, done}));
+      tcb.overrideTemplate(TestComponent, html).createAsync(TestComponent).then((fixture) => fn({fixture, done}));
     });
   });
 }
@@ -161,5 +174,7 @@ function testAsync(fn: Function, html: string = null) {
 export class TestComponent {
   value = 2;
   readonly = false;
-  change() {}
+
+  change() {
+  }
 }
