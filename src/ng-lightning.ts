@@ -7,6 +7,9 @@ import {NglButtonState} from './buttons/button-state';
 import {NglButtonIcon} from './buttons/button-icon';
 import {NglIconButton} from './buttons/icon';
 import {NglIcon} from './icons/icon';
+import {NglDropdownTrigger} from './dropdowns/dropdown-trigger';
+import {NglDropdown} from './dropdowns/dropdown';
+import {NglDropdownItem} from './dropdowns/dropdown-item';
 import {NglModal} from './modals/modal';
 import {NglPagination} from './paginations/pagination';
 import {NglPopover} from './popovers/popover';
@@ -23,6 +26,9 @@ export {NglButtonState} from './buttons/button-state';
 export {NglButtonIcon} from './buttons/button-icon';
 export {NglIconButton} from './buttons/icon';
 export {NglIcon} from './icons/icon';
+export {NglDropdownTrigger} from './dropdowns/dropdown-trigger';
+export {NglDropdown} from './dropdowns/dropdown';
+export {NglDropdownItem} from './dropdowns/dropdown-item';
 export {NglModal} from './modals/modal';
 export {NglPagination} from './paginations/pagination';
 export {NglPopover} from './popovers/popover';
@@ -37,6 +43,7 @@ export const NGL_DIRECTIVES = [
   NglBadge,
   NglButton, NglButtonState, NglButtonIcon, NglIconButton,
   NglIcon,
+  NglDropdownTrigger, NglDropdown, NglDropdownItem,
   NglModal,
   NglPagination,
   NglPopover, NglPopoverTrigger,
