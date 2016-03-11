@@ -5,6 +5,8 @@ import {DemoBadges} from './components/badges/badges';
 import {DemoButtons} from './components/buttons/buttons';
 import {DemoIcons} from './components/icons/icons';
 import {DemoAvatars} from './components/images/images';
+import {DemoDropdowns} from './components/dropdowns/dropdowns';
+import {DemoPicklists} from './components/picklists/picklists';
 import {DemoModals} from './components/modals/modals';
 import {DemoPaginations} from './components/paginations/paginations';
 import {DemoRatings} from './components/ratings/ratings';
@@ -24,6 +26,8 @@ interface IComponent {
 const components: any[] = [
   { key: 'badges', component: DemoBadges },
   { key: 'buttons', component: DemoButtons },
+  { key: 'dropdowns', component: DemoDropdowns, readme: require('src/dropdowns/README.dropdowns.md'), api: require('src/dropdowns/API.md') },
+  { key: 'picklists', component: DemoPicklists, readme: require('src/dropdowns/README.picklists.md'), api: require('src/dropdowns/API.md') },
   { key: 'icons', component: DemoIcons },
   { key: 'images', component: DemoAvatars },
   { key: 'modals', component: DemoModals },
@@ -31,7 +35,7 @@ const components: any[] = [
   { key: 'ratings', component: DemoRatings },
   { key: 'spinners', component: DemoSpinners },
   { key: 'tabs', component: DemoTabs },
-].sort((a, b) => a.key.localeCompare(b.key));
+];
 
 const content = {};
 components.forEach(component => {
