@@ -4,6 +4,7 @@ import {Plunker} from './playground/plunker';
 
 import {DemoBadges} from './components/badges/badges';
 import {DemoButtons} from './components/buttons/buttons';
+import {DemoButtonGroups} from './components/button-groups/button-groups';
 import {DemoIcons} from './components/icons/icons';
 import {DemoAvatars} from './components/images/images';
 import {DemoMenus} from './components/menus/menus';
@@ -29,6 +30,7 @@ export interface IComponent {
 const components: any[] = [
   { key: 'badges', component: DemoBadges },
   { key: 'buttons', component: DemoButtons },
+  { key: 'button-groups', component: DemoButtonGroups },
   { key: 'icons', component: DemoIcons },
   { key: 'images', component: DemoAvatars },
   { key: 'menus', component: DemoMenus },
@@ -45,6 +47,7 @@ components.forEach(component => {
   const { key } = component;
   const path = 'components/' + key + '/' + key;
   component.html = require('!!prismjs?lang=markup!./' + path + '.html');
+
   component.ts = require('!!string-replace?search=../../../../../dist&replace=ng-lightning!prismjs?lang=typescript!./' + path + '.ts');
   if (!component.title) {
     component.title = key.charAt(0).toUpperCase() + key.slice(1);

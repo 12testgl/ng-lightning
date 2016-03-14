@@ -7,7 +7,6 @@ import {NGL_DIRECTIVES} from '../../../../../dist/ng-lightning';
     template: require('./buttons.html'),
 })
 export class DemoButtons {
-
     selected: boolean = true;
     iconType: string = 'border';
     sizes: string[] = ['x-small', 'small', 'large'];
