@@ -1,6 +1,6 @@
 {
   "name": "ng-lightning",
-  "version": "0.2.1-0",
+  "version": "0.1.1-0",
   "description": "Native Angular 2 components and directives for Lightning Design System",
   "repository": {
     "type": "git",
@@ -22,7 +22,8 @@
     "demo:build": "npm run build && webpack --config ./demo/webpack.config.js",
     "demo:release": "npm run demo:build && node scripts/gh-pages",
     "prerelease": "npm run build && npm test",
-    "release": "node scripts/release"
+    "release": "node scripts/release",
+    "merge": "node scripts/gh-pr-merge"
   },
   "keywords": [
     "angular",
