@@ -1,0 +1,5 @@
+nav(role="navigation")
+  p.slds-assistive-text {{assistiveText}}
+  ol.slds-breadcrumb(class="slds-list--{{orientation}}", aria-labelledby="bread-crumb-label")
+    li.slds-list__item.slds-text-heading--label(*ngFor="#breadcrumb of breadcrumbs")
+      a(href="{{ breadcrumb.link }}") {{ breadcrumb.content }}

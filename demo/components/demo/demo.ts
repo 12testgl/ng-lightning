@@ -13,6 +13,7 @@ import {DemoPopovers} from './components/popovers/popovers';
 import {DemoRatings} from './components/ratings/ratings';
 import {DemoSpinners} from './components/spinners/spinners';
 import {DemoTabs} from './components/tabs/tabs';
+import {DemoBreadcrumbs} from './components/breadcrumbs/breadcrumbs';
 
 export interface IComponent {
   key: string;
@@ -38,6 +39,7 @@ const components: any[] = [
   { key: 'ratings', component: DemoRatings },
   { key: 'spinners', component: DemoSpinners },
   { key: 'tabs', component: DemoTabs },
+  { key: 'breadcrumbs', component: DemoBreadcrumbs },
 ];
 
 const content = {};
