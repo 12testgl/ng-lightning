@@ -23,6 +23,9 @@ import {NglSpinner} from './spinners/spinner';
 import {NglTabs} from './tabs/tabs';
 import {NglTab} from './tabs/tab';
 import {NglBreadcrumbs} from './breadcrumbs/breadcrumbs';
+import {NglTreeBranchTrigger} from './trees/tree-branch-trigger';
+import {NglTreeBranch} from './trees/tree-branch';
+import {NglTree} from './trees/tree';
 
 export {NglAvatar} from './images/avatar';
 export {NglBadge} from './badges/badge';
@@ -47,6 +50,9 @@ export {NglSpinner} from './spinners/spinner';
 export {NglTabs} from './tabs/tabs';
 export {NglTab} from './tabs/tab';
 export {NglBreadcrumbs} from './breadcrumbs/breadcrumbs';
+export {NglTreeBranchTrigger} from './trees/tree-branch-trigger';
+export {NglTreeBranch} from './trees/tree-branch';
+export {NglTree} from './trees/tree';
 
 export const NGL_DIRECTIVES = [
   NglAvatar,
@@ -63,6 +69,7 @@ export const NGL_DIRECTIVES = [
   NglSection,
   NglSpinner,
   NglTabs, NglTab,
+  NglTreeBranchTrigger, NglTreeBranch, NglTree,
 ];
 
 export {provideNglConfig} from './config/config';
