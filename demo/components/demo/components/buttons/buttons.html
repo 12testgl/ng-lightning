@@ -18,6 +18,6 @@
 <button type="button" [nglButtonIcon]="iconType" class="slds-button--icon-x-small">
   <ngl-icon-button icon="warning"></ngl-icon-button>
 </button>
-<button type="button" nglButtonIcon *ngFor="#size of sizes;">
+<button type="button" [nglButtonIcon] *ngFor="#size of sizes;">
   <ngl-icon-button icon="warning" [size]="size"></ngl-icon-button>
 </button>
