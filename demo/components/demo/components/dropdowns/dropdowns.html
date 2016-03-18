@@ -1,0 +1,31 @@
+<span class="slds-dropdown-trigger slds-dropdown-trigger--click" nglDropdown [(open)]="open">
+  <button class="slds-button slds-button--neutral" nglDropdownTrigger>
+    <span class="slds-truncate">Select an item</span>
+    <ngl-icon icon="down" size="x-small"></ngl-icon>
+  </button>
+  <div class="slds-dropdown slds-dropdown--left">
+    <ul class="dropdown__list" role="menu">
+      <li class="slds-dropdown__item">
+        <a role="menuitem" nglDropdownItem (click)="open = false">
+          <p class="slds-truncate">Item 1</p>
+          <ngl-icon icon="kanban" size="x-small"></ngl-icon>
+        </a>
+      </li>
+      <li class="slds-dropdown__item">
+        <a role="menuitem" nglDropdownItem (click)="open = false">
+          <p class="slds-truncate">Item 2</p>
+          <ngl-icon icon="side_list" size="x-small"></ngl-icon>
+        </a>
+      </li>
+      <li class="slds-dropdown__item">
+        <a role="menuitem" nglDropdownItem (click)="open = false">
+          <p class="slds-truncate">Item 3</p>
+          <ngl-icon icon="table" size="x-small"></ngl-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</span>
+
+<button type="button" nglButton="neutral" (click)="onToggle($event)">Open</button>
+<button type="button" nglButton="neutral" style="margin-left: 0px;" (click)="open = !open">Toggle</button>
