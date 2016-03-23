@@ -23,6 +23,16 @@ function getOutsideDropdownElement(fixtureElement: HTMLElement): HTMLElement {
 
 describe('`nglDropdown`', () => {
 
+  it('should have the \'slds-dropdown-trigger--click\' class', testAsync(({fixture, done}) => {
+    fixture.detectChanges();
+
+    const dropdownEl = getDropdownElement(fixture.nativeElement);
+
+    expect(dropdownEl).toHaveCssClass('slds-dropdown-trigger--click');
+
+    done();
+  }));
+
   it('should be closed when initialized as closed', testAsync(({fixture, done}) => {
     fixture.detectChanges();
 
