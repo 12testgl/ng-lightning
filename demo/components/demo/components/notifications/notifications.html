@@ -1,0 +1,40 @@
+<!-- Application level notifications appear in here / Triggered using the NglNotificationService API -->
+<ngl-notification></ngl-notification>
+
+<!-- Container-local notifications / Using bindings of NglNotification component itself -->
+<template ngFor #type [ngForOf]="['toast', 'alert']">
+  <template ngFor #severity [ngForOf]="['info', 'success', 'warning', 'error', 'offline']">
+    <ngl-notification inline [type]="type" [severity]="severity" *ngIf="inlineNotificationsState[type][severity]">
+      <h2>{{getInlineNotification(type, severity)}}</h2>
+    </ngl-notification>
+  </template>
+</template>
+
+<div class="slds-clearfix slds-p-vertical--small"></div>
+
+<div [(nglPick)]="type" class="slds-button-group" role="group" nglPickActiveClass="slds-button--brand">
+  <button type="button" nglButton="neutral" nglPickOption="toast">Toast</button>
+  <button type="button" nglButton="neutral" nglPickOption="alert">Alert</button>
+</div>
+
+<div class="slds-clearfix slds-p-vertical--small"></div>
+
+<div [(nglPick)]="severity" class="slds-button-group" role="group" nglPickActiveClass="slds-button--brand">
+  <button type="button" nglButton="neutral" nglPickOption="info">Info</button>
+  <button type="button" nglButton="neutral" nglPickOption="success">Success</button>
+  <button type="button" nglButton="neutral" nglPickOption="warning">Warning</button>
+  <button type="button" nglButton="neutral" nglPickOption="error">Error</button>
+  <button type="button" nglButton="neutral" nglPickOption="offline">Offline</button>
+</div>
+
+<div class="slds-clearfix slds-p-vertical--small"></div>
+
+<div [(nglPick)]="appLevel" class="slds-button-group" role="group" nglPickActiveClass="slds-button--brand">
+  <button type="button" nglButton="neutral" [nglPickOption]="true">Application level notifications</button>
+  <button type="button" nglButton="neutral" [nglPickOption]="false">Container level notifications</button>
+</div>
+
+<div class="slds-clearfix slds-p-vertical--small"></div>
+
+<button type="button" nglButton="neutral" (click)="addOrToggle()">{{appLevel ? 'Show' : 'Toggle'}}</button>
+<button type="button" nglButton="neutral" (click)="clear()">Clear</button>

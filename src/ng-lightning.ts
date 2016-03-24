@@ -14,6 +14,7 @@ import {NglDropdownTrigger} from './menus/dropdown-trigger';
 import {NglDropdown} from './menus/dropdown';
 import {NglDropdownItem} from './menus/dropdown-item';
 import {NglModal} from './modals/modal';
+import {NglNotification} from './notifications/notification';
 import {NglPagination} from './paginations/pagination';
 import {NglPick} from './pick/pick';
 import {NglPickOption} from './pick/pick-option';
@@ -42,6 +43,7 @@ export {NglDropdownTrigger} from './menus/dropdown-trigger';
 export {NglDropdown} from './menus/dropdown';
 export {NglDropdownItem} from './menus/dropdown-item';
 export {NglModal} from './modals/modal';
+export {NglNotification, NglNotificationService} from './notifications/notification';
 export {NglPagination} from './paginations/pagination';
 export {NglPick} from './pick/pick';
 export {NglPickOption} from './pick/pick-option';
@@ -65,6 +67,7 @@ export const NGL_DIRECTIVES = [
   NglLookup,
   NglDropdownTrigger, NglDropdown, NglDropdownItem,
   NglModal,
+  NglNotification,
   NglPagination,
   NglPick, NglPickOption,
   NglPill, NglPillImage, NglPillRemove,
