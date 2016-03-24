@@ -56,7 +56,7 @@ module.exports = function(config) {
       reporters: [{type: 'text-summary'}, {type: 'html'}],
     },
 
-    reporters: isTravis ? ['dots'] : ['progress', 'coverage'],
+    reporters: ['progress', 'coverage'],
     port: isTravis ? 9876 : 23011,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -64,6 +64,12 @@ module.exports = function(config) {
     browsers: [isTravis ? 'Firefox' : 'Chrome'],
     singleRun: false,
   };
+
+  // Coveralls reporter
+  if (isTravis) {
+    cfg.reporters = ['dots', 'coverage', 'coveralls'];
+    cfg.coverageReporter.reporters = [{type: 'lcovonly'}];
+  }
 
   if (isSaucelabs) {
     cfg.customLaunchers =  require('./test/browser-providers');
