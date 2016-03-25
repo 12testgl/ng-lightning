@@ -18,6 +18,8 @@ import {NglRating} from './ratings/rating';
 import {NglSpinner} from './spinners/spinner';
 import {NglTabs} from './tabs/tabs';
 import {NglTab} from './tabs/tab';
+import {NglBreadcrumbs} from './breadcrumbs/breadcrumbs';
+import {NglBreadcrumb} from './breadcrumbs/breadcrumb';
 
 export {NglAvatar} from './images/avatar';
 export {NglBadge} from './badges/badge';
@@ -37,6 +39,8 @@ export {NglRating} from './ratings/rating';
 export {NglSpinner} from './spinners/spinner';
 export {NglTabs} from './tabs/tabs';
 export {NglTab} from './tabs/tab';
+export {NglBreadcrumbs} from './breadcrumbs/breadcrumbs';
+export {NglBreadcrumb} from './breadcrumbs/breadcrumb';
 
 export const NGL_DIRECTIVES = [
   NglAvatar,
@@ -50,6 +54,7 @@ export const NGL_DIRECTIVES = [
   NglRating,
   NglSpinner,
   NglTabs, NglTab,
+  NglBreadcrumbs, NglBreadcrumb,
 ];
 
 export {provideNglConfig} from './config/config';
