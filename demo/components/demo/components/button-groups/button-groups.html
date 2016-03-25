@@ -1,0 +1,16 @@
+<div style="height:50px">
+  <button type="button" nglButton="neutral" (click)="addOption()" [disabled]="options.length > 3">
+    <ngl-icon-button icon="add"></ngl-icon-button>
+  </button>
+  <button type="button" nglButton="neutral" (click)="removeOption()" [disabled]="options.length === 0">
+    <ngl-icon-button icon="dash"></ngl-icon-button>
+  </button>
+  <span style="padding-left: 10px;" *ngIf="selectedOption">Selected: <code>{{selectedOption}}</code></span>
+</div>
+<div nglButtonGroup [(selected)]="selectedOption">
+  <button type="button" nglButton="neutral" nglButtonRadio="opt1" activeClass="slds-button--destructive">
+    <ngl-icon-button icon="download" align="left"></ngl-icon-button>Opt1
+  </button>
+  <button type="button" nglButton="neutral" nglButtonRadio="opt2">Opt2</button>
+  <button *ngFor="#option of options" nglButton="neutral" [nglButtonRadio]="option">{{option}}</button>
+</div>
