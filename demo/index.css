@@ -5,7 +5,7 @@ app {
 }
 
 header {
-  background:#363636;
+  background: #363636;
   border-bottom: 1px solid #1c1c1c;
   position:fixed; top:0;
   width:100%;
@@ -15,6 +15,19 @@ header {
 
 header a {
   color: #d9d9d9 !important;
+}
+
+.header-navigation-list {
+  background: #363636;
+  border-color: #505050;
+}
+
+.header-navigation-list a:not(:hover):focus {
+  background: #363636;
+}
+
+.header-navigation-list a:hover {
+  background: #505050;
 }
 
 main {
