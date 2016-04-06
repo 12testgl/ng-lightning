@@ -9,7 +9,16 @@ header
             a.slds-text-heading--small([routerLink]="['Intro']", style="color:#fff;") NG-LIGHTNING
 
       .slds-coll.slds-align-middle.slds-m-left--large.slds-grow
-        a.slds-p-horizontal--small([routerLink]="['Components']") Components
+        a.slds-p-horizontal--small([routerLink]="['Components']")
+          |Components
+          span.slds-dropdown-trigger.slds-dropdown-trigger--click(nglDropdown, [(open)]="navigationOpen", style="margin-left: 2px;", *ngIf="mustShowHeaderNavigation()")
+            ngl-icon(icon="down", size="x-small", type="inverse", nglDropdownTrigger, style="cursor: pointer;")
+            .header-navigation-list.slds-dropdown.slds-dropdown--right
+              ul.dropdown__list(role="menu")
+                each comp in components
+                  li.slds-dropdown__item
+                    a(role="menuitem", nglDropdownItem, (click)="scrollToSection('#{comp.key}'); navigationOpen = false;")
+                      p.slds-truncate #{comp.title}
         a.slds-p-horizontal--small([routerLink]="['Support']") Support
       
       .slds-col.slds-align-middle.slds-no-flex
