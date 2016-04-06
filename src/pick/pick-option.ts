@@ -16,10 +16,17 @@ export class NglPickOption {
   private value: any;
   private _subscription: Subscription;
 
-  constructor(private element: ElementRef, private renderer: Renderer, private nglPick: NglPick) {}
+  constructor(private element: ElementRef, private renderer: Renderer, private nglPick: NglPick) {
+    renderer.setElementAttribute(element.nativeElement, 'role', 'button');
+  }
 
   @HostListener('click')
-  pick() {
+  @HostListener('keydown.Space', ['$event'])
+  @HostListener('keydown.Enter', ['$event'])
+  pick(evt: Event) {
+    if (evt) {
+      evt.preventDefault();
+    }
     this.nglPick.selectOption(this.value);
   }
 
