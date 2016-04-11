@@ -128,6 +128,7 @@ describe('`Pick`', () => {
     <button type="button" (click)="opt2.pick()" class="outside">Trigger</button>
     <span>{{opt1.active}}-{{opt2.active}}</span>`
   ));
+
 });
 
 // Shortcut function to use instead of `injectAsync` for less boilerplate on each `it`
