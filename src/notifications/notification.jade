@@ -1,0 +1,17 @@
+.slds-notify_container(*ngIf="!inline")
+  .slds-notify(role='alert', *ngFor="#message of getMessages()",
+    [class.slds-notify--toast]="message.type === 'toast'",
+    [class.slds-notify--alert]="message.type === 'alert'",
+    [class.slds-theme--alert-texture]="message.type === 'alert'",
+    [class.slds-theme--success]="message.severity === 'success'",
+    [class.slds-theme--warning]="message.severity === 'warning'",
+    [class.slds-theme--error]="message.severity === 'error'",
+    [class.slds-theme--offline]="message.severity === 'offline'",
+  )
+    span.slds-assistive-text {{getAssistiveDescription(message)}}
+    button.slds-notify__close(type="button", *ngIf="message.enableManualClose", nglButtonIcon="inverse", (click)="removeMessage(message.id)")
+      ngl-icon-button(icon="close", alt="Close")
+    h2([innerHtml]="message.content")
+.slds-notify(*ngIf="inline", role='alert', [ngClass]="[type === 'alert' ? 'slds-theme--alert-texture' : 'slds-m-around--none', 'slds-notify--' + type, 'slds-theme--' + severity]")
+  span.slds-assistive-text {{getAssistiveDescription(severity)}}
+  ng-content
