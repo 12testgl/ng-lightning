@@ -3,8 +3,6 @@ import {Component, provide, enableProdMode} from 'angular2/core';
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {bootstrap} from 'angular2/platform/browser';
 
-import {provideNglConfig} from '../dist/ng-lightning';
-
 import {IntroRoute} from './components/intro/intro';
 import {DemoRoute} from './components/demo/demo';
 import {SupportRoute} from './components/support/support';
@@ -29,5 +27,4 @@ export class App {}
 bootstrap(App, [
   ROUTER_PROVIDERS,
   provide(LocationStrategy, {useClass: HashLocationStrategy}),
-  provideNglConfig(),
 ]);

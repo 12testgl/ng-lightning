@@ -1,10 +1,11 @@
-import {Component, Input, Attribute, ElementRef, Renderer, ChangeDetectionStrategy, Inject} from 'angular2/core';
-import {NGL_CONFIG, IConfig} from '../config/config';
+import {Component, Input, Attribute, ElementRef, Renderer, ChangeDetectionStrategy} from 'angular2/core';
+import {NglConfig, provideNglConfig} from '../config/config';
 
 @Component({
   selector: 'ngl-icon-button',
   templateUrl: './icon.jade',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideNglConfig()],
 })
 export class NglIconButton {
   @Input() icon: string;
@@ -13,7 +14,7 @@ export class NglIconButton {
   @Input() alt: string;
 
   constructor(@Attribute('state') public state: 'not-selected' | 'selected' | 'selected-focus',
-              @Inject(NGL_CONFIG) public config: IConfig, element: ElementRef, renderer: Renderer) {
+              public config: NglConfig, element: ElementRef, renderer: Renderer) {
 
     if (this.state) {
       renderer.setElementClass(element.nativeElement, `slds-text-${this.state}`, true);
