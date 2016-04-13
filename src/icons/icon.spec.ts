@@ -1,7 +1,6 @@
 import {it, describe, expect, injectAsync, TestComponentBuilder} from 'angular2/testing';
 import {Component} from 'angular2/core';
 import {NglIcon} from './icon';
-import {provideNglConfig} from '../config/config';
 
 function getIconElement(element: Element): HTMLElement {
   return <HTMLDivElement>element.querySelector('svg');
@@ -103,7 +102,6 @@ function testAsync(html: string, fn: Function) {
 @Component({
   directives: [NglIcon],
   template: '',
-  providers: [provideNglConfig()],
 })
 export class TestComponent {
   size = 'small';
