@@ -23,7 +23,8 @@ module.exports = function(config) {
         'node_modules/es6-shim/es6-shim.js',
         // paths loaded by Karma
         {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: false},
-        {pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: false},
+        {pattern: 'node_modules/reflect-metadata/Reflect.js', included: true, watched: false},
+        {pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: false},
         {pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: false},
         {pattern: 'node_modules/angular2/bundles/angular2.js', included: true, watched: false},
         {pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: false},
