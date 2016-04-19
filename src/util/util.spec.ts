@@ -29,6 +29,7 @@ describe('utility', () => {
     expect(isInt('')).toBe(false);
     expect(isInt('1a')).toBe(false);
     expect(isInt('4e2a')).toBe(false);
+    expect(isInt('4e-2')).toBe(false);
     expect(isInt(null)).toBe(false);
     expect(isInt(undefined)).toBe(false);
     expect(isInt(NaN)).toBe(false);
