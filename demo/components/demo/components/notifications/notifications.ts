@@ -8,4 +8,12 @@ import {NGL_DIRECTIVES} from '../../../../../dist/ng-lightning';
 })
 export class DemoNotifications {
   showAlert = false;
+
+  show() {
+    this.showAlert = true;
+  }
+
+  onClose(reason: string) {
+    this.showAlert = false;
+  }
 }
