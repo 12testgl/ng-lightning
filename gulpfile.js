@@ -110,7 +110,9 @@ gulp.task('tdd', gulp.series('test:clean-build', function tdd_impl(done) {
     process.exit(1);
   });
 
-  gulp.watch([PATHS.spec, PATHS.templates], gulp.series('test:build'));
+  setTimeout(function() {
+    gulp.watch([PATHS.spec, PATHS.templates], gulp.series('test:build'));
+  }, 1000);
 }));
 
 gulp.task('prepublish', gulp.series('build', function prepublish_impl() {
