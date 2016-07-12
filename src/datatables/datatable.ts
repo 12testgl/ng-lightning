@@ -3,11 +3,7 @@ import {Subscription} from 'rxjs/Rx';
 import {NglDatatableColumn} from './column';
 import {NglInternalDatatableHeadCell} from './_head';
 import {NglInternalDatatableCell} from './_cell';
-
-export interface INglDatatableSort {
-  key: string;
-  order: 'asc' | 'desc';
-};
+import {INglDatatableSort} from './directives';
 
 @Component({
   selector: 'table[ngl-datatable]',

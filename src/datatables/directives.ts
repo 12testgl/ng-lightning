@@ -6,9 +6,13 @@ export {NglDatatable} from './datatable';
 export {NglDatatableColumn} from './column';
 export {NglDatatableCell} from './cell';
 
-
 export const NGL_DATATABLE_DIRECTIVES: Array<any> = [
   NglDatatable,
   NglDatatableColumn,
   NglDatatableCell,
 ];
+
+export interface INglDatatableSort {
+  key: string;
+  order: 'asc' | 'desc';
+};
