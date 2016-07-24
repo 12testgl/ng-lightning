@@ -25,4 +25,10 @@ module.exports = {
     platform: 'Windows 10',
     version: '20.10240'
   },
+  'SL_IE_11': {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 10',
+    version: '11.103'
+  },
 };

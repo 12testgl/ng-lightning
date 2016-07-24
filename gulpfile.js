@@ -20,6 +20,8 @@ var PATHS = {
   temp: 'temp/',
 };
 
+var TESTIE = ['IE_no_addons'];
+
 var inlineTemplatesTask = lazypipe()
   .pipe(inlineTemplates, {
     base: '/src',
@@ -85,6 +87,7 @@ gulp.task('build:watch', function() {
 function startKarmaServer(isTddMode, done) {
   var config = {configFile: __dirname + '/karma.conf.js', singleRun: !isTddMode, autoWatch: isTddMode};
   if (argv.logLevel) config.logLevel = argv.logLevel;
+  if (argv.ie) config.browsers = TESTIE;
 
   var karmaServer = require('karma').Server;
   var server = new karmaServer(config, done);
