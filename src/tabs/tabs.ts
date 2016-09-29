@@ -23,7 +23,16 @@ export class NglTabs {
     this.activate();
   }
 
+  @Input() nglClass: string[] | string;
+
   @Output() selectedChange = new EventEmitter<NglTab>();
+
+  get tabGroupClasses(): string {
+    if (Array.isArray(this.nglClass)) {
+      return this.nglClass.join(' ');
+    }
+    return this.nglClass || '';
+  }
 
   ngAfterContentInit() {
     // Initial selection after all tabs are created

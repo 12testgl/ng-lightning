@@ -37,6 +37,22 @@ describe('Tabs Component', () => {
     expect(tabs).toHaveCssClass('slds-tabs--default__nav');
   });
 
+  it('should render the tabs container with `[nglClass]` classes applied using a `string[]`', () => {
+    const fixture = createTestComponent(`<ngl-tabs [(selected)]="selectedTab" [nglClass]="['foo', 'bar']"></ngl-tabs>`);
+    const tabs = getTabsElement(fixture.nativeElement);
+    expect(tabs).toHaveCssClass('slds-tabs--default__nav');
+    expect(tabs).toHaveCssClass('foo');
+    expect(tabs).toHaveCssClass('bar');
+  });
+
+  it('should render the tabs container with `[nglClass]` classes applied using a `string`', () => {
+    const fixture = createTestComponent(`<ngl-tabs [(selected)]="selectedTab" nglClass="foo bar"></ngl-tabs>`);
+    const tabs = getTabsElement(fixture.nativeElement);
+    expect(tabs).toHaveCssClass('slds-tabs--default__nav');
+    expect(tabs).toHaveCssClass('foo');
+    expect(tabs).toHaveCssClass('bar');
+  });
+
   it('should render the tab headers', () => {
     const fixture = createTestComponent();
     expectHeaders(fixture.nativeElement, ['First', 'Second',  'Third tab', 'Fourth tab']);
