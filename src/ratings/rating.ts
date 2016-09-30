@@ -12,6 +12,7 @@ import {toBoolean} from '../util/util';
     'aria-valuemin': '0',
     '[attr.aria-valuemax]': 'max',
   },
+  exportAs: 'nglRating',
 })
 export class NglRating {
 
@@ -62,6 +63,25 @@ export class NglRating {
 
     this.currentRate = value;
     this.hover.emit(value);
+  }
+
+  get iconsCount() {
+    return Math.ceil(this.currentRate) || this.currentRate;
+  }
+
+  get iconsOnCount() {
+    return Math.floor(this.currentRate);
+  }
+
+  xPos(iconIndex = 1, mult = 1) {
+    if (iconIndex <= Math.floor(this.currentRate)) {
+      return '0';
+    }
+    return `${(this.currentRate - iconIndex) * 100 * mult}%`;
+  }
+
+  xPosRev(iconIndex = 1) {
+    return this.xPos(iconIndex, -1);
   }
 
   @HostListener('mouseleave') reset() {
