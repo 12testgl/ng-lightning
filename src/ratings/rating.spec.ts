@@ -25,7 +25,7 @@ function expectState(element: HTMLElement, state: string) {
   expect(stars.length).toBe(state.length);
   expect(+element.firstElementChild.getAttribute('aria-valuemax')).toBe(state.length);
   expect(+element.firstElementChild.getAttribute('aria-valuenow')).toBe((state.match(/\*/g) || []).length);
-  expect(stars.map(icon => icon.classList.contains('slds-icon-text-warning') ? '*' : '-').join('')).toBe(state);
+  expect(stars.map(icon => icon.style.fill === 'rgb(255, 183, 93)' ? '*' : '-').join('')).toBe(state);
 }
 
 describe('Rating Component', () => {
@@ -170,6 +170,15 @@ describe('Rating Component', () => {
       expect(icon).not.toHaveCssClass('slds-icon--small');
       expect(icon).not.toHaveCssClass('slds-icon--large');
     });
+  });
+
+  it('should custom on/off color', () => {
+    const on = 'rgb(0, 0, 0)';
+    const off = 'rgb(255, 255, 255)';
+    const fixture = createTestComponent(`<ngl-rating rate="3" colorOn="${on}" colorOff="${off}"></ngl-rating>`);
+
+    const icons = getICons(fixture.nativeElement);
+    expect(icons.map(icon => icon.style.fill)).toEqual([on, on, on, off, off]);
   });
 
   describe('with custom icon', function () {
