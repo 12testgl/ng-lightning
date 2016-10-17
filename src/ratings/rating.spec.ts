@@ -33,8 +33,8 @@ function rgb2hex(value: string) {
 function expectState(element: HTMLElement, state: string) {
   const stars = getICons(element);
   expect(stars.length).toBe(state.length);
-  expect(+element.firstElementChild.getAttribute('aria-valuemax')).toBe(state.length);
-  expect(+element.firstElementChild.getAttribute('aria-valuenow')).toBe((state.match(/\*/g) || []).length);
+  expect(+element.firstElementChild.getAttribute('aria-valuemax')).toBe(state.replace(/-\*/g, '*').length);
+  expect(Math.ceil(+element.firstElementChild.getAttribute('aria-valuenow'))).toBe((state.replace(/-\*/g, '*').match(/\*/g) || []).length);
   expect(stars.map(icon => rgb2hex(icon.style.fill) === '#FFB75D' ? '*' : '-').join('')).toBe(state);
 }
 
@@ -93,6 +93,11 @@ describe('Rating Component', () => {
       fixture.componentInstance.max = 10;
       fixture.detectChanges();
       expectState(fixture.nativeElement, '*****-----');
+    });
+
+    it('should render correclty when using fractional values', () => {
+      const fixture = createTestComponent(`<ngl-rating rate="4.5" max="5"></ngl-rating>`);
+      expectState(fixture.nativeElement, '****-*');
     });
   });
 
