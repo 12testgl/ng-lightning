@@ -1,9 +1,9 @@
 .slds-button-group(role="group")
   p(*ngIf="isCenter", style="flex: auto")
-  button.slds-button.slds-button--neutral(*ngIf="boundaryLinks", [disabled]="!hasPrevious()", (click)="goto(1)") {{firstText}}
-  button.slds-button.slds-button--neutral([disabled]="!hasPrevious()", (click)="goto(current - 1)") {{previousText}}
+  button.slds-button.slds-button--neutral(*ngIf="boundaryLinks", style="border-radius: .25rem 0 0 .25rem;", [disabled]="!hasPrevious()", (click)="goto(1)") {{firstText}}
+  button.slds-button.slds-button--neutral([disabled]="!hasPrevious()", [style.border-radius] = "boundaryLinks ? '0' : '.25rem 0 0 .25rem'", (click)="goto(current - 1)") {{previousText}}
   button.slds-button.slds-button--neutral(*ngFor="let page of pages; trackBy:pageTrackBy", [class.slds-button--brand]="page.number === current", (click)="goto(page.number)", [disabled]="page.disabled")
     | {{page.number}}
-  button.slds-button.slds-button--neutral([disabled]="!hasNext()", (click)="goto(current + 1)") {{nextText}}
-  button.slds-button.slds-button--neutral(*ngIf="boundaryLinks", [disabled]="!hasNext()", (click)="goto(totalPages)") {{lastText}}
+  button.slds-button.slds-button--neutral([disabled]="!hasNext()", [style.border-radius] = "boundaryLinks ? '0' : '0 .25rem .25rem 0'", (click)="goto(current + 1)") {{nextText}}
+  button.slds-button.slds-button--neutral(*ngIf="boundaryLinks", style="border-radius: 0 .25rem .25rem 0;", [disabled]="!hasNext()", (click)="goto(totalPages)") {{lastText}}
   p(*ngIf="isCenter", style="flex: auto")
