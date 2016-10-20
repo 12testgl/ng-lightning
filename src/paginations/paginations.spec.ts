@@ -1,7 +1,7 @@
-import {TestBed, ComponentFixture, async}  from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {createGenericTestComponent} from '../../test/util/helpers';
-import {NglPaginationsModule} from './module';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { createGenericTestComponent } from '../../test/util/helpers';
+import { NglPaginationsModule } from './module';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -29,13 +29,13 @@ function expectPages(element: HTMLElement, definitions: string[]): void {
 
 describe('Pagination Component', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglPaginationsModule]}));
+  beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglPaginationsModule] }));
 
   describe('with default settings', () => {
 
     it('should render the pages correctly', () => {
       const fixture = createTestComponent();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '+2', '3', '4', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '+2', '3', '4', 'Next']);
     });
 
     it('should move to the requested page when clicked', () => {
@@ -67,11 +67,11 @@ describe('Pagination Component', () => {
       const fixture = createTestComponent(null, false);
       fixture.componentInstance.page = 1;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ '-Previous', '+1', '2', '3', '4', 'Next' ]);
+      expectPages(fixture.nativeElement, ['-Previous', '+1', '2', '3', '4', 'Next']);
 
       fixture.componentInstance.page = 4;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '3', '+4', '-Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '3', '+4', '-Next']);
     });
 
     it('should move to first if none defined', async(() => {
@@ -97,23 +97,43 @@ describe('Pagination Component', () => {
     }));
   });
 
+  describe('with isCenter settings', () => {
+    let html = `<ngl-pagination [page]="page" [total]="total" [isCenter]="true"></ngl-pagination>`;
+
+    it('should render the pages correctly', () => {
+      const fixture = createTestComponent(html);
+
+      const pElement = [].slice.call(fixture.nativeElement.querySelectorAll('p'));
+
+      const pResult = pElement.map((el: HTMLButtonElement) => {
+        let text = '';
+        if (el.style.flex === '1 1 auto') {
+          text = '+' + 'p:auto';
+        }
+        return text;
+      });
+
+      expect(pResult).toEqual(['+p:auto', '+p:auto']);
+    });
+  });
+
   describe('with limit settings', () => {
     let html = `<ngl-pagination [page]="page" [total]="total" limit="2"></ngl-pagination>`;
 
     it('should render the pages correctly', () => {
       const fixture = createTestComponent(html);
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '+2', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '+2', 'Next']);
     });
 
     it('should disable pages correctly when on limits', () => {
       const fixture = createTestComponent(html);
       fixture.componentInstance.page = 1;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ '-Previous', '+1', '2', 'Next' ]);
+      expectPages(fixture.nativeElement, ['-Previous', '+1', '2', 'Next']);
 
       fixture.componentInstance.page = 4;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '3', '+4', '-Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '3', '+4', '-Next']);
     });
   });
 
@@ -124,47 +144,47 @@ describe('Pagination Component', () => {
       const fixture = createTestComponent(html);
       fixture.componentInstance.page = 6;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '-...', '5', '+6', '7', '-...', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '-...', '5', '+6', '7', '-...', '10', '11', 'Next']);
     });
 
     it('should render gaps on start correctly', () => {
       const fixture = createTestComponent(html);
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '+2', '3', '-...', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '+2', '3', '-...', '10', '11', 'Next']);
 
       fixture.componentInstance.page = 3;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '+3', '4', '-...', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '+3', '4', '-...', '10', '11', 'Next']);
 
       fixture.componentInstance.page = 4;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '3', '+4', '5', '-...', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '3', '+4', '5', '-...', '10', '11', 'Next']);
 
       fixture.componentInstance.page = 5;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '3', '4', '+5', '6', '-...', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '3', '4', '+5', '6', '-...', '10', '11', 'Next']);
     });
 
     it('should render gaps on end correctly', () => {
       const fixture = createTestComponent(html);
       fixture.componentInstance.page = 7;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '-...', '6', '+7', '8', '9', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '-...', '6', '+7', '8', '9', '10', '11', 'Next']);
 
       fixture.componentInstance.page = 8;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '-...', '7', '+8', '9', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '-...', '7', '+8', '9', '10', '11', 'Next']);
 
       fixture.componentInstance.page = 9;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '-...', '8', '+9', '10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '-...', '8', '+9', '10', '11', 'Next']);
 
       fixture.componentInstance.page = 10;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '-...', '9', '+10', '11', 'Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '-...', '9', '+10', '11', 'Next']);
 
       fixture.componentInstance.page = 11;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '-...', '9', '10', '+11', '-Next' ]);
+      expectPages(fixture.nativeElement, ['Previous', '1', '2', '-...', '9', '10', '+11', '-Next']);
     });
   });
 
@@ -173,18 +193,18 @@ describe('Pagination Component', () => {
 
     it('should render the `First` / `Last` buttons', () => {
       const fixture = createTestComponent(html);
-      expectPages(fixture.nativeElement, [ 'First', 'Previous', '1', '+2', '3', '4', 'Next', 'Last' ]);
+      expectPages(fixture.nativeElement, ['First', 'Previous', '1', '+2', '3', '4', 'Next', 'Last']);
     });
 
     it('should disable the `First` / `Last` buttons correctly', () => {
       const fixture = createTestComponent(html);
       fixture.componentInstance.page = 1;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ '-First', '-Previous', '+1', '2', '3', '4', 'Next', 'Last' ]);
+      expectPages(fixture.nativeElement, ['-First', '-Previous', '+1', '2', '3', '4', 'Next', 'Last']);
 
       fixture.componentInstance.page = 4;
       fixture.detectChanges();
-      expectPages(fixture.nativeElement, [ 'First', 'Previous', '1', '2', '3', '+4', '-Next', '-Last' ]);
+      expectPages(fixture.nativeElement, ['First', 'Previous', '1', '2', '3', '+4', '-Next', '-Last']);
     });
 
     it('should move to the correct page when clicked', () => {
@@ -225,11 +245,11 @@ describe('Pagination Component', () => {
     fixture.detectChanges();
 
     const pageEls = getPageElements(fixture.nativeElement);
-    expect(pageEls.map(el => el.textContent)).toEqual([ '<<', '<', '1', '>', '>>' ]);
+    expect(pageEls.map(el => el.textContent)).toEqual(['<<', '<', '1', '>', '>>']);
 
     fixture.componentInstance.lastText = '>>>';
     fixture.detectChanges();
-    expect(pageEls.map(el => el.textContent)).toEqual([ '<<', '<', '1', '>', '>>>' ]);
+    expect(pageEls.map(el => el.textContent)).toEqual(['<<', '<', '1', '>', '>>>']);
   }));
 });
 

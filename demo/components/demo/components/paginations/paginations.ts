@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'demo-paginations',
@@ -6,4 +6,10 @@ import {Component} from '@angular/core';
 })
 export class DemoPaginations {
   total = 172;
+
+  isCenter: boolean = false;
+
+  changePostion(): void {
+    this.isCenter = !this.isCenter;
+  }
 }

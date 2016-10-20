@@ -4,6 +4,7 @@
 
   * `page: number`: Current page number.
   * `total: number`: Total number of items in all pages.
+  * `isCenter: boolean`: Control the component is displayed in the center.
   * `limit?: number = 0`:  Limit number of visible pages. A value less than one indicates that there is no limitation.
   * `boundaryLinks?: boolean = false`: Whether to display First / Last buttons.
   * `boundaryNumbers?: number = 0`: Define how many of the first and last page numbers to always show.

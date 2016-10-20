@@ -47,6 +47,9 @@ module.exports = function(config) {
         {pattern: 'node_modules/tether/dist/js/tether.min.js', included: true, watched: false},
         {pattern: 'karma-shim.js', included: true, watched: true},
 
+        // Lightning-design-system
+        {pattern: 'node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css', included: true, watched: false},
+
         // Our built application code
         {pattern: 'temp/**/*.js', included: false, watched: true},
 
