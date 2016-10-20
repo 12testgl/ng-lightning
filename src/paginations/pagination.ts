@@ -16,6 +16,7 @@ export class NglPagination implements OnChanges {
   @Input('page') current: number | string;
   @Output() pageChange = new EventEmitter<number>();
 
+  @Input() isCenter: boolean = false;
   @Input() total: number | string;
   @Input() perPage: number | string = 10;
   @Input() limit: number | string = 0;
