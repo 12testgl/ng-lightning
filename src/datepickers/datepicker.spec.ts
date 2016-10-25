@@ -108,8 +108,6 @@ describe('`Datepicker` Component', () => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ]);
       expectYearOptions(fixture.nativeElement, buildArray(1905, 2015));
     });
-
-    jasmine.clock().uninstall();
   }));
 
   it('should change view when input date is changing', async(() => {
@@ -161,8 +159,6 @@ describe('`Datepicker` Component', () => {
       ['18', '19', '20', '21', '22', '23', '24'],
       ['25', '26', '27', '28', '29', '30', '31'],
     ], 'August', '2013');
-
-    jasmine.clock().uninstall();
   }));
 
   it('updates the model when a day is clicked', () => {
@@ -246,8 +242,6 @@ describe('`Datepicker` Component', () => {
 
     const fixture = createTestComponent();
     expectYearOptions(fixture.nativeElement, buildArray(1883, 2010));
-
-    jasmine.clock().uninstall();
   });
 
   describe('keyboard navigation', () => {
@@ -351,8 +345,6 @@ describe('`Datepicker` Component', () => {
     fixture.componentInstance.showToday = false;
     fixture.detectChanges();
     expect(getTableRows(fixture.nativeElement).length).toBe(5);
-
-    jasmine.clock().uninstall();
   });
 
   it('should support custom month and day names', async(() => {
@@ -369,8 +361,6 @@ describe('`Datepicker` Component', () => {
     ], 'Sep', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7' ]);
     });
-
-    jasmine.clock().uninstall();
   }));
 });
 
