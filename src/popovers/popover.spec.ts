@@ -1,6 +1,7 @@
-import {fakeAsync, tick, TestBed, ComponentFixture}  from '@angular/core/testing';
+import {async, fakeAsync, tick, TestBed, ComponentFixture}  from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {createGenericTestComponent} from '../../test/util/helpers';
+import * as Tether from '../../test/mock/tether';
 import {NglPopoversModule} from './module';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
@@ -38,6 +39,13 @@ describe('Popovers', () => {
     expect(popoverEl.textContent.trim()).toBe('I am a tooltip');
     fixture.destroy();
   });
+
+  it('should position after view is initialized', async(() => {
+    createTestComponent();
+    setTimeout(() => {
+      expect((<any>Tether).spyPosition).toHaveBeenCalled();
+    });
+  }));
 
   it('should render popover with string content', () => {
     const fixture = createTestComponent(`<span nglPopover="I am a string" nglOpen="true"></span>`);

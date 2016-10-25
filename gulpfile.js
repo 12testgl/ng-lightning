@@ -13,7 +13,7 @@ var bundle = require('./scripts/bundle');
 var PATHS = {
   src: ['src/**/*.ts','!src/**/*.spec.ts'],
   templates: ['src/**/*.jade'],
-  spec: ['src/**/*.ts', 'test/util/*.ts'],
+  spec: ['src/**/*.ts', 'test/{util,mock}/*.ts'],
   typings: 'typings/index.d.ts',
   temp: 'temp/',
   tsInline: 'temp/inline/',

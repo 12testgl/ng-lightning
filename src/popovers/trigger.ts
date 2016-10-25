@@ -2,6 +2,7 @@ import {Directive, Input, ElementRef, ComponentRef, TemplateRef, ViewContainerRe
         Renderer, ComponentFactoryResolver, Injector, EmbeddedViewRef, ComponentFactory,
         Output, EventEmitter} from '@angular/core';
 import * as Tether from 'tether';
+import 'rxjs/add/operator/take';
 import {NglPopover, Direction} from './popover';
 import {placement} from './placements';
 
@@ -119,7 +120,7 @@ export class NglPopoverTrigger {
 
     this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [this.projectableNodes]);
     this.popover = this.componentRef.instance;
-    this.popover.afterViewInit.subscribe(() => this.tether.position()).unsubscribe();
+    this.popover.afterViewInit.take(1).subscribe(() => this.tether.position());
     this.setTether(true);
 
     // To avoid unexpected behavior when template "lives" inside an OnPush
