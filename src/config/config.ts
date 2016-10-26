@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter, ChangeDetectorRef, OpaqueToken, Inject} from '@angular/core';
+import {Injectable, EventEmitter, OpaqueToken, Inject} from '@angular/core';
 import {INglConfig} from './config.interface';
 
 export const NGL_CONFIG = new OpaqueToken('NGL_CONFIG');
@@ -6,11 +6,13 @@ export const NGL_CONFIG = new OpaqueToken('NGL_CONFIG');
 @Injectable()
 export class NglConfig {
 
+  _emitter = new EventEmitter();
+
   private values: INglConfig = {
     svgPath: 'assets/icons',
+    ratingColorOn: '#FFB75D',
+    ratingColorOff: '#54698D',
   };
-
-  private _emitter = new EventEmitter();
 
   constructor(@Inject(NGL_CONFIG) config: INglConfig = null) {
     this.values = Object.assign({}, this.values, config || {});
@@ -23,10 +25,6 @@ export class NglConfig {
 
   get(key: string) {
     return (<any>this.values)[key];
-  }
-
-  _attach(cd: ChangeDetectorRef) {
-    return this._emitter.subscribe(() => cd.markForCheck());
   }
 }
 
@@ -42,11 +40,15 @@ export function NglConfigurable(config = {changeDetectorProperty: 'cd'}) {
         throw Error(`NglConfig: invalid ChangeDetectorRef at property "${config.changeDetectorProperty}"`);
       }
 
-      this.configSubscription = this.config._attach(changeDetectorRef);
+      this.configSubscription = this.config._emitter.subscribe(() => {
+        if (this.nglOnConfigChanges) {
+          this.nglOnConfigChanges();
+        }
+        changeDetectorRef.markForCheck();
+      });
 
       if (ngOnInit) {
         ngOnInit.call(this);
-        ngOnInit = null;
       }
     };
 
@@ -56,7 +58,6 @@ export function NglConfigurable(config = {changeDetectorProperty: 'cd'}) {
 
       if (ngOnDestroy) {
         ngOnDestroy.call(this);
-        ngOnDestroy = null;
       }
     };
   };

@@ -1,5 +1,7 @@
-import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener, HostBinding, ContentChild, ViewChild, TemplateRef} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener,
+        HostBinding, ContentChild, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import {NglRatingIconTemplate} from './icons';
+import {NglConfig, NglConfigurable} from '../config/config';
 import {toBoolean} from '../util/util';
 
 @Component({
@@ -13,6 +15,7 @@ import {toBoolean} from '../util/util';
     '[attr.aria-valuemax]': 'max',
   },
 })
+@NglConfigurable()
 export class NglRating {
 
   range: number[] = [];
@@ -39,8 +42,8 @@ export class NglRating {
     return this._max;
   }
 
-  @Input() colorOn = '#FFB75D';
-  @Input() colorOff = '#54698D';
+  @Input() colorOn: string;
+  @Input() colorOff: string;
 
   private _template: TemplateRef<any>;
   private _max: number = 5;
@@ -50,12 +53,21 @@ export class NglRating {
   @Output() private rateChange = new EventEmitter<number>();
   @Output() private hover = new EventEmitter<number>();
 
+  constructor(private config: NglConfig, private cd: ChangeDetectorRef) {
+    this.nglOnConfigChanges();
+  }
+
   ngOnInit() {
     this.setRange();
   }
 
   ngAfterContentInit() {
     this._template = this.iconTemplate ? this.iconTemplate.templateRef : this.defaultTemplate;
+  }
+
+  nglOnConfigChanges() {
+    this.colorOn = this.config.get('ratingColorOn');
+    this.colorOff = this.config.get('ratingColorOff');
   }
 
   update(value: number) {

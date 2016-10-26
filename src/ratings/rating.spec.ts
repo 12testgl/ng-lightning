@@ -4,6 +4,7 @@ import {NglRating} from './rating';
 import {NglRatingsModule} from './module';
 import {createGenericTestComponent, dispatchKeyEvent, dispatchEvent, selectElements} from '../../test/util/helpers';
 import {By} from '@angular/platform-browser';
+import {NglConfig} from '../config/config';
 
 const createTestComponent = (html?: string) =>
   createGenericTestComponent(TestComponent, html) as ComponentFixture<TestComponent>;
@@ -214,10 +215,22 @@ describe('Rating Component', () => {
     });
   });
 
-  it('should custom on/off color', () => {
+  it('should have custom on/off color', () => {
     const on = '#000000';
     const off = '#FFFFFF';
     const fixture = createTestComponent(`<ngl-rating rate="3" colorOn="${on}" colorOff="${off}"></ngl-rating>`);
+
+    const icons = getICons(fixture.nativeElement);
+    expect(icons.map(icon => rgb2hex(icon.style.fill))).toEqual([on, on, on, off, off]);
+  });
+
+  it('should have configurable on/off color', () => {
+    const on = '#000000';
+    const off = '#FFFFFF';
+    const fixture = createTestComponent(`<ngl-rating rate="3"></ngl-rating>`);
+
+    fixture.componentInstance.updateConfig(on, off);
+    fixture.detectChanges();
 
     const icons = getICons(fixture.nativeElement);
     expect(icons.map(icon => rgb2hex(icon.style.fill))).toEqual([on, on, on, off, off]);
@@ -264,4 +277,10 @@ export class TestComponent {
   readonly = false;
   size: string;
   change = jasmine.createSpy('change');
+
+  constructor(private config: NglConfig) {}
+
+  updateConfig(ratingColorOn: string, ratingColorOff: string) {
+    this.config.update({ ratingColorOn, ratingColorOff });
+  }
 }

@@ -10,13 +10,13 @@ describe('`NglConfig`', () => {
   it('should emit when changes happen', () => {
     const config = new NglConfig();
 
-    const cd = { markForCheck: jasmine.createSpy('markForCheck') };
-    config._attach(<any>cd);
-    expect(cd.markForCheck).not.toHaveBeenCalled();
+    const cd = jasmine.createSpy('markForCheck');
+    config._emitter.subscribe(cd);
+    expect(cd).not.toHaveBeenCalled();
 
     config.update({ svgPath: 'new/path' });
     expect(config.get('svgPath')).toBe('new/path');
-    expect(cd.markForCheck).toHaveBeenCalled();
+    expect(cd).toHaveBeenCalled();
   });
 
 });
