@@ -30,3 +30,7 @@
   <button type="button" nglButton="neutral" (click)="x.open(0)">Open immediately</button>
   <button type="button" nglButton="neutral" (click)="x.close(0)">Close immediately</button>
 </div>
+
+<div class="slds-text-title--caps slds-m-bottom--small slds-m-top--x-large">Interaction</div>
+<template #interactive>Try clicking <a href="https://github.com/ng-lightning/ng-lightning" target="_blank">this link</a></template>
+<a [nglPopover]="interactive" nglInteractive="true" nglPopoverDelay="500" nglPopoverBehavior nglTooltip>Hover...</a>

@@ -1,6 +1,6 @@
 import {async, fakeAsync, tick, TestBed, ComponentFixture}  from '@angular/core/testing';
 import {Component} from '@angular/core';
-import {createGenericTestComponent} from '../../test/util/helpers';
+import {createGenericTestComponent, dispatchEvent} from '../../test/util/helpers';
 import * as Tether from '../../test/mock/tether';
 import {NglPopoversModule} from './module';
 
@@ -216,6 +216,30 @@ describe('Popovers', () => {
     expect(getPopoverElement(fixture.nativeElement)).toBeFalsy();
     fixture.destroy();
   });
+
+  it('should support interaction with content', fakeAsync(() => {
+    const fixture = createTestComponent('<div nglInteractive="true" [nglPopoverDelay]="[0, 200]" nglPopover="tip" [nglOpen]="open"></div>');
+
+    const popoverElement = getPopoverElement(fixture.nativeElement);
+    expect(popoverElement).toBeTruthy();
+
+    fixture.componentInstance.open = false;
+    fixture.detectChanges();
+
+    dispatchEvent(popoverElement, 'mouseenter');
+    fixture.detectChanges();
+
+    tick(200);
+    fixture.detectChanges();
+    expect(getPopoverElement(fixture.nativeElement)).toBeTruthy();
+
+    dispatchEvent(popoverElement, 'mouseleave');
+    fixture.detectChanges();
+
+    tick(200);
+    fixture.detectChanges();
+    expect(getPopoverElement(fixture.nativeElement)).toBeFalsy();
+  }));
 });
 
 @Component({

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer, HostListener} from '@angular/core';
 import {replaceClass, toBoolean} from '../util/util';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
@@ -11,6 +11,8 @@ export type Direction = 'top' | 'right' | 'bottom' | 'left';
 export class NglPopover {
 
   @Output() afterViewInit = new EventEmitter();
+
+  @Output() onInteraction = new EventEmitter<boolean>();
 
   private _theme: string;
   @Input() set theme(theme: any) {
@@ -38,4 +40,11 @@ export class NglPopover {
   ngAfterViewInit() {
     this.afterViewInit.emit(null);
   }
+
+  @HostListener('mouseenter', ['$event', 'true'])
+  @HostListener('mouseleave', ['$event', 'false'])
+  interactiveHandler(evt: Event, isEnter: boolean) {
+    this.onInteraction.emit(isEnter);
+  }
+
 }

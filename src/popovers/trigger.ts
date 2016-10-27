@@ -31,6 +31,8 @@ export class NglPopoverTrigger {
     [this.openDelay, this.closeDelay] = delay.map(Number);
   }
 
+  @Input() nglInteractive = false;
+
   @Input() set nglOpen(open: boolean) {
     this.toggle(open, open ? this.openDelay : this.closeDelay);
   }
@@ -47,6 +49,7 @@ export class NglPopoverTrigger {
   private openDelay = 0;
   private closeDelay = 0;
   private toggleTimeout: any = null;
+  private interactiveSubscription: any = null;
 
   constructor(private element: ElementRef, private viewContainer: ViewContainerRef, private injector: Injector,
               private renderer: Renderer, componentFactoryResolver: ComponentFactoryResolver) {
@@ -121,6 +124,11 @@ export class NglPopoverTrigger {
     this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [this.projectableNodes]);
     this.popover = this.componentRef.instance;
     this.popover.afterViewInit.take(1).subscribe(() => this.tether.position());
+
+    if (this.nglInteractive) {
+      this.interactiveSubscription = this.popover.onInteraction.subscribe((enter: boolean) => this.nglOpen = enter);
+    }
+
     this.setTether(true);
 
     // To avoid unexpected behavior when template "lives" inside an OnPush
@@ -147,6 +155,10 @@ export class NglPopoverTrigger {
     this.componentRef.destroy();
     this.componentRef = null;
     this.popover = null;
+
+    if (this.interactiveSubscription) {
+      this.interactiveSubscription.unsubscribe();
+    }
 
     this.nglPopoverToggled.emit(false);
   }
