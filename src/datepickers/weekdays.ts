@@ -14,21 +14,16 @@ export class NglDatepickerWeekdays {
   weekdays: any[] = [];
 
   ngOnChanges() {
-    // add days, starting by the first day of week defined by user
-    for (let i = 0 + this.firstDayOfWeek; i < 7; i++) {
+    let offset = this.firstDayOfWeek;
+    for (let i = 0; i < 7; i++) {
       this.weekdays.push({
         id: `weekday-${i}`,
-        label: this.dayNamesShort[i],
-        title: this.dayNamesLong[i],
+        label: this.dayNamesShort[offset],
+        title: this.dayNamesLong[offset],
       });
-    }
-    // complete with any days preceeding firstDayOfWeek
-    for (let i = 0; i < this.firstDayOfWeek; i++) {
-      this.weekdays.push({
-        id: `weekday-${i}`,
-        label: this.dayNamesShort[i],
-        title: this.dayNamesLong[i],
-      });
+      offset++;
+      if (offset > 6)
+        offset = 0;
     }
   }
 }
