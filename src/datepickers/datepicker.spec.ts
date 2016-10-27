@@ -362,6 +362,23 @@ describe('`Datepicker` Component', () => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7' ]);
     });
   }));
+
+  it('should support custom week start (firstDayOfWeek)', async(() => {
+    const currentDate = new Date(2005, 10, 9); // 9 November 2005
+    jasmine.clock().mockDate(currentDate);
+
+    const fixture = createTestComponent(`<ngl-datepicker [date]="date" [firstDayOfWeek]="1" showToday="false"></ngl-datepicker>`);
+
+    expectCalendar(fixture, [
+      ['30-', '31-', '01', '02', '03', '04', '05'],
+      ['06', '07', '08', '09', '10', '11', '12'],
+      ['13', '14', '15', '16', '17', '18', '19'],
+      ['20', '21', '22', '23', '24', '25', '26'],
+      ['27', '28', '29', '*30+', '01-', '02-', '03-'],
+    ], 'September', '2010').then(() => {
+      expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]);
+    });
+  }));
 });
 
 

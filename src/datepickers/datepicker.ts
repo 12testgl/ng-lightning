@@ -21,6 +21,7 @@ export class NglDatepicker {
   @Input() monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   @Input() dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   @Input() dayNamesLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursda', 'Friday', 'Saturday'];
+  @Input() firstDayOfWeek = 0; // sunday by default
 
   @Input('date') set _date(date: Date) {
     this.date = this.parseDate(date);
@@ -148,7 +149,7 @@ export class NglDatepicker {
     const offset = first.getDay();
     const last = new Date(year, month, 0).getDate();
 
-    return this.getDayObjects(year, month - 1, last - offset + 1, last, true);
+    return this.getDayObjects(year, month - 1, last - offset + 1 + this.firstDayOfWeek, last, true);
   }
 
   private daysInNextMonth(year: number, month: number, numOfDays: number) {
