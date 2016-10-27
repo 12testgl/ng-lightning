@@ -7,7 +7,7 @@
 <div>
   Quisque scelerisque lectus vel sodales semper.
   Sed <a [nglPopover]="tip" [nglPopoverPlacement]="placement" [nglOpen]="open" (mouseenter)="open = true" (mouseleave)="open = false">hover</a>  vehicula sapien,
-  vitae tristique <a tabindex="0" [nglPopover]="tip2" nglPopoverBehavior>behavior</a> nisl viverra vitae. Aliquam erat volutpat. Ut accumsan metus vel hendrerit sagittis.
+  vitae tristique <a [nglPopover]="tip2" nglPopoverBehavior>behavior</a> nisl viverra vitae. Aliquam erat volutpat. Ut accumsan metus vel hendrerit sagittis.
 </div>
 <div class="slds-m-top--x-large">
   <button type="button" nglButton="neutral" [nglPopover]="tip2" nglPopoverTheme="success" [nglOpen]="open2" (click)="open2 = !open2">Click me</button>
@@ -24,7 +24,7 @@
 </div>
 
 <div class="slds-text-title--caps slds-m-bottom--small slds-m-top--x-large">Open and close with delay</div>
-<a tabindex="0" nglPopover="I open and close with 1 second delay..." nglPopoverBehavior nglTooltip nglPopoverDelay="1000" #x="nglPopover">Hover me!</a>
+<a nglPopover="I open and close with 1 second delay..." nglInteractive="true" nglPopoverBehavior nglTooltip nglPopoverDelay="1000" #x="nglPopover">Hover me!</a>
 
 <div class="slds-m-top--medium">
   <button type="button" nglButton="neutral" (click)="x.open(0)">Open immediately</button>

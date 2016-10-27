@@ -11,6 +11,12 @@ describe('`NglPopoverBehavior`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglPopoversModule]}));
 
+  it('should add `tabindex` to make it focusable', () => {
+    const fixture = createTestComponent();
+    const triggerEl = fixture.nativeElement.firstElementChild;
+    expect(triggerEl.getAttribute('tabindex')).toBe('0');
+  });
+
   it('should change visibility based on mouse', () => {
     const fixture = createTestComponent();
     const triggerEl = fixture.nativeElement.firstElementChild;

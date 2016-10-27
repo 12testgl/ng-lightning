@@ -1,10 +1,12 @@
-import {Directive, HostListener} from '@angular/core';
+import {Directive, HostListener, HostBinding} from '@angular/core';
 import {NglPopoverTrigger} from './trigger';
 
 @Directive({
   selector: '[nglPopover][nglPopoverBehavior]',
 })
 export class NglPopoverBehavior {
+
+  @HostBinding('attr.tabindex') tabindex = 0;
 
   constructor(private trigger: NglPopoverTrigger) {}
 
