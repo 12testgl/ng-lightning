@@ -14,16 +14,14 @@ export class NglDatepickerWeekdays {
   weekdays: any[] = [];
 
   ngOnChanges() {
-    let offset = this.firstDayOfWeek;
+    this.weekdays = [];
     for (let i = 0; i < 7; i++) {
+      const offset = (this.firstDayOfWeek + i) % 7;
       this.weekdays.push({
         id: `weekday-${i}`,
         label: this.dayNamesShort[offset],
         title: this.dayNamesLong[offset],
       });
-      offset++;
-      if (offset > 6)
-        offset = 0;
     }
   }
 }

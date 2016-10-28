@@ -367,7 +367,7 @@ describe('`Datepicker` Component', () => {
     const currentDate = new Date(2005, 10, 9); // 9 November 2005
     jasmine.clock().mockDate(currentDate);
 
-    const fixture = createTestComponent(`<ngl-datepicker [date]="date" [firstDayOfWeek]="1" showToday="false"></ngl-datepicker>`);
+    const fixture = createTestComponent(`<ngl-datepicker [date]="date" [firstDayOfWeek]="firstDayOfWeek" showToday="false"></ngl-datepicker>`);
 
     expectCalendar(fixture, [
       ['30-', '31-', '01', '02', '03', '04', '05'],
@@ -379,6 +379,21 @@ describe('`Datepicker` Component', () => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]);
     });
   }));
+
+  it('should not have more than seven days in weekdays', async(() => {
+    const currentDate = new Date(2005, 10, 9); // 9 November 2005
+    jasmine.clock().mockDate(currentDate);
+
+    const fixture = createTestComponent(`<ngl-datepicker [date]="date" [firstDayOfWeek]="firstDayOfWeek" showToday="false"></ngl-datepicker>`);
+
+    expect(getDayHeaders(fixture.nativeElement).length).toEqual(7);
+    fixture.componentInstance.firstDayOfWeek = 0;
+    fixture.detectChanges();
+    expect(getDayHeaders(fixture.nativeElement).length).toEqual(7);
+    fixture.componentInstance.customDays = [ '1', '2', '3', '4', '5', '5', '7' ];
+    fixture.detectChanges();
+    expect(getDayHeaders(fixture.nativeElement).length).toEqual(7);
+  }));
 });
 
 
@@ -389,6 +404,7 @@ export class TestComponent {
   date = new Date(2010, 8, 30); // 30 September 2010
   showToday: boolean;
   dateChange = jasmine.createSpy('dateChange');
+  firstDayOfWeek = 1;
 
   customMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   customDays = [ 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7' ];
