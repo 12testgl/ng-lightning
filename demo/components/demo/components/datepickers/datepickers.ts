@@ -7,6 +7,7 @@ import {Component} from '@angular/core';
 })
 export class DemoDatepickers {
   date: Date;
+  firstDayOfWeek = 0;
 
   gotoDate() {
     this.date = new Date(2005, 10, 9);

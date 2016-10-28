@@ -15,13 +15,12 @@ export type NglInternalDate = { year: number, month: number, day: number, disabl
   styles: [`:host { display: block; }`],
 })
 export class NglDatepicker {
-  date: NglInternalDate;
-  current: NglInternalDate;
-
   @Input() monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   @Input() dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   @Input() dayNamesLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursda', 'Friday', 'Saturday'];
 
+  date: NglInternalDate;
+  current: NglInternalDate;
   @Input('date') set _date(date: Date) {
     this.date = this.parseDate(date);
     if (this.date) {
@@ -29,13 +28,18 @@ export class NglDatepicker {
     }
     this.render();
   }
+  @Output() dateChange = new EventEmitter();
 
   showToday = true;
   @Input('showToday') set _showToday(showToday: boolean) {
     this.showToday = toBoolean(showToday);
   }
 
-  @Output() dateChange = new EventEmitter();
+  firstDayOfWeek = 0;
+  @Input('firstDayOfWeek') set _firstDayOfWeek(firstDayOfWeek: number) {
+    this.firstDayOfWeek = firstDayOfWeek;
+    this.render();
+  }
 
   weeks: NglInternalDate[];
   uid = uniqueId('datepicker');
@@ -148,7 +152,7 @@ export class NglDatepicker {
     const offset = first.getDay();
     const last = new Date(year, month, 0).getDate();
 
-    return this.getDayObjects(year, month - 1, last - offset + 1, last, true);
+    return this.getDayObjects(year, month - 1, last - offset + 1 + this.firstDayOfWeek, last, true);
   }
 
   private daysInNextMonth(year: number, month: number, numOfDays: number) {
