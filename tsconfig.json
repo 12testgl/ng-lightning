@@ -10,9 +10,6 @@
     "outDir": "./dist",
     "declaration": true
   },
-  "exclude": [
-    "node_modules"
-  ],
   "compileOnSave": false,
   "buildOnSave": false
 }

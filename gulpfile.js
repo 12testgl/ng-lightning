@@ -14,7 +14,6 @@ var PATHS = {
   src: ['src/**/*.ts','!src/**/*.spec.ts'],
   templates: ['src/**/*.jade'],
   spec: ['src/**/*.ts', 'test/{util,mock}/*.ts'],
-  typings: 'typings/index.d.ts',
   temp: 'temp/',
   tsInline: 'temp/inline/',
   es5: 'temp/es5/',
@@ -74,7 +73,7 @@ gulp.task('build:ts', gulp.series('lint:ts', 'ngc'));
 
 
 gulp.task('bundle:es5', function build_ts_es5_impl() {
-  return gulp.src([PATHS.tsInline + '**/*.ts', PATHS.typings] , {base: PATHS.tsInline})
+  return gulp.src([PATHS.tsInline + '**/*.ts'] , {base: PATHS.tsInline})
     .pipe(tsProject())
     .pipe(gulp.dest(PATHS.es5));
 });
@@ -105,7 +104,7 @@ gulp.task('test:clean', function() {
 });
 
 gulp.task('test:build', function() {
-  var tsResult = gulp.src(PATHS.spec.concat(PATHS.typings), {base: './'})
+  var tsResult = gulp.src(PATHS.spec, {base: './'})
     .pipe(inlineTemplatesTask())
     .pipe(tsProject());
 
@@ -133,9 +132,5 @@ gulp.task('prepublish', gulp.series('build', function prepublish_impl() {
   return gulp.src(['package.json', '*.md', 'LICENSE'])
     .pipe(gulp.dest(PATHS.dist));
 }));
-
-gulp.task('typings:clean', function() {
-  return require('del')('typings');
-});
 
 gulp.task('default', gulp.series('build'));

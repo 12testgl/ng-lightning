@@ -14,8 +14,7 @@
     "skipLibCheck": true
   },
   "files": [
-    "temp/inline/ng-lightning.ts",
-    "typings/index.d.ts"
+    "temp/inline/ng-lightning.ts"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,
