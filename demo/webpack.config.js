@@ -10,41 +10,34 @@ const pkg = require('../package.json');
 /**
  * Get npm lifecycle event to identify the environment
  */
-var ENV = process.env.npm_lifecycle_event;
+const ENV = process.env.npm_lifecycle_event;
 
 const isProduction = ENV === 'demo:build';
 
+
+const DEMO_DIST = path.resolve(__dirname, 'dist');
+
 const config = {
-  cache: false,
   entry: path.resolve(__dirname, 'main.ts'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: DEMO_DIST,
     filename: 'bundle.js'
   },
   devtool: isProduction ? 'source-map' : 'eval-source-map',
   resolve: {
-    extensions: ['', '.ts',  '.js'],
-    alias: {
-      'ng-lightning': path.resolve(__dirname, '../temp/inline'),
-      'bundle.umd.js': path.resolve(__dirname, '../dist/bundles/ng-lightning.umd.js'),
-    }
+    extensions: ['.ts', '.js'],
   },
   module: {
-    loaders: [
-      { test: /\.ts$/, loaders: ['ts', 'angular2-template'] },
+    rules: [
+      { test: /\.ts$/, loaders: ['awesome-typescript-loader?tsconfig=demo/tsconfig.json', 'angular2-template-loader'] },
       { test: /\.pug$/, loaders: ['pug-html-loader'] },
       { test: /\.html$/, loaders: ['raw'] },
       { test: /\.md$/, loader: 'html?minimize=false!markdown' },
     ]
   },
-  ts: {
-    transpileOnly : true,
-    compilerOptions: {
-      declaration: false,
-    },
-  },
+  stats: 'minimal', // Only output when errors or new compilation happen
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin([DEMO_DIST], {
       root: __dirname,
       verbose: true,
     }),
@@ -71,23 +64,30 @@ const config = {
       port: 1111,
       open: false,
       server: {
-        baseDir: [path.resolve(__dirname, 'dist')]
+        baseDir: [DEMO_DIST]
       },
       reloadDelay: 100,
       reloadDebounce: 300,
-    })
+    }),
+
+    // Workaround needed for angular 2 angular/angular#11580
+    new webpack.ContextReplacementPlugin(
+      // The (\\|\/) piece accounts for path separators in *nix and Windows
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      path.resolve(__dirname, '../src') // location of your src
+    ),
+
+    new webpack.LoaderOptionsPlugin({
+      debug: !isProduction,
+      minimize: isProduction
+    }),
   ],
 };
 
 if (isProduction) {
   config.plugins.push(
-    new webpack.optimize.OccurenceOrderPlugin(true),
-
     // Only emit files when there are no errors
     new webpack.NoErrorsPlugin(),
-
-    // Dedupe modules in the output
-    new webpack.optimize.DedupePlugin(),
 
     // Minify all javascript, switch loaders to minimizing mode
     new webpack.optimize.UglifyJsPlugin()

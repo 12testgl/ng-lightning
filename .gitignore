@@ -1,5 +1,4 @@
 ### Build generated
-/dist
 /demo/dist
 /temp/
 /coverage/

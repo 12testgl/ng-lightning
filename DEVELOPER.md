@@ -43,7 +43,7 @@ If you want to watch your source files for changes and build every time use:
 npm start
 ```
 
-**Note**: Generated output is placed into the `dist` folder.
+**Note**: Generated output is placed into the `node_modules/ng-lightning` folder.
 
 ### Tests
 

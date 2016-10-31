@@ -1,14 +1,19 @@
 var gulp = require('gulp');
+var path = require('path');
+var del = require('del')
 var ts = require('gulp-typescript');
-var tsProject = ts.createProject('tsconfig.json');
+var tsProject = ts.createProject('test/tsconfig.json');
 var lazypipe = require('lazypipe');
 var pug = require('pug');
 var inlineTemplates = require('gulp-inline-ng2-template');
 var cache = require('gulp-cached');
+var exec = require('child_process').exec;
+var isWin = /^win/.test(process.platform);
+var executable = isWin ? 'node_modules\\.bin\\ngc.cmd' : './node_modules/.bin/ngc';
+var webpack = require('webpack');
 var argv = require('yargs')
             .boolean('failOnError').default('failOnError', false) // tslint
             .argv;
-var bundle = require('./scripts/bundle');
 
 var PATHS = {
   src: ['src/**/*.ts','!src/**/*.spec.ts'],
@@ -16,8 +21,7 @@ var PATHS = {
   spec: ['src/**/*.ts', 'test/{util,mock}/*.ts'],
   temp: 'temp/',
   tsInline: 'temp/inline/',
-  es5: 'temp/es5/',
-  dist: 'dist/',
+  dist: 'node_modules/ng-lightning',
 };
 
 var inlineTemplatesTask = lazypipe()
@@ -35,7 +39,7 @@ var inlineTemplatesTask = lazypipe()
   });
 
 gulp.task('clean', function() {
-  return require('del')([PATHS.dist, PATHS.tsInline, PATHS.es5]);
+  return del([PATHS.dist, PATHS.temp]);
 });
 
 gulp.task('lint:ts', function lint_ts_impl() {
@@ -58,34 +62,35 @@ gulp.task('ngc:templates', function() {
     .pipe(gulp.dest(PATHS.tsInline));
 });
 
-gulp.task('ngc', gulp.series('ngc:templates', function __ngc(cb) {
-  var exec = require('child_process').exec;
-  var isWin = /^win/.test(process.platform);
-  var executable = isWin ? 'node_modules\\.bin\\ngc.cmd' : './node_modules/.bin/ngc';
-  exec(`${executable} -p ./tsconfig-es2015.json`, (e) => {
+gulp.task('ngc', gulp.series('lint:ts', 'ngc:templates', function __ngc(cb) {
+  exec(`${executable} -p ./tsconfig.json`, (e) => {
     if (e) console.log(e);
-    require('del')('./dist/waste');
+    del('./temp/waste');
     cb();
   }).stdout.on('data', function(data) { console.log(data); });
 }));
 
-gulp.task('build:ts', gulp.series('lint:ts', 'ngc'));
-
-
-gulp.task('bundle:es5', function build_ts_es5_impl() {
-  return gulp.src([PATHS.tsInline + '**/*.ts'] , {base: PATHS.tsInline})
-    .pipe(tsProject())
-    .pipe(gulp.dest(PATHS.es5));
+gulp.task('bundle', function __bundle(done) {
+  webpack({
+    devtool: 'source-map',
+    resolve: { extensions: ['.js'] },
+    entry: path.resolve(__dirname, PATHS.dist, 'ng-lightning.js'),
+    output: {
+      filename: PATHS.dist + '/bundles/ng-lightning.umd.js',
+      library: 'ng-lightning',
+      libraryTarget: 'umd'
+    },
+    externals: [/^\@angular\//, /^rxjs\//, 'tether'], // require but don't bundle
+  }, function(err, stats) {
+    if (err) throw new Error('bundle [webpack]', err);
+    done();
+  });
 });
 
-gulp.task('bundle', gulp.series('bundle:es5', function __bundle() {
-  return bundle();
-}));
-
-gulp.task('build', gulp.series('clean', gulp.series('build:ts', 'bundle')));
+gulp.task('build', gulp.series('clean', 'ngc', 'bundle'));
 
 gulp.task('build:watch', function() {
-  gulp.watch([ PATHS.src, PATHS.templates ], gulp.series('build:ts', 'bundle'));
+  gulp.watch([ PATHS.src, PATHS.templates ], gulp.series('ngc', 'bundle'));
 });
 
 function startKarmaServer(isTddMode, done) {
@@ -100,7 +105,7 @@ function startKarmaServer(isTddMode, done) {
 }
 
 gulp.task('test:clean', function() {
-  return require('del')(PATHS.temp);
+  return del(PATHS.temp);
 });
 
 gulp.task('test:build', function() {

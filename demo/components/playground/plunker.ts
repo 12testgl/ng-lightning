@@ -19,6 +19,8 @@ export class Plunker {
   appModule = appModule;
   systemjs = systemjs;
 
+  localBundle = !process.env.production;
+
   ts() {
     return this.component.ts.replace(/selector: '([^']+)'/, 'selector: \'my-app\'')
               .replace(`'./${this.component.key}.html'`, '\'app/demo.html\'')
@@ -29,7 +31,8 @@ export class Plunker {
     return this.component.html;
   }
 
-  lib = require('!!raw!bundle.umd.js');
+  // Uncomment this if you you want to test UMD bundle during development
+  lib = ''; // require('!!raw!ng-lightning/bundles/ng-lightning.umd.js');
 
   open(component: any) {
     this.component = component;

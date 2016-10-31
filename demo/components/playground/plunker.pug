@@ -5,6 +5,5 @@ form(*ngIf="component", action="https://plnkr.co/edit/?p=preview", method="POST"
   input(type="hidden", name="files[app/demo.ts]", [value]="ts()")
   input(type="hidden", name="files[app/main.ts]", [value]="appMain")
   input(type="hidden", name="files[app/module.ts]", [value]="appModule")
-  if (!production)
-    input(type="hidden", name="files[ng-lightning.umd.js]", [value]="lib")
+  input(*ngIf="localBundle", type="hidden", name="files[ng-lightning.umd.js]", [value]="lib")
   input(type="hidden", name="files[styles.css]", value="body { padding: 20px; }")
