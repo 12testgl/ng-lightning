@@ -18,7 +18,7 @@ export class Plunker {
 
     const { key } = this.component;
 
-    const raw = require('!!raw!../components/' + key + '/' + key + '.ts');
+    const raw = require('!!raw!../demo/' + key + '/' + key + '.ts');
     return raw.replace(/selector: '([^']+)'/, 'selector: \'my-app\'')
               .replace(`'./${key}.html'`, '\'app/demo.html\'')
               .replace(/class Demo(.*) \{/, 'class AppComponent {');
@@ -29,7 +29,7 @@ export class Plunker {
 
     const { key } = this.component;
 
-    const raw = require('!!raw!../components/' + key + '/' + key + '.html');
+    const raw = require('!!raw!../demo/' + key + '/' + key + '.html');
     return raw;
   }
 

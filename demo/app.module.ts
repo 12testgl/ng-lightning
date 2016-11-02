@@ -7,10 +7,10 @@ import {routes} from './app.routing';
 import {NglModule} from 'ng-lightning/ng-lightning';
 
 import {AppComp} from './app';
-import {IntroComponent} from './components/intro/intro';
-import {DemoRoute} from './components/demo/demo';
-import {NglDemoComponentsModule} from './components/demo';
-import {SupportComponent} from './components/support/support';
+import {IntroComponent} from './intro/intro';
+import {PrismComponent} from './intro/prism';
+import {NglDemoComponentsModule} from './components/index';
+import {SupportComponent} from './support/support';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import {SupportComponent} from './components/support/support';
   declarations: [
     AppComp,
     IntroComponent,
-    DemoRoute,
+    PrismComponent,
     SupportComponent,
   ],
   bootstrap: [AppComp],

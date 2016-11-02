@@ -1,7 +1,3 @@
-mixin prism(html)
-  pre.language-bash
-    code.language-bash(ngNonBindable, [innerHtml]=html)
-
 #banner(style="background: #111111; color: #ccc; tex-align: center;")
   .slds-container--large.slds-container--center
     .slds-grid.slds-grid--align-center.slds-p-around--large
@@ -16,9 +12,9 @@ mixin prism(html)
     .slds-col--padded.slds-text-align--center.slds-size--1-of-1.slds-large-size--1-of-3.slds-m-top--medium
       .slds-text-heading--medium BUILDING FOR THE FUTURE
       .slds-m-top--small
-        | Built upon next generation frameworks like
+        | Built upon next generation frameworks like&nbsp;
         b: a(href="https://angular.io/") Angular 2
-        | and
+        | &nbsp;and&nbsp;
         b: a(href="https://www.lightningdesignsystem.com/") Salesforce's Lightning Design System
         | , rest ​assured that you building an application to stand the test of time.
     .slds-col--padded.slds-text-align--center.slds-size--1-of-1.slds-large-size--1-of-3.slds-m-top--medium
@@ -39,7 +35,7 @@ mixin prism(html)
       | Install through
       code npm
       | :
-    +prism('install')
+    prism([html]="install")
 
     p.slds-m-top--large.slds-m-bottom--small
       | If you use&nbsp;
@@ -47,7 +43,7 @@ mixin prism(html)
       | &nbsp;to load your files, you should adjust your configuration to point our UMD bundle through&nbsp;
       a(href="https://unpkg.com/") unpkg
       | &nbsp;or your node_modules, similar to this:
-    +prism('bundle')
+    prism([html]="bundle")
     p.slds-m-top--small You can also check on of our plunker examples for a working setup.
 
   .slds-p-vertical--x-small
@@ -63,7 +59,7 @@ mixin prism(html)
       | Once installed you need to import our main module into your application module by calling&nbsp;
       code NglModule.forRoot()
       | . You should end up with code similar to this:
-    +prism('usageApp')
+    prism([html]="usageApp")
 
   .slds-p-vertical--large
     .slds-text-heading--large.slds-m-bottom--large Configuration
@@ -74,7 +70,7 @@ mixin prism(html)
       code ng-lightning
       | &nbsp;during the initialization of the application, in order to provide your own default values.
       | For example:
-    +prism('config')
+    prism([html]="config")
     p.slds-m-top--small
       | Currently available options can be found&nbsp;
       a(href="https://github.com/ng-lightning/ng-lightning/blob/master/src/config/config.interface.ts") here
@@ -84,4 +80,4 @@ mixin prism(html)
       | If you want to change some config properties during runtime, you can easily achieve it by utilizing the&nbsp;
       code update
       | &nbsp;method like this:
-    +prism('configRun')
+    prism([html]="configRun")

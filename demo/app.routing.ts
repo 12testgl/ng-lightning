@@ -1,11 +1,11 @@
 import {Routes} from '@angular/router';
 
-import {IntroComponent} from './components/intro/intro';
-import {DemoRoute} from './components/demo/demo';
-import {SupportComponent} from './components/support/support';
+import {IntroComponent} from './intro/intro';
+import {DemoComponent} from './components/demo';
+import {SupportComponent} from './support/support';
 
 export const routes: Routes = [
   { path: '', component: IntroComponent },
-  { path: 'components', component: DemoRoute},
+  { path: 'components', component: DemoComponent},
   { path: 'support', component: SupportComponent},
 ];
