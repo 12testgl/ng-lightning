@@ -37,7 +37,7 @@ export class NglDatepicker {
 
   firstDayOfWeek = 0;
   @Input('firstDayOfWeek') set _firstDayOfWeek(firstDayOfWeek: any) {
-    this.firstDayOfWeek = (typeof firstDayOfWeek) === 'number' ? firstDayOfWeek : parseInt(firstDayOfWeek);
+    this.firstDayOfWeek = +firstDayOfWeek;
     this.render();
   }
 

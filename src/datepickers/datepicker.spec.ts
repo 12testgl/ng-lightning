@@ -387,8 +387,24 @@ describe('`Datepicker` Component', () => {
         ['28', '29', '*30+', '01-', '02-', '03-', '04-'],
       ], 'September', '2010').then(() => {
         expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon' ]);
+
+        fixture.componentInstance.date = new Date(2017, 0, 19); // 19 January 2017
+        fixture.componentInstance.firstDayOfWeek = 1;
+        //fixture.detectChanges();
+
+        expectCalendar(fixture, [
+          ['26-', '27-', '28-', '29-', '30-', '31-', '01'],
+          ['02', '03', '04', '05', '06', '07', '08'],
+          ['09', '10', '11', '12', '13', '14', '15'],
+          ['16', '17', '18', '*19+', '20', '21', '22'],
+          ['23', '24', '25', '26', '27', '28', '29'],
+          ['30', '31', '01-', '02-', '03-', '04-', '05-'],
+        ], 'January', '2017').then(() => {
+          expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]);
+        });
       });
     });
+
   }));
 });
 
