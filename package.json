@@ -19,7 +19,7 @@
     "build": "gulp",
     "start": "npm run build && gulp build:watch",
     "demo": "webpack --config ./demo/webpack.config.js --watch",
-    "demo:build": "npm run build && webpack --config ./demo/webpack.config.js",
+    "demo:build": "npm run build && gulp demo:ngc && webpack --config ./demo/webpack.config.js",
     "demo:release": "npm run demo:build && node scripts/gh-pages",
     "prerelease": "npm run build && npm test",
     "release": "node scripts/release"
@@ -95,7 +95,6 @@
     "markdown-loader": "^0.1.7",
     "prismjs": "^1.5.1",
     "pug": "^2.0.0-beta6",
-    "pug-html-loader": "^1.0.9",
     "pug-loader": "^2.3.0",
     "q": "^1.4.1",
     "raw-loader": "^0.5.1",

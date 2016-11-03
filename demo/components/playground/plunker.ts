@@ -8,7 +8,7 @@ const appModule = require('!!raw!./files/app/module.ts');
 
 @Component({
   selector: 'plunker',
-  templateUrl: './plunker.pug',
+  templateUrl: './plunker.html',
   exportAs: 'playground',
 })
 export class Plunker {

@@ -1,0 +1,29 @@
+<section [id]="component.key" class="slds-m-top--x-large">
+  <h1 class="slds-text-heading--large">{{title()}}
+    <button (click)="onTry.emit(component)" style="float:right; font-size:small;" class="slds-button slds-button--neutral slds-button--small">TRY IN PLUNKER</button>
+  </h1>
+  <hr class="slds-m-top--small slds-m-bottom--large"/>
+  <div class="slds-grid">
+    <div class="slds-col slds-size--1-of-2">
+      <ng-content></ng-content>
+    </div>
+    <div class="slds-col slds-size--1-of-2">
+      <div ngNonBindable [innerHtml]="component.readme" class="slds-p-horizontal--small readme"></div>
+    </div>
+  </div>
+  <div class="slds-grid slds-m-top--large">
+    <div class="slds-col">
+      <ngl-tabs [(selected)]="selectedTab">
+        <template ngl-tab="ngl-tab" heading="Markup">
+          <pre class="language-html"><code ngNonBindable [innerHtml]="html()" class="language-html"></code></pre>
+        </template>
+        <template ngl-tab="ngl-tab" heading="Typescript">
+          <pre class="language-typescript"><code ngNonBindable [innerHtml]="ts()" class="language-typescript"></code></pre>
+        </template>
+        <template ngl-tab="ngl-tab" heading="API">
+          <pre class="language-markup"><code ngNonBindable [innerHtml]="component.api" class="language-markup api"></code></pre>
+        </template>
+      </ngl-tabs>
+    </div>
+  </div>
+</section>

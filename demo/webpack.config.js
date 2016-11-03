@@ -11,14 +11,12 @@ const pkg = require('../package.json');
  * Get npm lifecycle event to identify the environment
  */
 const ENV = process.env.npm_lifecycle_event;
-
 const isProduction = ENV === 'demo:build';
-
 
 const DEMO_DIST = path.resolve(__dirname, 'dist');
 
 const config = {
-  entry: path.resolve(__dirname, 'main.ts'),
+  entry: path.resolve(__dirname, isProduction ? 'main-aot.ts' : 'main.ts'),
   output: {
     path: DEMO_DIST,
     filename: 'bundle.js'
@@ -30,7 +28,6 @@ const config = {
   module: {
     rules: [
       { test: /\.ts$/, loaders: ['awesome-typescript-loader?tsconfig=demo/tsconfig.json', 'angular2-template-loader'] },
-      { test: /\.pug$/, loaders: ['pug-html-loader'] },
       { test: /\.html$/, loaders: ['raw'] },
       { test: /\.md$/, loader: 'html?minimize=false!markdown' },
     ]

@@ -93,6 +93,17 @@ gulp.task('build:watch', function() {
   gulp.watch([ PATHS.src, PATHS.templates ], gulp.series('ngc', 'bundle'));
 });
 
+gulp.task('demo:ngc:clean', function() {
+  return del(['demo/**/*.ngfactory.ts', 'temp/demo']);
+});
+
+gulp.task('demo:ngc', gulp.series('demo:ngc:clean', function __ngc(cb) {
+  exec(`${executable} -p ./demo/tsconfig-aot.json`, (e) => {
+    if (e) console.log(e);
+    cb();
+  }).stdout.on('data', function(data) { console.log(data); });
+}));
+
 function startKarmaServer(isTddMode, done) {
   var config = {configFile: __dirname + '/karma.conf.js', singleRun: !isTddMode, autoWatch: isTddMode};
   if (argv.logLevel) config.logLevel = argv.logLevel;

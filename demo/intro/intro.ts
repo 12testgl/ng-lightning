@@ -2,7 +2,7 @@ import {Component, ChangeDetectionStrategy} from '@angular/core';
 const prism = require('prismjs');
 
 @Component({
-  templateUrl: './intro.pug',
+  templateUrl: './intro.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IntroComponent {
