@@ -6,4 +6,8 @@ import {Component} from '@angular/core';
 })
 export class DemoPaginations {
   total = 172;
+
+  pageDefault: number;
+  pageBoundary: number;
+  page: number;
 }

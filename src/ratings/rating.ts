@@ -45,13 +45,13 @@ export class NglRating {
   @Input() colorOn: string;
   @Input() colorOff: string;
 
+  @Output() rateChange = new EventEmitter<number>();
+  @Output() hover = new EventEmitter<number>();
+
   private _template: TemplateRef<any>;
   private _max: number = 5;
   private readonly = false;
   private inputRate: number;
-
-  @Output() private rateChange = new EventEmitter<number>();
-  @Output() private hover = new EventEmitter<number>();
 
   constructor(private config: NglConfig, private cd: ChangeDetectorRef) {
     this.nglOnConfigChanges();

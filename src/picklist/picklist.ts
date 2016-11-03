@@ -16,13 +16,14 @@ import {toBoolean} from '../util/util';
 })
 export class NglPicklist {
 
-  data: any[];
-
   filteredData: any[];
 
-  @Input('data') private set _data(data: any[]) {
-    this.data = data;
+  @Input() set data(data: any[]) {
+    this._data = data;
     this.filterData();
+  }
+  get data() {
+    return this._data;
   }
 
   @Input() set fluid(fluid: boolean | string) {
@@ -63,6 +64,7 @@ export class NglPicklist {
     return typeof(this.filterType) !== 'undefined';
   }
 
+  private _data: any[];
   private _open = false;
   private _changeSubscription: any;
   private _disabled = false;

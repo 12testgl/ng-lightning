@@ -31,7 +31,7 @@ export class NglPickOption {
   @HostListener('click')
   @HostListener('keydown.Space', ['$event'])
   @HostListener('keydown.Enter', ['$event'])
-  pick(evt: Event) {
+  pick(evt?: Event) {
     if (evt) {
       evt.preventDefault();
     }

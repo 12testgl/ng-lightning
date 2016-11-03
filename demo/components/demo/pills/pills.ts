@@ -5,8 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './pills.html',
 })
 export class DemoPills {
+
+  pills: any[] = [];
+
   private pillCounter = 1;
-  private pills = <any[]>[];
 
   ngOnInit() {
     for (let x = 5; x > 0; x--) {

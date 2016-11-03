@@ -5,6 +5,7 @@ import {Component} from '@angular/core';
   templateUrl: './picklist.html',
 })
 export class DemoPicklist {
+  open: boolean = false;
   multiple: boolean = true;
   pick: any = [];
 

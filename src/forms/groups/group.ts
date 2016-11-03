@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, HostBinding, ContentChild, TemplateRef} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, HostBinding, ContentChild, TemplateRef, OnChanges} from '@angular/core';
 import {uniqueId} from '../../util/util';
 import {NglFormLabelTemplate, getFormLabel} from '../form-label';
 
@@ -10,7 +10,7 @@ import {NglFormLabelTemplate, getFormLabel} from '../form-label';
     '[class.slds-form-element]': 'true',
   },
 })
-export class NglFormGroup {
+export class NglFormGroup implements OnChanges {
 
   @Input('label') labelStr: string;
   @ContentChild(NglFormLabelTemplate) labelTpl: NglFormLabelTemplate;
@@ -24,7 +24,7 @@ export class NglFormGroup {
 
   _label: string | TemplateRef<any>;
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this.setFormLabel();
   }
 

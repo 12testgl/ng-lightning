@@ -5,7 +5,7 @@
 /coverage/
 
 ### Package manager generated
-/node_modules/
+node_modules
 
 ### Logs
 *.log

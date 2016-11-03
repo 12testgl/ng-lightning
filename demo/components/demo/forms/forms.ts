@@ -5,6 +5,10 @@ import {Component} from '@angular/core';
   templateUrl: './forms.html',
 })
 export class DemoForms {
+
+  required = false;
+
+  hasError = false;
   error = 'The input has an error!';
 
   days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];

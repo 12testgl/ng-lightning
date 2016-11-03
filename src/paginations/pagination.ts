@@ -13,7 +13,10 @@ export class NglPagination implements OnChanges {
 
   pages: NglPage[] = [];
 
-  @Input('page') current: number | string;
+  current: number;
+  @Input() set page(page: number | string) {
+    this.current = +page;
+  }
   @Output() pageChange = new EventEmitter<number>();
 
   @Input() total: number | string;
@@ -48,7 +51,7 @@ export class NglPagination implements OnChanges {
     this.pageChange.emit(+page);
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this.totalPages = Math.ceil(+this.total / +this.perPage);
 
     const { start, end } = this.limits();

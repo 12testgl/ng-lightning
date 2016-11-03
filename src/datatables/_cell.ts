@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, Input, HostBinding} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Input, HostBinding, OnChanges} from '@angular/core';
 import {NglDatatableColumn} from './column';
 
 @Component({
@@ -6,7 +6,7 @@ import {NglDatatableColumn} from './column';
   templateUrl: './_cell.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglInternalDatatableCell {
+export class NglInternalDatatableCell implements OnChanges {
   @Input() row: any;
   @Input() column: NglDatatableColumn;
   @Input() index: number;
@@ -18,7 +18,7 @@ export class NglInternalDatatableCell {
 
   context: any;
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this.context =  {
       $implicit: this.value,
       row: this.row,

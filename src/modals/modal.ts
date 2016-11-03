@@ -25,28 +25,32 @@ export class NglModal {
 
   headingId = uniqueId('modal_header');
 
-  open: boolean = true;
-  @Input('open') set _open(_open: any) {
+  @Input() set open(_open: any) {
     _open = toBoolean(_open);
     if (_open === this.open) return;
 
-    if (_open) {
+    this._open = _open;
+    if (this.open) {
       setTimeout(() => this.focusFirst());
     }
-    this.open = _open;
   }
+  get open() {
+    return this._open;
+  }
+
   @Output() openChange = new EventEmitter();
 
   @ContentChild(NglModalHeaderTemplate) headerTpl: NglModalHeaderTemplate;
 
   @ContentChild(NglModalFooter) footer: NglModalFooter;
 
+  private _open: boolean = true;
   private _directional = false;
 
   constructor(private element: ElementRef, private renderer: Renderer) {}
 
   @HostListener('keydown.esc', ['$event'])
-  close(evt: Event) {
+  close(evt?: Event) {
     if (evt) {
       evt.stopPropagation();
     }

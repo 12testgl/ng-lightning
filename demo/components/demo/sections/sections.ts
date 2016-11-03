@@ -4,4 +4,6 @@ import {Component} from '@angular/core';
   selector: 'demo-sections',
   templateUrl: './sections.html',
 })
-export class DemoSections {}
+export class DemoSections {
+  open: boolean = false;
+}

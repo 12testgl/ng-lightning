@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ContentChild, Optional, ElementRef, Renderer, TemplateRef} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ContentChild, Optional, ElementRef, Renderer, TemplateRef, OnChanges} from '@angular/core';
 import {NglFormGroupAlternate} from './group-alt';
 import {NglFormCheckbox} from '../elements/input';
 import {NglFormLabelTemplate, getFormLabel} from '../form-label';
@@ -9,7 +9,7 @@ import {uniqueId} from '../../util/util';
   templateUrl: './element.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglFormGroupElement {
+export class NglFormGroupElement implements OnChanges {
   @ContentChild(NglFormCheckbox) contentEl: NglFormCheckbox;
 
   @Input('label') labelStr: string;
@@ -25,7 +25,7 @@ export class NglFormGroupElement {
 
   constructor(@Optional() private groupAlt: NglFormGroupAlternate, private element: ElementRef, private renderer: Renderer) {}
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this.setFormLabel();
   }
 

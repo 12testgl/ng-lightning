@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef, Renderer, ChangeDetectionStrategy, Attribute, Optional} from '@angular/core';
+import {Component, Input, ElementRef, Renderer, ChangeDetectionStrategy, Attribute, Optional, OnChanges} from '@angular/core';
 import {toBoolean, replaceClass} from '../util/util';
 import {NglButton} from '../buttons/button';
 import {NglButtonIcon} from '../buttons/button-icon';
@@ -10,7 +10,7 @@ export type NglIconCategory = 'action' | 'custom' | 'doctype' | 'standard' | 'ut
   templateUrl: './icon.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglIcon {
+export class NglIcon implements OnChanges {
   _icon: string;
   @Input('icon') set setIcon(icon: string) {
     this._icon = icon;
@@ -28,7 +28,8 @@ export class NglIcon {
   @Input() alt: string;
   @Input() svgClass: string | string[];
 
-  private category: NglIconCategory = 'utility';
+  category: NglIconCategory = 'utility';
+
   private button: boolean;
   private _containerClass: string[];
 
@@ -43,7 +44,7 @@ export class NglIcon {
     }
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     const { containerClass } = this;
     replaceClass(this, this._containerClass, containerClass);
     this._containerClass = containerClass;

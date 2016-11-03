@@ -1,11 +1,11 @@
-import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'tr[nglWeekdays]',
   templateUrl: './weekdays.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglDatepickerWeekdays {
+export class NglDatepickerWeekdays implements OnChanges {
 
   @Input() dayNamesShort: string[];
   @Input() dayNamesLong: string[];
@@ -13,7 +13,7 @@ export class NglDatepickerWeekdays {
 
   weekdays: any[] = [];
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this.weekdays = [];
     for (let i = 0; i < 7; i++) {
       const offset = (this.firstDayOfWeek + i) % 7;

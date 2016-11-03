@@ -9,7 +9,7 @@ export class DemoTabs {
   type: string = 'scoped';
   id: number = 0;
   selectedTab: any = 'sum';
-  private details: number[] = [];
+  details: number[] = [];
 
   change() {
     this.type = this.type === 'scoped' ? 'default' : 'scoped';

@@ -5,6 +5,7 @@ import {Component} from '@angular/core';
   templateUrl: './menus.html',
 })
 export class DemoMenus {
+  selected: string;
   open: boolean;
 
   items = [

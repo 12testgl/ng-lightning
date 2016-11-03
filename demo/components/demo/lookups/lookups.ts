@@ -9,6 +9,11 @@ import 'rxjs/add/operator/map';
 })
 export class DemoLookups {
 
+  superhero: string = null;
+  value: string = '';
+  address = '';
+  hero: string = null;
+
   superheroes = ['Hulk', 'Flash', 'Superman', 'Batman', 'Spiderman', 'Iron Man', 'Thor', 'Wolverine', 'Deadpool'];
   superheroeines = ['Catwoman', 'She-Hulk', 'Wonder Woman', 'Batwoman', 'Invisible Woman'];
 
@@ -20,7 +25,7 @@ export class DemoLookups {
 
   scope = this.scopes[0];
 
-  constructor(public http: Http) {}
+  constructor(private http: Http) {}
 
   lookup = (query: string, source = this.superheroes): string[] => {
     if (!query) {

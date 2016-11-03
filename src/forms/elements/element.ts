@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ElementRef, Renderer, TemplateRef} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ElementRef, Renderer, TemplateRef, OnChanges} from '@angular/core';
 import {uniqueId} from '../../util/util';
 import {NglFormInput} from './input';
 import {NglFormLabelTemplate, getFormLabel} from '../form-label';
@@ -9,7 +9,7 @@ import {NglFormLabelTemplate, getFormLabel} from '../form-label';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`:host { display: block; }`],
 })
-export class NglFormElement {
+export class NglFormElement implements OnChanges {
   @ContentChild(NglFormInput) contentEl: NglFormInput;
 
   @Input('label') labelStr: string;
@@ -29,7 +29,7 @@ export class NglFormElement {
     this.renderer.setElementClass(this.element.nativeElement, 'slds-form-element', true);
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this.setFormLabel();
     this.setInputErrorId();
     this.renderer.setElementClass(this.element.nativeElement, 'slds-has-error', !!this.error);

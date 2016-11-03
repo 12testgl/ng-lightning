@@ -1,4 +1,4 @@
-import {Component, ContentChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ElementRef, Renderer, ChangeDetectorRef, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ContentChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ElementRef, Renderer, ChangeDetectorRef, ViewChild, TemplateRef, OnChanges} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
@@ -24,7 +24,7 @@ import {uniqueId, isObject} from '../util/util';
     }`,
   ],
 })
-export class NglLookup {
+export class NglLookup implements OnChanges {
 
   @ContentChild(NglLookupItemTemplate) itemTemplate: NglLookupItemTemplate;
   @ContentChild(NglLookupScopeItem) polymorphic: NglLookupScopeItem;
@@ -128,7 +128,7 @@ export class NglLookup {
     });
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes?: any) {
     this._label = this.labelTemplate ? this.labelTemplate.templateRef : (this.label || '');
   }
 

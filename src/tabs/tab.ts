@@ -17,7 +17,7 @@ export class NglTab {
 
   private _active: boolean = false;
 
-  constructor(public templateRef: TemplateRef<any>) {}
+  constructor(public templateRef?: TemplateRef<any>) {}
 
   set active(active: boolean) {
     if (active ===  this._active) return;

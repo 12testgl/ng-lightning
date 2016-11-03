@@ -33,8 +33,8 @@ export class NglNotification implements OnChanges {
 
   @Output('nglNotificationClose') closeEventEmitter = new EventEmitter<string>();
 
-  private severity: string;
-  private showClose = false;
+  severity: string;
+  showClose = false;
   private currentTimeout: any = null;
 
   constructor(public element: ElementRef, public renderer: Renderer, @Optional() notificationClose: NglNotificationClose) {

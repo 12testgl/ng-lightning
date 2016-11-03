@@ -20,6 +20,12 @@ export class DemoDatatables {
   // Initial sort
   sort: INglDatatableSort = { key: 'rank', order: 'asc' };
 
+  // Show loading overlay
+  loading = false;
+
+  // Toggle name column
+  hideName = false;
+
   // Custom sort function
   onSort($event: INglDatatableSort) {
     const { key, order } = $event;

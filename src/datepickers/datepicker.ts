@@ -43,7 +43,7 @@ export class NglDatepicker {
 
   weeks: NglInternalDate[];
   uid = uniqueId('datepicker');
-  private monthLabel: string;
+  monthLabel: string;
 
   constructor() {}
 
@@ -61,7 +61,7 @@ export class NglDatepicker {
   @HostListener('keydown.PageDown', ['$event', '"MoveMonth"', '1'])
   @HostListener('keydown.Home', ['$event', '"MoveTo"', '1'])
   @HostListener('keydown.End', ['$event', '"MoveTo"', '31'])
-  keyboardHandler($event: KeyboardEvent, code: string, param?: string) {
+  keyboardHandler($event: KeyboardEvent, code: string, param?: number | string) {
     if ($event) {
       $event.preventDefault();
       $event.stopPropagation();

@@ -23,7 +23,7 @@ export class NglButtonState {
 
   constructor(public element: ElementRef, public renderer: Renderer) {}
 
-  @HostListener('click', ['$event.target'])
+  @HostListener('click')
   onSelectChange() {
     this.selectedChange.emit(!this.selected);
   }
