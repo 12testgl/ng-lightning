@@ -390,7 +390,6 @@ describe('`Datepicker` Component', () => {
 
         fixture.componentInstance.date = new Date(2017, 0, 19); // 19 January 2017
         fixture.componentInstance.firstDayOfWeek = 1;
-        //fixture.detectChanges();
 
         expectCalendar(fixture, [
           ['26-', '27-', '28-', '29-', '30-', '31-', '01'],
