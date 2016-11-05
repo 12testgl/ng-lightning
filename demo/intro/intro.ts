@@ -1,13 +1,14 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
+const prism = require('prismjs');
 
 @Component({
   templateUrl: './intro.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IntroComponent {
-  install = require('!!prismjs?lang=bash!./install.md');
-  bundle = require('!!prismjs?lang=typescript!./bundle.md').replace('x.x.x', process.env.version).replace(/\{/g, `&#x007b;`).replace(/\}/g, `&#x007d;`);
-  usageApp = require('!!prismjs?lang=typescript!./usage-app.md').replace(/\{/g, `&#x007b;`).replace(/\}/g, `&#x007d;`);
-  config = require('!!prismjs?lang=typescript!./config.md').replace(/\{/g, `&#x007b;`).replace(/\}/g, `&#x007d;`);
-  configRun = require('!!prismjs?lang=typescript!./config-run.md').replace(/\{/g, `&#x007b;`).replace(/\}/g, `&#x007d;`);
+  install = prism.highlight(require('!!raw!./install.md'), prism.languages.clike);
+  bundle = prism.highlight(require('!!raw!./bundle.md').replace('x.x.x', process.env.version), prism.languages.javascript);
+  usageApp = prism.highlight(require('!!raw!./usage-app.md'), prism.languages.javascript);
+  config = prism.highlight(require('!!raw!./config.md'), prism.languages.javascript);
+  configRun = prism.highlight(require('!!raw!./config-run.md'), prism.languages.javascript);
 }

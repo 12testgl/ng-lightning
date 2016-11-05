@@ -23,9 +23,8 @@ keys.forEach(key => {
   const component: IComponent = components[key] = { key };
 
   const path = 'demo/' + key + '/' + key;
-  component.html = require('!!prismjs?lang=markup!./' + path + '.html');
-  component.ts = require('!!prismjs?lang=typescript!./' + path + '.ts')
-                  .replace(/\{/g, `&#x007b;`).replace(/\}/g, `&#x007d;`);
+  component.html = require('!!raw!./' + path + '.html');
+  component.ts = require('!!raw!./' + path + '.ts');
   if (!component.title) {
     component.title = key.charAt(0).toUpperCase() + key.slice(1);
   }

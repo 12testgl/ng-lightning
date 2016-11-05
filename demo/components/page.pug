@@ -14,10 +14,10 @@ section.slds-m-top--x-large([id]="component.key")
       ngl-tabs([(selected)]="selectedTab")
         template(ngl-tab, heading="Markup")
           pre.language-html
-            code.language-html(ngNonBindable, [innerHtml]="component.html")
+            code.language-html(ngNonBindable, [innerHtml]="html()")
         template(ngl-tab, heading="Typescript")
           pre.language-typescript
-            code.language-typescript(ngNonBindable, [innerHtml]="component.ts")
+            code.language-typescript(ngNonBindable, [innerHtml]="ts()")
         template(ngl-tab, heading="API")
           pre.language-markup
             code.language-markup.api(ngNonBindable, [innerHtml]="component.api")

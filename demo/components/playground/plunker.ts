@@ -1,5 +1,11 @@
 import {Component, ElementRef} from '@angular/core';
 
+const index = require('!!pug?pretty=true!./files/index.pug')(process.env);
+const systemjs = require('!!raw!./files/systemjs.config.js').replace('__NG_LIGHTHNING_URL__',
+                    process.env.production ? `npm:ng-lightning@${process.env.pkg.version}/bundles/ng-lightning.umd.js` : './ng-lightning.umd.js');
+const appMain = require('!!raw!./files/app/main.ts');
+const appModule = require('!!raw!./files/app/module.ts');
+
 @Component({
   selector: 'plunker',
   templateUrl: './plunker.pug',
@@ -8,48 +14,27 @@ import {Component, ElementRef} from '@angular/core';
 export class Plunker {
   component: any;
 
-  index() {
-    if (!this.component) return '';
-    return require('!!pug?pretty=true!./files/index.pug')(process.env);
-  }
+  index = index;
+  appMain = appMain;
+  appModule = appModule;
+  systemjs = systemjs;
 
   ts() {
-    if (!this.component) return '';
-
-    const { key } = this.component;
-
-    const raw = require('!!raw!../demo/' + key + '/' + key + '.ts');
-    return raw.replace(/selector: '([^']+)'/, 'selector: \'my-app\'')
-              .replace(`'./${key}.html'`, '\'app/demo.html\'')
+    return this.component.ts.replace(/selector: '([^']+)'/, 'selector: \'my-app\'')
+              .replace(`'./${this.component.key}.html'`, '\'app/demo.html\'')
               .replace(/class Demo(.*) \{/, 'class AppComponent {');
   }
 
   html() {
-    if (!this.component) return '';
-
-    const { key } = this.component;
-
-    const raw = require('!!raw!../demo/' + key + '/' + key + '.html');
-    return raw;
+    return this.component.html;
   }
 
-  lib() {
-    return require('!!raw!bundle.umd.js');
-  }
-
-  systemjs() {
-    const libPath = process.env.production ? `npm:ng-lightning@${process.env.pkg.version}/bundles/ng-lightning.umd.js` : './ng-lightning.umd.js';
-    return require('!!raw!./files/systemjs.config.js').replace('__NG_LIGHTHNING_URL__', libPath);
-  }
-
-  raw(filename: string) {
-    return require('!!raw!./files/' + filename);
-  }
+  lib = require('!!raw!bundle.umd.js');
 
   open(component: any) {
     this.component = component;
     setTimeout(() => this.element.nativeElement.querySelector('form').submit());
   }
 
-  constructor(public element: ElementRef) {}
+  constructor(private element: ElementRef) {}
 }

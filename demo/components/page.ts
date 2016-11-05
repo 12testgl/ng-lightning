@@ -1,4 +1,5 @@
 import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
+const prism = require('prismjs');
 
 @Component({
   selector: 'page-component',
@@ -11,4 +12,12 @@ export class PageComponent {
   @Input() component: any;
 
   @Output() onTry = new EventEmitter();
+
+  html() {
+    return prism.highlight(this.component.html, prism.languages.markup);
+  }
+
+  ts() {
+    return prism.highlight(this.component.ts, prism.languages.javascript);
+  }
 }
