@@ -37,7 +37,7 @@ export class NglDatepicker {
 
   firstDayOfWeek = 0;
   @Input('firstDayOfWeek') set _firstDayOfWeek(firstDayOfWeek: number) {
-    this.firstDayOfWeek = firstDayOfWeek;
+    this.firstDayOfWeek = +firstDayOfWeek;
     this.render();
   }
 
@@ -149,7 +149,9 @@ export class NglDatepicker {
 
   private daysInPreviousMonth(year: number, month: number) {
     const first = new Date(year, month, 1);
-    const offset = first.getDay();
+    let offset = first.getDay();
+    if (offset === 0 && this.firstDayOfWeek !== 0)
+      offset = 7;
     const last = new Date(year, month, 0).getDate();
 
     return this.getDayObjects(year, month - 1, last - offset + 1 + this.firstDayOfWeek, last, true);
