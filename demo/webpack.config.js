@@ -19,7 +19,8 @@ const config = {
   entry: path.resolve(__dirname, isProduction ? 'main-aot.ts' : 'main.ts'),
   output: {
     path: DEMO_DIST,
-    filename: 'bundle.js'
+    filename: isProduction ? 'index.[hash].js' : 'index.js',
+    chunkFilename: isProduction ? 'chunk.[id].[hash].js' : 'chunk.[id].js'
   },
   devtool: isProduction ? 'source-map' : 'eval-source-map',
   resolve: {
@@ -27,7 +28,14 @@ const config = {
   },
   module: {
     rules: [
-      { test: /\.ts$/, loaders: ['awesome-typescript-loader?tsconfig=demo/tsconfig.json', 'angular2-template-loader'] },
+      {
+        test: /\.ts$/,
+        loaders: [
+          'awesome-typescript-loader?tsconfig=demo/tsconfig.json',
+          'angular2-template-loader',
+          'angular2-router-loader' + (isProduction ? '?aot=true&genDir=demo' : '')
+        ]
+      },
       { test: /\.html$/, loaders: ['raw'] },
       { test: /\.md$/, loader: 'html?minimize=false!markdown' },
     ]

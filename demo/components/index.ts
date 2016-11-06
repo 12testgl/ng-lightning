@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
+
 import {RouterModule} from '@angular/router';
+import {routes} from './components.routing';
 
 import {NglModule} from 'ng-lightning/ng-lightning';
 
@@ -44,11 +46,11 @@ const DEMO_COMPONENTS = [
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
     HttpModule,
     NglModule,
     FormsModule,
-    RouterModule,
+    RouterModule.forChild(routes),
   ],
   declarations: [
     ...DEMO_COMPONENTS,

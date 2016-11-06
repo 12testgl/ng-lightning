@@ -14,7 +14,10 @@
     "skipLibCheck": true
   },
   "files": [
-    "./main.ts"
+    "./main.ts",
+    "./intro/intro.module.ts",
+    "./components/index.ts",
+    "./support/support.module.ts"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true
