@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ContentChild, ChangeDetectorRef, ElementRef, Renderer} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ContentChild, ChangeDetectorRef, AfterContentInit} from '@angular/core';
 import {NglFormElement} from './element';
 import {NglFormCheckbox} from './input';
 import {NglFormLabelTemplate} from '../form-label';
@@ -7,10 +7,14 @@ import {NglFormLabelTemplate} from '../form-label';
   selector: 'ngl-form-checkbox-toggle',
   templateUrl: './checkbox-toggle.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.slds-form-element]': 'true',
+    '[class.slds-has-error]': '!!error',
+  },
   providers: [ {provide: NglFormElement, useExisting: NglFormElementCheckboxToggle} ],
   styles: [`:host { display: block; }`],
 })
-export class NglFormElementCheckboxToggle extends NglFormElement {
+export class NglFormElementCheckboxToggle extends NglFormElement implements AfterContentInit {
   @ContentChild(NglFormCheckbox) contentEl: NglFormCheckbox;
 
   @Input('label') labelStr: string;
@@ -20,9 +24,12 @@ export class NglFormElementCheckboxToggle extends NglFormElement {
   @Input() enabledText: string = 'Enabled';
   @Input() disabledText: string = 'Disabled';
 
-  required = false;
+  constructor(detector: ChangeDetectorRef) {
+    super(detector);
+  }
 
-  constructor(detector: ChangeDetectorRef, element: ElementRef, renderer: Renderer) {
-    super(detector, element, renderer);
+  // AoT workaround
+  ngAfterContentInit() {
+    super.ngAfterContentInit();
   }
 };

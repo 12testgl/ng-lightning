@@ -1,5 +1,5 @@
-import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, ElementRef, Renderer, TemplateRef, OnChanges} from '@angular/core';
-import {uniqueId} from '../../util/util';
+import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, TemplateRef, OnChanges, AfterContentInit} from '@angular/core';
+import {uniqueId, toBoolean} from '../../util/util';
 import {NglFormInput} from './input';
 import {NglFormLabelTemplate, getFormLabel} from '../form-label';
 
@@ -7,9 +7,13 @@ import {NglFormLabelTemplate, getFormLabel} from '../form-label';
   selector: 'ngl-form-element',
   templateUrl: './element.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.slds-form-element]': 'true',
+    '[class.slds-has-error]': '!!error',
+  },
   styles: [`:host { display: block; }`],
 })
-export class NglFormElement implements OnChanges {
+export class NglFormElement implements OnChanges, AfterContentInit {
   @ContentChild(NglFormInput) contentEl: NglFormInput;
 
   @Input('label') labelStr: string;
@@ -23,16 +27,11 @@ export class NglFormElement implements OnChanges {
 
   _label: TemplateRef<any> | string;
 
-  constructor(public detector: ChangeDetectorRef, private element: ElementRef, private renderer: Renderer) {}
-
-  ngOnInit() {
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-form-element', true);
-  }
+  constructor(protected detector: ChangeDetectorRef) {}
 
   ngOnChanges(changes?: any) {
     this.setFormLabel();
     this.setInputErrorId();
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-has-error', !!this.error);
   }
 
   ngAfterContentInit() {
@@ -44,12 +43,17 @@ export class NglFormElement implements OnChanges {
     this.setFormLabel();
   }
 
-  private setInputErrorId() {
+  setRequired(required: string | boolean) {
+    this.required = toBoolean(required);
+    this.detector.markForCheck();
+  }
+
+  protected setInputErrorId() {
     if (!this.contentEl) return;
     this.contentEl.describedBy = this.error ? `error_${this.uid}` : null;
   }
 
-  private setFormLabel() {
+  protected setFormLabel() {
     this._label = getFormLabel(this.labelStr, this.labelTpl);
   }
 };

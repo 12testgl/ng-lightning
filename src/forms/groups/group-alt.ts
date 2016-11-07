@@ -21,4 +21,9 @@ export class NglFormGroupAlternate extends NglFormGroup {
   @Input() required: boolean;
 
   @Input() type: string;
+
+  // AoT workaround
+  ngAfterContentInit() {
+    super.ngAfterContentInit();
+  }
 };

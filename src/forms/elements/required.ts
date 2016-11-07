@@ -1,5 +1,4 @@
 import {Directive, Input} from '@angular/core';
-import {toBoolean} from '../../util/util';
 import {NglFormElement} from './element';
 
 @Directive({
@@ -10,7 +9,6 @@ export class NglFormElementRequired {
   constructor(private nglFormElement: NglFormElement) {}
 
   @Input() set required(required: string | boolean) {
-    this.nglFormElement.required = toBoolean(required);
-    this.nglFormElement.detector.markForCheck();
+    this.nglFormElement.setRequired(required);
   }
 };

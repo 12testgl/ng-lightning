@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ContentChild, ChangeDetectorRef, ElementRef, Renderer} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ContentChild, ChangeDetectorRef, AfterContentInit} from '@angular/core';
 import {NglFormElement} from './element';
 import {NglFormCheckbox} from './input';
 import {NglFormLabelTemplate} from '../form-label';
@@ -7,10 +7,14 @@ import {NglFormLabelTemplate} from '../form-label';
   selector: 'ngl-form-checkbox',
   templateUrl: './checkbox.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.slds-form-element]': 'true',
+    '[class.slds-has-error]': '!!error',
+  },
   providers: [ {provide: NglFormElement, useExisting: NglFormElementCheckbox} ],
   styles: [`:host { display: block; }`],
 })
-export class NglFormElementCheckbox extends NglFormElement {
+export class NglFormElementCheckbox extends NglFormElement implements AfterContentInit {
   @ContentChild(NglFormCheckbox) contentEl: NglFormCheckbox;
 
   @Input('label') labelStr: string;
@@ -18,9 +22,12 @@ export class NglFormElementCheckbox extends NglFormElement {
 
   @Input() error: string;
 
-  required = false;
+  constructor(detector: ChangeDetectorRef) {
+    super(detector);
+  }
 
-  constructor(detector: ChangeDetectorRef, element: ElementRef, renderer: Renderer) {
-    super(detector, element, renderer);
+  // AoT workaround
+  ngAfterContentInit() {
+    super.ngAfterContentInit();
   }
 };
