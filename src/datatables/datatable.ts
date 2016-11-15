@@ -68,7 +68,7 @@ export class NglDatatable {
     return column.key || index;
   }
 
-  dataTrackBy(index: number, data: any) {
+  dataTrackBy = (index: number, data: any) => {
     return this.trackByKey ? data[this.trackByKey] : index;
   }
 

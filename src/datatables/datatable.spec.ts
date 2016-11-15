@@ -334,6 +334,19 @@ describe('`NglDatatable`', () => {
     expect(getHeadingsText(fixture.nativeElement)).toEqual(['Custom heading']);
     expect(getHeadingsTitle(fixture.nativeElement)).toEqual([null]);
   });
+
+  it('should track rows based on input', () => {
+    const fixture = createTestComponent(`<table ngl-datatable [data]="data" trackByKey="id"></table>`);
+    const rows = getRows(fixture.nativeElement);
+
+    fixture.componentInstance.data = [ ...fixture.componentInstance.data.reverse() ];
+    fixture.detectChanges();
+
+    const newRows = getRows(fixture.nativeElement);
+    for (let i = 0, ii = fixture.componentInstance.data.length; i < ii; i++) {
+      expect(rows[i]).toBe(newRows[ii - i - 1]);
+    }
+  });
 });
 
 @Component({
