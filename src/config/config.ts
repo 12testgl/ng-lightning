@@ -40,7 +40,7 @@ export function NglConfigurable(config = {changeDetectorProperty: 'cd'}) {
         throw Error(`NglConfig: invalid ChangeDetectorRef at property "${config.changeDetectorProperty}"`);
       }
 
-      this.configSubscription = this.config._emitter.subscribe(() => {
+      this.nglConfigSubscription = this.config._emitter.subscribe(() => {
         if (this.nglOnConfigChanges) {
           this.nglOnConfigChanges();
         }
@@ -53,8 +53,10 @@ export function NglConfigurable(config = {changeDetectorProperty: 'cd'}) {
     };
 
     constructor.prototype.ngOnDestroy = function() {
-      this.configSubscription.unsubscribe();
-      this.configSubscription = null;
+      if (this.nglConfigSubscription) {
+        this.nglConfigSubscription.unsubscribe();
+        this.nglConfigSubscription = null;
+      }
 
       if (ngOnDestroy) {
         ngOnDestroy.call(this);
