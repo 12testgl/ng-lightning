@@ -1,6 +1,6 @@
 import {Directive, Input, ElementRef, ComponentRef, TemplateRef, ViewContainerRef,
         Renderer, ComponentFactoryResolver, Injector, EmbeddedViewRef, ComponentFactory,
-        Output, EventEmitter} from '@angular/core';
+        Output, EventEmitter, NgZone} from '@angular/core';
 import * as Tether from 'tether';
 import 'rxjs/add/operator/take';
 import {NglPopover, Direction} from './popover';
@@ -59,6 +59,7 @@ export class NglPopoverTrigger {
   private interactiveSubscription: any = null;
 
   constructor(private element: ElementRef, private viewContainer: ViewContainerRef, private injector: Injector,
+              private ngZone: NgZone,
               private renderer: Renderer, componentFactoryResolver: ComponentFactoryResolver) {
     this.popoverFactory = componentFactoryResolver.resolveComponentFactory(NglPopover);
   }
@@ -71,6 +72,16 @@ export class NglPopoverTrigger {
   // Expose close method
   close(delay = this.closeDelay) {
     this.toggle(false, delay);
+  }
+
+  position(async = true) {
+    this.ngZone.runOutsideAngular(() => {
+      if (async) {
+        setTimeout(() => this.tether.position());
+      } else {
+        this.tether.position();
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -130,7 +141,7 @@ export class NglPopoverTrigger {
 
     this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [this.projectableNodes]);
     this.popover = this.componentRef.instance;
-    this.popover.afterViewInit.take(1).subscribe(() => this.tether.position());
+    this.popover.afterViewInit.take(1).subscribe(() => this.position(false));
 
     if (this.nglInteractive) {
       this.interactiveSubscription = this.popover.onInteraction.subscribe((enter: boolean) => this.nglOpen = enter);

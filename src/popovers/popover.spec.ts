@@ -217,6 +217,16 @@ describe('Popovers', () => {
     fixture.destroy();
   });
 
+  it('should support "manual" reposition', () => {
+    const fixture = createTestComponent(`
+      <div nglPopover="tip" #tip="nglPopover" nglOpen="true"></div>
+      <button type="button" (click)="tip.position(false)"></button>
+    `);
+    (<any>Tether).spyPosition.calls.reset();
+    fixture.nativeElement.querySelector('button').click();
+    expect((<any>Tether).spyPosition).toHaveBeenCalled();
+  });
+
   it('should support interaction with content', fakeAsync(() => {
     const fixture = createTestComponent('<div nglInteractive [nglPopoverDelay]="[0, 200]" nglPopover="tip" [nglOpen]="open"></div>');
 

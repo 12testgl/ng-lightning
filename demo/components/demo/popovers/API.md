@@ -18,6 +18,7 @@
 
   * `open(delay?: number)`: "Manually" trigger open. Optionally specify a `delay` different than `nglPopoverDelay`'s'.
   * `close(delay?: number)`: "Manually" trigger close. Optionally specify a `delay` different than `nglPopoverDelay`'s'.
+  * `position(async = true)`: Reposition popover instance, synchronously or asynchronously depending on `async`.
 
 
 # `[nglPopover][nglPopoverBehavior]`
