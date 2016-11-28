@@ -1,5 +1,5 @@
 import {async, fakeAsync, tick, TestBed, ComponentFixture}  from '@angular/core/testing';
-import {Component} from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {createGenericTestComponent, dispatchEvent} from '../../test/util/helpers';
 import * as Tether from '../../test/mock/tether';
 import {NglPopoversModule} from './module';
@@ -13,7 +13,11 @@ export function getPopoverElement(element: HTMLElement): HTMLElement {
 
 describe('Popovers', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglPopoversModule]}));
+  beforeEach(() => TestBed.configureTestingModule({
+    declarations: [TestComponent, DestroyableComponent],
+    imports: [NglPopoversModule],
+    providers: [SpyService],
+  }));
 
   it('should render popover correctly', () => {
     const fixture = createTestComponent(`<ngl-popover>My content</ngl-popover>`);
@@ -250,6 +254,20 @@ describe('Popovers', () => {
     fixture.detectChanges();
     expect(getPopoverElement(fixture.nativeElement)).toBeFalsy();
   }));
+
+  it('should properly destroy TemplateRef content', () => {
+    const fixture = createTestComponent(`
+        <template #t><destroyable></destroyable></template>
+        <div [nglPopover]="t" #tip="nglPopover" nglOpen="true"></div>
+        <button type="button" (click)="tip.close()"></button>`);
+
+    const spyService = fixture.debugElement.injector.get(SpyService);
+    expect(spyService.called).not.toHaveBeenCalled();
+
+    fixture.nativeElement.querySelector('button').click();
+    fixture.detectChanges();
+    expect(spyService.called).toHaveBeenCalled();
+  });
 });
 
 @Component({
@@ -265,4 +283,20 @@ export class TestComponent {
   theme: string;
 
   cb = jasmine.createSpy('cb');
+}
+
+
+@Injectable()
+class SpyService {
+  called = jasmine.createSpy('spyCall');
+}
+
+@Component({selector: 'destroyable', template: 'Some content'})
+export class DestroyableComponent {
+
+  constructor(private service: SpyService) {}
+
+  ngOnDestroy() {
+    this.service.called();
+  }
 }

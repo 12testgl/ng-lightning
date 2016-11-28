@@ -49,6 +49,7 @@ export class NglPopoverTrigger {
   private popover: NglPopover;
   private popoverFactory: ComponentFactory<NglPopover>;
   private componentRef: ComponentRef<NglPopover>;
+  private viewRef: EmbeddedViewRef<any>;
   private placement: Direction = 'top';
   private theme: string;
   private tether: Tether;
@@ -139,7 +140,10 @@ export class NglPopoverTrigger {
   private create() {
     if (this.componentRef) return;
 
-    this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [this.projectableNodes]);
+    const { nodes, viewRef } = this.getProjectableNodes();
+    this.viewRef = viewRef;
+
+    this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [nodes]);
     this.popover = this.componentRef.instance;
     this.popover.afterViewInit.take(1).subscribe(() => this.position(false));
 
@@ -156,12 +160,12 @@ export class NglPopoverTrigger {
     this.nglPopoverToggled.emit(true);
   }
 
-  private get projectableNodes() {
+  private getProjectableNodes(): { nodes: any[], viewRef?: EmbeddedViewRef<any> } {
     if (this.nglPopover instanceof TemplateRef) {
-      const view: EmbeddedViewRef<any> = this.viewContainer.createEmbeddedView(<TemplateRef<any>>this.nglPopover);
-      return view.rootNodes;
+      const viewRef: EmbeddedViewRef<any> = this.viewContainer.createEmbeddedView(<TemplateRef<any>>this.nglPopover);
+      return { nodes: viewRef.rootNodes, viewRef };
     } else {
-      return [this.renderer.createText(null, <string>this.nglPopover)];
+      return { nodes: [this.renderer.createText(null, <string>this.nglPopover)] };
     }
   }
 
@@ -170,6 +174,14 @@ export class NglPopoverTrigger {
 
     this.tether.destroy();
     this.tether = null;
+
+    // Cleanup template view
+    if (this.viewRef) {
+      this.viewContainer.remove(this.viewContainer.indexOf(this.viewRef));
+      this.viewRef = null;
+    }
+
+    this.viewContainer.remove(this.viewContainer.indexOf(this.componentRef.hostView));
     this.componentRef.destroy();
     this.componentRef = null;
     this.popover = null;
