@@ -20,3 +20,6 @@
 
   * `nglIcon`: You can find the values on the [icon page](https://www.lightningdesignsystem.com/resources/icons/#utility).
   * `nglIconCategory = 'utility'`: Category sprite to use.
+
+
+# `<ngl-icon-waffle> | [ngl-icon-waffle]`
