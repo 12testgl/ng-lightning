@@ -1,5 +1,5 @@
 import {Component, Input, QueryList, ContentChildren, Output, EventEmitter} from '@angular/core';
-import {isInt} from '../util/util';
+import {isInt, toBoolean} from '../util/util';
 import {NglTab} from './tab';
 
 @Component({
@@ -24,6 +24,15 @@ export class NglTabs {
   }
 
   @Output() selectedChange = new EventEmitter<NglTab>();
+
+  @Input() set titleCaps(titleCaps: any) {
+    this._titleCaps = toBoolean(titleCaps);
+  }
+  get titleCaps() {
+    return this._titleCaps;
+  }
+
+  private _titleCaps = true;
 
   ngAfterContentInit() {
     // Initial selection after all tabs are created

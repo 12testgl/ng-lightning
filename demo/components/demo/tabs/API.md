@@ -4,6 +4,7 @@
 
   * `selected: string | number | NglTab`: The tab to activate. This can be either the `index` number, the tab's id *(nglTabId="myid")* or the actual `NglTab` instance.
   * `type?: 'default' | 'scoped' = 'default'`: Whether the tabset is [scoped](https://www.lightningdesignsystem.com/components/tabs#scoped) or not.
+  * `titleCaps: boolean = true`: Whether tab headers are capitalized.
 
 ### Output
 

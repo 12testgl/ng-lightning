@@ -42,6 +42,25 @@ describe('Tabs Component', () => {
     expectHeaders(fixture.nativeElement, ['First', 'Second',  'Third tab', 'Fourth tab']);
   });
 
+  it('should render titles with caps', () => {
+    const fixture = createTestComponent();
+    const lis = selectElements(fixture.nativeElement, 'li');
+    lis.forEach((li) => expect(li).toHaveCssClass('slds-text-title--caps'));
+  });
+
+  it('should render titles with caps based on input', () => {
+    const fixture = createTestComponent(`
+      <ngl-tabs [(selected)]="selectedTab" [titleCaps]="titleCaps">
+        <template ngl-tab></template><template ngl-tab></template>
+      </ngl-tabs>`);
+    const lis = selectElements(fixture.nativeElement, 'li');
+    lis.forEach((li) => expect(li).not.toHaveCssClass('slds-text-title--caps'));
+
+    fixture.componentInstance.titleCaps = 'true';
+    fixture.detectChanges();
+    lis.forEach((li) => expect(li).toHaveCssClass('slds-text-title--caps'));
+  });
+
   it('should render tab headers based on template', () => {
     const fixture = createTestComponent(`<ngl-tabs [(selected)]="selectedTab">
           <template #h><b>My header</b></template>
@@ -145,6 +164,7 @@ describe('Tabs Component', () => {
 })
 export class TestComponent {
   selectedTab: string | number = 'two';
+  titleCaps: string | boolean = false;
   change = jasmine.createSpy('selectedChange').and.callFake(($event: any) => {
     this.selectedTab = $event;
   });
