@@ -7,12 +7,12 @@ include ./menu
   .slds-form-element__control(*ngIf="pick")
     .slds-pill_container
       ngl-pill((nglPillRemove)="clear()") {{resolveLabel(pick)}}
-  
+
   //- Default
   .slds-form-element__control.slds-grid(*ngIf="!pick", [class.slds-box--border]="polymorphic")
 
     //- Polymorphic object dropdown
-    ngl-internal-lookup-scope(*ngIf="polymorphic", [open]="openScope", (openChange)="onScopeOpen($event)", 
+    ngl-internal-lookup-scope(*ngIf="polymorphic", [open]="openScope", (openChange)="onScopeOpen($event)",
             [scope]="polymorphic", (scopeChange)="scopeSelect($event)")
         ng-content(select="[nglPolymorphicLabel]")
 
@@ -26,6 +26,7 @@ include ./menu
 
   //- Dropdown menu
   .slds-lookup__menu(*ngIf="expanded", role="listbox", [ngSwitch]="!!itemTemplate")
+    ng-content(select="[nglLookupHeader]")
     +lookup-list()(*ngSwitchCase="false")
       |{{resolveLabel(item)}}
     +lookup-list()(*ngSwitchCase="true")

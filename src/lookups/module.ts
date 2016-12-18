@@ -7,7 +7,7 @@ import {NglMenusModule} from '../menus/module';
 import {NglInternalOutletModule} from '../util/outlet.module';
 
 import {NglLookup} from './lookup';
-import {NglLookupItemTemplate, NglLookupLabelTemplate} from './item';
+import {NglLookupItemTemplate, NglLookupLabelTemplate, NglLookupHeader} from './item';
 import {NglLookupScopeItem} from './scope-item';
 
 import {NglInternalLookupScope} from './scope';
@@ -17,6 +17,7 @@ const NGL_LOOKUP_DIRECTIVES = [
   NglLookupItemTemplate,
   NglLookupScopeItem,
   NglLookupLabelTemplate,
+  NglLookupHeader,
 ];
 
 @NgModule({

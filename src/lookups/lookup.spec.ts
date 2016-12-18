@@ -12,7 +12,7 @@ function getElements(element: HTMLElement) {
     lookup: <HTMLDivElement>element.querySelector('.slds-lookup'),
     label: <HTMLLabelElement>element.querySelector('label'),
     input: <HTMLInputElement>element.querySelector('input'),
-    menu: <HTMLInputElement>element.querySelector('.slds-lookup__menu'),
+    menu: <HTMLElement>element.querySelector('.slds-lookup__menu'),
     options: selectElements(element, '.slds-lookup__list > li'),
     pill: getPill(element),
   };
@@ -93,6 +93,22 @@ describe('Lookup Component', () => {
 
     const { label } = getElements(fixture.nativeElement);
     expect(label).toBeNull();
+  });
+
+  it('should support custom header', () => {
+    const fixture = createTestComponent(`
+      <ngl-lookup [value]="value" [lookup]="filter" debounce="0">
+        <div nglLookupHeader class="slds-text-body--small">Header</div>
+      </ngl-lookup>`);
+
+    fixture.componentInstance.value = 'DE';
+    fixture.detectChanges();
+    const { menu } = getElements(fixture.nativeElement);
+    const headerEl = menu.firstElementChild;
+
+    expect(headerEl).toHaveCssClass('slds-lookup__item--label');
+    expect(headerEl).toHaveCssClass('slds-text-body--small');
+    expect(headerEl.textContent).toBe('Header');
   });
 
   it('should update placeholder based on input', () => {

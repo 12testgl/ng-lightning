@@ -9,3 +9,11 @@ export class NglLookupItemTemplate {
 export class NglLookupLabelTemplate {
   constructor(public templateRef: TemplateRef<any>) {}
 }
+
+@Directive({
+  selector: '[nglLookupHeader]',
+  host: {
+    '[class.slds-lookup__item--label]': 'true',
+  },
+})
+export class NglLookupHeader {}
