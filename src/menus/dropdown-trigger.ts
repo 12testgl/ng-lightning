@@ -18,7 +18,8 @@ export class NglDropdownTrigger implements OnDestroy {
     this.parentFocusEventSubscription.unsubscribe();
   }
 
-  @HostListener('click') toggleOpen() {
+  @HostListener('click', ['$event']) toggleOpen($event: Event) {
+    $event.preventDefault();
     this.dropdown.toggle();
   }
 
