@@ -7,8 +7,17 @@ import {Component} from '@angular/core';
 })
 export class DemoDatepickers {
   date: Date;
+  mindate: Date;
 
   gotoDate() {
     this.date = new Date(2005, 10, 9);
+  }
+
+  setMinDate() {
+    if (!this.mindate){
+      this.mindate = new Date(2005, 1, 2);
+    } else {
+      this.mindate = null;
+    }
   }
 }

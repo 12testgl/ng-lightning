@@ -8,6 +8,9 @@
   * `dayNamesShort = ['Sun', 'Mon', ...]`: Short form of weekdays.
   * `dayNamesLong = ['Sunday', 'Monday', ...]`: Long form of weekdays.
   * `firstDayOfWeek: number = 0`: First day of the week. Sunday = 0, Monday = 1, ...
+  * `mindate: Date`: Set minimum allowed date
+  * `maxdate: Date`: Set maximum allowed date
+  * `dateDisabled (date: Date) => boolean`: Callback function to set a specified date as disabled
 
 ### Output
 

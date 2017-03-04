@@ -7,15 +7,23 @@ import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@
 })
 export class NglDatepickerYear {
 
-  // How many years before and after the current one are selectable in dropdown
-  @Input() numYearsBefore: number = 100;
-  @Input() numYearsAfter: number = 10;
-
   year: number;
   @Input('year') set setYear(year: string | number) {
     this.year = +year;
   }
   @Output() yearChange = new EventEmitter();
+
+  // How many years before and after the current one are selectable in dropdown
+  numYearsBefore: number;
+  @Input('numYearsBefore') set _numYearsBefore(yearsBefore: string | number) {
+    const defaultValue = 100;
+    this.numYearsBefore = (yearsBefore) ? +yearsBefore : defaultValue;
+  }
+  numYearsAfter: number;
+  @Input('numYearsAfter') set _numYearsAfter(yearsAfter: string | number) {
+    const defaultValue = 10;
+    this.numYearsAfter = (yearsAfter) ? +yearsAfter : defaultValue;
+  }
 
   get range(): number[] {
     const currentYear = (new Date()).getFullYear();

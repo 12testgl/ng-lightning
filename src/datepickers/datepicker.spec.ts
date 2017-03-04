@@ -428,6 +428,210 @@ describe('`Datepicker` Component', () => {
       });
     });
   }));
+
+  describe('mindate', () => {
+
+    it('should display mindate in current month', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" showToday="false"></ngl-datepicker>`);
+      return expectCalendar(fixture, [
+        ['29-', '30-', '31-', '01-', '02-', '03-', '04-'],
+        ['05-', '06-', '07-', '08-', '09-', '10-', '11-'],
+        ['12', '13', '14', '15', '16', '17', '18'],
+        ['19', '20', '21', '22', '23', '24', '25'],
+        ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ], 'September', '2010');
+    }));
+
+    it('should display updated mindate when mindate changes', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.mindate = new Date(2010, 8, 5);
+      return expectCalendar(fixture, [
+        ['29-', '30-', '31-', '01-', '02-', '03-', '04-'],
+        ['05', '06', '07', '08', '09', '10', '11'],
+        ['12', '13', '14', '15', '16', '17', '18'],
+        ['19', '20', '21', '22', '23', '24', '25'],
+        ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ], 'September', '2010');
+    }));
+
+    it('should not accept date value less than mindate', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 8, 2);
+      return expectCalendar(fixture, [
+        ['29-', '30-', '31-', '01-', '02-', '03-', '04-'],
+        ['05-', '06-', '07-', '08-', '09-', '10-', '11-'],
+        ['12', '13', '14', '15', '16', '17', '18'],
+        ['19', '20', '21', '22', '23', '24', '25'],
+        ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ], 'September', '2010');
+    }));
+
+    it('should not move to previous month when button is clicked', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" showToday="false"></ngl-datepicker>`);
+      clickButton(fixture.nativeElement, false);
+      expectCalendar(fixture, [
+        ['29-', '30-', '31-', '01-', '02-', '03-', '04-'],
+        ['05-', '06-', '07-', '08-', '09-', '10-', '11-'],
+        ['12', '13', '14', '15', '16', '17', '18'],
+        ['19', '20', '21', '22', '23', '24', '25'],
+        ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ], 'September', '2010').then(() => {
+        expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
+      });
+    }));
+
+    it('should move to next month when button is clicked', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" showToday="false"></ngl-datepicker>`);
+      clickButton(fixture.nativeElement, true);
+      expectCalendar(fixture, [
+        ['26-', '27-', '28-', '29-', '*30-', '01', '02'],
+        ['03', '04', '05', '06', '07', '08', '09'],
+        ['10', '11', '12', '13', '14', '15', '16'],
+        ['17', '18', '19', '20', '21', '22', '23'],
+        ['24', '25', '26', '27', '28', '29', '30+'],
+        ['31', '01-', '02-', '03-', '04-', '05-', '06-'],
+      ], 'October', '2010').then(() => {
+        expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
+      });
+    }));
+
+    it('should not display previous years on select menu', async(() => {
+      const currentDate = new Date(2005, 10, 9); // 9 November 2005
+      jasmine.clock().mockDate(currentDate);
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" showToday="false"></ngl-datepicker>`);
+      expectYearOptions(fixture.nativeElement, buildArray(2010, 2015));
+    }));
+
+  });
+
+  describe('maxdate', () => {
+
+    it('should display maxdate in current month', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 15); // 15 October 2010
+      return expectCalendar(fixture, [
+        ['26-', '27-', '28-', '29-', '30-', '01', '02'],
+        ['03', '04', '05', '06', '07', '08', '09'],
+        ['10', '11', '12', '13', '14', '*15+', '16'],
+        ['17', '18', '19', '20', '21', '22', '23'],
+        ['24', '25', '26-', '27-', '28-', '29-', '30-'],
+        ['31-', '01-', '02-', '03-', '04-', '05-', '06-'],
+      ], 'October', '2010');
+    }));
+
+    it('should display updated maxdate when maxdate changes', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 15); // 15 October 2010
+      fixture.componentInstance.maxdate = new Date(2010, 9, 19);
+      return expectCalendar(fixture, [
+        ['26-', '27-', '28-', '29-', '30-', '01', '02'],
+        ['03', '04', '05', '06', '07', '08', '09'],
+        ['10', '11', '12', '13', '14', '*15+', '16'],
+        ['17', '18', '19', '20-', '21-', '22-', '23-'],
+        ['24-', '25-', '26-', '27-', '28-', '29-', '30-'],
+        ['31-', '01-', '02-', '03-', '04-', '05-', '06-'],
+      ], 'October', '2010');
+    }));
+
+    it('should not accept date value larger than max date', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 30);
+      return expectCalendar(fixture, [
+        ['29-', '30-', '31-', '01', '02', '03', '04'],
+        ['05', '06', '07', '08', '09', '10', '11'],
+        ['12', '13', '14', '15', '16', '17', '18'],
+        ['19', '20', '21', '22', '23', '24', '25'],
+        ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ], 'September', '2010');
+    }));
+
+    it('should not move to next month when button is clicked', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 15);
+      fixture.detectChanges();
+      clickButton(fixture.nativeElement, true);
+      expectCalendar(fixture, [
+        ['26-', '27-', '28-', '29-', '30-', '01', '02'],
+        ['03', '04', '05', '06', '07', '08', '09'],
+        ['10', '11', '12', '13', '14', '*15+', '16'],
+        ['17', '18', '19', '20', '21', '22', '23'],
+        ['24', '25', '26-', '27-', '28-', '29-', '30-'],
+        ['31-', '01-', '02-', '03-', '04-', '05-', '06-'],
+      ], 'October', '2010').then(() => {
+        expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
+      });
+    }));
+
+    it('should move to previous month when button is clicked', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 15);
+      fixture.detectChanges();
+      clickButton(fixture.nativeElement, false);
+      expectCalendar(fixture, [
+        ['29-', '30-', '31-', '01', '02', '03', '04'],
+        ['05', '06', '07', '08', '09', '10', '11'],
+        ['12', '13', '14', '15+', '16', '17', '18'],
+        ['19', '20', '21', '22', '23', '24', '25'],
+        ['26', '27', '28', '29', '30', '01-', '02-'],
+      ], 'September', '2010').then(() => {
+        expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
+      });
+    }));
+
+    it('should not display following years on select menu', async(() => {
+      const currentDate = new Date(2005, 10, 9); // 9 November 2005
+      jasmine.clock().mockDate(currentDate);
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      expectYearOptions(fixture.nativeElement, buildArray(1905, 2010));
+    }));
+
+  });
+
+  describe('mindate and maxdate', () => {
+
+    it('should display mindate and maxdate on current month', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 15); // 15 October 2010
+      fixture.componentInstance.mindate = new Date(2010, 9, 9); // 9 October 2010
+      fixture.detectChanges();
+      return expectCalendar(fixture, [
+        ['26-', '27-', '28-', '29-', '30-', '01-', '02-'],
+        ['03-', '04-', '05-', '06-', '07-', '08-', '09'],
+        ['10', '11', '12', '13', '14', '*15+', '16'],
+        ['17', '18', '19', '20', '21', '22', '23'],
+        ['24', '25', '26-', '27-', '28-', '29-', '30-'],
+        ['31-', '01-', '02-', '03-', '04-', '05-', '06-'],
+      ], 'October', '2010');
+    }));
+
+    it('should not display any other year when mindate and maxdate are set on same year ', async(() => {
+      const fixture = createTestComponent(`<ngl-datepicker [date]="date" [mindate]="mindate" [maxdate]="maxdate" showToday="false"></ngl-datepicker>`);
+      fixture.componentInstance.date = new Date(2010, 9, 15); // 15 October 2010
+      fixture.componentInstance.mindate = new Date(2010, 9, 9); // 9 October 2010
+      fixture.detectChanges();
+      expectYearOptions(fixture.nativeElement, ['2010']);
+    }));
+
+  });
+
+  describe('disabled dates', () => {
+
+    it('should support disabling dates via callback', () => {
+        const fixture = createTestComponent(
+            `<ngl-datepicker [date]="date" showToday="false" [dateDisabled]="dateDisabled"></ngl-datepicker>`);
+
+        // 19, 20 October 2010
+        return expectCalendar(fixture, [
+          ['26-', '27-', '28-', '29-', '30-', '01', '02'],
+          ['03', '04', '05', '06', '07', '08', '09'],
+          ['10', '11', '12', '13', '14', '15', '16'],
+          ['17', '18', '19-', '20-', '21', '22', '23'],
+          ['24', '25', '26', '27', '28', '29', '30'],
+          ['31', '01-', '02-', '03-', '04-', '05-', '06-'],
+        ], 'October', '2010');
+    });
+
+  });
 });
 
 
@@ -436,10 +640,16 @@ describe('`Datepicker` Component', () => {
 })
 export class TestComponent {
   date = new Date(2010, 8, 30); // 30 September 2010
+  mindate = new Date(2010, 8, 12); // 12 September 2010
+  maxdate = new Date(2010, 9, 25); // 25 October 2010
   showToday: boolean;
   dateChange = jasmine.createSpy('dateChange');
   firstDayOfWeek = 1;
 
   customMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   customDays = [ 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7' ];
+
+  dateDisabled = (date: Date) => {
+    return (date.getTime() === new Date(2010, 9, 19).getTime() || date.getTime() === new Date(2010, 9, 20).getTime()); // 19, 20 October 2010
+  }
 }

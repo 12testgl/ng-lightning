@@ -1,16 +1,16 @@
 .slds-datepicker__filter.slds-grid
   .slds-datepicker__filter--month.slds-grid.slds-grid--align-spread.slds-grow
     .slds-align-middle
-      button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', -1)")
+      button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', -1)", [disabled]="isFirstAllowedMonth()")
         svg.slds-button__icon.slds-button__icon--small(nglIcon="left")
         span.slds-assistive-text Previous Month
     h2.slds-align-middle([id]="uid + '_month'", aria-live="assertive", aria-atomic="true") {{ monthLabel }}
     .slds-align-middle
-      button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', 1)")
+      button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', 1)", [disabled]="isLastAllowedMonth()")
         svg.slds-button__icon.slds-button__icon--small(nglIcon="right")
         span.slds-assistive-text Next Month
 
-  ngl-date-year.slds-shrink-none([year]="current.year", (yearChange)="moveYear($event)")
+  ngl-date-year.slds-shrink-none([year]="current.year", [numYearsBefore]="yearsBefore(mindate)", [numYearsAfter]="yearsAfter(maxdate)", (yearChange)="keyboardHandler(null, 'MoveYear', $event)")
 
 table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'")
   thead
@@ -18,7 +18,7 @@ table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'")
   tbody
     tr(*ngFor="let week of weeks; trackBy:indexTrackBy")
       td(*ngFor="let date of week", (click)="select(date)", [class.slds-is-today]="isActive(date)",
-         [nglDay]="date.day", [nglDaySelected]="isSelected(date)", [nglDayDisabled]="date.disabled")
+         [nglDay]="date.day", [nglDaySelected]="isSelected(date)", [nglDayDisabled]="date.disabled || isDisabledDate(date)")
     tr(*ngIf="showToday")
       td(colspan="7", role="gridcell")
         a.slds-show--inline-block.slds-p-bottom--x-small(href="javascript:void(0)", (click)="selectToday()") Today

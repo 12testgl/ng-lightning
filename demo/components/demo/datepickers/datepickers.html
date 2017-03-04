@@ -2,5 +2,6 @@
 
 <button type="button" nglButton="neutral" (click)="gotoDate()" class="slds-m-bottom--large">09 November 2005</button>
 <button type="button" nglButton="destructive" (click)="date = null" class="slds-m-bottom--large">Clear</button>
+<button type="button" nglButton="neutral" (click)="setMinDate()" class="slds-m-bottom--large">Min date: 02 Feb 2005</button>
 
-<ngl-datepicker [(date)]="date" class="slds-box slds-box--x-small"></ngl-datepicker>
+<ngl-datepicker [(date)]="date" [mindate]="mindate" [maxdate]="maxdate" [dateDisabled]="dateDisabled" class="slds-box slds-box--x-small"></ngl-datepicker>
