@@ -163,6 +163,22 @@ describe('`NglDatatable`', () => {
     ]);
   });
 
+  it('should support custom header class per column', () => {
+    const fixture = createTestComponent(`
+      <table ngl-datatable [data]="data">
+        <ngl-datatable-column headClass="class1"></ngl-datatable-column>
+        <ngl-datatable-column [headClass]="{ class2: exists }"></ngl-datatable-column>
+      </table>`);
+
+    const rows = getHeadings(fixture.nativeElement);
+    expect(rows[0]).toHaveCssClass('class1');
+    expect(rows[1]).toHaveCssClass('class2');
+
+    fixture.componentInstance.exists = false;
+    fixture.detectChanges();
+    expect(rows[1]).not.toHaveCssClass('class2');
+  });
+
   it('should support custom cell class per column', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">

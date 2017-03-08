@@ -21,7 +21,8 @@
   * `heading: string`: Header text of column. It will also be used as `title` and as header on small screens even if a custom header template is used.
   * `key?: string`: Object property of data. If not specified you should provide a custom template.
   * `sortable?: boolean`: Whether it is sortable or not. `key` should be always defined for sortable columns
-  * `cellClass?: string | string[]`: Style class(es) for each cell of this column. Use as `ngClass`
+  * `headClass?: string | Array | Object`: Style class(es) for header cell of this column. Use as `ngClass`
+  * `cellClass?: string | Array | Object`: Style class(es) for each cell of this column. Use as `ngClass`
 
 # `template[nglDatatableCell]`
 

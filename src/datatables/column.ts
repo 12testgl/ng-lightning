@@ -9,6 +9,7 @@ import {toBoolean} from '../util/util';
 export class NglDatatableColumn {
   @Input() heading: string;
   @Input() key: string;
+  @Input() headClass: any;
   @Input() cellClass: any;
   @ContentChild(NglDatatableCell) cellTpl: NglDatatableCell;
   @ContentChild(NglDatatableHeadingTemplate) headingTpl: NglDatatableHeadingTemplate;
