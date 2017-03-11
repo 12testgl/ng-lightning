@@ -9,3 +9,21 @@
    <ngl-avatar [src]="src" [size]="size" [type]="type"></ngl-avatar>
  </div>
 </div>
+
+<div class="slds-text-title--caps slds-m-top--small slds-m-bottom--small">Image with title</div>
+<div class="slds-align-middle slds-col slds-m-bottom--small">
+  <button type="button" nglButton="neutral" (click)="changeRatio()">Change Ratio</button>
+  {{ ratio }}
+  <ngl-figure title="test" assistiveText="Image with title">
+    <div [nglCrop]="ratio">
+      <img src="https://www.lightningdesignsystem.com/assets/images/placeholder-img@16x9.jpg" alt="16x9 image" />
+    </div>
+  </ngl-figure>
+</div>
+
+<div class="slds-text-title--caps slds-m-top--small slds-m-bottom--small">Image with link</div>
+<ngl-figure title="Figure">
+  <a href="javascript:void(0)">
+    <img src="https://www.lightningdesignsystem.com/assets/images/placeholder-img@16x9.jpg" alt="16x9 image" />
+  </a>
+</ngl-figure>
