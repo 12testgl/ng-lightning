@@ -84,6 +84,31 @@ describe('Picklist filter', () => {
     expect(getDisplayedItems(fixture)).toEqual(['Item 1', 'Item 2', 'Item 3']);
   });
 
+  it('should filter by default based on value', () => {
+    const fixture = createTestComponent(`
+      <ngl-picklist [data]="['Item 1', 'Item 2', 'Item 3']" [(nglPick)]="pick" [open]="open" (openChange)="openChange($enent)" filter>
+        <template nglPicklistItem let-item>{{item}}</template>
+      </ngl-picklist>'
+    `);
+    const dropdownTrigger = getDropdownTrigger(fixture);
+    const dropdownFilter = getDropdownFilter(fixture);
+
+    dropdownTrigger.click();
+    fixture.detectChanges();
+
+    expect(getDisplayedItems(fixture)).toEqual(['Item 1', 'Item 2', 'Item 3']);
+
+    dropdownFilter.value = '1';
+    dispatchEvent(dropdownFilter, 'input');
+    fixture.detectChanges();
+    expect(getDisplayedItems(fixture)).toEqual(['Item 1']);
+
+    dropdownFilter.value = '2';
+    dispatchEvent(dropdownFilter, 'input');
+    fixture.detectChanges();
+    expect(getDisplayedItems(fixture)).toEqual(['Item 2']);
+  });
+
   it('should be able to select with keyboard', () => {
     const fixture = createTestComponent();
     fixture.componentInstance.open = true;

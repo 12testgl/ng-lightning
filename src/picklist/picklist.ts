@@ -93,7 +93,7 @@ export class NglPicklist {
   }
 
   _filterData() {
-    if (!this.data || !this.filterType || !this.filter) {
+    if (!this.data || !this.hasFilter || !this.filter) {
       return this.data;
     }
     const filter = <any>this.filterType;
