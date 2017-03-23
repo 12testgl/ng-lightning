@@ -11,6 +11,18 @@ export function getPopoverElement(element: HTMLElement): HTMLElement {
   return <HTMLElement>element.querySelector('ngl-popover');
 }
 
+function getBodyEl(element: HTMLElement): HTMLElement {
+  return <HTMLElement>element.querySelector('.slds-popover__body');
+}
+
+function getHeaderEl(element: HTMLElement): HTMLElement {
+  return <HTMLElement>element.querySelector('.slds-popover__header');
+}
+
+function getFooterEl(element: HTMLElement): HTMLElement {
+  return <HTMLElement>element.querySelector('.slds-popover__footer');
+}
+
 describe('Popovers', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
@@ -25,6 +37,13 @@ describe('Popovers', () => {
     expect(popoverEl).toHaveCssClass('slds-popover');
     expect(popoverEl.textContent.trim()).toBe('My content');
     fixture.destroy();
+  });
+
+  it('should render aria correctly', () => {
+    const fixture = createTestComponent(`<ngl-popover>My content</ngl-popover>`);
+    const popoverEl = getPopoverElement(fixture.nativeElement);
+    const bodyEl = getBodyEl(popoverEl);
+    expect(popoverEl.getAttribute('aria-describedby')).toBe(bodyEl.id);
   });
 
   it('should notify when view is initialized', () => {
@@ -267,6 +286,20 @@ describe('Popovers', () => {
     fixture.nativeElement.querySelector('button').click();
     fixture.detectChanges();
     expect(spyService.called).toHaveBeenCalled();
+  });
+
+  it('should render header correctly', () => {
+    const fixture = createTestComponent(`<span nglPopover="tip" nglPopoverHeader="header" nglOpen="true"></span>`);
+    const popoverEl = getPopoverElement(fixture.nativeElement);
+    const headerEl = getHeaderEl(popoverEl);
+    expect(headerEl.textContent).toBe('header');
+    expect(popoverEl.getAttribute('aria-labelledby')).toBe(headerEl.firstElementChild.id);
+  });
+
+  it('should render footer correctly', () => {
+    const fixture = createTestComponent(`<span nglPopover="tip" nglPopoverFooter="footer" nglOpen="true"></span>`);
+    const footerEl = getFooterEl(getPopoverElement(fixture.nativeElement));
+    expect(footerEl.textContent).toBe('footer');
   });
 });
 

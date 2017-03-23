@@ -15,6 +15,9 @@ export class NglPopoverTrigger {
 
   @Input() nglPopover: string | TemplateRef<any>;
 
+  @Input() nglPopoverHeader: string;
+  @Input() nglPopoverFooter: string;
+
   @Input() set nglPopoverPlacement(_placement: Direction) {
     this.placement = _placement || 'top';
     this.setTether();
@@ -145,6 +148,8 @@ export class NglPopoverTrigger {
 
     this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [nodes]);
     this.popover = this.componentRef.instance;
+    this.popover.header = this.nglPopoverHeader;
+    this.popover.footer = this.nglPopoverFooter;
     this.popover.afterViewInit.take(1).subscribe(() => this.position(false));
 
     if (this.nglInteractive) {

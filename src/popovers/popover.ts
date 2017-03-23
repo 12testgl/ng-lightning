@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer, HostListener} from '@angular/core';
-import {replaceClass, toBoolean} from '../util/util';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer, HostListener, HostBinding} from '@angular/core';
+import {replaceClass, toBoolean, uniqueId} from '../util/util';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
 
@@ -14,7 +14,9 @@ export class NglPopover {
 
   @Output() onInteraction = new EventEmitter<boolean>();
 
-  private _theme: string;
+  @Input() header: string;
+  @Input() footer: string;
+
   @Input() set theme(theme: any) {
     replaceClass(this, `slds-theme--${this._theme}`, theme ? `slds-theme--${theme}` : '');
     this._theme = theme;
@@ -24,21 +26,32 @@ export class NglPopover {
     this.renderer.setElementClass(this.element.nativeElement, 'slds-popover--tooltip', toBoolean(isTooltip));
   }
 
-  private _nubbin: Direction;
   set nubbin(direction: Direction) {
     replaceClass(this, `slds-nubbin--${this._nubbin}`, direction ? `slds-nubbin--${direction}` : '');
     this._nubbin = direction;
   }
+
+  uid = uniqueId('popover');
+
+   @HostBinding('attr.aria-labelledby')
+   get labelledby() {
+    return this.header ? `${this.uid}-heading` : null;
+   }
+
+  private _nubbin: Direction;
+  private _theme: string;
 
   constructor(public element: ElementRef, public renderer: Renderer, public changeDetector: ChangeDetectorRef) {
     this.renderer.setElementClass(this.element.nativeElement, 'slds-popover', true);
 
     // Prevent position changes of "close by" elements
     this.renderer.setElementStyle(this.element.nativeElement, 'position', 'absolute');
+
+    this.renderer.setElementAttribute(this.element.nativeElement, 'aria-describedby', this.uid);
   }
 
   ngAfterViewInit() {
-    this.afterViewInit.emit(null);
+    this.afterViewInit.emit();
   }
 
   @HostListener('mouseenter', ['$event', 'true'])
