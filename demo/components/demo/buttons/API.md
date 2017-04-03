@@ -2,7 +2,7 @@
 
 ### Input
 
-  * `nglButton?: 'neutral' | 'brand' | 'destructive' | 'inverse'`: Buttons theme.
+  * `nglButton?: 'success' | 'neutral' | 'brand' | 'destructive' | 'inverse'`: Buttons theme.
 
 
 # `[nglButtonIcon]`

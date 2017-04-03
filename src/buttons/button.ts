@@ -7,7 +7,7 @@ import {replaceClass} from '../util/util';
 export class NglButton {
 
   private _type: string;
-  @Input() set nglButton(type: 'neutral' | 'brand' | 'destructive' | 'inverse') {
+  @Input() set nglButton(type: 'success' | 'neutral' | 'brand' | 'destructive' | 'inverse') {
     replaceClass(this, `${this.prefix}${this._type}`, type ? `${this.prefix}${type}` : '');
     this._type = type;
   }
