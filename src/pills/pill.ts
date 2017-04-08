@@ -1,16 +1,15 @@
-import {Component, ChangeDetectionStrategy, ChangeDetectorRef, Output, EventEmitter} from '@angular/core';
+import {Component, ChangeDetectionStrategy, ChangeDetectorRef, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'ngl-pill',
   templateUrl: './pill.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class.slds-pill]': 'true',
-  },
 })
 export class NglPill {
   removable: boolean;
   unlinked: boolean = true;
+
+  @Input() nglPillClass;
 
   @Output() nglPillRemove = new EventEmitter();
 

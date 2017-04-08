@@ -10,7 +10,7 @@ const createTestComponent = (html?: string, detectChanges?: boolean) =>
 
 function getIcon(element: HTMLElement): any {
   const pill = getPill(element);
-  return pill.childNodes[1];
+  return pill.firstChild;
 }
 
 describe('NglPill', () => {
