@@ -35,6 +35,23 @@ This library depends on Salesforce's LDS markup and CSS (tested with 2.2.1). We 
 ```html
 <link rel="stylesheet" href="https://unpkg.com/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css">
 ```
+####Note - IE11 Support
+IE11 does not currently support two important features used by ng-lightning. 
+
+* SVG External Content -- used to load SVG Icons from a sprite map via the `use` tag. See [here](https://css-tricks.com/svg-use-external-source/) for more information.
+* `Element.classList` on SVG elements -- used by Angular's `renderer.setElementClass`. See [here](https://github.com/angular/angular/issues/6327) for more information.
+
+If you need IE11 support, you'll need to provide the following polyfills. Typically, these should be placed within the `head` element, similar to other shims like core-js or reflect-metadata`
+
+* [SVG4Everybody](https://github.com/jonathantneal/svg4everybody)
+* [classList.js](https://github.com/eligrey/classList.js)
+
+These polyfills are also available via npmcdn.
+
+* [https://npmcdn.com/classlist.js](https://npmcdn.com/classlist.js)
+* [https://npmcdn.com/svg4everybody](https://npmcdn.com/svg4everybody)
+
+** It has been noted that the second polyfill causes considerable slowdown to page rendering when used in Angular dev mode. Using `enableProdMode()` resolves this issue, so make sure you always run in production with this flag! As these polyfills do not affect Chrome or Firefox, it might be worthwhile to utilize those browsers in development.**
 
 #### SVG Icons
 Because of various cross-domain issues, if you want to use SLDS icons, you must provide a copy of the various sprite files (ie `@salesforce-ux/design-system/assets/icons/action-sprite/svg/symbols.svg`), served locally through your server. Check our [webpack configuration](demo/webpack.config.js), to see how we achieve this for our demo page.
