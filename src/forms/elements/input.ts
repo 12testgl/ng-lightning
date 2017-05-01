@@ -40,9 +40,14 @@ export class NglFormSelect {
 
 @Directive({
   selector: 'input[nglFormControl][type=checkbox]',
+  host: {
+    '[class.slds-assistive-text]': 'assistive',
+  },
 })
 export class NglFormCheckbox {
   type = 'checkbox';
+
+  assistive: boolean = false;
 
   @HostBinding('id') id: string;
   @HostBinding('attr.aria-describedby') describedBy: string;
