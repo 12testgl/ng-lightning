@@ -6,8 +6,8 @@ import {NglPillsModule} from './module';
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
-export function getPill(root: HTMLElement): any {
-  return root.firstElementChild;
+export function getPill(root: HTMLElement): HTMLElement {
+  return <HTMLElement>root.querySelector('.slds-pill');
 }
 
 function getLabelEl(pill: HTMLElement): HTMLElement {
@@ -31,6 +31,10 @@ describe('NglPill', () => {
     expect(text.tagName).toBe('A');
     expect(text.textContent.trim()).toBe('I am a pill!');
     expect(removeButton).toHaveCssClass('slds-pill__remove');
+
+    fixture.componentInstance.nglPillClass = 'slds-has-error';
+    fixture.detectChanges();
+    expect(pill).toHaveCssClass('slds-has-error');
   });
 
   it('should render unlinked correctly', () => {
@@ -78,7 +82,7 @@ describe('NglPill', () => {
 
 @Component({
   template: `
-    <ngl-pill (nglPillRemove)="onRemove()">
+    <ngl-pill (nglPillRemove)="onRemove()" [nglPillClass]="nglPillClass">
       <a>I am a pill!</a>
     </ngl-pill>
   `,
@@ -86,4 +90,5 @@ describe('NglPill', () => {
 export class TestComponent {
   removable = true;
   onRemove = jasmine.createSpy('onRemove');
+  nglPillClass;
 }
