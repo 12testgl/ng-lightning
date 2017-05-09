@@ -16,4 +16,4 @@
 ### Content
 
   * `ng-content`: Label.
-  * `<template nglPicklistItem>`: Template used to render each option.
+  * `<ng-template nglPicklistItem>`: Template used to render each option.

@@ -1,12 +1,12 @@
 import {Directive, Input, TemplateRef, Output, EventEmitter, Optional} from '@angular/core';
 
 /*
- * <template ngl-tab heading="...">
+ * <ng-template ngl-tab heading="...">
  *    Content goes here...
- * </template>
+ * </ng-template>
  */
 @Directive({
-  selector: 'template[ngl-tab]',
+  selector: 'ng-template[ngl-tab]',
   exportAs: 'nglTab',
 })
 export class NglTab {

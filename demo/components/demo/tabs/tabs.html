@@ -1,18 +1,18 @@
 <ngl-tabs [(selected)]="selectedTab" [type]="type">
-  <template ngl-tab heading="Overview">
+  <ng-template ngl-tab heading="Overview">
     You have {{details.length}} details.
-  </template>
+  </ng-template>
   <ngl-tab *ngFor="let detail of details" (onActivate)="tabChange(detail, 'active')" (onDeactivate)="tabChange(detail, 'inactive')">
-    <template ngl-tab-heading>Detail <i>{{ detail }}</i></template>
-    <template ngl-tab-content>
+    <ng-template ngl-tab-heading>Detail <i>{{ detail }}</i></ng-template>
+    <ng-template ngl-tab-content>
       <p>Some detail text for <b>{{detail}}</b>.</p>
       <button type="button" nglButton="destructive" (click)="removeDetail(detail)">Remove</button>
-    </template>
+    </ng-template>
   </ngl-tab>
-  <template #heading>Summary</template>
-  <template ngl-tab nglTabId="sum" #summaryTab="nglTab" [heading]="heading">
+  <ng-template #heading>Summary</ng-template>
+  <ng-template ngl-tab nglTabId="sum" #summaryTab="nglTab" [heading]="heading">
     Next last ID is {{id}}.
-  </template>
+  </ng-template>
 </ngl-tabs>
 
 <div class="slds-m-top--large">

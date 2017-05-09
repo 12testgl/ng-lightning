@@ -17,10 +17,10 @@
 
 ### Content
 
-  * `template[nglLookupItem]?`: Custom suggestion template inside popup menu.
-  * `template[nglPolymorphicLabel]`: Label for selected scope of a polymorphic lookup.
+  * `ng-template[nglLookupItem]?`: Custom suggestion template inside popup menu.
+  * `ng-template[nglPolymorphicLabel]`: Label for selected scope of a polymorphic lookup.
 
-# template[nglPolymorphicItem]
+# ng-template[nglPolymorphicItem]
 
 ### Input
 

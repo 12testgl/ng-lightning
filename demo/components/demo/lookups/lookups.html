@@ -6,28 +6,28 @@
 <button type="button" nglButton="neutral" (click)="value='Athens'" class="slds-m-bottom--large">Search for: Athens</button>
 <button type="button" nglButton="destructive" (click)="address = null" class="slds-m-bottom--large" [disabled]="!address">Clear</button>
 <ngl-lookup [(value)]="value" [lookup]="lookupAsync" field="formatted_address" [(pick)]="address">
-  <template nglLookupLabel>Type an address:</template>
+  <ng-template nglLookupLabel>Type an address:</ng-template>
   <div nglLookupHeader class="slds-text-body--small">Most relevant cities</div>
-  <template nglLookupItem let-ctx>
+  <ng-template nglLookupItem let-ctx>
     <div class="slds-media__body">
       <div class="slds-lookup__result-text">{{ctx.formatted_address}}</div>
       <span class="slds-lookup__result-meta slds-text-body--small">Place ID: {{ctx.place_id}}</span>
     </div>
-  </template>
+  </ng-template>
 </ngl-lookup>
 <div *ngIf="address" class="slds-m-top--large">Selected place ID: <b>{{address.place_id}}</b></div>
 
 
 <div class="slds-text-title--caps slds-m-top--x-large slds-m-bottom--small">Polymorphic</div>
 <ngl-lookup [lookup]="lookupPolymorphic" [(pick)]="hero" debounce="0" [placeholder]="'Search ' + scope.value">
-  <template nglLookupLabel>Who is your favorite superhero/superheroeine?</template>
+  <ng-template nglLookupLabel>Who is your favorite superhero/superheroeine?</ng-template>
   <span nglPolymorphicLabel>
     <svg nglIconCategory="standard" [nglIcon]="scope.icon" [ngClass]="'slds-icon-standard-' + scope.icon" class="slds-icon slds-icon--small"></svg>
   </span>
-  <template nglPolymorphicItem [scopes]="scopes" (scopeChange)="scope = $event" let-item>
+  <ng-template nglPolymorphicItem [scopes]="scopes" (scopeChange)="scope = $event" let-item>
     <p class="slds-truncate">
       <svg nglIconCategory="standard" [nglIcon]="item.icon" [ngClass]="'slds-icon-standard-' + item.icon" class="slds-icon slds-icon--small slds-m-right--small"></svg>
       {{ item.value }}
     </p>
-  </template>
+  </ng-template>
 </ngl-lookup>

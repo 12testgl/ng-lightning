@@ -15,7 +15,7 @@
   * `rateChange: EventEmitter<number>`: the clicked rate
   * `hover: EventEmitter<number>`: the currently hovered rate
 
-# `template[nglRatingIcon]`
+# `ng-template[nglRatingIcon]`
 
 ### Variables
 

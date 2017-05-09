@@ -105,7 +105,7 @@ describe('`NglPicklist`', () => {
   it('should render trigger disabled', () => {
     const fixture = createTestComponent(`
       <ngl-picklist [data]="items" [(nglPick)]="picks" [disabled]="disabled">
-        <template nglPicklistItem let-item>{{item.value}}</template>
+        <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
       </ngl-picklist>
     `);
     fixture.componentInstance.disabled = true;
@@ -122,7 +122,7 @@ describe('`NglPicklist`', () => {
   it('should render as fluid', () => {
     const fixture = createTestComponent(`
       <ngl-picklist [data]="items" [(nglPick)]="picks" [fluid]="fluid">
-        <template nglPicklistItem let-item>{{item.value}}</template>
+        <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
       </ngl-picklist>`);
     fixture.componentInstance.fluid = true;
     fixture.detectChanges();
@@ -141,7 +141,7 @@ describe('`NglPicklist`', () => {
   template: `
     <ngl-picklist [data]="items" [(nglPick)]="picks" [(open)]="open" [nglPickMultiple]="multiple">
       <span class="slds-truncate">{{picks.length ? picks.length + ' options selected' : 'Select option(s)'}}</span>
-      <template nglPicklistItem let-item>{{item.value}}</template>
+      <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
     </ngl-picklist>
   `,
 })

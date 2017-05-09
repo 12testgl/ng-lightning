@@ -74,10 +74,10 @@ const config = {
       { from: path.resolve(__dirname, 'index.css') },
     ]),
 
-    // Workaround needed for angular 2 angular/angular#11580
+    // Workaround needed for angular 4 angular/angular#14898
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      /angular(\\|\/)core(\\|\/)@angular/,
       path.resolve(__dirname, '../src') // location of your src
     ),
 

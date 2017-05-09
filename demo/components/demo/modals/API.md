@@ -4,7 +4,7 @@
 
   * `[body]`: Body content.
   * `[tagline]`: If you need to provide additional context inside the header.
-  * `template[ngl-modal-footer]`: Contains buttons displayed on modal's footer.
+  * `ng-template[ngl-modal-footer]`: Contains buttons displayed on modal's footer.
 
 ### Input
 
@@ -17,7 +17,7 @@
 
   * `openChange: EventEmitter<boolean>`: emitted when modal's visibility is going to change to `false`
 
-# `template[nglModalHeader]`
+# `ng-template[nglModalHeader]`
 
 ### Variables
 

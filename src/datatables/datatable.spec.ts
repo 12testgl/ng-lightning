@@ -148,10 +148,10 @@ describe('`NglDatatable`', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
         <ngl-datatable-column key="id">
-          <template nglDatatableCell let-value>{{value}}:</template>
+          <ng-template nglDatatableCell let-value>{{value}}:</ng-template>
         </ngl-datatable-column>
         <ngl-datatable-column>
-          <template nglDatatableCell let-row="row" let-i="index">{{i}} = {{row.name}}</template>
+          <ng-template nglDatatableCell let-row="row" let-i="index">{{i}} = {{row.name}}</ng-template>
         </ngl-datatable-column>
         <ngl-datatable-column key="number"></ngl-datatable-column>
       </table>`);
@@ -275,7 +275,7 @@ describe('`NglDatatable`', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
         <ngl-datatable-column>
-          <template nglDatatableCell><button type="button" (click)="cb()"></button></template>
+          <ng-template nglDatatableCell><button type="button" (click)="cb()"></button></ng-template>
         </ngl-datatable-column>
       </table>`);
     expect(fixture.componentInstance.cb).not.toHaveBeenCalled();
@@ -292,7 +292,7 @@ describe('`NglDatatable`', () => {
   it('should be able to render a loading overlay', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data" [loading]="loading">
-        <template nglLoadingOverlay>Loading...</template>
+        <ng-template nglLoadingOverlay>Loading...</ng-template>
       </table>`);
 
     expect(getLoadingEl(fixture.nativeElement)).toBeFalsy();
@@ -307,7 +307,7 @@ describe('`NglDatatable`', () => {
   it('should show a custom message when no data available', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable>
-        <template nglNoRowsOverlay>No data available in table!</template>
+        <ng-template nglNoRowsOverlay>No data available in table!</ng-template>
       </table>`);
     expect(getData(fixture.nativeElement)).toEqual([[ 'No data available in table!' ]]);
   });
@@ -333,7 +333,7 @@ describe('`NglDatatable`', () => {
     const fixture = createTestComponent(`
         <table ngl-datatable>
           <ngl-datatable-column heading="My title">
-            <template nglDatatableHeading>Custom heading</template>
+            <ng-template nglDatatableHeading>Custom heading</ng-template>
           </ngl-datatable-column>
         </table>`);
     expect(getHeadingsText(fixture.nativeElement)).toEqual(['Custom heading']);
@@ -344,7 +344,7 @@ describe('`NglDatatable`', () => {
     const fixture = createTestComponent(`
         <table ngl-datatable>
           <ngl-datatable-column>
-            <template nglDatatableHeading>Custom heading</template>
+            <ng-template nglDatatableHeading>Custom heading</ng-template>
           </ngl-datatable-column>
         </table>`);
     expect(getHeadingsText(fixture.nativeElement)).toEqual(['Custom heading']);
