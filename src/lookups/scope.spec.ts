@@ -97,9 +97,9 @@ describe('Lookup Polymorphic', () => {
   template: `
     <ngl-lookup label="Lookup:" [value]="value" [lookup]="filter" [(pick)]="selection" debounce="0" [placeholder]="'Search ' + scope.label">
       <span nglPolymorphicLabel>{{scope.label}}</span>
-      <template nglPolymorphicItem [scopes]="scopes" (scopeChange)="scope = $event" let-scope>
+      <ng-template nglPolymorphicItem [scopes]="scopes" (scopeChange)="scope = $event" let-scope>
         {{ scope.icon }}. {{ scope.label }}
-      </template>
+      </ng-template>
     </ngl-lookup>`,
 })
 export class TestComponent {

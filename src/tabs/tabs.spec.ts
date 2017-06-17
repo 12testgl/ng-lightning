@@ -51,7 +51,7 @@ describe('Tabs Component', () => {
   it('should render titles with caps based on input', () => {
     const fixture = createTestComponent(`
       <ngl-tabs [(selected)]="selectedTab" [titleCaps]="titleCaps">
-        <template ngl-tab></template><template ngl-tab></template>
+        <ng-template ngl-tab></ng-template><ng-template ngl-tab></ng-template>
       </ngl-tabs>`);
     const lis = selectElements(fixture.nativeElement, 'li');
     lis.forEach((li) => expect(li).not.toHaveCssClass('slds-text-title--caps'));
@@ -63,14 +63,14 @@ describe('Tabs Component', () => {
 
   it('should render tab headers based on template', () => {
     const fixture = createTestComponent(`<ngl-tabs [(selected)]="selectedTab">
-          <template #h><b>My header</b></template>
-          <template ngl-tab [heading]="h"></template>
+          <ng-template #h><b>My header</b></ng-template>
+          <ng-template ngl-tab [heading]="h"></ng-template>
           <ngl-tab heading="Simple">
-            <template ngl-tab-content></template>
+            <ng-template ngl-tab-content></ng-template>
           </ngl-tab>
           <ngl-tab>
-            <template ngl-tab-heading><i>Another</i> header</template>
-            <template ngl-tab-content></template>
+            <ng-template ngl-tab-heading><i>Another</i> header</ng-template>
+            <ng-template ngl-tab-content></ng-template>
           </ngl-tab>
         </ngl-tabs>`);
     expectHeaders(fixture.nativeElement, ['<b>My header</b>', 'Simple', '<i>Another</i> header']);
@@ -133,8 +133,8 @@ describe('Tabs Component', () => {
   it('should allow activating tab from outside', () => {
     const fixture = createTestComponent(`
       <ngl-tabs [selected]="selectedTab" (selectedChange)="change($event)">
-        <template ngl-tab></template>
-        <template ngl-tab nglTabId="another" #anotherTab="nglTab">Another tab</template>
+        <ng-template ngl-tab></ng-template>
+        <ng-template ngl-tab nglTabId="another" #anotherTab="nglTab">Another tab</ng-template>
       </ngl-tabs>
       <button (click)="selectedTab = anotherTab"></button>
     `);
@@ -151,13 +151,13 @@ describe('Tabs Component', () => {
 @Component({
   template: `
     <ngl-tabs [selected]="selectedTab" (selectedChange)="change($event)">
-      <template ngl-tab heading="First">Tab 1</template>
-      <template ngl-tab nglTabId="two" heading="Second">Tab 2</template>
-      <template ngl-tab nglTabId="three" heading="Third tab" (onActivate)="activate(true)"
-            (onDeactivate)="activate(false)">Tab 3</template>
+      <ng-template ngl-tab heading="First">Tab 1</ng-template>
+      <ng-template ngl-tab nglTabId="two" heading="Second">Tab 2</ng-template>
+      <ng-template ngl-tab nglTabId="three" heading="Third tab" (onActivate)="activate(true)"
+            (onDeactivate)="activate(false)">Tab 3</ng-template>
       <ngl-tab (onActivate)="activate(4, true)" (onDeactivate)="activate(4, false)">
-        <template ngl-tab-heading>Fourth tab</template>
-        <template ngl-tab-content>Tab 4</template>
+        <ng-template ngl-tab-heading>Fourth tab</ng-template>
+        <ng-template ngl-tab-content>Tab 4</ng-template>
       </ngl-tab>
     </ngl-tabs>
   `,

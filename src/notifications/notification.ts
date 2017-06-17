@@ -1,4 +1,5 @@
-import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, Renderer, Optional, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, Renderer, Optional, ChangeDetectionStrategy, HostBinding} from '@angular/core';
+import {trigger, state, animate, transition, style} from '@angular/animations';
 import {NglNotificationClose} from './notification-close';
 import {replaceClass, isInt} from '../util/util';
 
@@ -13,6 +14,13 @@ import {replaceClass, isInt} from '../util/util';
     `:host.slds-notify--alert {
       display: block;
     }`,
+  ],
+  animations: [
+    trigger('visibilityChanged', [
+    state('void' , style({ opacity: 0, transform: 'translateY(-100%)' })),
+    state('1' , style({ opacity: 1, transform: 'translateY(0)' })),
+    transition('void <=> 1', animate('.5s')),
+    ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   exportAs: 'nglNotification',
@@ -31,14 +39,20 @@ export class NglNotification implements OnChanges {
     }
   }
 
+  @HostBinding('@visibilityChanged') get visibility(){
+    return this.visible;
+  }
+
   @Output('nglNotificationClose') closeEventEmitter = new EventEmitter<string>();
 
   severity: string;
   showClose = false;
   private currentTimeout: any = null;
+  private visible = false;
 
   constructor(public element: ElementRef, public renderer: Renderer, @Optional() notificationClose: NglNotificationClose) {
     this.showClose = !!notificationClose;
+    this.visible = true;
   }
 
   ngOnChanges(changes: any) {
@@ -55,6 +69,7 @@ export class NglNotification implements OnChanges {
 
   close(reason?: string, $event?: Event) {
     this.clearTimeout();
+    this.visible = false;
     if ($event) {
       $event.preventDefault();
       $event.stopPropagation();

@@ -17,7 +17,7 @@ describe('`NglFormLabelTemplate`', () => {
   it('should render correctly inside form element', () => {
     const fixture = createTestComponent(`
       <ngl-form-element>
-        <template nglFormLabel>{{ label }}</template>
+        <ng-template nglFormLabel>{{ label }}</ng-template>
         <input nglFormControl type="text">
       </ngl-form-element>`);
     const labelEl = getLabelElement(fixture.nativeElement);
@@ -25,7 +25,7 @@ describe('`NglFormLabelTemplate`', () => {
   });
 
   it('should render correctly inside form group', () => {
-    const fixture = createTestComponent(`<fieldset ngl-form-group-alt><template nglFormLabel>{{ label }}</template></fieldset>`);
+    const fixture = createTestComponent(`<fieldset ngl-form-group-alt><ng-template nglFormLabel>{{ label }}</ng-template></fieldset>`);
     const labelEl = getLabelElement(fixture.nativeElement);
     expect(labelEl).toHaveText('My Label');
   });
@@ -33,8 +33,8 @@ describe('`NglFormLabelTemplate`', () => {
   it('should render correctly inside form group element', () => {
     const fixture = createTestComponent(`
       <fieldset ngl-form-group-alt>
-        <template nglFormLabel>{{ label }}</template>
-        <ngl-form-group-element><template nglFormLabel>Checkbox label</template><input nglFormControl type="checkbox" /></ngl-form-group-element>
+        <ng-template nglFormLabel>{{ label }}</ng-template>
+        <ngl-form-group-element><ng-template nglFormLabel>Checkbox label</ng-template><input nglFormControl type="checkbox" /></ngl-form-group-element>
       </fieldset>`);
 
     const labelEl = getLabelElement(fixture.nativeElement);

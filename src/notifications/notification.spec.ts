@@ -1,4 +1,5 @@
 import {fakeAsync, tick, TestBed, ComponentFixture}  from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Component} from '@angular/core';
 import {createGenericTestComponent} from '../../test/util/helpers';
 import {NglNotificationsModule} from './module';
@@ -12,7 +13,7 @@ function getCloseButton(fixture: any): HTMLElement {
 
 describe('`nglNotification`', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglNotificationsModule]}));
+  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglNotificationsModule, NoopAnimationsModule]}));
 
   it('should have the proper classes and attributes', () => {
     const fixture = createTestComponent();

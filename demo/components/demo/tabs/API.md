@@ -11,7 +11,7 @@
   * `selectedChange: EventEmitter<NglTab>`: the tab clicked in order to activate
 
 
-# `<template ngl-tab>` | `<ngl-tab>`
+# `<ng-template ngl-tab>` | `<ngl-tab>`
 
 ### Input
 
@@ -25,5 +25,5 @@
 
 ### Only when using `<ngl-tab>`
 
-  * `<template ngl-tab-heading>`: contains heading's content
-  * `<template ngl-tab-content>`: contains tabs's content
+  * `<ng-template ngl-tab-heading>`: contains heading's content
+  * `<ng-template ngl-tab-content>`: contains tabs's content

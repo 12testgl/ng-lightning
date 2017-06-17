@@ -10,7 +10,7 @@
 </ngl-form-element>
 
 <ngl-form-element [error]="hasError ? error : null" class="slds-m-top--small">
-  <template nglFormLabel><i>Textarea Label</i> <span *ngIf="required">(<b>required</b>!)</span></template>
+  <ng-template nglFormLabel><i>Textarea Label</i> <span *ngIf="required">(<b>required</b>!)</span></ng-template>
   <textarea nglFormControl placeholder="Placeholder Text" [required]="required"></textarea>
 </ngl-form-element>
 
@@ -36,8 +36,8 @@
 </fieldset>
 
 <fieldset ngl-form-group-alt [required]="required" [error]="hasError ? error : null" class="slds-m-top--small">
-  <template nglFormLabel><i>Alternate Radio Group</i></template>
-  <ngl-form-group-element *ngFor="let day of days"><template nglFormLabel>{{day}}</template><input nglFormControl type="radio" /></ngl-form-group-element>
+  <ng-template nglFormLabel><i>Alternate Radio Group</i></ng-template>
+  <ngl-form-group-element *ngFor="let day of days"><ng-template nglFormLabel>{{day}}</ng-template><input nglFormControl type="radio" /></ngl-form-group-element>
 </fieldset>
 
 <fieldset ngl-form-group label="Checkbox Group Label" [required]="required" [error]="hasError ? error : null" class="slds-m-top--small">

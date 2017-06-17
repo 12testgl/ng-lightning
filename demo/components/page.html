@@ -14,15 +14,15 @@
   <div class="slds-grid slds-m-top--large">
     <div class="slds-col">
       <ngl-tabs [(selected)]="selectedTab">
-        <template ngl-tab="ngl-tab" heading="Markup">
+        <ng-template ngl-tab="ngl-tab" heading="Markup">
           <pre class="language-html"><code ngNonBindable [innerHtml]="html()" class="language-html"></code></pre>
-        </template>
-        <template ngl-tab="ngl-tab" heading="Typescript">
+        </ng-template>
+        <ng-template ngl-tab="ngl-tab" heading="Typescript">
           <pre class="language-typescript"><code ngNonBindable [innerHtml]="ts()" class="language-typescript"></code></pre>
-        </template>
-        <template ngl-tab="ngl-tab" heading="API">
+        </ng-template>
+        <ng-template ngl-tab="ngl-tab" heading="API">
           <pre class="language-markup"><code ngNonBindable [innerHtml]="component.api" class="language-markup api"></code></pre>
-        </template>
+        </ng-template>
       </ngl-tabs>
     </div>
   </div>

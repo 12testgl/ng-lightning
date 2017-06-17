@@ -87,7 +87,7 @@ describe('Picklist filter', () => {
   it('should filter by default based on value', () => {
     const fixture = createTestComponent(`
       <ngl-picklist [data]="['Item 1', 'Item 2', 'Item 3']" [(nglPick)]="pick" [open]="open" (openChange)="openChange($enent)" filter>
-        <template nglPicklistItem let-item>{{item}}</template>
+        <ng-template nglPicklistItem let-item>{{item}}</ng-template>
       </ngl-picklist>'
     `);
     const dropdownTrigger = getDropdownTrigger(fixture);
@@ -172,7 +172,7 @@ describe('Picklist filter', () => {
   it('should show filter placeholder based on input', () => {
     const fixture = createTestComponent(`
       <ngl-picklist [data]="items" [(nglPick)]="pick" open="true" filter="value" [filterPlaceholder]="filterPlaceholder">
-        <template nglPicklistItem let-item>{{item.value}}</template>
+        <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
       </ngl-picklist>`);
 
     const dropdownFilter = getDropdownFilter(fixture);
@@ -191,7 +191,7 @@ describe('Picklist filter', () => {
 @Component({
   template: `
     <ngl-picklist [data]="items" [(nglPick)]="pick" [open]="open" (openChange)="openChange($enent)" filter="value">
-      <template nglPicklistItem let-item>{{item.value}}</template>
+      <ng-template nglPicklistItem let-item>{{item.value}}</ng-template>
     </ngl-picklist>'
   `,
 })

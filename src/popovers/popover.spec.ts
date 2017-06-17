@@ -140,13 +140,13 @@ describe('Popovers', () => {
   });
 
   it('should have tooltip appearence', () => {
-    const fixture = createTestComponent(`<template #tip></template><span [nglPopover]="tip" nglOpen="true" nglTooltip></span>`);
+    const fixture = createTestComponent(`<ng-template #tip></ng-template><span [nglPopover]="tip" nglOpen="true" nglTooltip></span>`);
     const popoverEl = getPopoverElement(fixture.nativeElement);
     expect(popoverEl).toHaveCssClass('slds-popover--tooltip');
   });
 
   it('should destroy popover when host is destroyed', () => {
-    const fixture = createTestComponent(`<template #tip></template><span *ngIf="exists" [nglPopover]="tip" nglOpen="true"></span>`, false);
+    const fixture = createTestComponent(`<ng-template #tip></ng-template><span *ngIf="exists" [nglPopover]="tip" nglOpen="true"></span>`, false);
     fixture.componentInstance.exists = true;
     fixture.detectChanges();
     expect(getPopoverElement(fixture.nativeElement)).toBeTruthy();
@@ -276,7 +276,7 @@ describe('Popovers', () => {
 
   it('should properly destroy TemplateRef content', () => {
     const fixture = createTestComponent(`
-        <template #t><destroyable></destroyable></template>
+        <ng-template #t><destroyable></destroyable></ng-template>
         <div [nglPopover]="t" #tip="nglPopover" nglOpen="true"></div>
         <button type="button" (click)="tip.close()"></button>`);
 
@@ -305,7 +305,7 @@ describe('Popovers', () => {
 
 @Component({
   template: `
-    <template #tip>I am a tooltip</template>
+    <ng-template #tip>I am a tooltip</ng-template>
     <span [nglPopover]="tip" [nglPopoverPlacement]="placement" [nglPopoverTheme]="theme" [nglOpen]="open" (nglPopoverToggled)="cb($event)">Open here</span>
   `,
 })

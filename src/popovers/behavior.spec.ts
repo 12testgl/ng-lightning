@@ -48,7 +48,7 @@ describe('`NglPopoverBehavior`', () => {
 
 @Component({
   template: `
-    <template #tip>I am a tooltip</template>
+    <ng-template #tip>I am a tooltip</ng-template>
     <span [nglPopover]="tip" nglPopoverBehavior>Open here</span>
   `,
 })

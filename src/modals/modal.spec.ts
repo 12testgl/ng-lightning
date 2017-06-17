@@ -1,4 +1,5 @@
 import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Component} from '@angular/core';
 import {createGenericTestComponent, dispatchKeyEvent} from '../../test/util/helpers';
 import {By} from '@angular/platform-browser';
@@ -31,7 +32,7 @@ function getBackdrop(element: HTMLElement) {
 
 describe('`NglModal`', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglModalsModule]}));
+  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglModalsModule, NoopAnimationsModule]}));
 
   it('should render correctly if open', () => {
     const fixture = createTestComponent();
@@ -78,7 +79,7 @@ describe('`NglModal`', () => {
   it('should support custom header', () => {
     const fixture = createTestComponent(`
       <ngl-modal>
-        <template nglModalHeader let-id="id"><span [id]="id" class="my-custom">Hello</span></template>
+        <ng-template nglModalHeader let-id="id"><span [id]="id" class="my-custom">Hello</span></ng-template>
         <div body>Body content.</div>
       </ngl-modal>`);
     const headerEl = fixture.nativeElement.querySelector('.slds-modal__header > .my-custom');
@@ -93,7 +94,9 @@ describe('`NglModal`', () => {
 
     const button = getCloseButton(fixture.nativeElement);
     button.click();
-    expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    setTimeout(() => {
+      expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    }, 200);
   });
 
   it('should close when escape is triggered', () => {
@@ -101,13 +104,15 @@ describe('`NglModal`', () => {
     expect(fixture.componentInstance.openChange).not.toHaveBeenCalled();
 
     dispatchKeyEvent(fixture, By.directive(NglModal), 'keydown.esc');
-    expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    setTimeout(() => {
+      expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    }, 200);
   });
 
   it('should support footer', () => {
     const fixture = createTestComponent(`
       <ngl-modal open="true">
-        <template ngl-modal-footer>{{header}} in footer</template>
+        <ng-template ngl-modal-footer>{{header}} in footer</ng-template>
       </ngl-modal>`);
     const footer = fixture.nativeElement.querySelector('.slds-modal__footer');
     expect(footer).toHaveText('Modal Header in footer');
@@ -121,7 +126,7 @@ describe('`NglModal`', () => {
   it('should support directional footer', () => {
     const fixture = createTestComponent(`
       <ngl-modal open="true" [directional]="directional">
-        <template ngl-modal-footer></template>
+        <ng-template ngl-modal-footer></ng-template>
       </ngl-modal>`, false);
     fixture.componentInstance.directional = true;
     fixture.detectChanges();

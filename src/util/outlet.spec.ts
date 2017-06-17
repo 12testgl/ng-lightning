@@ -46,7 +46,7 @@ describe('`NglInternalOutlet`', () => {
 
 @Component({
   template: `
-    <template #tpl>Template content. Count is {{ count }}</template>
+    <ng-template #tpl>Template content. Count is {{ count }}</ng-template>
     <span [nglInternalOutlet]="isTemplate ? tpl : str"></span>
   `,
 })
