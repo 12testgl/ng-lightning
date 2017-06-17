@@ -132,7 +132,9 @@ gulp.task('test:build', function() {
 gulp.task('test:clean-build', gulp.series('test:clean', 'test:build'));
 
 gulp.task('test', gulp.series('test:clean-build', function test_impl(done) {
-  startKarmaServer(false, done);
+  startKarmaServer(false, function(){
+    done();
+  });
 }));
 
 gulp.task('tdd', gulp.series('test:clean-build', function tdd_impl(done) {

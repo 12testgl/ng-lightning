@@ -1,4 +1,5 @@
 import {TestBed, ComponentFixture} from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Component} from '@angular/core';
 import {createGenericTestComponent, dispatchKeyEvent} from '../../test/util/helpers';
 import {By} from '@angular/platform-browser';
@@ -31,7 +32,7 @@ function getBackdrop(element: HTMLElement) {
 
 describe('`NglModal`', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglModalsModule]}));
+  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglModalsModule, NoopAnimationsModule]}));
 
   it('should render correctly if open', () => {
     const fixture = createTestComponent();
@@ -93,7 +94,9 @@ describe('`NglModal`', () => {
 
     const button = getCloseButton(fixture.nativeElement);
     button.click();
-    expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    setTimeout(() => {
+      expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    }, 200);
   });
 
   it('should close when escape is triggered', () => {
@@ -101,7 +104,9 @@ describe('`NglModal`', () => {
     expect(fixture.componentInstance.openChange).not.toHaveBeenCalled();
 
     dispatchKeyEvent(fixture, By.directive(NglModal), 'keydown.esc');
-    expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    setTimeout(() => {
+      expect(fixture.componentInstance.openChange).toHaveBeenCalledWith(false);
+    }, 200);
   });
 
   it('should support footer', () => {

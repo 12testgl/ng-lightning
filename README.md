@@ -39,6 +39,24 @@ This library depends on Salesforce's LDS markup and CSS (tested with 2.2.1). We 
 #### SVG Icons
 Because of various cross-domain issues, if you want to use SLDS icons, you must provide a copy of the various sprite files (ie `@salesforce-ux/design-system/assets/icons/action-sprite/svg/symbols.svg`), served locally through your server. Check our [webpack configuration](demo/webpack.config.js), to see how we achieve this for our demo page.
 
+#### Animations
+Currently animations are supported for the following components:
+* Notifications
+* Modals
+
+In order for animations to work, you should include `BrowserAnimationsModule` in your app as in the following snippet:
+```ts
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+@NgModule({
+  ...
+  imports: [BrowserAnimationsModule],
+  ...
+})
+export class NglDemoModule { }
+```
+If you don't want to use animations, you can use the `NoopAnimationsModule` instead of the `BrowserAnimationsModule`.
+
 #### IE11 support
 Unfortunately, IE11 does not support two important features.
 
