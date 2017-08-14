@@ -1,4 +1,4 @@
-import {ElementRef, Renderer} from '@angular/core';
+import {ElementRef, Renderer2} from '@angular/core';
 
 export function toBoolean(value: any): boolean {
   switch (value) {
@@ -38,7 +38,7 @@ export function uniqueId(prefix = 'uid') {
 }
 
 export interface IReplaceClass {
-  renderer: Renderer;
+  renderer: Renderer2;
   element: ElementRef;
 };
 export function replaceClass(instance: IReplaceClass, oldClass: string | string[], newClass?: string | string[]) {
@@ -53,7 +53,7 @@ export function replaceClass(instance: IReplaceClass, oldClass: string | string[
 function setClass(instance: IReplaceClass, klasses: string | string[], isAdd: boolean) {
   if (klasses) {
     (Array.isArray(klasses) ? klasses : [klasses]).forEach(k => {
-      instance.renderer.setElementClass(instance.element.nativeElement, k, isAdd);
+      instance.renderer[isAdd ? 'addClass' : 'removeClass'](instance.element.nativeElement, k);
     });
   }
 }

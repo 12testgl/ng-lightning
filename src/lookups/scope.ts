@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ElementRef, Renderer} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ElementRef, Renderer2} from '@angular/core';
 import {NglLookupScopeItem} from './scope-item';
 
 @Component({
@@ -13,10 +13,10 @@ export class NglInternalLookupScope {
   @Input() open: boolean = false;
   @Output() openChange = new EventEmitter();
 
-  constructor(element: ElementRef, renderer: Renderer) {
-    renderer.setElementClass(element.nativeElement, 'slds-align-middle', true);
-    renderer.setElementClass(element.nativeElement, 'slds-m-left--xx-small', true);
-    renderer.setElementClass(element.nativeElement, 'slds-shrink-none', true);
+  constructor(element: ElementRef, renderer: Renderer2) {
+    renderer.addClass(element.nativeElement, 'slds-align-middle');
+    renderer.addClass(element.nativeElement, 'slds-m-left--xx-small');
+    renderer.addClass(element.nativeElement, 'slds-shrink-none');
   }
 
   onScopeChange(scope: any) {

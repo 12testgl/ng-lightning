@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, Renderer, Optional, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, Renderer2, Optional, ChangeDetectionStrategy} from '@angular/core';
 import {NglNotificationClose} from './notification-close';
 import {replaceClass, isInt} from '../util/util';
 
@@ -37,7 +37,7 @@ export class NglNotification implements OnChanges {
   showClose = false;
   private currentTimeout: any = null;
 
-  constructor(public element: ElementRef, public renderer: Renderer, @Optional() notificationClose: NglNotificationClose) {
+  constructor(public element: ElementRef, public renderer: Renderer2, @Optional() notificationClose: NglNotificationClose) {
     this.showClose = !!notificationClose;
   }
 

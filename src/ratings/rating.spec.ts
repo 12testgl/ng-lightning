@@ -242,7 +242,7 @@ describe('Rating Component', () => {
     beforeEach(function () {
       fixture = createTestComponent(`
         <ngl-rating [(rate)]="value">
-          <template nglRatingIcon let-active let-i="index" let-fill="fill">{{i}}/{{active}}/{{fill}}</template>
+          <ng-template nglRatingIcon let-active let-i="index" let-fill="fill">{{i}}/{{active}}/{{fill}}</ng-template>
         </ngl-rating>`);
     });
 

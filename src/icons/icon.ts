@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef, Renderer, ChangeDetectionStrategy, Attribute, Optional, OnChanges} from '@angular/core';
+import {Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, Attribute, Optional, OnChanges} from '@angular/core';
 import {toBoolean, replaceClass} from '../util/util';
 import {NglButton} from '../buttons/button';
 import {NglButtonIcon} from '../buttons/button-icon';
@@ -33,14 +33,14 @@ export class NglIcon implements OnChanges {
   private button: boolean;
   private _containerClass: string[];
 
-  constructor(public element: ElementRef, public renderer: Renderer,
+  constructor(public element: ElementRef, public renderer: Renderer2,
               @Attribute('state') private state: string,
               @Attribute('button') button: string,
               @Optional() nglButton: NglButton, @Optional() nglButtonIcon: NglButtonIcon) {
 
     this.button = button === null ? !!(nglButton || nglButtonIcon) : toBoolean(button);
     if (state) {
-      renderer.setElementClass(element.nativeElement, `slds-text-${state}`, true);
+      renderer.addClass(element.nativeElement, `slds-text-${state}`);
     }
   }
 

@@ -1,4 +1,4 @@
-import {Component, ContentChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ElementRef, Renderer, ChangeDetectorRef, ViewChild, TemplateRef, OnChanges} from '@angular/core';
+import {Component, ContentChild, ChangeDetectionStrategy, Input, Output, EventEmitter, ElementRef, Renderer2, ChangeDetectorRef, ViewChild, TemplateRef, OnChanges} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
@@ -69,7 +69,7 @@ export class NglLookup implements OnChanges {
   @Input() set open(_open: boolean) {
     if (this.open === _open) return;
     if (_open) {
-      this.globalClickUnsubscriber = this.renderer.listenGlobal('document', 'click', ($event: MouseEvent) => {
+      this.globalClickUnsubscriber = this.renderer.listen('document', 'click', ($event: MouseEvent) => {
         this.globalClickHandler($event);
         this.detector.markForCheck();
       });
@@ -90,7 +90,7 @@ export class NglLookup implements OnChanges {
   private lastUserInput: string;
   private pendingFocus = false;
 
-  constructor(private element: ElementRef, private renderer: Renderer, private detector: ChangeDetectorRef) {}
+  constructor(private element: ElementRef, private renderer: Renderer2, private detector: ChangeDetectorRef) {}
 
   handlePick(item: any) {
     this.pickChange.emit(item);
@@ -197,7 +197,7 @@ export class NglLookup implements OnChanges {
   }
 
   focus() {
-    this.renderer.invokeElementMethod(this.inputEl.nativeElement, 'focus', []);
+    this.inputEl.nativeElement.focus();
   }
 
   // Whether menu is expanded

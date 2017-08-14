@@ -81,7 +81,7 @@ describe('Lookup Component', () => {
   });
 
   it('should support custom label template', () => {
-    const fixture = createTestComponent(`<ngl-lookup [lookup]="filter"><template nglLookupLabel>Lookup:</template></ngl-lookup>`);
+    const fixture = createTestComponent(`<ngl-lookup [lookup]="filter"><ng-template nglLookupLabel>Lookup:</ng-template></ngl-lookup>`);
 
     const { label, input } = getElements(fixture.nativeElement);
     expect(label.textContent.trim()).toEqual('Lookup:');
@@ -173,7 +173,7 @@ describe('Lookup Component', () => {
 
     fixture.detectChanges();
     const { input } = getElements(fixture.nativeElement);
-    expect(input).toBe(document.activeElement);
+    expect(<Element>input).toBe(document.activeElement);
   });
 
   it('should close menu when there is selection', () => {
@@ -342,8 +342,8 @@ describe('Lookup Component', () => {
 
   it('should support custom item template', () => {
     const fixture = createTestComponent(`<ngl-lookup [value]="value" [lookup]="filter" [pick]="selection" (pickChange)="onSelect($event)" debounce="0">
-          <template nglLookupLabel>Lookup:</template>
-          <template nglLookupItem let-ctx>{{ctx.foo}} - {{ctx.bar}} {{value}}</template>
+          <ng-template nglLookupLabel>Lookup:</ng-template>
+          <ng-template nglLookupItem let-ctx>{{ctx.foo}} - {{ctx.bar}} {{value}}</ng-template>
         </ngl-lookup>`);
     const { componentInstance, nativeElement } = fixture;
     componentInstance.filter = jasmine.createSpy('filter').and.callFake(() => [

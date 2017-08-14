@@ -1,8 +1,8 @@
-<template #tip>
+<ng-template #tip>
   <div class="slds-text-title--caps"><strong>{{ placement }}</strong> placement. Initially open!</div>
   Dolor sit amet, <i>consectetur adipisicing</i> elit. Cum, quaerat?
-</template>
-<template #tip2>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.</template>
+</ng-template>
+<ng-template #tip2>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.</ng-template>
 
 <div>
   Quisque scelerisque lectus vel sodales semper.
@@ -32,5 +32,5 @@
 </div>
 
 <div class="slds-text-title--caps slds-m-bottom--small slds-m-top--x-large">Interaction</div>
-<template #interactive>Try clicking <a href="https://github.com/ng-lightning/ng-lightning" target="_blank">this link</a></template>
+<ng-template #interactive>Try clicking <a href="https://github.com/ng-lightning/ng-lightning" target="_blank">this link</a></ng-template>
 <a [nglPopover]="interactive" nglInteractive="true" nglPopoverDelay="500" nglPopoverBehavior nglTooltip>Hover...</a>

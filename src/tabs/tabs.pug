@@ -8,4 +8,4 @@ ul([ngClass]="'slds-tabs--' + type + '__nav'", role="tablist", (keydown.ArrowLef
     a([nglInternalOutlet]="tab.heading", [ngClass]="'slds-tabs--' + type + '__link'", role="tab",
       [attr.aria-selected]="tab.active", [attr.tabindex]="tab.active ? 0 : 1")
 div([ngClass]="'slds-tabs--' + type + '__content'", role="tabpanel")
-  template([ngTemplateOutlet]="activeTab?.templateRef")
+  ng-template([ngTemplateOutlet]="activeTab?.templateRef")

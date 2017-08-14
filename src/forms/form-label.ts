@@ -1,6 +1,6 @@
 import {Directive, TemplateRef} from '@angular/core';
 
-@Directive({selector: 'template[nglFormLabel]'})
+@Directive({selector: '[nglFormLabel]'})
 export class NglFormLabelTemplate {
   constructor(public templateRef: TemplateRef<any>) {}
 }

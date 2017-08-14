@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, HostListener, ElementRef, OnInit, OnDestroy, ContentChildren, QueryList, Renderer} from '@angular/core';
+import {Directive, Input, Output, EventEmitter, HostListener, ElementRef, OnInit, OnDestroy, ContentChildren, QueryList, Renderer2} from '@angular/core';
 import {NglDropdownItem} from './dropdown-item';
 import {toBoolean} from '../util/util';
 
@@ -14,19 +14,22 @@ const openEventEmitter = new EventEmitter<any>();
 export class NglDropdown implements OnInit, OnDestroy {
   @Input('open') set isOpen(isOpen: boolean) {
     this._isOpen = toBoolean(isOpen);
-    if (isOpen) {
+
+    if (this.isOpen) {
       this.clearGlobalClickTimeout();
       this.globalClickTimeout = setTimeout(() => {
         if (this.handlePageEvents) {
           this._subscribeToClickEvents();
         }
       });
+
+      this.renderer.addClass(this.element.nativeElement, 'slds-is-open');
     } else {
       this._unsubscribeFromClickEvents();
+      this.renderer.removeClass(this.element.nativeElement, 'slds-is-open');
     }
 
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-is-open', this.isOpen);
-    this.renderer.setElementAttribute(this.element.nativeElement, 'aria-expanded', `${this.isOpen}`);
+    this.renderer.setAttribute(this.element.nativeElement, 'aria-expanded', `${this.isOpen}`);
   }
   get isOpen() {
     return this._isOpen;
@@ -59,7 +62,7 @@ export class NglDropdown implements OnInit, OnDestroy {
     this.focusItem(direction);
   }
 
-  constructor(public element: ElementRef, public renderer: Renderer) {}
+  constructor(public element: ElementRef, public renderer: Renderer2) {}
 
   ngOnInit() {
     this.openEventSubscription = openEventEmitter.subscribe(this.handleDropdownOpenEvent.bind(this));
@@ -97,7 +100,7 @@ export class NglDropdown implements OnInit, OnDestroy {
     // Prevent document listener to close it, since click happened inside
     this.clickEventUnsubscriber = this.renderer.listen(this.element.nativeElement, 'click', ($event: any) => $event.$nglStop = true);
 
-    this.globalClickEventUnsubscriber = this.renderer.listenGlobal('document', 'click', this.handleGlobalClickEvent.bind(this));
+    this.globalClickEventUnsubscriber = this.renderer.listen('document', 'click', this.handleGlobalClickEvent.bind(this));
   }
 
   private _unsubscribeFromClickEvents() {
@@ -125,7 +128,7 @@ export class NglDropdown implements OnInit, OnDestroy {
     if (activeElementIndex === items.length || activeElementIndex < 0) {
       return;
     }
-    this.renderer.invokeElementMethod(items[activeElementIndex], 'focus', []);
+    items[activeElementIndex].focus();
   }
 
   private handleDropdownOpenEvent(dropdown: NglDropdown) {

@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, HostListener, ElementRef, Renderer} from '@angular/core';
+import {Directive, Input, Output, EventEmitter, HostListener, ElementRef, Renderer2} from '@angular/core';
 import {toBoolean} from '../util/util';
 
 @Directive({
@@ -21,7 +21,7 @@ export class NglButtonState {
   }
   @Output('nglButtonStateChange') selectedChange = new EventEmitter<boolean>();
 
-  constructor(public element: ElementRef, public renderer: Renderer) {}
+  constructor(public element: ElementRef, public renderer: Renderer2) {}
 
   @HostListener('click')
   onSelectChange() {
@@ -29,6 +29,10 @@ export class NglButtonState {
   }
 
   private toggleClass(className: string, isAdd: boolean) {
-    this.renderer.setElementClass(this.element.nativeElement, className, isAdd);
+    if (isAdd) {
+      this.renderer.addClass(this.element.nativeElement, className);
+    } else {
+      this.renderer.removeClass(this.element.nativeElement, className);
+    }
   }
 };

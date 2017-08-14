@@ -1,5 +1,5 @@
 import {Directive, Input, ElementRef, ComponentRef, TemplateRef, ViewContainerRef,
-        Renderer, ComponentFactoryResolver, Injector, EmbeddedViewRef, ComponentFactory,
+        Renderer2, ComponentFactoryResolver, Injector, EmbeddedViewRef, ComponentFactory,
         Output, EventEmitter, NgZone} from '@angular/core';
 import * as Tether from 'tether';
 import 'rxjs/add/operator/take';
@@ -64,7 +64,7 @@ export class NglPopoverTrigger {
 
   constructor(private element: ElementRef, private viewContainer: ViewContainerRef, private injector: Injector,
               private ngZone: NgZone,
-              private renderer: Renderer, componentFactoryResolver: ComponentFactoryResolver) {
+              private renderer: Renderer2, componentFactoryResolver: ComponentFactoryResolver) {
     this.popoverFactory = componentFactoryResolver.resolveComponentFactory(NglPopover);
   }
 
@@ -170,7 +170,7 @@ export class NglPopoverTrigger {
       const viewRef: EmbeddedViewRef<any> = this.viewContainer.createEmbeddedView(<TemplateRef<any>>this.nglPopover);
       return { nodes: viewRef.rootNodes, viewRef };
     } else {
-      return { nodes: [this.renderer.createText(null, <string>this.nglPopover)] };
+      return { nodes: [this.renderer.createText(<string>this.nglPopover)] };
     }
   }
 

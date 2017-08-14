@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer } from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'figure[nglFigure]',
@@ -12,5 +12,5 @@ import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer } from '
 export class NglFigure  {
   @Input('nglTitle') title: string = null;
 
-  constructor(public element: ElementRef, public renderer: Renderer) {  }
+  constructor(public element: ElementRef, public renderer: Renderer2) {  }
 };

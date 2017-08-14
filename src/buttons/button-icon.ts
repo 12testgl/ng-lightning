@@ -1,4 +1,4 @@
-import {Directive, Input, ElementRef, Renderer} from '@angular/core';
+import {Directive, Input, ElementRef, Renderer2} from '@angular/core';
 import {replaceClass} from '../util/util';
 
 const DEFAULT_TYPE: string = 'border';
@@ -15,9 +15,9 @@ export class NglButtonIcon {
     this._type = type;
   }
 
-  constructor(public element: ElementRef, public renderer: Renderer) {
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-button', true);
-    this.renderer.setElementClass(this.element.nativeElement, this.normalize(), true);
+  constructor(public element: ElementRef, public renderer: Renderer2) {
+    this.renderer.addClass(this.element.nativeElement, 'slds-button');
+    this.renderer.addClass(this.element.nativeElement, this.normalize());
   }
 
   private normalize(type?: string): string {

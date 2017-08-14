@@ -1,4 +1,4 @@
-import { Directive, Input, HostListener, ElementRef, Renderer } from '@angular/core';
+import { Directive, Input, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { NglPick } from './pick';
 
@@ -26,7 +26,7 @@ export class NglPickOption {
   private _active = false;
   private _subscription: Subscription;
 
-  constructor(private element: ElementRef, private renderer: Renderer, private nglPick: NglPick) {}
+  constructor(private element: ElementRef, private renderer: Renderer2, private nglPick: NglPick) {}
 
   @HostListener('click')
   @HostListener('keydown.Space', ['$event'])
@@ -44,7 +44,11 @@ export class NglPickOption {
 
       const activeClass = this.nglPickActiveClass || this.nglPick.nglPickActiveClass;
       if (activeClass) {
-        this.renderer.setElementClass(this.element.nativeElement, activeClass, this.active);
+        if (this.active) {
+          this.renderer.addClass(this.element.nativeElement, activeClass);
+        } else {
+          this.renderer.removeClass(this.element.nativeElement, activeClass);
+        }
       }
     });
   }

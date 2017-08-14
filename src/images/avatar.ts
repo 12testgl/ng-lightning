@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2} from '@angular/core';
 import {replaceClass} from '../util/util';
 
 @Component({
@@ -23,17 +23,17 @@ export class NglAvatar {
   private _type: string;
   private _size: string;
 
-  constructor(public element: ElementRef, public renderer: Renderer) {
-    renderer.setElementClass(element.nativeElement, 'slds-avatar', true);
+  constructor(public element: ElementRef, public renderer: Renderer2) {
+    renderer.addClass(element.nativeElement, 'slds-avatar');
   }
 
   ngOnInit() {
     if (!this._type) {
-      this.renderer.setElementClass(this.element.nativeElement, 'slds-avatar--rectangle', true);
+      this.renderer.addClass(this.element.nativeElement, 'slds-avatar--rectangle');
     }
 
     if (!this._size) {
-      this.renderer.setElementClass(this.element.nativeElement, 'slds-avatar--medium', true);
+      this.renderer.addClass(this.element.nativeElement, 'slds-avatar--medium');
     }
   }
 

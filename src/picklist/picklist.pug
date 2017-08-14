@@ -12,4 +12,4 @@
         a(role="menuitem", nglDropdownItem)
           p.slds-truncate
             svg.slds-icon.slds-icon--selected.slds-icon--x-small.slds-icon-text-default.slds-m-right--x-small(nglIcon="check")
-            template([ngTemplateOutlet]="itemTemplate?.templateRef", [ngOutletContext]="{$implicit: item}")
+            ng-template([ngTemplateOutlet]="itemTemplate?.templateRef", [ngTemplateOutletContext]="{$implicit: item}")

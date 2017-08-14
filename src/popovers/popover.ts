@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer, HostListener, HostBinding} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer2, HostListener, HostBinding} from '@angular/core';
 import {replaceClass, toBoolean, uniqueId} from '../util/util';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
@@ -23,7 +23,7 @@ export class NglPopover {
   }
 
   @Input() set nglTooltip(isTooltip: any) {
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-popover--tooltip', toBoolean(isTooltip));
+    this.renderer[toBoolean(isTooltip) ? 'addClass' : 'removeClass'](this.element.nativeElement, 'slds-popover--tooltip');
   }
 
   set nubbin(direction: Direction) {
@@ -41,13 +41,13 @@ export class NglPopover {
   private _nubbin: Direction;
   private _theme: string;
 
-  constructor(public element: ElementRef, public renderer: Renderer, public changeDetector: ChangeDetectorRef) {
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-popover', true);
+  constructor(public element: ElementRef, public renderer: Renderer2, public changeDetector: ChangeDetectorRef) {
+    this.renderer.addClass(this.element.nativeElement, 'slds-popover');
 
     // Prevent position changes of "close by" elements
-    this.renderer.setElementStyle(this.element.nativeElement, 'position', 'absolute');
+    this.renderer.setStyle(this.element.nativeElement, 'position', 'absolute');
 
-    this.renderer.setElementAttribute(this.element.nativeElement, 'aria-describedby', this.uid);
+    this.renderer.setAttribute(this.element.nativeElement, 'aria-describedby', this.uid);
   }
 
   ngAfterViewInit() {

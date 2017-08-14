@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ContentChild, Optional, ElementRef, Renderer, TemplateRef, OnChanges} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, ContentChild, Optional, ElementRef, Renderer2, TemplateRef, OnChanges} from '@angular/core';
 import {NglFormGroupAlternate} from './group-alt';
 import {NglFormCheckbox} from '../elements/input';
 import {NglFormLabelTemplate, getFormLabel} from '../form-label';
@@ -23,7 +23,7 @@ export class NglFormGroupElement implements OnChanges {
     return `slds-${this.contentEl.type}${this.groupAlt ? '--button' : ''}__label`;
   }
 
-  constructor(@Optional() private groupAlt: NglFormGroupAlternate, private element: ElementRef, private renderer: Renderer) {}
+  constructor(@Optional() private groupAlt: NglFormGroupAlternate, private element: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges(changes?: any) {
     this.setFormLabel();
@@ -38,10 +38,10 @@ export class NglFormGroupElement implements OnChanges {
 
     if (this.groupAlt) {
       this.groupAlt.type = type;
-      this.renderer.setElementClass(this.element.nativeElement, 'slds-button' , true);
-      this.renderer.setElementClass(this.element.nativeElement, `slds-${type}--button`, true);
+      this.renderer.addClass(this.element.nativeElement, 'slds-button');
+      this.renderer.addClass(this.element.nativeElement, `slds-${type}--button`);
     } else {
-      this.renderer.setElementClass(this.element.nativeElement, `slds-${type}`, true);
+      this.renderer.addClass(this.element.nativeElement, `slds-${type}`);
     }
 
     this.contentEl.id = this.uid;

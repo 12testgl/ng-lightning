@@ -1,11 +1,11 @@
 import {Directive, TemplateRef} from '@angular/core';
 
-@Directive({selector: 'template[nglLookupItem]'})
+@Directive({selector: '[nglLookupItem]'})
 export class NglLookupItemTemplate {
   constructor(public templateRef: TemplateRef<any>) {}
 }
 
-@Directive({selector: 'template[nglLookupLabel]'})
+@Directive({selector: '[nglLookupLabel]'})
 export class NglLookupLabelTemplate {
   constructor(public templateRef: TemplateRef<any>) {}
 }

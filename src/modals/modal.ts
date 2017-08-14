@@ -1,4 +1,4 @@
-import {Component, Input, Output, ElementRef, Renderer, EventEmitter, HostListener, ViewChild, ContentChild} from '@angular/core';
+import {Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild} from '@angular/core';
 import {toBoolean, uniqueId} from '../util/util';
 import {NglModalFooter} from './footer';
 import {NglModalHeaderTemplate} from './header';
@@ -47,8 +47,6 @@ export class NglModal {
   private _open: boolean = true;
   private _directional = false;
 
-  constructor(private renderer: Renderer) {}
-
   @HostListener('keydown.esc', ['$event'])
   close(evt?: Event) {
     if (evt) {
@@ -63,6 +61,6 @@ export class NglModal {
   }
 
   focusFirst() {
-    this.renderer.invokeElementMethod(this.closeButton.nativeElement, 'focus', []);
+    this.closeButton.nativeElement.focus();
   }
 };

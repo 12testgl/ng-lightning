@@ -1,2 +1,2 @@
-template(*ngIf="column.cellTpl", [ngTemplateOutlet]="column.cellTpl.templateRef", [ngOutletContext]="context")
+ng-template(*ngIf="column.cellTpl", [ngTemplateOutlet]="column.cellTpl.templateRef", [ngTemplateOutletContext]="context")
 span(*ngIf="!column.cellTpl") {{ value }}

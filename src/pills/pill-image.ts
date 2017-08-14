@@ -1,15 +1,15 @@
-import {Directive, ElementRef, Renderer} from '@angular/core';
+import {Directive, ElementRef, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[nglPillImage]',
 })
 export class NglPillImage {
 
-  constructor(private element: ElementRef, private renderer: Renderer) {}
+  constructor(private element: ElementRef, private renderer: Renderer2) {}
 
   ngAfterContentInit() {
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-pill__icon', true);
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-avatar--medium', false);
+    this.renderer.addClass(this.element.nativeElement, 'slds-pill__icon');
+    this.renderer.removeClass(this.element.nativeElement, 'slds-avatar--medium');
   }
 
 }

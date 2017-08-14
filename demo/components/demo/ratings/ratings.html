@@ -15,7 +15,7 @@ Value is: {{value}}
 
 <div class="slds-text-title--caps slds-m-bottom--small slds-m-top--x-large">Custom icon</div>
 <ngl-rating [(rate)]="value">
-  <template nglRatingIcon let-active>
+  <ng-template nglRatingIcon let-active>
     <ngl-avatar [src]="customImage(active)" type="circle"></ngl-avatar>
-  </template>
+  </ng-template>
 </ngl-rating>

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer, Input } from '@angular/core';
+import {Directive, ElementRef, Renderer2, Input } from '@angular/core';
 
 @Directive({
   selector: '[nglCrop]',
@@ -7,14 +7,16 @@ export class NglFigureCrop {
 
   @Input() set nglCrop(ratio: '16-by-9' | '4-by-3' | '1-by-1') {
     const nativeElement = this.element.nativeElement;
-    this.renderer.setElementClass(nativeElement, 'slds-image__crop', !!ratio);
 
     if (this._ratio) {
-      this.renderer.setElementClass(nativeElement, `slds-image__crop--${this._ratio}`, false);
+      this.renderer.removeClass(nativeElement, `slds-image__crop--${this._ratio}`);
     }
 
     if (ratio) {
-      this.renderer.setElementClass(nativeElement, `slds-image__crop--${ratio}`, true);
+      this.renderer.addClass(nativeElement, 'slds-image__crop');
+      this.renderer.addClass(nativeElement, `slds-image__crop--${ratio}`);
+    } else {
+      this.renderer.removeClass(nativeElement, 'slds-image__crop');
     }
 
     this._ratio = ratio;
@@ -22,5 +24,5 @@ export class NglFigureCrop {
 
   private _ratio;
 
-  constructor(private element: ElementRef, private renderer: Renderer) {}
+  constructor(private element: ElementRef, private renderer: Renderer2) {}
 }

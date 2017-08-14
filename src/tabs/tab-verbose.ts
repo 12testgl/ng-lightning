@@ -3,18 +3,18 @@ import {NglTab} from './tab';
 
 /*
  * <ngl-tab [heading="..."]>
- *    <template ngl-tab-heading>...</template>
- *    <template ngl-tab-content>
+ *    <ng-template ngl-tab-heading>...</ng-template>
+ *    <ng-template ngl-tab-content>
  *       Content goes here...
- *    </template>
+ *    </ng-template>
  * </ngl-tab>
  */
-@Directive({selector: 'template[ngl-tab-heading]'})
+@Directive({selector: '[ngl-tab-heading]'})
 export class NglTabHeading {
   constructor(public templateRef: TemplateRef<any>) {}
 }
 
-@Directive({selector: 'template[ngl-tab-content]'})
+@Directive({selector: '[ngl-tab-content]'})
 export class NglTabContent {
   constructor(public templateRef: TemplateRef<any>) {}
 }

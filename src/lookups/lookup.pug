@@ -30,4 +30,4 @@ include ./menu
     +lookup-list()(*ngSwitchCase="false")
       |{{resolveLabel(item)}}
     +lookup-list()(*ngSwitchCase="true")
-      template([ngTemplateOutlet]="itemTemplate.templateRef", [ngOutletContext]="{ $implicit: item }")
+      ng-template([ngTemplateOutlet]="itemTemplate.templateRef", [ngTemplateOutletContext]="{ $implicit: item }")

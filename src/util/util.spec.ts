@@ -61,36 +61,40 @@ describe('utility', () => {
 
     beforeEach(() => {
       instance = {
-        renderer: { setElementClass: jasmine.createSpy('setElementClass') },
+        renderer: {
+          addClass: jasmine.createSpy('addClass'),
+          removeClass: jasmine.createSpy('removeClass'),
+        },
         element: { nativeElement: null },
       };
     });
 
     it('will replace classes if supplied', () => {
       replaceClass(instance, null, null);
-      expect(instance.renderer.setElementClass).not.toHaveBeenCalled();
+      expect(instance.renderer.addClass).not.toHaveBeenCalled();
+      expect(instance.renderer.removeClass).not.toHaveBeenCalled();
 
       replaceClass(instance, 'c1', 'c2');
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'c1', false);
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'c2', true);
+      expect(instance.renderer.removeClass).toHaveBeenCalledWith(null, 'c1');
+      expect(instance.renderer.addClass).toHaveBeenCalledWith(null, 'c2');
     });
 
     it('will not remove class if not needed', () => {
       replaceClass(instance, 'c3', 'c3');
-      expect(instance.renderer.setElementClass).not.toHaveBeenCalledWith(null, 'c3', false);
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'c3', true);
+      expect(instance.renderer.removeClass).not.toHaveBeenCalledWith(null, 'c3');
+      expect(instance.renderer.addClass).toHaveBeenCalledWith(null, 'c3');
     });
 
     it('will add multiple classes if array is passed', () => {
       replaceClass(instance, null, ['c5', 'c6']);
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'c5', true);
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'c6', true);
+      expect(instance.renderer.addClass).toHaveBeenCalledWith(null, 'c5');
+      expect(instance.renderer.addClass).toHaveBeenCalledWith(null, 'c6');
     });
 
     it('will remove multiple classes if array is passed', () => {
       replaceClass(instance, ['r1', 'r2'], null);
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'r1', false);
-      expect(instance.renderer.setElementClass).toHaveBeenCalledWith(null, 'r2', false);
+      expect(instance.renderer.removeClass).toHaveBeenCalledWith(null, 'r1');
+      expect(instance.renderer.removeClass).toHaveBeenCalledWith(null, 'r2');
     });
   });
 });

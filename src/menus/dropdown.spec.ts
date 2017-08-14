@@ -116,11 +116,11 @@ describe('`nglDropdown`', () => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
-    expect(dropdownTrigger).not.toEqual(document.activeElement);
+    expect(<Element>dropdownTrigger).not.toEqual(document.activeElement);
 
     dispatchKeyEvent(fixture, By.directive(NglDropdown), 'keydown.esc');
     expect(fixture.componentInstance.setOpen).toHaveBeenCalledWith(false);
-    expect(dropdownTrigger).toEqual(document.activeElement);
+    expect(<Element>dropdownTrigger).toEqual(document.activeElement);
     fixture.destroy();
   });
 
@@ -133,7 +133,7 @@ describe('`nglDropdown`', () => {
     expect(fixture.componentInstance.setOpen).toHaveBeenCalledWith(true);
 
     dispatchKeyEvent(fixture, By.directive(NglDropdown), 'keydown.arrowdown');
-    expect(dropdownItem).toEqual(document.activeElement);
+    expect(<Element>dropdownItem).toEqual(document.activeElement);
     fixture.destroy();
   });
 });

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer, Optional} from '@angular/core';
+import {Directive, ElementRef, Renderer2, Optional} from '@angular/core';
 import {NglPill} from './pill';
 
 @Directive({
@@ -6,10 +6,10 @@ import {NglPill} from './pill';
 })
 export class NglPillLink {
 
-  constructor(@Optional() pill: NglPill, element: ElementRef, renderer: Renderer) {
+  constructor(@Optional() pill: NglPill, element: ElementRef, renderer: Renderer2) {
     if (!pill) return;
 
-    renderer.setElementClass(element.nativeElement, 'slds-pill__label', true);
+    renderer.addClass(element.nativeElement, 'slds-pill__label');
     pill.unlinked = false;
   }
 

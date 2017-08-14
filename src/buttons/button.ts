@@ -1,4 +1,4 @@
-import {Directive, Input, ElementRef, Renderer} from '@angular/core';
+import {Directive, Input, ElementRef, Renderer2} from '@angular/core';
 import {replaceClass} from '../util/util';
 
 @Directive({
@@ -13,8 +13,8 @@ export class NglButton {
   }
 
   private prefix = `slds-button--`;
-  constructor(public element: ElementRef, public renderer: Renderer) {
-    this.renderer.setElementClass(this.element.nativeElement, 'slds-button', true);
+  constructor(public element: ElementRef, public renderer: Renderer2) {
+    this.renderer.addClass(this.element.nativeElement, 'slds-button');
   }
 
 };
