@@ -5,6 +5,7 @@ import {NglInternalOutletModule} from '../util/outlet.module';
 import {NglFormElement} from './elements/element';
 import {NglFormElementCheckbox} from './elements/checkbox';
 import {NglFormElementCheckboxToggle} from './elements/checkbox-toggle';
+import {NglFormElementCheckboxAdd} from './elements/checkbox-add';
 import {NglFormInput, NglFormTextarea, NglFormSelect, NglFormCheckbox, NglFormRadio} from './elements/input';
 import {NglFormElementRequired} from './elements/required';
 import {NglFormGroup} from './groups/group';
@@ -13,7 +14,7 @@ import {NglFormGroupElement} from './groups/element';
 import {NglFormLabelTemplate} from './form-label';
 
 const NGL_FORM_DIRECTIVES = [
-  NglFormElement, NglFormElementCheckbox, NglFormElementCheckboxToggle,
+  NglFormElement, NglFormElementCheckbox, NglFormElementCheckboxToggle, NglFormElementCheckboxAdd,
   NglFormInput, NglFormTextarea, NglFormSelect, NglFormCheckbox, NglFormRadio,
   NglFormElementRequired,
   NglFormGroup,

@@ -10,7 +10,7 @@
   * `template[nglFormLabel]?`: Input template label.
 
 
-# `<ngl-form-checkbox> | <ngl-form-checkbox-toggle>`
+# `<ngl-form-checkbox> | <ngl-form-checkbox-toggle> | <ngl-form-checkbox-add>`
 
 ### Input
   * `label?: string | TemplateRef`: Input label.
