@@ -9,20 +9,20 @@ include ./menu
       ngl-pill((nglPillRemove)="clear()") {{resolveLabel(pick)}}
 
   //- Default
-  .slds-form-element__control.slds-grid(*ngIf="!pick", [class.slds-box--border]="polymorphic")
+  .slds-form-element__control.slds-grid(*ngIf="!pick", [class.slds-box_border]="polymorphic")
 
     //- Polymorphic object dropdown
     ngl-internal-lookup-scope(*ngIf="polymorphic", [open]="openScope", (openChange)="onScopeOpen($event)",
             [scope]="polymorphic", (scopeChange)="scopeSelect($event)")
         ng-content(select="[nglPolymorphicLabel]")
 
-    .slds-input-has-icon.slds-grow([ngClass]="{'slds-input-has-icon--right': searchIcon }")
+    .slds-input-has-icon.slds-grow([ngClass]="{'slds-input-has-icon_right': searchIcon }")
       svg.slds-input__icon.slds-icon-text-default(nglIcon="search", *ngIf="searchIcon")
       input.slds-input.slds-lookup__search-input(#lookupInput, [id]="inputId", type="text", aria-autocomplete="list", role="combobox",
                      [attr.aria-expanded]="!!expanded", [attr.aria-activedescendant]="optionId(activeIndex)",
                      [ngModel]="inputValue", (ngModelChange)="onInputChange($event)", (keydown.Esc)="close($event)", [placeholder]="placeholder || ''",
                      (keydown.ArrowDown)="moveActive($event, 1)", (keydown.ArrowUp)="moveActive($event, -1)", (keydown.Enter)="pickActive($event)",
-                     [ngClass]="{'slds-input': !polymorphic, 'slds-input--bare': polymorphic}")
+                     [ngClass]="{'slds-input': !polymorphic, 'slds-input_bare': polymorphic}")
 
   //- Dropdown menu
   .slds-lookup__menu(*ngIf="expanded", role="listbox", [ngSwitch]="!!itemTemplate")

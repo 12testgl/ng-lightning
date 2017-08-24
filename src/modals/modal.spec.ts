@@ -47,7 +47,7 @@ describe('`NglModal`', () => {
     expect(content).toHaveText('Body content.');
 
     const backdrop = getBackdrop(fixture.nativeElement);
-    expect(backdrop).toHaveCssClass('slds-backdrop--open');
+    expect(backdrop).toHaveCssClass('slds-backdrop_open');
   });
 
   it('should render correctly if closed', () => {
@@ -60,18 +60,18 @@ describe('`NglModal`', () => {
     expect(modal.getAttribute('aria-hidden')).toBe('true');
 
     const backdrop = getBackdrop(fixture.nativeElement);
-    expect(backdrop).not.toHaveCssClass('slds-backdrop--open');
+    expect(backdrop).not.toHaveCssClass('slds-backdrop_open');
   });
 
   it('should render correctly without header', () => {
     const fixture = createTestComponent();
     const headerEl = fixture.nativeElement.querySelector('.slds-modal__header');
-    expect(headerEl).not.toHaveCssClass('slds-modal__header--empty');
+    expect(headerEl).not.toHaveCssClass('slds-modal__header_empty');
     expect(getHeader(fixture.nativeElement)).toBeTruthy();
 
     fixture.componentInstance.header = null;
     fixture.detectChanges();
-    expect(headerEl).toHaveCssClass('slds-modal__header--empty');
+    expect(headerEl).toHaveCssClass('slds-modal__header_empty');
     expect(getHeader(fixture.nativeElement)).toBeFalsy();
   });
 
@@ -111,7 +111,7 @@ describe('`NglModal`', () => {
       </ngl-modal>`);
     const footer = fixture.nativeElement.querySelector('.slds-modal__footer');
     expect(footer).toHaveText('Modal Header in footer');
-    expect(footer).not.toHaveCssClass('slds-modal__footer--directional');
+    expect(footer).not.toHaveCssClass('slds-modal__footer_directional');
 
     fixture.componentInstance.header = 'Changed header';
     fixture.detectChanges();
@@ -127,11 +127,11 @@ describe('`NglModal`', () => {
     fixture.detectChanges();
 
     const footer = getFooter(fixture.nativeElement);
-    expect(footer).toHaveCssClass('slds-modal__footer--directional');
+    expect(footer).toHaveCssClass('slds-modal__footer_directional');
 
     fixture.componentInstance.directional = false;
     fixture.detectChanges();
-    expect(footer).not.toHaveCssClass('slds-modal__footer--directional');
+    expect(footer).not.toHaveCssClass('slds-modal__footer_directional');
   });
 });
 

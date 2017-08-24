@@ -16,7 +16,7 @@ function getTabHeaders(element: HTMLElement): HTMLElement[] {
 }
 
 function getTabContent(element: HTMLElement): string {
-  return element.querySelector('.slds-tabs--default__content').textContent;
+  return element.querySelector('.slds-tabs_default__content').textContent;
 }
 
 function expectHeaders(element: HTMLElement, expected: string[]) {
@@ -34,7 +34,7 @@ describe('Tabs Component', () => {
     const tabs = getTabsElement(fixture.nativeElement);
     expect(tabs).toBeDefined();
     expect(tabs.tagName).toBe('UL');
-    expect(tabs).toHaveCssClass('slds-tabs--default__nav');
+    expect(tabs).toHaveCssClass('slds-tabs_default__nav');
   });
 
   it('should render the tab headers', () => {
@@ -45,7 +45,7 @@ describe('Tabs Component', () => {
   it('should render titles with caps', () => {
     const fixture = createTestComponent();
     const lis = selectElements(fixture.nativeElement, 'li');
-    lis.forEach((li) => expect(li).toHaveCssClass('slds-text-title--caps'));
+    lis.forEach((li) => expect(li).toHaveCssClass('slds-text-title_caps'));
   });
 
   it('should render titles with caps based on input', () => {
@@ -54,11 +54,11 @@ describe('Tabs Component', () => {
         <ng-template ngl-tab></ng-template><ng-template ngl-tab></ng-template>
       </ngl-tabs>`);
     const lis = selectElements(fixture.nativeElement, 'li');
-    lis.forEach((li) => expect(li).not.toHaveCssClass('slds-text-title--caps'));
+    lis.forEach((li) => expect(li).not.toHaveCssClass('slds-text-title_caps'));
 
     fixture.componentInstance.titleCaps = 'true';
     fixture.detectChanges();
-    lis.forEach((li) => expect(li).toHaveCssClass('slds-text-title--caps'));
+    lis.forEach((li) => expect(li).toHaveCssClass('slds-text-title_caps'));
   });
 
   it('should render tab headers based on template', () => {

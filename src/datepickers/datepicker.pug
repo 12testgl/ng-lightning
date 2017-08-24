@@ -1,13 +1,13 @@
 .slds-datepicker__filter.slds-grid
-  .slds-datepicker__filter--month.slds-grid.slds-grid--align-spread.slds-grow
+  .slds-datepicker__filter_month.slds-grid.slds-grid_align-spread.slds-grow
     .slds-align-middle
-      button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', -1)")
-        svg.slds-button__icon.slds-button__icon--small(nglIcon="left")
+      button.slds-button.slds-button_icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', -1)")
+        svg.slds-button__icon.slds-button__icon_small(nglIcon="left")
         span.slds-assistive-text Previous Month
     h2.slds-align-middle([id]="uid + '_month'", aria-live="assertive", aria-atomic="true") {{ monthLabel }}
     .slds-align-middle
-      button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', 1)")
-        svg.slds-button__icon.slds-button__icon--small(nglIcon="right")
+      button.slds-button.slds-button_icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', 1)")
+        svg.slds-button__icon.slds-button__icon_small(nglIcon="right")
         span.slds-assistive-text Next Month
 
   ngl-date-year.slds-shrink-none([year]="current.year", (yearChange)="moveYear($event)")
@@ -21,4 +21,4 @@ table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'")
          [nglDay]="date.day", [nglDaySelected]="isSelected(date)", [nglDayDisabled]="date.disabled")
     tr(*ngIf="showToday")
       td(colspan="7", role="gridcell")
-        a.slds-show--inline-block.slds-p-bottom--x-small(href="javascript:void(0)", (click)="selectToday()") Today
+        a.slds-show_inline-block.slds-p-bottom_x-small(href="javascript:void(0)", (click)="selectToday()") Today

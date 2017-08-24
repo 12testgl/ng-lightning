@@ -21,6 +21,6 @@ export class NglButtonIcon {
   }
 
   private normalize(type?: string): string {
-    return `slds-button--icon${type === `''` ? '' : `-${type || DEFAULT_TYPE}`}`;
+    return `slds-button_icon${type === `''` ? '' : `-${type || DEFAULT_TYPE}`}`;
   }
 }

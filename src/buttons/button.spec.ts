@@ -26,7 +26,7 @@ describe('`nglButton`', () => {
     const button = getButtonElement(fixture.nativeElement);
     const icon = button.querySelector('svg');
     expect(icon).toHaveCssClass('slds-button__icon');
-    expect(icon).toHaveCssClass('slds-button__icon--left');
+    expect(icon).toHaveCssClass('slds-button__icon_left');
   });
 
   it('should render dynamic style', () => {
@@ -35,19 +35,19 @@ describe('`nglButton`', () => {
 
     const button = getButtonElement(fixture.nativeElement);
     expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button--brand');
+    expect(button).toHaveCssClass('slds-button_brand');
 
     componentInstance.style = 'destructive';
     fixture.detectChanges();
     expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button--destructive');
-    expect(button).not.toHaveCssClass('slds-button--brand');
+    expect(button).toHaveCssClass('slds-button_destructive');
+    expect(button).not.toHaveCssClass('slds-button_brand');
 
     componentInstance.style = null;
     fixture.detectChanges();
     expect(button).toHaveCssClass('slds-button');
-    expect(button).not.toHaveCssClass('slds-button--destructive');
-    expect(button).not.toHaveCssClass('slds-button--brand');
+    expect(button).not.toHaveCssClass('slds-button_destructive');
+    expect(button).not.toHaveCssClass('slds-button_brand');
   });
 });
 

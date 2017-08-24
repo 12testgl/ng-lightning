@@ -1,9 +1,9 @@
-<button type="button" nglButton="neutral" (click)="hideName = !hideName" class="slds-m-bottom--large">Toggle "Name" column</button>
-<button type="button" nglButton="neutral" (click)="loading = !loading" class="slds-m-bottom--large">Toggle Loading</button>
-<button type="button" nglButton="neutral" (click)="toggleData()" class="slds-m-bottom--large">Clear/Set data</button>
+<button type="button" nglButton="neutral" (click)="hideName = !hideName" class="slds-m-bottom_large">Toggle "Name" column</button>
+<button type="button" nglButton="neutral" (click)="loading = !loading" class="slds-m-bottom_large">Toggle Loading</button>
+<button type="button" nglButton="neutral" (click)="toggleData()" class="slds-m-bottom_large">Clear/Set data</button>
 
 <table ngl-datatable [data]="data" trackByKey="rank" [loading]="loading" [(sort)]="sort" (sortChange)="onSort($event)"
-  (onRowClick)="onRowClick($event)" class="slds-max-medium-table--stacked-horizontal">
+  (onRowClick)="onRowClick($event)" class="slds-max-medium-table_stacked-horizontal">
   <ngl-datatable-column heading="Rank" key="rank" sortable></ngl-datatable-column>
   <ngl-datatable-column heading="Name" key="name" *ngIf="!hideName" cellClass="slds-truncate" sortable></ngl-datatable-column>
   <ngl-datatable-column heading="Surname" key="surname" cellClass="slds-truncate" sortable>
@@ -16,7 +16,7 @@
 
   <!-- Loading overlay -->
   <ng-template nglLoadingOverlay>
-    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+    <div class="slds-box slds-box_small slds-theme_shade slds-text-align_center">Loading...</div>
   </ng-template>
 
   <!-- No rows overlay -->

@@ -1,57 +1,57 @@
 <div id="banner" style="background: #111111; color: #ccc; tex-align: center;">
-  <div class="slds-container--large slds-container--center">
-    <div class="slds-grid slds-grid--align-center slds-p-around--large">
-      <div class="slds-col slds-text-align--center"><img src="img/shield.svg" style="height: 170px;"/>
-        <div style="color:#FFF;" class="slds-text-heading--large">NG-LIGHTNING</div>
-        <div class="slds-m-top--small">Native Angular components & directives for Lightning Design System</div>
+  <div class="slds-container_large slds-container_center">
+    <div class="slds-grid slds-grid_align-center slds-p-around_large">
+      <div class="slds-col slds-text-align_center"><img src="img/shield.svg" style="height: 170px;"/>
+        <div style="color:#FFF;" class="slds-text-heading_large">NG-LIGHTNING</div>
+        <div class="slds-m-top_small">Native Angular components & directives for Lightning Design System</div>
       </div>
     </div>
   </div>
 </div>
-<div class="slds-container--large slds-container--center slds-m-top--small slds-p-around--x-large">
+<div class="slds-container_large slds-container_center slds-m-top_small slds-p-around_x-large">
   <div class="slds-grid slds-wrap">
-    <div class="slds-col--padded slds-text-align--center slds-size--1-of-1 slds-large-size--1-of-3 slds-m-top--medium">
-      <div class="slds-text-heading--medium">BUILDING FOR THE FUTURE</div>
-      <div class="slds-m-top--small">Built upon next generation frameworks like <b><a href="https://angular.io/">Angular</a></b> and <b><a href="https://www.lightningdesignsystem.com/">Salesforce's Lightning Design System</a></b>, rest ​assured that you building an application to stand the test of time.</div>
+    <div class="slds-col_padded slds-text-align_center slds-size_1-of-1 slds-large-size_1-of-3 slds-m-top_medium">
+      <div class="slds-text-heading_medium">BUILDING FOR THE FUTURE</div>
+      <div class="slds-m-top_small">Built upon next generation frameworks like <b><a href="https://angular.io/">Angular</a></b> and <b><a href="https://www.lightningdesignsystem.com/">Salesforce's Lightning Design System</a></b>, rest ​assured that you building an application to stand the test of time.</div>
     </div>
-    <div class="slds-col--padded slds-text-align--center slds-size--1-of-1 slds-large-size--1-of-3 slds-m-top--medium">
-      <div class="slds-text-heading--medium">BEST PRACTICES</div>
-      <div class="slds-m-top--small">We focus on building stateless functional components that depend only on their input properties, guaranteeing better performance, more development flexibility and seamless integration with your application's requirements.</div>
+    <div class="slds-col_padded slds-text-align_center slds-size_1-of-1 slds-large-size_1-of-3 slds-m-top_medium">
+      <div class="slds-text-heading_medium">BEST PRACTICES</div>
+      <div class="slds-m-top_small">We focus on building stateless functional components that depend only on their input properties, guaranteeing better performance, more development flexibility and seamless integration with your application's requirements.</div>
     </div>
-    <div class="slds-col--padded slds-text-align--center slds-size--1-of-1 slds-large-size--1-of-3 slds-m-top--medium">
-      <div class="slds-text-heading--medium"> ACCESSIBILITY</div>
-      <div class="slds-m-top--small">
+    <div class="slds-col_padded slds-text-align_center slds-size_1-of-1 slds-large-size_1-of-3 slds-m-top_medium">
+      <div class="slds-text-heading_medium"> ACCESSIBILITY</div>
+      <div class="slds-m-top_small">
         We put a lot of effort to follow Lightning Design System's accessibility guidelines, to assure that your product is operable by people with a wide range of abilities
         and meets all legal requirements.
       </div>
     </div>
   </div>
   <hr/>
-  <div class="slds-p-vertical--large">
-    <div class="slds-text-heading--large slds-m-bottom--large">Getting started</div>
-    <p class="slds-m-bottom--small">Install through <code>npm</code>:</p>
+  <div class="slds-p-vertical_large">
+    <div class="slds-text-heading_large slds-m-bottom_large">Getting started</div>
+    <p class="slds-m-bottom_small">Install through <code>npm</code>:</p>
     <prism [html]="install"></prism>
-    <p class="slds-m-top--large slds-m-bottom--small">If you use <strong>SystemJS</strong> to load your files, you should adjust your configuration to point our UMD bundle through <a href="https://unpkg.com/">unpkg</a> or your node_modules, similar to this:</p>
+    <p class="slds-m-top_large slds-m-bottom_small">If you use <strong>SystemJS</strong> to load your files, you should adjust your configuration to point our UMD bundle through <a href="https://unpkg.com/">unpkg</a> or your node_modules, similar to this:</p>
     <prism [html]="bundle"></prism>
-    <p class="slds-m-top--small">You can also check on of our plunker examples for a working setup.</p>
+    <p class="slds-m-top_small">You can also check on of our plunker examples for a working setup.</p>
   </div>
-  <div class="slds-p-vertical--x-small">
-    <div class="slds-text-heading--large slds-m-bottom--large">Reading the documentation</div>
+  <div class="slds-p-vertical_x-small">
+    <div class="slds-text-heading_large slds-m-bottom_large">Reading the documentation</div>
     <p>Each component has API documentation, examples, and a working demo. They can be found <a [routerLink]="['/components']">here</a>.</p>
   </div>
-  <div class="slds-p-vertical--large">
-    <div class="slds-text-heading--large slds-m-bottom--large">Usage</div>
+  <div class="slds-p-vertical_large">
+    <div class="slds-text-heading_large slds-m-bottom_large">Usage</div>
     <p>Once installed you need to import our main module into your application module by calling <code>NglModule.forRoot()</code>. You should end up with code similar to this:</p>
     <prism [html]="usageApp"></prism>
   </div>
-  <div class="slds-p-vertical--large">
-    <div class="slds-text-heading--large slds-m-bottom--large">Configuration</div>
+  <div class="slds-p-vertical_large">
+    <div class="slds-text-heading_large slds-m-bottom_large">Configuration</div>
     <p>Optionally, you can pass an object to the <code>forRoot</code> method, to configure <code>ng-lightning</code> during the initialization of the application, in order to provide your own default values.
       For example:
     </p>
     <prism [html]="config"></prism>
-    <p class="slds-m-top--small">Currently available options can be found <a href="https://github.com/ng-lightning/ng-lightning/blob/master/src/config/config.interface.ts">here</a>.</p>
-    <p class="slds-m-top--large">If you want to change some config properties during runtime, you can easily achieve it by utilizing the <code>update</code> method like this:</p>
+    <p class="slds-m-top_small">Currently available options can be found <a href="https://github.com/ng-lightning/ng-lightning/blob/master/src/config/config.interface.ts">here</a>.</p>
+    <p class="slds-m-top_large">If you want to change some config properties during runtime, you can easily achieve it by utilizing the <code>update</code> method like this:</p>
     <prism [html]="configRun"></prism>
   </div>
 </div>

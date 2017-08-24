@@ -15,7 +15,7 @@ export class NglInternalLookupScope {
 
   constructor(element: ElementRef, renderer: Renderer2) {
     renderer.addClass(element.nativeElement, 'slds-align-middle');
-    renderer.addClass(element.nativeElement, 'slds-m-left--xx-small');
+    renderer.addClass(element.nativeElement, 'slds-m-left_xx-small');
     renderer.addClass(element.nativeElement, 'slds-shrink-none');
   }
 

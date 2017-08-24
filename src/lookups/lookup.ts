@@ -17,7 +17,7 @@ import {uniqueId, isObject} from '../util/util';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './lookup.pug',
   styles: [
-    `.slds-dropdown__item--active > a {
+    `.slds-dropdown__item_active > a {
         outline: 0;
         text-decoration: none;
         background-color: #f4f6f9;

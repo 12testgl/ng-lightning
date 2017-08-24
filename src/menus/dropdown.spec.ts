@@ -32,7 +32,7 @@ describe('`nglDropdown`', () => {
     const fixture = createTestComponent();
     const dropdownEl = getDropdownElement(fixture.nativeElement);
     expect(dropdownEl).toHaveCssClass('slds-dropdown-trigger');
-    expect(dropdownEl).toHaveCssClass('slds-dropdown-trigger--click');
+    expect(dropdownEl).toHaveCssClass('slds-dropdown-trigger_click');
     fixture.destroy();
   });
 

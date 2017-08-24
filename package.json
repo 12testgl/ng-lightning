@@ -53,7 +53,7 @@
     "@angular/platform-browser-dynamic": "^4.3.4",
     "@angular/platform-server": "^4.3.4",
     "@angular/router": "^4.3.4",
-    "@salesforce-ux/design-system": "^2.2.1",
+    "@salesforce-ux/design-system": "^2.3.1",
     "@types/jasmine": "^2.5.53",
     "@types/node": "^6.0.56",
     "@types/tether": "^1.4.2",

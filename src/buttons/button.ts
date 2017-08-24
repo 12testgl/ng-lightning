@@ -12,7 +12,7 @@ export class NglButton {
     this._type = type;
   }
 
-  private prefix = `slds-button--`;
+  private prefix = `slds-button_`;
   constructor(public element: ElementRef, public renderer: Renderer2) {
     this.renderer.addClass(this.element.nativeElement, 'slds-button');
   }

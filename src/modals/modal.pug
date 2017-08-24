@@ -1,16 +1,16 @@
-.slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-modal--' + size : '']", [attr.aria-hidden]="!open", role="dialog",
+.slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-modal_' + size : '']", [attr.aria-hidden]="!open", role="dialog",
                               [attr.aria-labelledby]="headingId")
   .slds-modal__container
-    .slds-modal__header([class.slds-modal__header--empty]="!header && !headerTpl")
-      button.slds-button.slds-button--icon-inverse.slds-modal__close(#closeButton, type="button", (click)="close()")
-        svg.slds-button__icon.slds-button__icon--large(nglIcon="close")
+    .slds-modal__header([class.slds-modal__header_empty]="!header && !headerTpl")
+      button.slds-button.slds-button_icon-inverse.slds-modal__close(#closeButton, type="button", (click)="close()")
+        svg.slds-button__icon.slds-button__icon_large(nglIcon="close")
         span.slds-assistive-text Close
-      h2.slds-text-heading--medium(*ngIf="header", [id]="headingId") {{header}}
+      h2.slds-text-heading_medium(*ngIf="header", [id]="headingId") {{header}}
       ng-template(*ngIf="headerTpl", [ngTemplateOutlet]="headerTpl.templateRef", [ngTemplateOutletContext]="{id: headingId}")
       ng-content(select="[tagline]")
-    .slds-modal__content.slds-p-around--medium
+    .slds-modal__content.slds-p-around_medium
       ng-content(select="[body]")
-    .slds-modal__footer(*ngIf="footer", [class.slds-modal__footer--directional]="directional")
+    .slds-modal__footer(*ngIf="footer", [class.slds-modal__footer_directional]="directional")
       ng-template([ngTemplateOutlet]="footer.templateRef")
 div(tabindex="0", (focus)="focusFirst()")
-.slds-backdrop([class.slds-backdrop--open]="open")
+.slds-backdrop([class.slds-backdrop_open]="open")

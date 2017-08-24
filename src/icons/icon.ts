@@ -54,10 +54,10 @@ export class NglIcon implements OnChanges {
     const classes = Array.isArray(this.svgClass) ? <string[]>this.svgClass : [this.svgClass || ''];
 
     const prefix = this.button ? 'slds-button__icon' : 'slds-icon';
-    classes.push(this.state ? 'slds-button__icon--stateful' : prefix);
+    classes.push(this.state ? 'slds-button__icon_stateful' : prefix);
 
     if (this.size) {
-      classes.push(`${prefix}--${this.size}`);
+      classes.push(`${prefix}_${this.size}`);
     }
 
     if (this.type) {
@@ -65,7 +65,7 @@ export class NglIcon implements OnChanges {
     }
 
     if (this.align || this.state) {
-      classes.push(`slds-button__icon--${this.align || 'left'}`);
+      classes.push(`slds-button__icon_${this.align || 'left'}`);
     }
 
     return classes;

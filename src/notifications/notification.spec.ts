@@ -24,15 +24,15 @@ describe('`nglNotification`', () => {
     fixture.componentInstance.severity = 'error';
     fixture.detectChanges();
 
-    expect(notificationElement).toHaveCssClass('slds-notify--toast');
-    expect(notificationElement).toHaveCssClass('slds-theme--error');
+    expect(notificationElement).toHaveCssClass('slds-notify_toast');
+    expect(notificationElement).toHaveCssClass('slds-theme_error');
 
     fixture.componentInstance.type = 'alert';
     fixture.componentInstance.severity = null;
     fixture.detectChanges();
 
-    expect(notificationElement).toHaveCssClass('slds-notify--alert');
-    expect(notificationElement).not.toHaveCssClass('slds-theme--error');
+    expect(notificationElement).toHaveCssClass('slds-notify_alert');
+    expect(notificationElement).not.toHaveCssClass('slds-theme_error');
 
     const closeButton = getCloseButton(fixture);
     expect(closeButton).toHaveCssClass('slds-notify__close');

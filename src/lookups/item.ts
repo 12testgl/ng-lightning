@@ -13,7 +13,7 @@ export class NglLookupLabelTemplate {
 @Directive({
   selector: '[nglLookupHeader]',
   host: {
-    '[class.slds-lookup__item--label]': 'true',
+    '[class.slds-lookup__item_label]': 'true',
   },
 })
 export class NglLookupHeader {}

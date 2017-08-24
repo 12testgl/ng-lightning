@@ -7,7 +7,7 @@ const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
 function getBreadcrumbsLinks(element: HTMLElement): HTMLLinkElement[] {
- return [].slice.call(element.querySelectorAll('a'));
+  return [].slice.call(element.querySelectorAll('a'));
 }
 
 function getAssistiveText(element: HTMLElement): string {
@@ -26,7 +26,11 @@ describe('Breadcrumbs Component', () => {
     anchors.map(el => el.parentElement).forEach(parentEl => {
       expect(parentEl.tagName).toBe('LI');
       expect(parentEl).toHaveCssClass('slds-breadcrumb__item');
-      expect(parentEl.parentElement.tagName).toBe('OL');
+
+      let fullPathEl = parentEl.parentElement;
+      expect(fullPathEl.tagName).toBe('OL');
+      expect(fullPathEl).toHaveCssClass('slds-breadcrumb');
+      expect(fullPathEl).toHaveCssClass('slds-list_horizontal');
     });
   });
 

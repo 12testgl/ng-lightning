@@ -2,7 +2,7 @@ Lookup is an advanced inline search form.
 
 You should provide a `lookup` method to query for suggestions. If you want to let user choose between objects, you should define the `field` property that will be used as suggestion's label.
 
-<div class="slds-box slds-box--small slds-m-bottom--small">
+<div class="slds-box slds-box_small slds-m-bottom_small">
 **Heads up!**  Use an arrow function for lookup methods, since they are *expected* to be passed around and you want to keep the `this` binding.
 </div>
 

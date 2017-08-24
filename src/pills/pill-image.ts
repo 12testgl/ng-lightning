@@ -9,7 +9,7 @@ export class NglPillImage {
 
   ngAfterContentInit() {
     this.renderer.addClass(this.element.nativeElement, 'slds-pill__icon');
-    this.renderer.removeClass(this.element.nativeElement, 'slds-avatar--medium');
+    this.renderer.removeClass(this.element.nativeElement, 'slds-avatar_medium');
   }
 
 }
