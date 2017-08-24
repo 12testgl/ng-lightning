@@ -33,10 +33,10 @@ export class NglDatatable {
   @Input() data: any[] = [];
   @Input() trackByKey: string;
 
-  @HostBinding('class.slds-table--bordered')
+  @HostBinding('class.slds-table_bordered')
   @Input() bordered = true;
 
-  @HostBinding('class.slds-table--striped')
+  @HostBinding('class.slds-table_striped')
   @Input() striped = true;
 
   @Input() sort: INglDatatableSort;

@@ -6,7 +6,7 @@ import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2 } from 
   templateUrl: './figure.pug',
   host: {
     '[class.slds-image]': 'true',
-    '[class.slds-image--card]': 'true',
+    '[class.slds-image_card]': 'true',
   },
 })
 export class NglFigure  {

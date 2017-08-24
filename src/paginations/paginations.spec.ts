@@ -11,8 +11,8 @@ function getPageElements(element: HTMLElement): HTMLButtonElement[] {
 }
 
 function expectPages(element: HTMLElement, definitions: string[]): void {
-  const activeClass = 'slds-button--brand';
-  const neutralClass = 'slds-button--neutral';
+  const activeClass = 'slds-button_brand';
+  const neutralClass = 'slds-button_neutral';
 
   const pages = getPageElements(element).map((el: HTMLButtonElement) => {
     let text = el.textContent.trim();

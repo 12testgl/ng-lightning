@@ -14,18 +14,18 @@ describe('Figure Crop', () => {
     const fixture = createTestComponent();
     const el = fixture.nativeElement.firstElementChild;
     expect(el).toHaveCssClass('slds-image__crop');
-    expect(el).toHaveCssClass('slds-image__crop--4-by-3');
+    expect(el).toHaveCssClass('slds-image__crop_4-by-3');
 
     fixture.componentInstance.ratio = null;
     fixture.detectChanges();
     expect(el).not.toHaveCssClass('slds-image__crop');
-    expect(el).not.toHaveCssClass('slds-image__crop--4-by-3');
+    expect(el).not.toHaveCssClass('slds-image__crop_4-by-3');
 
     fixture.componentInstance.ratio = '16-by-9';
     fixture.detectChanges();
     expect(el).toHaveCssClass('slds-image__crop');
-    expect(el).toHaveCssClass('slds-image__crop--16-by-9');
-    expect(el).not.toHaveCssClass('slds-image__crop--4-by-3');
+    expect(el).toHaveCssClass('slds-image__crop_16-by-9');
+    expect(el).not.toHaveCssClass('slds-image__crop_4-by-3');
   });
 });
 

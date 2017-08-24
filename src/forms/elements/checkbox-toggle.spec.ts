@@ -16,11 +16,11 @@ function getLabelElement(element: Element): HTMLLabelElement {
 }
 
 function getEnabledTextElement(element: Element): HTMLSpanElement {
-  return <HTMLSpanElement>element.querySelector('.slds-checkbox--on');
+  return <HTMLSpanElement>element.querySelector('.slds-checkbox_on');
 }
 
 function getDisabledTextElement(element: Element): HTMLSpanElement {
-  return <HTMLSpanElement>element.querySelector('.slds-checkbox--off');
+  return <HTMLSpanElement>element.querySelector('.slds-checkbox_off');
 }
 
 describe('`NglFormCheckboxToggle`', () => {

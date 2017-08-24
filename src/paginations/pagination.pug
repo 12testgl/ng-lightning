@@ -1,7 +1,7 @@
 .slds-button-group(role="group")
-  button.slds-button.slds-button--neutral(*ngIf="boundaryLinks", [disabled]="!hasPrevious()", (click)="goto(1)") {{firstText}}
-  button.slds-button.slds-button--neutral([disabled]="!hasPrevious()", (click)="goto(current - 1)") {{previousText}}
-  button.slds-button(*ngFor="let page of pages; trackBy:pageTrackBy", [ngClass]="'slds-button--' + (page.number === current ? 'brand' : 'neutral')", (click)="goto(page.number)", [disabled]="page.disabled")
+  button.slds-button.slds-button_neutral(*ngIf="boundaryLinks", [disabled]="!hasPrevious()", (click)="goto(1)") {{firstText}}
+  button.slds-button.slds-button_neutral([disabled]="!hasPrevious()", (click)="goto(current - 1)") {{previousText}}
+  button.slds-button(*ngFor="let page of pages; trackBy:pageTrackBy", [ngClass]="'slds-button_' + (page.number === current ? 'brand' : 'neutral')", (click)="goto(page.number)", [disabled]="page.disabled")
     | {{page.number}}
-  button.slds-button.slds-button--neutral([disabled]="!hasNext()", (click)="goto(current + 1)") {{nextText}}
-  button.slds-button.slds-button--neutral(*ngIf="boundaryLinks", [disabled]="!hasNext()", (click)="goto(totalPages)") {{lastText}}
+  button.slds-button.slds-button_neutral([disabled]="!hasNext()", (click)="goto(current + 1)") {{nextText}}
+  button.slds-button.slds-button_neutral(*ngIf="boundaryLinks", [disabled]="!hasNext()", (click)="goto(totalPages)") {{lastText}}

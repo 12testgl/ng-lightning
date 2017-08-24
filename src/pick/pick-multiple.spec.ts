@@ -6,7 +6,7 @@ import {NglPickModule} from './module';
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
-function expectState(element: HTMLElement, state: boolean[], activeClass = 'slds-button--brand') {
+function expectState(element: HTMLElement, state: boolean[], activeClass = 'slds-button_brand') {
   const options = selectElements(element, 'button');
   expect(options.length).toBe(state.length);
   expect(state).toEqual(options.map(o => o.classList.contains(activeClass)));
@@ -14,7 +14,7 @@ function expectState(element: HTMLElement, state: boolean[], activeClass = 'slds
 
 describe('Pick multiple array', () => {
   let HTML = `
-    <div [(nglPick)]="selected" nglPickMultiple nglPickActiveClass="slds-button--brand">
+    <div [(nglPick)]="selected" nglPickMultiple nglPickActiveClass="slds-button_brand">
       <button type="button" nglPickOption="op1"></button>
       <button type="button" *ngFor="let option of options" [nglPickOption]="option"></button>
     </div>
@@ -101,7 +101,7 @@ describe('Pick multiple array', () => {
 
 describe('Pick multiple object', () => {
   let HTML = `
-    <div [(nglPick)]="selectedObject" nglPickMultiple nglPickActiveClass="slds-button--brand">
+    <div [(nglPick)]="selectedObject" nglPickMultiple nglPickActiveClass="slds-button_brand">
       <button type="button" nglPickOption="op1"></button>
       <button type="button" *ngFor="let option of options" [nglPickOption]="option"></button>
     </div>

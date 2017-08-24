@@ -29,15 +29,15 @@ export class NglAvatar {
 
   ngOnInit() {
     if (!this._type) {
-      this.renderer.addClass(this.element.nativeElement, 'slds-avatar--rectangle');
+      this.renderer.addClass(this.element.nativeElement, 'slds-avatar_rectangle');
     }
 
     if (!this._size) {
-      this.renderer.addClass(this.element.nativeElement, 'slds-avatar--medium');
+      this.renderer.addClass(this.element.nativeElement, 'slds-avatar_medium');
     }
   }
 
   private updateClass(oldValue: string, newValue: string) {
-    replaceClass(this, `slds-avatar--${oldValue}`, newValue ? `slds-avatar--${newValue}` : '');
+    replaceClass(this, `slds-avatar_${oldValue}`, newValue ? `slds-avatar_${newValue}` : '');
   }
 };

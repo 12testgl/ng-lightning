@@ -1,17 +1,17 @@
-<section [id]="component.key" class="slds-m-top--x-large">
-  <h1 class="slds-text-heading--large">{{title()}}
-    <button (click)="onTry.emit(component)" style="float:right; font-size:small;" class="slds-button slds-button--neutral slds-button--small">TRY IN PLUNKER</button>
+<section [id]="component.key" class="slds-m-top_x-large">
+  <h1 class="slds-text-heading_large">{{title()}}
+    <button (click)="onTry.emit(component)" style="float:right; font-size:small;" class="slds-button slds-button_neutral slds-button_small">TRY IN PLUNKER</button>
   </h1>
-  <hr class="slds-m-top--small slds-m-bottom--large"/>
+  <hr class="slds-m-top_small slds-m-bottom_large"/>
   <div class="slds-grid">
-    <div class="slds-col slds-size--1-of-2">
+    <div class="slds-col slds-size_1-of-2">
       <ng-content></ng-content>
     </div>
-    <div class="slds-col slds-size--1-of-2">
-      <div ngNonBindable [innerHtml]="component.readme" class="slds-p-horizontal--small readme"></div>
+    <div class="slds-col slds-size_1-of-2">
+      <div ngNonBindable [innerHtml]="component.readme" class="slds-p-horizontal_small readme"></div>
     </div>
   </div>
-  <div class="slds-grid slds-m-top--large">
+  <div class="slds-grid slds-m-top_large">
     <div class="slds-col">
       <ngl-tabs [(selected)]="selectedTab">
         <ng-template ngl-tab="ngl-tab" heading="Markup">

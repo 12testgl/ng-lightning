@@ -26,11 +26,11 @@ describe('Badge Component', () => {
     const { componentInstance, nativeElement } = fixture;
 
     const badge = getBadgeElement(nativeElement);
-    expect(badge.classList.toString()).toEqual('slds-badge slds-theme--default');
+    expect(badge.classList.toString()).toEqual('slds-badge slds-theme_default');
 
     componentInstance.type = 'shade';
     fixture.detectChanges();
-    expect(badge.classList.toString()).toEqual('slds-badge slds-theme--shade');
+    expect(badge.classList.toString()).toEqual('slds-badge slds-theme_shade');
 
     componentInstance.type = null;
     fixture.detectChanges();

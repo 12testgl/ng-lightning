@@ -22,22 +22,22 @@ describe('`nglButtonIcon`', () => {
 
     fixture.detectChanges();
     expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button--icon-border');
+    expect(button).toHaveCssClass('slds-button_icon-border');
 
     componentInstance.style = '';
     fixture.detectChanges();
-    expect(button).not.toHaveCssClass('slds-button--icon');
-    expect(button).toHaveCssClass('slds-button--icon-border');
+    expect(button).not.toHaveCssClass('slds-button_icon');
+    expect(button).toHaveCssClass('slds-button_icon-border');
 
     componentInstance.style = 'container';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button--icon-container');
-    expect(button).not.toHaveCssClass('slds-button--icon');
+    expect(button).toHaveCssClass('slds-button_icon-container');
+    expect(button).not.toHaveCssClass('slds-button_icon');
 
     componentInstance.style = null;
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button--icon-border');
-    expect(button).not.toHaveCssClass('slds-button--icon-container');
+    expect(button).toHaveCssClass('slds-button_icon-border');
+    expect(button).not.toHaveCssClass('slds-button_icon-container');
   });
 
   it('should render the appropriate icon', () => {
@@ -50,22 +50,22 @@ describe('`nglButtonIcon`', () => {
   it('should render the default button icon when attribute value is empty', () => {
     const fixture = createTestComponent(`<button nglButtonIcon=""></button>`);
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).toHaveCssClass('slds-button--icon-border');
-    expect(button).not.toHaveCssClass('slds-button--icon');
+    expect(button).toHaveCssClass('slds-button_icon-border');
+    expect(button).not.toHaveCssClass('slds-button_icon');
   });
 
   it('should render the default button icon when attribute value is not set', () => {
     const fixture = createTestComponent(`<button nglButtonIcon></button>`);
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).not.toHaveCssClass('slds-button--icon');
-    expect(button).toHaveCssClass('slds-button--icon-border');
+    expect(button).not.toHaveCssClass('slds-button_icon');
+    expect(button).toHaveCssClass('slds-button_icon-border');
   });
 
   it(`should render the bare button for ''`, () => {
     const fixture = createTestComponent(`<button nglButtonIcon="''"></button>`);
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).toHaveCssClass('slds-button--icon');
-    expect(button).not.toHaveCssClass('slds-button--icon-border');
+    expect(button).toHaveCssClass('slds-button_icon');
+    expect(button).not.toHaveCssClass('slds-button_icon-border');
   });
 });
 

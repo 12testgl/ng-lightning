@@ -31,10 +31,10 @@ function expectSearchIcon(element: HTMLElement, exists: boolean) {
   const containerEl = element.querySelector('.slds-input-has-icon');
   const svg = containerEl.querySelector('svg.slds-input__icon');
   if (exists) {
-    expect(containerEl).toHaveCssClass('slds-input-has-icon--right');
+    expect(containerEl).toHaveCssClass('slds-input-has-icon_right');
     expect(svg).toBeTruthy();
   } else {
-    expect(containerEl).not.toHaveCssClass('slds-input-has-icon--right');
+    expect(containerEl).not.toHaveCssClass('slds-input-has-icon_right');
     expect(svg).toBeFalsy();
   }
 }
@@ -98,7 +98,7 @@ describe('Lookup Component', () => {
   it('should support custom header', () => {
     const fixture = createTestComponent(`
       <ngl-lookup [value]="value" [lookup]="filter" debounce="0">
-        <div nglLookupHeader class="slds-text-body--small">Header</div>
+        <div nglLookupHeader class="slds-text-body_small">Header</div>
       </ngl-lookup>`);
 
     fixture.componentInstance.value = 'DE';
@@ -106,8 +106,8 @@ describe('Lookup Component', () => {
     const { menu } = getElements(fixture.nativeElement);
     const headerEl = menu.firstElementChild;
 
-    expect(headerEl).toHaveCssClass('slds-lookup__item--label');
-    expect(headerEl).toHaveCssClass('slds-text-body--small');
+    expect(headerEl).toHaveCssClass('slds-lookup__item_label');
+    expect(headerEl).toHaveCssClass('slds-text-body_small');
     expect(headerEl.textContent).toBe('Header');
   });
 

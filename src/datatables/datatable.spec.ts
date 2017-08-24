@@ -46,12 +46,12 @@ function expectSortedHeadings(element: HTMLElement, expected: string[]) {
     const expectation = expected[index];
     if (expectation.startsWith('+')) {
       expect(e).toHaveCssClass('slds-is-sorted');
-      expect(e).toHaveCssClass('slds-is-sorted--asc');
+      expect(e).toHaveCssClass('slds-is-sorted_asc');
       expect(e.getAttribute('aria-sort')).toEqual('ascending');
       expect(expectation).toEqual(`+${text}`);
     } else if (expectation.startsWith('-')) {
       expect(e).toHaveCssClass('slds-is-sorted');
-      expect(e).toHaveCssClass('slds-is-sorted--desc');
+      expect(e).toHaveCssClass('slds-is-sorted_desc');
       expect(e.getAttribute('aria-sort')).toEqual('descending');
       expect(expectation).toEqual(`-${text}`);
     } else {
@@ -71,8 +71,8 @@ describe('`NglDatatable`', () => {
 
     const tableEl = fixture.nativeElement.firstElementChild;
     expect(tableEl).toHaveCssClass('slds-table');
-    expect(tableEl).toHaveCssClass('slds-table--bordered');
-    expect(tableEl).toHaveCssClass('slds-table--striped');
+    expect(tableEl).toHaveCssClass('slds-table_bordered');
+    expect(tableEl).toHaveCssClass('slds-table_striped');
 
     expect(getHeadingsText(fixture.nativeElement)).toEqual(['ID', 'Name', 'Number']);
     expect(getHeadingsTitle(fixture.nativeElement)).toEqual(['ID', 'Name', 'Number']);
@@ -88,36 +88,36 @@ describe('`NglDatatable`', () => {
     const fixture = createTestComponent(`<table ngl-datatable [striped]="striped" [bordered]="bordered"></table>`);
     const tableEl = fixture.nativeElement.firstElementChild;
     expect(tableEl).toHaveCssClass('slds-table');
-    expect(tableEl).not.toHaveCssClass('slds-table--bordered');
-    expect(tableEl).not.toHaveCssClass('slds-table--striped');
+    expect(tableEl).not.toHaveCssClass('slds-table_bordered');
+    expect(tableEl).not.toHaveCssClass('slds-table_striped');
 
     fixture.componentInstance.striped = true;
     fixture.detectChanges();
-    expect(tableEl).toHaveCssClass('slds-table--striped');
-    expect(tableEl).not.toHaveCssClass('slds-table--bordered');
+    expect(tableEl).toHaveCssClass('slds-table_striped');
+    expect(tableEl).not.toHaveCssClass('slds-table_bordered');
 
     fixture.componentInstance.bordered = true;
     fixture.detectChanges();
-    expect(tableEl).toHaveCssClass('slds-table--striped');
-    expect(tableEl).toHaveCssClass('slds-table--bordered');
+    expect(tableEl).toHaveCssClass('slds-table_striped');
+    expect(tableEl).toHaveCssClass('slds-table_bordered');
   });
 
   it('should appy bordered and striped based on input', () => {
     const fixture = createTestComponent(`<table ngl-datatable [striped]="striped" [bordered]="bordered"></table>`);
     const tableEl = fixture.nativeElement.firstElementChild;
     expect(tableEl).toHaveCssClass('slds-table');
-    expect(tableEl).not.toHaveCssClass('slds-table--bordered');
-    expect(tableEl).not.toHaveCssClass('slds-table--striped');
+    expect(tableEl).not.toHaveCssClass('slds-table_bordered');
+    expect(tableEl).not.toHaveCssClass('slds-table_striped');
 
     fixture.componentInstance.striped = true;
     fixture.detectChanges();
-    expect(tableEl).toHaveCssClass('slds-table--striped');
-    expect(tableEl).not.toHaveCssClass('slds-table--bordered');
+    expect(tableEl).toHaveCssClass('slds-table_striped');
+    expect(tableEl).not.toHaveCssClass('slds-table_bordered');
 
     fixture.componentInstance.bordered = true;
     fixture.detectChanges();
-    expect(tableEl).toHaveCssClass('slds-table--striped');
-    expect(tableEl).toHaveCssClass('slds-table--bordered');
+    expect(tableEl).toHaveCssClass('slds-table_striped');
+    expect(tableEl).toHaveCssClass('slds-table_bordered');
   });
 
   it('should show/hide column correctly', () => {

@@ -8,7 +8,7 @@ const openEventEmitter = new EventEmitter<any>();
   selector: '[nglDropdown]',
   host: {
     '[class.slds-dropdown-trigger]': 'true',
-    '[class.slds-dropdown-trigger--click]': 'true',
+    '[class.slds-dropdown-trigger_click]': 'true',
   },
 })
 export class NglDropdown implements OnInit, OnDestroy {

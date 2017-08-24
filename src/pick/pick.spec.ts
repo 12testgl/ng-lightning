@@ -13,7 +13,7 @@ function getElements(element: HTMLElement): any {
   };
 }
 
-function expectState(element: HTMLElement, state: boolean[], activeClass = 'slds-button--brand') {
+function expectState(element: HTMLElement, state: boolean[], activeClass = 'slds-button_brand') {
   const { options } = getElements(element);
   expect(options.length).toBe(state.length);
   expect(options.map((o: HTMLElement) => o.classList.contains(activeClass))).toEqual(state);
@@ -57,16 +57,16 @@ describe('`Pick`', () => {
     fixture.componentInstance.selected = 'op1';
     fixture.detectChanges();
     expect(options[0]).toHaveCssClass('my-active-class');
-    expect(options[0]).not.toHaveCssClass('slds-button--brand');
+    expect(options[0]).not.toHaveCssClass('slds-button_brand');
     expect(options[1]).not.toHaveCssClass('another-class');
-    expect(options[0]).not.toHaveCssClass('slds-button--brand');
+    expect(options[0]).not.toHaveCssClass('slds-button_brand');
 
     fixture.componentInstance.selected = 'op2';
     fixture.detectChanges();
     expect(options[0]).not.toHaveCssClass('my-active-class');
-    expect(options[0]).not.toHaveCssClass('slds-button--brand');
+    expect(options[0]).not.toHaveCssClass('slds-button_brand');
     expect(options[1]).toHaveCssClass('another-class');
-    expect(options[0]).not.toHaveCssClass('slds-button--brand');
+    expect(options[0]).not.toHaveCssClass('slds-button_brand');
   });
 
   it('should have proper selected value when `nglPickOption` is clicked', () => {
@@ -145,7 +145,7 @@ describe('`Pick`', () => {
 
   it('should allow picking from outside and expose state', () => {
     const fixture = createTestComponent(`
-      <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickActiveClass="slds-button--brand">
+      <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickActiveClass="slds-button_brand">
         <button type="button" nglPickOption="op1" #opt1="nglPickOption"></button>
         <button type="button" nglPickOption="op2" #opt2="nglPickOption"></button>
       </div>
@@ -167,7 +167,7 @@ describe('`Pick`', () => {
 
 @Component({
   template: `
-    <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickActiveClass="slds-button--brand">
+    <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickActiveClass="slds-button_brand">
       <button type="button" nglPickOption="op1"></button>
       <button type="button" *ngFor="let option of options" [nglPickOption]="option"></button>
     </div>

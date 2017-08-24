@@ -128,11 +128,11 @@ describe('`NglPicklist`', () => {
     fixture.detectChanges();
 
     const picklistEl = fixture.nativeElement.querySelector('.slds-picklist');
-    expect(picklistEl).toHaveCssClass('slds-picklist--fluid');
+    expect(picklistEl).toHaveCssClass('slds-picklist_fluid');
 
     fixture.componentInstance.fluid = false;
     fixture.detectChanges();
-    expect(picklistEl).not.toHaveCssClass('slds-picklist--fluid');
+    expect(picklistEl).not.toHaveCssClass('slds-picklist_fluid');
   });
 });
 

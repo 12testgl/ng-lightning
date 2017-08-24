@@ -28,7 +28,7 @@ describe('NglPill', () => {
     const icon = getIcon(fixture.nativeElement);
     expect(icon).toHaveCssClass('slds-pill__icon');
     expect(icon).toHaveCssClass('slds-avatar');
-    expect(icon).not.toHaveCssClass('slds-avatar--medium');
+    expect(icon).not.toHaveCssClass('slds-avatar_medium');
   });
 
 });

@@ -26,7 +26,7 @@ describe('Spinner Component', () => {
     const container = getSpinnerContainer(fixture.nativeElement);
 
     expect(spinner).toBeDefined();
-    expect(spinner).toHaveCssClass('slds-spinner--medium');
+    expect(spinner).toHaveCssClass('slds-spinner_medium');
     expect(container).not.toHaveCssClass('slds-spinner_container');
     expect(image).toBeDefined();
   });
@@ -34,13 +34,13 @@ describe('Spinner Component', () => {
   it('should render a large spinner based on input', () => {
     const fixture = createTestComponent(`<ngl-spinner [size]="'large'" ></ngl-spinner>`);
     const spinner = getSpinnerElement(fixture.nativeElement);
-    expect(spinner).toHaveCssClass('slds-spinner--large');
+    expect(spinner).toHaveCssClass('slds-spinner_large');
   });
 
   it('should render a themed spinner based on input', () => {
     const fixture = createTestComponent(`<ngl-spinner type="brand" ></ngl-spinner>`);
     const spinner = getSpinnerElement(fixture.nativeElement);
-    expect(spinner).toHaveCssClass('slds-spinner--brand');
+    expect(spinner).toHaveCssClass('slds-spinner_brand');
   });
 
   it('should apply container class if attribute exists', () => {

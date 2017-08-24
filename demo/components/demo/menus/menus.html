@@ -1,9 +1,9 @@
 <span nglDropdown [(open)]="open">
-  <button class="slds-button slds-button--neutral" nglDropdownTrigger>
+  <button class="slds-button slds-button_neutral" nglDropdownTrigger>
     <span class="slds-truncate">Select an item</span>
     <ngl-icon icon="down" type="default" size="x-small"></ngl-icon>
   </button>
-  <div class="slds-dropdown slds-dropdown--left">
+  <div class="slds-dropdown slds-dropdown_left">
     <ul class="dropdown__list" role="menu">
       <li class="slds-dropdown__item" *ngFor="let item of items;">
         <a role="menuitem" nglDropdownItem (click)="selected = item.value; open = false;">
@@ -18,4 +18,4 @@
 <button type="button" nglButton="neutral" (click)="onToggle($event)">Open</button>
 <button type="button" nglButton="neutral" style="margin-left: 0px;" (click)="open = !open">Toggle</button>
 
-<div *ngIf="selected" class="slds-m-top--large">You selected: <b>{{selected}}</b></div>
+<div *ngIf="selected" class="slds-m-top_large">You selected: <b>{{selected}}</b></div>

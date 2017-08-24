@@ -20,7 +20,7 @@ export class NglFormGroupElement implements OnChanges {
   uid = uniqueId('form_element');
 
   get labelClass() {
-    return `slds-${this.contentEl.type}${this.groupAlt ? '--button' : ''}__label`;
+    return `slds-${this.contentEl.type}${this.groupAlt ? '_button' : ''}__label`;
   }
 
   constructor(@Optional() private groupAlt: NglFormGroupAlternate, private element: ElementRef, private renderer: Renderer2) {}
@@ -39,7 +39,7 @@ export class NglFormGroupElement implements OnChanges {
     if (this.groupAlt) {
       this.groupAlt.type = type;
       this.renderer.addClass(this.element.nativeElement, 'slds-button');
-      this.renderer.addClass(this.element.nativeElement, `slds-${type}--button`);
+      this.renderer.addClass(this.element.nativeElement, `slds-${type}_button`);
     } else {
       this.renderer.addClass(this.element.nativeElement, `slds-${type}`);
     }

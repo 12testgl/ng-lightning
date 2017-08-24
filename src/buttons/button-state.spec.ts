@@ -23,10 +23,10 @@ describe('`nglButtonState`', () => {
     const icons = selectElements(button, 'svg');
     expect(icons.length).toBe(3);
     icons.forEach((icon) => {
-      expect(icon).toHaveCssClass('slds-button__icon--stateful');
+      expect(icon).toHaveCssClass('slds-button__icon_stateful');
       expect(icon).not.toHaveCssClass('slds-icon');
       expect(icon).not.toHaveCssClass('slds-button__icon');
-      expect(icon).toHaveCssClass('slds-button__icon--left');
+      expect(icon).toHaveCssClass('slds-button__icon_left');
     });
   });
 

@@ -10,7 +10,7 @@ import {replaceClass, isInt} from '../util/util';
     'role': 'alert',
   },
   styles: [
-    `:host.slds-notify--alert {
+    `:host.slds-notify_alert {
       display: block;
     }`,
   ],
@@ -45,11 +45,11 @@ export class NglNotification implements OnChanges {
     const {type: changedType, setSeverity: changedSeverity} = changes;
     if (changedType) {
       const previousValue = typeof(changedType.previousValue) === 'string' ? changedType.previousValue : '';
-      replaceClass(this, `slds-notify--${previousValue}`, `slds-notify--${changedType.currentValue}`);
+      replaceClass(this, `slds-notify_${previousValue}`, `slds-notify_${changedType.currentValue}`);
     }
     if (changedSeverity) {
       const previousValue = typeof(changedSeverity.previousValue) === 'string' ? changedSeverity.previousValue : '';
-      replaceClass(this, `slds-theme--${previousValue}`, changedSeverity.currentValue ? `slds-theme--${changedSeverity.currentValue}` : null);
+      replaceClass(this, `slds-theme_${previousValue}`, changedSeverity.currentValue ? `slds-theme_${changedSeverity.currentValue}` : null);
     }
   }
 

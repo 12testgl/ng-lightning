@@ -9,12 +9,12 @@ export class NglFigureCrop {
     const nativeElement = this.element.nativeElement;
 
     if (this._ratio) {
-      this.renderer.removeClass(nativeElement, `slds-image__crop--${this._ratio}`);
+      this.renderer.removeClass(nativeElement, `slds-image__crop_${this._ratio}`);
     }
 
     if (ratio) {
       this.renderer.addClass(nativeElement, 'slds-image__crop');
-      this.renderer.addClass(nativeElement, `slds-image__crop--${ratio}`);
+      this.renderer.addClass(nativeElement, `slds-image__crop_${ratio}`);
     } else {
       this.renderer.removeClass(nativeElement, 'slds-image__crop');
     }

@@ -74,12 +74,12 @@ describe('Icon Component', () => {
     const fixture = createTestComponent(`<ngl-icon icon="warning" [size]="size"></ngl-icon>`);
     const { nativeElement, componentInstance } = fixture;
     const { icon } = getElements(nativeElement);
-    expect(icon).toHaveCssClass('slds-icon--small');
+    expect(icon).toHaveCssClass('slds-icon_small');
 
     componentInstance.size = 'large';
     fixture.detectChanges();
-    expect(icon).not.toHaveCssClass('slds-icon--small');
-    expect(icon).toHaveCssClass('slds-icon--large');
+    expect(icon).not.toHaveCssClass('slds-icon_small');
+    expect(icon).toHaveCssClass('slds-icon_large');
   });
 
   it('should allow extra svg classes', () => {

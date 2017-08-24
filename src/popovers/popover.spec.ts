@@ -58,7 +58,7 @@ describe('Popovers', () => {
     const fixture = createTestComponent();
     const popoverEl = getPopoverElement(fixture.nativeElement);
     expect(popoverEl).toHaveCssClass('slds-popover');
-    expect(popoverEl).toHaveCssClass('slds-nubbin--bottom'); // Top placement
+    expect(popoverEl).toHaveCssClass('slds-nubbin_bottom'); // Top placement
     expect(popoverEl.textContent.trim()).toBe('I am a tooltip');
     fixture.destroy();
   });
@@ -94,13 +94,13 @@ describe('Popovers', () => {
 
     componentInstance.placement = 'left';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-nubbin--right');
-    expect(popoverEl).not.toHaveCssClass('slds-nubbin--bottom');
+    expect(popoverEl).toHaveCssClass('slds-nubbin_right');
+    expect(popoverEl).not.toHaveCssClass('slds-nubbin_bottom');
 
     componentInstance.placement = 'bottom';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-nubbin--top');
-    expect(popoverEl).not.toHaveCssClass('slds-nubbin--right');
+    expect(popoverEl).toHaveCssClass('slds-nubbin_top');
+    expect(popoverEl).not.toHaveCssClass('slds-nubbin_right');
     fixture.destroy();
   });
 
@@ -110,20 +110,20 @@ describe('Popovers', () => {
     const popoverEl = getPopoverElement(nativeElement);
 
     fixture.detectChanges();
-    expect(popoverEl).not.toHaveCssClass('slds-theme--info');
+    expect(popoverEl).not.toHaveCssClass('slds-theme_info');
 
     componentInstance.theme = 'info';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-theme--info');
+    expect(popoverEl).toHaveCssClass('slds-theme_info');
 
     componentInstance.theme = 'error';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-theme--error');
-    expect(popoverEl).not.toHaveCssClass('slds-theme--info');
+    expect(popoverEl).toHaveCssClass('slds-theme_error');
+    expect(popoverEl).not.toHaveCssClass('slds-theme_info');
 
     componentInstance.theme = null;
     fixture.detectChanges();
-    expect(popoverEl).not.toHaveCssClass('slds-theme--error');
+    expect(popoverEl).not.toHaveCssClass('slds-theme_error');
     fixture.destroy();
   });
 
@@ -142,7 +142,7 @@ describe('Popovers', () => {
   it('should have tooltip appearence', () => {
     const fixture = createTestComponent(`<ng-template #tip></ng-template><span [nglPopover]="tip" nglOpen="true" nglTooltip></span>`);
     const popoverEl = getPopoverElement(fixture.nativeElement);
-    expect(popoverEl).toHaveCssClass('slds-popover--tooltip');
+    expect(popoverEl).toHaveCssClass('slds-popover_tooltip');
   });
 
   it('should destroy popover when host is destroyed', () => {
