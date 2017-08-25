@@ -1,6 +1,6 @@
 .slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-modal--' + size : '']", [attr.aria-hidden]="!open", role="dialog",
                               [attr.aria-labelledby]="headingId")
-  .slds-modal__container
+  .slds-modal__container([@visibilityChanged]="animationOpen", (@visibilityChanged.start)='emitClose($event)')
     .slds-modal__header([class.slds-modal__header--empty]="!header && !headerTpl")
       button.slds-button.slds-button--icon-inverse.slds-modal__close(#closeButton, type="button", (click)="close()")
         svg.slds-button__icon.slds-button__icon--large(nglIcon="close")
