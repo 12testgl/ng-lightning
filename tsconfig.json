@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "stripInternal": true,
-    "outDir": "./node_modules/ng-lightning",
+    "outDir": "./demo/node_modules/ng-lightning",
     "rootDir": "./temp/inline",
     "sourceMap": true,
     "inlineSources": true,

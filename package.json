@@ -19,8 +19,8 @@
     "docs": "compodoc ./temp/inline -p ./tsconfig.json -d ./docs/",
     "build": "gulp",
     "start": "npm run build && gulp build:watch",
-    "demo": "gulp demo:clean && webpack --config ./demo/webpack.config.js --watch",
-    "demo:build": "npm run build && gulp demo:ngc && webpack --config ./demo/webpack.config.js",
+    "demo": "gulp demo:clean && cd demo && npm start",
+    "demo:build": "npm run build && cd demo && npm run build",
     "demo:release": "npm run demo:build && node scripts/gh-pages",
     "prerelease": "npm run build && npm test",
     "release": "node scripts/release"
