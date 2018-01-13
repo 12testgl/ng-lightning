@@ -1,5 +1,5 @@
 const isTravis = process.env.TRAVIS;
-const isSaucelabs = process.argv.indexOf('--saucelabs') !== -1 || (isTravis && process.env.TRAVIS_PULL_REQUEST === 'false');
+const isSaucelabs = process.argv.indexOf('--saucelabs') !== -1 || (isTravis);
 
 if (isSaucelabs && !process.env.SAUCE_USERNAME) {
   try {
