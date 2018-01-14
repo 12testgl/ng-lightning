@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -25,7 +25,7 @@ export class DemoLookups {
 
   scope = this.scopes[0];
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   lookup = (query: string, source = this.superheroes): string[] => {
     if (!query) {
@@ -42,7 +42,6 @@ export class DemoLookups {
     }
 
     return this.http.get(`//maps.googleapis.com/maps/api/geocode/json?address=${query}`)
-      .map((res: Response) => res.json())
       .map((response: any) => response.results);
   }
 

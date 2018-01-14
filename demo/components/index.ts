@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
 import {RouterModule} from '@angular/router';
 import {routes} from './components.routing';
@@ -47,7 +47,7 @@ const DEMO_COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     NglModule,
     FormsModule,
     RouterModule.forChild(routes),
