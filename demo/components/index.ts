@@ -31,7 +31,7 @@ import {DemoPicklist} from './demo/picklist/picklist';
 import {DemoPills} from './demo/pills/pills';
 import {DemoPopovers} from './demo/popovers/popovers';
 import {DemoRatings} from './demo/ratings/ratings';
-import {DemoSections} from './demo/sections/sections';
+import {DemoExpandableSection} from './demo/expandable-section/expandable-section';
 import {DemoSpinners} from './demo/spinners/spinners';
 import {DemoTabs} from './demo/tabs/tabs';
 
@@ -40,7 +40,7 @@ const DEMO_COMPONENTS = [
   DemoBadges, DemoBreadcrumbs, DemoButtons, DemoDatatables, DemoDatepickers,
   DemoForms, DemoIcons, DemoAvatars, DemoLookups, DemoMenus,
   DemoModals, DemoNotifications, DemoPaginations, DemoPick, DemoPicklist,
-  DemoPills, DemoPopovers, DemoRatings, DemoSections, DemoSpinners,
+  DemoPills, DemoPopovers, DemoRatings, DemoExpandableSection, DemoSpinners,
   DemoTabs,
 ];
 

@@ -25,6 +25,10 @@ export class PageComponent {
     if (this.component.title) return this.component.title;
 
     const { key } = this.component;
-    return key.charAt(0).toUpperCase() + key.slice(1);
+    return key.split('-')
+      .map((text: string) => text.charAt(0).toUpperCase() + text.substr(1).toLowerCase())
+      .join(' ');
   }
 }
+
+

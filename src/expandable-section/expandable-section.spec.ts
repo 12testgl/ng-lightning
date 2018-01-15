@@ -1,7 +1,7 @@
 import {TestBed, ComponentFixture}  from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {createGenericTestComponent} from '../../test/util/helpers';
-import {NglSectionsModule} from './module';
+import {NglExpandableSectionModule} from './module';
 
 const createTestComponent = (html?: string) =>
   createGenericTestComponent(TestComponent, html) as ComponentFixture<TestComponent>;
@@ -14,9 +14,9 @@ function getTitleEl(element: HTMLElement) {
 }
 
 
-describe('Section Component', () => {
+describe('Expandable Section Component', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglSectionsModule]}));
+  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglExpandableSectionModule]}));
 
   it('should render correctly', () => {
     const fixture = createTestComponent();
@@ -58,11 +58,47 @@ describe('Section Component', () => {
     expect(sectionEl).not.toHaveCssClass('slds-is-open');
   });
 
+  it('should hide arrow if not collapsable', () => {
+    const fixture = createTestComponent();
+    const { nativeElement, componentInstance } = fixture;
+    componentInstance.collapsable = false;
+    fixture.detectChanges();
+
+    const arrow = nativeElement.querySelector('svg.slds-section__title-action-icon.slds-button__icon.slds-button__icon_left');
+    expect(arrow).toBeNull();
+  });
+
+  it('should force body expansion if not collapsable', () => {
+    const fixture = createTestComponent();
+    const { nativeElement, componentInstance } = fixture;
+    const sectionEl = getSectionEl(nativeElement);
+
+    componentInstance.open = false;
+    componentInstance.collapsable = false;
+    fixture.detectChanges();
+    expect(sectionEl).toHaveCssClass('slds-is-open');
+  });
+
+  it('should not toggle when clicking on title if not collapsable', () => {
+    const fixture = createTestComponent();
+    const { nativeElement, componentInstance } = fixture;
+    const sectionEl = getSectionEl(nativeElement);
+    const titleEl = getTitleEl(fixture.nativeElement);
+
+    componentInstance.collapsable = false;
+    fixture.detectChanges();
+    expect(sectionEl).toHaveCssClass('slds-is-open');
+
+    titleEl.click();
+    fixture.detectChanges();
+    expect(sectionEl).toHaveCssClass('slds-is-open');
+  });
 });
 
 @Component({
-  template: `<ngl-section [(open)]="open" title="Section title">Body</ngl-section>`,
+  template: `<ngl-expandable-section [(open)]="open" [collapsable]="collapsable" title="Section title">Body</ngl-expandable-section>`,
 })
 export class TestComponent {
   open = false;
+  collapsable = true;
 }

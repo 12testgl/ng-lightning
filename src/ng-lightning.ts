@@ -19,7 +19,7 @@ import {NglPicklistModule} from './picklist/module';
 import {NglPillsModule} from './pills/module';
 import {NglPopoversModule} from './popovers/module';
 import {NglRatingsModule} from './ratings/module';
-import {NglSectionsModule} from './sections/module';
+import {NglExpandableSectionModule} from './expandable-section/module';
 import {NglSpinnersModule} from './spinners/module';
 import {NglTabsModule} from './tabs/module';
 import {INglConfig} from './config/config.interface';
@@ -48,7 +48,7 @@ const MODULES = [
   NglPillsModule,
   NglPopoversModule,
   NglRatingsModule,
-  NglSectionsModule,
+  NglExpandableSectionModule,
   NglSpinnersModule,
   NglTabsModule,
 ];
