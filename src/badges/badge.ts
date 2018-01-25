@@ -1,4 +1,5 @@
-import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ThemeOption} from '../util/types';
 
 @Component({
   selector: 'ngl-badge',
@@ -6,5 +7,5 @@ import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NglBadge {
-  @Input() type: string;
+  @Input() theme: ThemeOption;
 };
