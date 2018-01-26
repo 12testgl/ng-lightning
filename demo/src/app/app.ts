@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app',
@@ -6,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class AppComp {
 
-  now = process.env.now;
+  now = environment.now;
 
-  version = process.env.version;
+  version = environment.version;
 }

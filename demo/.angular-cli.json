@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "ng-lightning-demo"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico",
+        { "glob": "prism-okaidia.css", "input": "../node_modules/prismjs/themes", "output": "assets/prismjs" },
+        { "glob": "**/*", "input": "../node_modules/@salesforce-ux/design-system/assets/styles", "output": "assets/styles" },
+        { "glob": "**/*", "input": "../node_modules/@salesforce-ux/design-system/assets/fonts", "output": "assets/fonts" },
+        { "glob": "**/*", "input": "../node_modules/@salesforce-ux/design-system/assets/images", "output": "assets/images" },
+        {
+          "glob": "**/symbols.svg",
+          "input": "../node_modules/@salesforce-ux/design-system/assets/icons",
+          "output": "assets/icons"
+        }
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "build": {
+    "preserveSymlinks": true
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {},
+    "serve": {
+      "port": 1111
+    }
+  }
+}

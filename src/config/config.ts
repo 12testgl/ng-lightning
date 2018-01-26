@@ -1,7 +1,7 @@
 import {Injectable, EventEmitter, InjectionToken, Inject} from '@angular/core';
 import {INglConfig} from './config.interface';
 
-export const NGL_CONFIG = new InjectionToken('NGL_CONFIG');
+export const NGL_CONFIG = new InjectionToken<INglConfig>('NGL_CONFIG');
 
 @Injectable()
 export class NglConfig {

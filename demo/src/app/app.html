@@ -2,12 +2,12 @@
   <div class="slds-container--large slds-container--center">
     <div class="slds-grid slds-p-vertical--small slds-p-horizontal--x-large">
       <div class="slds-col slds-align-middle slds-no-flex">
-        <div class="slds-media slds-media--center"><span class="slds-media__figure slds-medium-show"><img src="img/shield.svg" style="height:25px;"/></span>
+        <div class="slds-media slds-media--center"><span class="slds-media__figure slds-medium-show"><img src="assets/images/shield.svg" style="height:25px;"/></span>
           <div class="slds-media__body"><a [routerLink]="['']" style="color:#fff;" class="slds-text-title--caps">NG-LIGHTNING</a></div>
         </div>
       </div>
       <div class="slds-coll slds-align-middle slds-m-left--large slds-grow"><a [routerLink]="['components']" class="slds-p-horizontal--small">Components</a><a [routerLink]="['support']" class="slds-p-horizontal--small">Support</a></div>
-      <div class="slds-col slds-align-middle slds-no-flex"><a href="https://www.npmjs.com/package/ng-lightning" alt="NPM" title="Install with NPM"><img src="img/npm.svg" style="height:15px; background:transparent;"/></a><a href="https://github.com/ng-lightning/ng-lightning" alt="Source" title="View Source" class="slds-m-left--small"><img src="img/octicon.png" style="height:20px; background:transparent;"/></a></div>
+      <div class="slds-col slds-align-middle slds-no-flex"><a href="https://www.npmjs.com/package/ng-lightning" alt="NPM" title="Install with NPM"><img src="assets/images/npm.svg" style="height:15px; background:transparent;"/></a><a href="https://github.com/ng-lightning/ng-lightning" alt="Source" title="View Source" class="slds-m-left--small"><img src="assets/images/octicon.png" style="height:20px; background:transparent;"/></a></div>
     </div>
   </div>
 </header>
@@ -16,5 +16,5 @@
 </main>
 <footer id="footer" class="slds-p-vertical--small slds-p-horizontal--x-large slds-grid slds-text-body--small">
   <div class="slds-col">© 2016 - present. Code licensed under the MIT License.</div>
-  <div class="slds-col slds-text-align--right">Last updated on {{now}}. v{{version}}</div>
+  <div class="slds-col slds-text-align--right">Last updated on {{now | date:'dd MMM yyyy'}}. v{{version}}</div>
 </footer>

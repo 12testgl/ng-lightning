@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var path = require('path');
-var del = require('del')
+var del = require('del');
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('test/tsconfig.json');
 var lazypipe = require('lazypipe');
@@ -21,7 +21,7 @@ var PATHS = {
   spec: ['src/**/*.ts', 'test/{util,mock}/*.ts'],
   temp: 'temp/',
   tsInline: 'temp/inline/',
-  dist: 'node_modules/ng-lightning',
+  dist: 'demo/node_modules/ng-lightning',
 };
 
 var inlineTemplatesTask = lazypipe()
@@ -94,7 +94,7 @@ gulp.task('build:watch', function() {
 });
 
 gulp.task('demo:clean', function() {
-  return del(['demo/**/*.ngfactory.ts', 'demo/**/*.ngsummary.json', 'demo/node_modules', 'temp/demo']);
+  return del(['demo/dist', 'temp/demo']);
 });
 
 gulp.task('demo:ngc', gulp.series('demo:clean', function __ngc(cb) {
