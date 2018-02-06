@@ -1,8 +1,9 @@
-<ngl-section [(open)]="open" title="Section Title">
+<ngl-expandable-section [(open)]="open" title="Section Title" [collapsable]="collapsable">
   <p>
     Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. 
     Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
     sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Nullam quis risus eget urna mollis ornare vel eu leo. Nulla vitae elit libero, a pharetra augue.
   </p>
-</ngl-section>
+</ngl-expandable-section>
+<button type="button" nglButton="neutral" (click)="change()" class="slds-m-top_large">Change</button>

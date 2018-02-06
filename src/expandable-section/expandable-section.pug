@@ -1,0 +1,17 @@
+mixin title
+  span.slds-truncate([title]="title")&attributes(attributes) {{title}}
+
+h3.slds-section__title([class.slds-theme_shade]="!collapsable")
+  button.slds-button.slds-section__title-action(*ngIf="collapsable; else simple_title",
+                                                [attr.aria-controls]="uid",
+                                                [attr.aria-expanded]="expanded",
+                                                type="button",
+                                                (click)="toggle($event)")
+    svg.slds-section__title-action-icon.slds-button__icon.slds-button__icon_left(nglIcon="switch")
+    +title()
+
+  ng-template(#simple_title)
+    +title.slds-p-horizontal_small()
+
+.slds-section__content([attr.aria-hidden]="!expanded", [attr.id]="uid")
+  ng-content

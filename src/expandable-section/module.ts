@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {NglSection} from './section';
+import {NglExpandableSection} from './expandable-section';
 import {NglIconsModule} from '../icons/module';
 
 @NgModule({
-  declarations: [NglSection],
-  exports: [NglSection],
+  declarations: [NglExpandableSection],
+  exports: [NglExpandableSection],
   imports: [CommonModule, NglIconsModule],
 })
-export class NglSectionsModule {}
+export class NglExpandableSectionModule {}

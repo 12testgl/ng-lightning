@@ -55,8 +55,8 @@
     <page-component [component]="components.ratings" (onTry)="playground.open($event)">
       <demo-ratings></demo-ratings>
     </page-component>
-    <page-component [component]="components.sections" (onTry)="playground.open($event)">
-      <demo-sections></demo-sections>
+    <page-component [component]="components['expandable-section']" (onTry)="playground.open($event)">
+      <demo-expandable-section></demo-expandable-section>
     </page-component>
     <page-component [component]="components.spinners" (onTry)="playground.open($event)">
       <demo-spinners></demo-spinners>
