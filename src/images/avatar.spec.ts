@@ -14,6 +14,10 @@ function getImageElement(element: Element): HTMLImageElement {
   return <HTMLImageElement>element.querySelector('img');
 }
 
+function getInitialsElement(element: Element): HTMLElement {
+  return <HTMLImageElement>element.querySelector('abbr');
+}
+
 describe('Avatar Component', () => {
 
   beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglImagesModule]}));
@@ -64,6 +68,50 @@ describe('Avatar Component', () => {
     const image = getImageElement(avatar);
     expect(image.getAttribute('alt')).toEqual('assistive text');
   });
+
+  it('should render the initials if no image', () => {
+    const fixture = createTestComponent(`<ngl-avatar initials="TB"></ngl-avatar>`);
+    const avatar = getAvatarElement(fixture.nativeElement);
+    const image = getImageElement(avatar);
+    const initialsEl = getInitialsElement(avatar);
+    expect(image).toBeNull();
+    expect(initialsEl).toHaveCssClass('slds-avatar__initials');
+    expect(initialsEl).toHaveCssClass('slds-icon-standard-user');
+    expect(initialsEl.innerText).toBe('TB');
+  });
+
+  it('should render the initials with custom background', () => {
+    const fixture = createTestComponent(`<ngl-avatar initials="TB" fallbackIconName="standard:account"></ngl-avatar>`);
+    const avatar = getAvatarElement(fixture.nativeElement);
+    const initialsEl = getInitialsElement(avatar);
+    expect(initialsEl).toHaveCssClass('slds-icon-standard-account');
+    expect(initialsEl).not.toHaveCssClass('slds-icon-standard-user');
+  });
+
+  it('should not render the initials if image is set', () => {
+    const fixture = createTestComponent(`<ngl-avatar initials="TB" src="image1.jpg"></ngl-avatar>`);
+    const avatar = getAvatarElement(fixture.nativeElement);
+    const image = getImageElement(avatar);
+    const initialsEl = getInitialsElement(avatar);
+    expect(image).not.toBeNull();
+    expect(initialsEl).toBeNull();
+  });
+
+  it('should render the initials as fallback if image fails to load', (done) => {
+    const fixture = createTestComponent(`<ngl-avatar initials="TB" [src]="'not-exists.png'" (onError)="onError()"></ngl-avatar>`, false);
+    fixture.componentInstance.onError = () => {
+      fixture.detectChanges();
+
+      const avatar = getAvatarElement(fixture.nativeElement);
+      const image = getImageElement(avatar);
+      const initialsEl = getInitialsElement(avatar);
+
+      expect(image).toBeNull();
+      expect(initialsEl).not.toBeNull();
+      done();
+    };
+    fixture.detectChanges();
+  });
 });
 
 
@@ -71,4 +119,5 @@ describe('Avatar Component', () => {
 export class TestComponent {
   variant: string = 'circle';
   size: string = 'small';
+  onError: Function;
 }

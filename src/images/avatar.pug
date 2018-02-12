@@ -1,1 +1,4 @@
-img([src]="src", [alt]="alternativeText")
+img(*ngIf="shouldShowImage; else template_initials", [src]="src", [alt]="alternativeText", (error)="onImgError()")
+
+ng-template(#template_initials)
+  abbr.slds-avatar__initials([ngClass]="fallbackIconClass()") {{ initials }}

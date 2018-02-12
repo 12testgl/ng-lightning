@@ -25,4 +25,4 @@ export class DemoAvatars {
   changeRatio() {
     this.ratio = this.ratios[(this.ratios.indexOf(this.ratio) + 1) % this.ratios.length];
   }
-};
+}

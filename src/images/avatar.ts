@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, Renderer2} from '@angular/core';
 import {replaceClass} from '../util/util';
 
 @Component({
@@ -20,8 +20,15 @@ export class NglAvatar {
     this._variant = value;
   }
 
+  @Input() initials: string;
+
+  @Input() fallbackIconName = 'standard:user';
+
+  @Output() onError = new EventEmitter();
+
   private _variant: string;
   private _size: string;
+  private error = false;
 
   constructor(public element: ElementRef, public renderer: Renderer2) {
     renderer.addClass(element.nativeElement, 'slds-avatar');
@@ -35,6 +42,20 @@ export class NglAvatar {
     if (!this._size) {
       this.renderer.addClass(this.element.nativeElement, 'slds-avatar_medium');
     }
+  }
+
+  fallbackIconClass() {
+    const [category, icon] = this.fallbackIconName.split(':');
+    return `slds-icon-${category}-${icon}`;
+  }
+
+  get shouldShowImage() {
+    return this.src && !this.error;
+  }
+
+  onImgError() {
+    this.error = true;
+    this.onError.emit();
   }
 
   private updateClass(oldValue: string, newValue: string) {
