@@ -8,19 +8,19 @@ import {replaceClass} from '../util/util';
 })
 export class NglAvatar {
   @Input() src: string = '';
-  @Input() alt: string = '';
+  @Input() alternativeText: string = '';
 
   @Input('size') set setSize(value: string) {
     this.updateClass(this._size, value);
     this._size = value;
   }
 
-  @Input('type') set setType(value: string) {
-    this.updateClass(this._type, value);
-    this._type = value;
+  @Input('variant') set setVariant(value: string) {
+    this.updateClass(this._variant, value);
+    this._variant = value;
   }
 
-  private _type: string;
+  private _variant: string;
   private _size: string;
 
   constructor(public element: ElementRef, public renderer: Renderer2) {
@@ -28,16 +28,16 @@ export class NglAvatar {
   }
 
   ngOnInit() {
-    if (!this._type) {
-      this.renderer.addClass(this.element.nativeElement, 'slds-avatar--rectangle');
+    if (!this._variant) {
+      this.renderer.addClass(this.element.nativeElement, 'slds-avatar_rectangle');
     }
 
     if (!this._size) {
-      this.renderer.addClass(this.element.nativeElement, 'slds-avatar--medium');
+      this.renderer.addClass(this.element.nativeElement, 'slds-avatar_medium');
     }
   }
 
   private updateClass(oldValue: string, newValue: string) {
-    replaceClass(this, `slds-avatar--${oldValue}`, newValue ? `slds-avatar--${newValue}` : '');
+    replaceClass(this, `slds-avatar_${oldValue}`, newValue ? `slds-avatar_${newValue}` : '');
   }
 };

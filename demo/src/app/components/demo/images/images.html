@@ -1,22 +1,22 @@
-<div class="slds-text-title--caps slds-m-bottom--small">Avatars</div>
-<ngl-avatar src="assets/images/avatar1.jpg" alt="avatar 1"></ngl-avatar>
-<ngl-avatar size="small" type="circle" src="assets/images/avatar2.jpg" alt="avatar 2"></ngl-avatar>
+<div class="slds-text-title_caps slds-m-bottom_small">Avatars</div>
+<ngl-avatar src="assets/images/avatar1.jpg" alternativeText="avatar 1"></ngl-avatar>
+<ngl-avatar size="small" variant="circle" src="assets/images/avatar2.jpg" alternativeText="avatar 2"></ngl-avatar>
 
-<div class="slds-grid slds-m-top--large" style="height: 50px;">
+<div class="slds-grid slds-m-top_large" style="height: 50px;">
  <div class="slds-align-middle slds-col">
-   <button type="button" nglButton="neutral" (click)="changeType()">Change Type</button>
+   <button type="button" nglButton="neutral" (click)="changeVariant()">Change Variant</button>
    <button type="button" nglButton="neutral" (click)="changeSize()">Change Size</button>
-   <ngl-avatar [src]="src" [size]="size" [type]="type"></ngl-avatar>
+   <ngl-avatar [src]="src" [size]="size" [variant]="variant"></ngl-avatar>
  </div>
 </div>
 
-<div class="slds-text-title--caps slds-m-top--small slds-m-bottom--small">Figure</div>
+<div class="slds-text-title_caps slds-m-top_small slds-m-bottom_small">Figure</div>
 <figure nglFigure [nglTitle]="'Image ' + ratio" style="width: 20rem;">
   <a href="javascript:void(0)" [nglCrop]="ratio">
     <img src="https://www.lightningdesignsystem.com/assets/images/placeholder-img@16x9.jpg" alt="16x9 image" />
   </a>
 </figure>
 
-<div class="slds-m-top--small">
+<div class="slds-m-top_small">
   <button type="button" nglButton="neutral" (click)="changeRatio()">Change Ratio</button>
 </div>

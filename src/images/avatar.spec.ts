@@ -23,23 +23,23 @@ describe('Avatar Component', () => {
     const avatar = getAvatarElement(fixture.nativeElement);
     const image = getImageElement(avatar);
     expect(image.getAttribute('src')).toBe('image1.jpg');
-    expect(avatar).toHaveCssClass('slds-avatar--rectangle');
-    expect(avatar).toHaveCssClass('slds-avatar--medium');
+    expect(avatar).toHaveCssClass('slds-avatar_rectangle');
+    expect(avatar).toHaveCssClass('slds-avatar_medium');
     expect(avatar).toHaveCssClass('slds-avatar');
     expect(avatar).toHaveCssClass('custom-class');
   });
 
-  it('should change the type of the avatar element based on input', () => {
-    const fixture = createTestComponent(`<ngl-avatar [type]="type" src="image1.jpg" [ngClass]="{'custom-class': true}"></ngl-avatar>`);
+  it('should change the variation of the avatar element based on input', () => {
+    const fixture = createTestComponent(`<ngl-avatar [variant]="variant" src="image1.jpg" [ngClass]="{'custom-class': true}"></ngl-avatar>`);
     const avatar = getAvatarElement(fixture.nativeElement);
 
-    expect(avatar).toHaveCssClass('slds-avatar--circle');
+    expect(avatar).toHaveCssClass('slds-avatar_circle');
     expect(avatar).toHaveCssClass('custom-class');
 
-    fixture.componentInstance.type = 'rectangle';
+    fixture.componentInstance.variant = 'rectangle';
     fixture.detectChanges();
-    expect(avatar).toHaveCssClass('slds-avatar--rectangle');
-    expect(avatar).not.toHaveCssClass('slds-avatar--circle');
+    expect(avatar).toHaveCssClass('slds-avatar_rectangle');
+    expect(avatar).not.toHaveCssClass('slds-avatar_circle');
     expect(avatar).toHaveCssClass('custom-class');
   });
 
@@ -47,19 +47,19 @@ describe('Avatar Component', () => {
     const fixture = createTestComponent(`<ngl-avatar [size]="size" src="image1.jpg"></ngl-avatar>`);
     const avatar = getAvatarElement(fixture.nativeElement);
 
-    expect(avatar).toHaveCssClass('slds-avatar--small');
-    expect(avatar).not.toHaveCssClass('slds-avatar--large');
-    expect(avatar).not.toHaveCssClass('slds-avatar--x-small');
-    expect(avatar).not.toHaveCssClass('slds-avatar--medium');
+    expect(avatar).toHaveCssClass('slds-avatar_small');
+    expect(avatar).not.toHaveCssClass('slds-avatar_large');
+    expect(avatar).not.toHaveCssClass('slds-avatar_x-small');
+    expect(avatar).not.toHaveCssClass('slds-avatar_medium');
 
     fixture.componentInstance.size = 'large';
     fixture.detectChanges();
-    expect(avatar).toHaveCssClass('slds-avatar--large');
-    expect(avatar).not.toHaveCssClass('slds-avatar--small');
+    expect(avatar).toHaveCssClass('slds-avatar_large');
+    expect(avatar).not.toHaveCssClass('slds-avatar_small');
   });
 
   it('should render the avatar element with assistive text', () => {
-    const fixture = createTestComponent(`<ngl-avatar alt="assistive text" src="image1.jpg"></ngl-avatar>`);
+    const fixture = createTestComponent(`<ngl-avatar alternativeText="assistive text" src="image1.jpg"></ngl-avatar>`);
     const avatar = getAvatarElement(fixture.nativeElement);
     const image = getImageElement(avatar);
     expect(image.getAttribute('alt')).toEqual('assistive text');
@@ -69,6 +69,6 @@ describe('Avatar Component', () => {
 
 @Component({ template: `` })
 export class TestComponent {
-  type: string = 'circle';
+  variant: string = 'circle';
   size: string = 'small';
 }
