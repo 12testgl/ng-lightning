@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NglInternalOutletModule} from '../util/outlet.module';
+import {NglPopoversModule} from '../popovers/module';
+import {NglIconsModule} from '../icons/module';
 
 import {NglFormElement} from './elements/element';
 import {NglFormElementCheckbox} from './elements/checkbox';
@@ -26,6 +28,6 @@ const NGL_FORM_DIRECTIVES = [
 @NgModule({
   declarations: NGL_FORM_DIRECTIVES,
   exports: NGL_FORM_DIRECTIVES,
-  imports: [CommonModule, NglInternalOutletModule],
+  imports: [CommonModule, NglInternalOutletModule, NglPopoversModule, NglIconsModule],
 })
 export class NglFormsModule {}

@@ -12,4 +12,7 @@ export class DemoForms {
   error = 'The input has an error!';
 
   days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+
+  hasHelp = false;
+  help = 'This field has a help tooltip!';
 }

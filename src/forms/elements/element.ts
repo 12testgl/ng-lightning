@@ -19,6 +19,8 @@ export class NglFormElement implements OnChanges, AfterContentInit {
   @Input('label') labelStr: string;
   @ContentChild(NglFormLabelTemplate) labelTpl: NglFormLabelTemplate;
 
+  @Input() fieldHelp: string;
+
   @Input() error: string;
 
   uid = uniqueId('form_element');

@@ -4,17 +4,20 @@
 <ngl-form-checkbox label="Error" style="display: inline-block;">
   <input nglFormControl type="checkbox" [(ngModel)]="hasError" />
 </ngl-form-checkbox>
+<ngl-form-checkbox label="Help" style="display: inline-block;">
+  <input nglFormControl type="checkbox" [(ngModel)]="hasHelp" />
+</ngl-form-checkbox>
 
-<ngl-form-element label="Input Label" [error]="hasError ? error : null" class="slds-m-top--small">
+<ngl-form-element label="Input Label" [fieldHelp]="hasHelp ? help : null" [error]="hasError ? error : null" class="slds-m-top--small">
   <input nglFormControl type="text" placeholder="My input" [required]="required">
 </ngl-form-element>
 
-<ngl-form-element [error]="hasError ? error : null" class="slds-m-top--small">
+<ngl-form-element [fieldHelp]="hasHelp ? help : null" [error]="hasError ? error : null" class="slds-m-top--small">
   <ng-template nglFormLabel><i>Textarea Label</i> <span *ngIf="required">(<b>required</b>!)</span></ng-template>
   <textarea nglFormControl placeholder="Placeholder Text" [required]="required"></textarea>
 </ngl-form-element>
 
-<ngl-form-element label="Select Label" [error]="hasError ? error : null" class="slds-m-top--small">
+<ngl-form-element label="Select Label" [fieldHelp]="hasHelp ? help : null" [error]="hasError ? error : null" class="slds-m-top--small">
   <select nglFormControl class="slds-select" [required]="required">
     <option>Option One</option>
     <option>Option Two</option>

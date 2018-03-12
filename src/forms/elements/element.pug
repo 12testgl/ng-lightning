@@ -1,6 +1,10 @@
 label.slds-form-element__label([attr.for]="uid")
   abbr.slds-required(*ngIf="required", title="required") *
   span([nglInternalOutlet]="_label")
+.slds-form-element__icon(*ngIf="fieldHelp")
+  a([nglPopover]="fieldHelp", nglPopoverBehavior, nglPopoverPlacement="top", nglTooltip)
+    svg.slds-icon.slds-icon--x-small.slds-icon-text-default(nglIcon="info")
+  span.slds-assistive-text Help
 .slds-form-element__control
   ng-content
 .slds-form-element__help(*ngIf="error", [id]="'error_' + uid") {{error}}
