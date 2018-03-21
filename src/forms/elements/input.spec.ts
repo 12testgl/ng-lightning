@@ -71,6 +71,15 @@ describe('`NglFormInput`', () => {
     expect(() => createTestComponent(`<ngl-form-element><input type="input"></ngl-form-element>`)).toThrowError();
   });
 
+  it('should support icon', () => {
+    const fixture = createTestComponent(`<ngl-form-element fieldHelp="Field Help"><input nglFormControl type="text"></ngl-form-element>`);
+
+    const helpEl = fixture.nativeElement.querySelector('.slds-form-element__icon');
+    expect(helpEl).toBeTruthy();
+    const assistiveEl = fixture.nativeElement.querySelector('.slds-assistive-text');
+    expect(assistiveEl).toHaveText('Help');
+  });
+
 });
 
 @Component({
