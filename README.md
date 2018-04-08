@@ -39,6 +39,41 @@ This library depends on Salesforce's LDS markup and CSS (tested with 2.2.1). We 
 #### SVG Icons
 Because of various cross-domain issues, if you want to use SLDS icons, you must provide a copy of the various sprite files (ie `@salesforce-ux/design-system/assets/icons/action-sprite/svg/symbols.svg`), served locally through your server. Check our [webpack configuration](demo/webpack.config.js), to see how we achieve this for our demo page.
 
+#### Angular CLI
+For use with [Angular CLI](https://cli.angular.io/), assets need to be copied from the `@salesforce-us/design-system` project into the `src/assets` folder.
+
+For example, your Angular folder structure could look like the following:
+
+```
+assets/
+  action-sprite/
+  custom-sprite/
+  doctype-sprite/
+  standard-sprite/
+  utility-sprite/
+  salesforce-lightning-design-system.min.css
+```
+
+And these changes will provide the svg icons and css to the application:
+
+`.angular-cli.json`:
+```
+...
+"styles": [
+  "./assets/salesforce-lightning-design-system.min.css"
+]
+```
+
+`app.module.ts`:
+```
+imports: [
+  ...
+  NglModule.forRoot({
+    svgPath: '/assets'
+  })
+]
+```
+
 #### IE11 support
 Unfortunately, IE11 does not support two important features.
 
