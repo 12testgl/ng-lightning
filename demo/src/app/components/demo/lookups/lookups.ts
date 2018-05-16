@@ -18,9 +18,9 @@ export class DemoLookups {
   superheroeines = ['Catwoman', 'She-Hulk', 'Wonder Woman', 'Batwoman', 'Invisible Woman'];
 
   scopes = [
-    { value: 'All', icon: 'groups' },
-    { value: 'Men', icon: 'user' },
-    { value: 'Women', icon: 'lead' },
+    { value: 'All', iconName: 'standard:groups' },
+    { value: 'Men', iconName: 'standard:user' },
+    { value: 'Women', iconName: 'standard:lead' },
   ];
 
   scope = this.scopes[0];

@@ -2,7 +2,7 @@ span(nglDropdown, [open]="open", (openChange)="openChange.emit($event)")
   ng-content
 
   button.slds-button.slds-button--icon.slds-button-space-left.slds-shrink-none(type="button", nglDropdownTrigger)
-    svg.slds-button__icon(nglIconCategory="utility", nglIcon="down")
+    svg.slds-button__icon(nglIconName="down")
 
   .slds-dropdown.slds-dropdown--left(*ngIf="open")
     ul.dropdown__list

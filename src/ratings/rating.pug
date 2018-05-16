@@ -1,6 +1,6 @@
 ng-template(#t, let-fill="fill")
-  svg.slds-icon([nglIcon]="icon", [ngClass]="size ? 'slds-icon--' + size : ''", [style.fill]="fill === 100 ? colorOn : colorOff")
-  svg.slds-icon(*ngIf="fill > 0 && fill < 100", [nglIcon]="icon", [ngClass]="size ? 'slds-icon--' + size : ''",
+  svg.slds-icon([nglIconName]="icon", [ngClass]="size ? 'slds-icon--' + size : ''", [style.fill]="fill === 100 ? colorOn : colorOff")
+  svg.slds-icon(*ngIf="fill > 0 && fill < 100", [nglIconName]="icon", [ngClass]="size ? 'slds-icon--' + size : ''",
     [style.fill]="colorOn", style="position:absolute; bottom:0;", [style.left.%]="fill - 100", [xPos]="(100 - fill) + '%'")
 
 .slds-show--inline-block(*ngFor="let r of range; let i = index", (click)="update(r)", (mouseenter)="enter(r)", style="position: relative;")

@@ -70,7 +70,7 @@ describe('`nglButtonIcon`', () => {
 });
 
 @Component({
-  template: `<button [nglButtonIcon]="style"><ngl-icon icon="add"></ngl-icon></button>`,
+  template: `<button [nglButtonIcon]="style"><ngl-icon iconName="add"></ngl-icon></button>`,
 })
 export class TestComponent {
   style: string;

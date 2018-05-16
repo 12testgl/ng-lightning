@@ -22,11 +22,11 @@
 <ngl-lookup [lookup]="lookupPolymorphic" [(pick)]="hero" debounce="0" [placeholder]="'Search ' + scope.value">
   <ng-template nglLookupLabel>Who is your favorite superhero/superheroeine?</ng-template>
   <span nglPolymorphicLabel>
-    <svg nglIconCategory="standard" [nglIcon]="scope.icon" [ngClass]="'slds-icon-standard-' + scope.icon" class="slds-icon slds-icon--small"></svg>
+    <svg [nglIconName]="scope.iconName" [ngClass]="'slds-icon-' + scope.iconName.replace(':', '-')" class="slds-icon slds-icon--small"></svg>
   </span>
   <ng-template nglPolymorphicItem [scopes]="scopes" (scopeChange)="scope = $event" let-item>
     <p class="slds-truncate">
-      <svg nglIconCategory="standard" [nglIcon]="item.icon" [ngClass]="'slds-icon-standard-' + item.icon" class="slds-icon slds-icon--small slds-m-right--small"></svg>
+      <svg [nglIconName]="item.iconName" [ngClass]="'slds-icon-' + scope.iconName.replace(':', '-')" class="slds-icon slds-icon--small slds-m-right--small"></svg>
       {{ item.value }}
     </p>
   </ng-template>

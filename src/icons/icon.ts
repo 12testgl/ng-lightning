@@ -3,32 +3,19 @@ import {toBoolean, replaceClass} from '../util/util';
 import {NglButton} from '../buttons/button';
 import {NglButtonIcon} from '../buttons/button-icon';
 
-export type NglIconCategory = 'action' | 'custom' | 'doctype' | 'standard' | 'utility';
-
 @Component({
   selector: 'ngl-icon, [ngl-icon]',
   templateUrl: './icon.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NglIcon implements OnChanges {
-  _icon: string;
-  @Input('icon') set setIcon(icon: string) {
-    this._icon = icon;
-  }
-  get icon() {
-    return this.category === 'custom' ? `custom${this._icon}` : this._icon;
-  }
 
-  @Input('category') set setCategory(category: NglIconCategory) {
-    this.category = category || 'utility';
-  }
-  @Input() type: 'default' | 'warning' | 'error';
+  @Input() iconName: string;
+  @Input() variant: 'default' | 'warning' | 'error';
   @Input() align: 'left' | 'right';
   @Input() size: 'x-small' | 'small' | 'large';
-  @Input() alt: string;
+  @Input() alternativeText: string;
   @Input() svgClass: string | string[];
-
-  category: NglIconCategory = 'utility';
 
   private button: boolean;
   private _containerClass: string[];
@@ -42,6 +29,7 @@ export class NglIcon implements OnChanges {
     if (state) {
       renderer.addClass(element.nativeElement, `slds-text-${state}`);
     }
+    renderer.addClass(element.nativeElement, 'slds-icon_container');
   }
 
   ngOnChanges(changes?: any) {
@@ -54,26 +42,32 @@ export class NglIcon implements OnChanges {
     const classes = Array.isArray(this.svgClass) ? <string[]>this.svgClass : [this.svgClass || ''];
 
     const prefix = this.button ? 'slds-button__icon' : 'slds-icon';
-    classes.push(this.state ? 'slds-button__icon--stateful' : prefix);
+    classes.push(this.state ? 'slds-button__icon_stateful' : prefix);
 
     if (this.size) {
-      classes.push(`${prefix}--${this.size}`);
+      classes.push(`${prefix}_${this.size}`);
     }
 
-    if (this.type) {
-      classes.push(`slds-icon-text-${this.type}`);
+    if (this.variant) {
+      classes.push(`slds-icon-text-${this.variant}`);
     }
 
     if (this.align || this.state) {
-      classes.push(`slds-button__icon--${this.align || 'left'}`);
+      classes.push(`slds-button__icon_${this.align || 'left'}`);
     }
 
     return classes;
   }
 
   private get containerClass() {
-    return /^(action|custom|standard)$/.test(this.category)
-            ? ['slds-icon_container', `slds-icon-${this.category}-${this.icon.replace('_', '-')}`]
-            : null;
+    return [`slds-icon-${this.normalizedIconName.replace(/(:|_)/g, '-')}`];
   }
+
+  private get normalizedIconName() {
+    if (this.iconName.indexOf(':') < 0) {
+      return `utility:${this.iconName}`;
+    }
+    return this.iconName;
+  }
+
 };

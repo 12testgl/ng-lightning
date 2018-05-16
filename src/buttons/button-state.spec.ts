@@ -23,10 +23,10 @@ describe('`nglButtonState`', () => {
     const icons = selectElements(button, 'svg');
     expect(icons.length).toBe(3);
     icons.forEach((icon) => {
-      expect(icon).toHaveCssClass('slds-button__icon--stateful');
+      expect(icon).toHaveCssClass('slds-button__icon_stateful');
       expect(icon).not.toHaveCssClass('slds-icon');
       expect(icon).not.toHaveCssClass('slds-button__icon');
-      expect(icon).toHaveCssClass('slds-button__icon--left');
+      expect(icon).toHaveCssClass('slds-button__icon_left');
     });
   });
 
@@ -62,9 +62,9 @@ describe('`nglButtonState`', () => {
 @Component({
   template: `
     <button type="button" [nglButtonState]="selected" (nglButtonStateChange)="change($event)">
-      <ngl-icon icon="add" state="not-selected">Follow</ngl-icon>
-      <ngl-icon icon="check" state="selected">Following</ngl-icon>
-      <ngl-icon icon="close" state="selected-focus">Unfollow</ngl-icon>
+      <ngl-icon iconName="add" state="not-selected">Follow</ngl-icon>
+      <ngl-icon iconName="check" state="selected">Following</ngl-icon>
+      <ngl-icon iconName="close" state="selected-focus">Unfollow</ngl-icon>
     </button>
   `,
 })

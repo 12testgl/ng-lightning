@@ -1,24 +1,24 @@
 <button type="button" nglButton="success">Success</button>
 <button type="button" nglButton="neutral">Neutral</button>
 <button type="button" [nglButton]="selected ? 'destructive' : 'neutral'">
-  <ngl-icon icon="download" align="left"></ngl-icon>Delete
+  <ngl-icon iconName="download" align="left"></ngl-icon>Delete
 </button>
 <button type="button" nglButton="neutral" (click)="change()">Change</button>
 
 <div class="slds-text-title--caps slds-m-top--x-large slds-m-bottom--small">Stateful</div>
 <button type="button" nglButtonIcon [(nglButtonState)]="selected">
-  <ngl-icon icon="settings"></ngl-icon>
+  <ngl-icon iconName="settings"></ngl-icon>
 </button>
 <button type="button" nglButton="neutral" [(nglButtonState)]="selected">
-  <ngl-icon icon="add" state="not-selected">Follow</ngl-icon>
-  <ngl-icon icon="check" state="selected">Following</ngl-icon>
-  <ngl-icon icon="close" state="selected-focus">Unfollow</ngl-icon>
+  <ngl-icon iconName="add" state="not-selected">Follow</ngl-icon>
+  <ngl-icon iconName="check" state="selected">Following</ngl-icon>
+  <ngl-icon iconName="close" state="selected-focus">Unfollow</ngl-icon>
 </button>
 
 <div class="slds-text-title--caps slds-m-top--x-large slds-m-bottom--small">Icon</div>
 <button type="button" [nglButtonIcon]="iconType" class="slds-button--icon-x-small">
-  <ngl-icon icon="warning"></ngl-icon>
+  <ngl-icon iconName="warning"></ngl-icon>
 </button>
 <button type="button" nglButtonIcon *ngFor="let size of sizes;">
-  <ngl-icon icon="warning" [size]="size"></ngl-icon>
+  <ngl-icon iconName="warning" [size]="size"></ngl-icon>
 </button>

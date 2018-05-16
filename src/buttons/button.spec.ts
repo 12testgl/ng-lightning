@@ -22,11 +22,11 @@ describe('`nglButton`', () => {
   });
 
   it('should render icon correctly', () => {
-    const fixture = createTestComponent(`<button [nglButton]="style"><ngl-icon icon="download" align="left"></ngl-icon> Download</button>`);
+    const fixture = createTestComponent(`<button [nglButton]="style"><ngl-icon iconName="download" align="left"></ngl-icon> Download</button>`);
     const button = getButtonElement(fixture.nativeElement);
     const icon = button.querySelector('svg');
     expect(icon).toHaveCssClass('slds-button__icon');
-    expect(icon).toHaveCssClass('slds-button__icon--left');
+    expect(icon).toHaveCssClass('slds-button__icon_left');
   });
 
   it('should render dynamic style', () => {
