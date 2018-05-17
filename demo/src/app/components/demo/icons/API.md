@@ -2,7 +2,7 @@
 
 ### Input
 
-  * `iconName: string`: The Lightning Design System name of the icon. Names are written in the format 'utility:down' where 'utility' is the category, and 'down' is the specific icon to be displayed.
+  * `iconName: string`: The name of the icon. Names are written in the format 'utility:down' where 'utility' is the category, and 'down' is the specific icon to be displayed.
   * `variant?: 'default' | 'warning' | 'error'`: The variant changes the appearance of a utility icon. Accepted variants include inverse, warning and error. Use the inverse variant to implement a white fill in utility icons on dark backgrounds.
   * `size: 'x-small' | 'small' | 'large'`: The size of the icon. Options include xx-small, x-small, small, medium, or large. This value defaults to medium.
   * `svgClass: string | string[] = ''`: Extra class(es) you want to apply to SVG element.
@@ -17,7 +17,16 @@
 
 ### Input
 
-  * `nglIconName`: The Lightning Design System name of the icon. Names are written in the format 'utility:down' where 'utility' is the category, and 'down' is the specific icon to be displayed.
+  * `nglIconName`: The name of the icon. Names are written in the format 'utility:down' where 'utility' is the category, and 'down' is the specific icon to be displayed.
 
 
-# `<ngl-icon-waffle> | [ngl-icon-waffle]`
+# `[ngl-dynamic-icon]`
+
+### Input
+
+  * `nglDynamicIconType: 'waffle''`: The name of the ngl-dynamic-icon. Only waffle is supported for now. 
+  * `nglDynamicIconOption: object'`: The option attribute changes the appearance of the dynamicIcon. The options available depend on the type attribute. 
+
+### Output
+
+  * `onClick`: The action triggered when the icon is clicked.	This will not work if the ngl-dynamic-icon is not placed on an action element. 
