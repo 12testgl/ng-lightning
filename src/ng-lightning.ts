@@ -6,6 +6,7 @@ import {NglBreadcrumbsModule} from './breadcrumbs/module';
 import {NglButtonsModule} from './buttons/module';
 import {NglDatatablesModule} from './datatables/module';
 import {NglDatepickersModule} from './datepickers/module';
+import {NglFilesModule} from './files/module';
 import {NglFormsModule} from './forms/module';
 import {NglIconsModule} from './icons/module';
 import {NglImagesModule} from './images/module';
@@ -36,6 +37,7 @@ const MODULES = [
   NglButtonsModule,
   NglDatatablesModule,
   NglDatepickersModule,
+  NglFilesModule,
   NglFormsModule,
   NglIconsModule,
   NglImagesModule,
