@@ -3,12 +3,14 @@ import {CommonModule} from '@angular/common';
 
 import {NglIcon} from './icon';
 import {NglIconSvg} from './svg';
-import {NglIconWaffle} from './waffle';
+import {NglDynamicIcon} from './dynamic-icon';
+import {NglDynamicIconWaffle} from './dynamic-icon-waffle';
 
 const NGL_ICON_DIRECTIVES = [
   NglIcon,
   NglIconSvg,
-  NglIconWaffle,
+  NglDynamicIcon,
+  NglDynamicIconWaffle,
 ];
 
 @NgModule({

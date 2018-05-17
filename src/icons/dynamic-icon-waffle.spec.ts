@@ -6,7 +6,7 @@ import {NglIconsModule} from './module';
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
-describe('`ngl-icon-waffle`', () => {
+describe('`ngl-dynamic-icon-waffle`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [TestComponent],
@@ -15,13 +15,14 @@ describe('`ngl-icon-waffle`', () => {
 
   it('should render correctly', () => {
     const fixture = createTestComponent();
-    const host = fixture.nativeElement.firstElementChild;
+    const host = fixture.nativeElement.querySelector('button');
 
+    expect(host).toHaveCssClass('slds-button');
     expect(host).toHaveCssClass('slds-icon-waffle_container');
     expect(host.firstElementChild).toHaveCssClass('slds-icon-waffle');
   });
 });
 
-@Component({ template: '<div ngl-icon-waffle></div>' })
+@Component({ template: '<ngl-dynamic-icon-waffle></ngl-dynamic-icon-waffle>' })
 export class TestComponent {
 }
