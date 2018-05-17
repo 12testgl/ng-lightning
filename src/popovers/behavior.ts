@@ -1,10 +1,13 @@
-import {Directive, HostListener, HostBinding} from '@angular/core';
+import {Directive, HostListener, HostBinding, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {NglPopoverTrigger} from './trigger';
 
 @Directive({
   selector: '[nglPopover][nglPopoverBehavior]',
 })
-export class NglPopoverBehavior {
+export class NglPopoverBehavior implements OnChanges {
+
+  @Input('nglPopoverBehavior')
+  public isBehaviorEnabled?: boolean;
 
   @HostBinding('attr.tabindex') tabindex = 0;
 
@@ -13,7 +16,7 @@ export class NglPopoverBehavior {
   @HostListener('mouseenter')
   @HostListener('focus')
   onMouseOver() {
-    this.trigger.nglOpen = true;
+    this.trigger.nglOpen = this.isBehaviorEnabled !== false;
   }
 
   @HostListener('mouseleave')
@@ -21,4 +24,10 @@ export class NglPopoverBehavior {
   onMouseOut() {
     this.trigger.nglOpen = false;
   }
-};
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.isBehaviorEnabled && this.isBehaviorEnabled === false) {
+      this.trigger.nglOpen = false;
+    }
+  }
+}
