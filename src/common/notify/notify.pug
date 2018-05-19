@@ -1,0 +1,15 @@
+mixin icon()
+  ngl-icon(*ngIf="iconName", [iconName]="iconName", size="x-small")&attributes(attributes)
+
+mixin close()
+  button.slds-button.slds-button_icon.slds-notify__close.slds-button_icon-inverse(*ngIf="dismissible", type="button", (click)="close('button', $event)")
+    svg.slds-button__icon(nglIconName="utility:close")&attributes(attributes)
+    span.slds-assistive-text(*ngIf="closeButtonAssistiveText") {{closeButtonAssistiveText}}
+
+span.slds-assistive-text {{assistiveText || variant}}
+block iconName
+.slds-notify__content
+  ng-content
+block close
+  +close()
+

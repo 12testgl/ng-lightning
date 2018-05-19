@@ -1,0 +1,15 @@
+<div class="slds-notify_container">
+  <ngl-alert *ngIf="showTopAlert" variant="warning" iconName="warning" (close)="onClose($event); showTopAlert = false;">
+    <h2 class="slds-text-heading_small">
+      Your browser is outdated. Your Salesforce experience may be degraded.
+      <a href="javascript:void(0);">More Information</a>
+    </h2>
+  </ngl-alert>
+</div>
+
+<ngl-alert variant="offline" class="slds-theme_alert-texture" iconName="offline">
+  <h2>You are in offline mode. <a href="javascript:void(0);">More Information</a></h2>
+</ngl-alert>
+<ngl-alert variant="error" class="slds-m-top_small">Your browser is currently not supported.</ngl-alert>
+
+<button type="button" [disabled]="showTopAlert" nglButton="neutral" class="slds-m-top_medium" (click)="showTopAlert = true">Show alert in container</button>

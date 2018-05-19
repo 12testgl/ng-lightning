@@ -1,6 +1,9 @@
 <div class="slds-container--large slds-container--center">
   <plunker #playground="playground"></plunker>
   <div class="slds-p-around--large">
+    <page-component [component]="components.alert" (onTry)="playground.open($event)">
+      <demo-alert></demo-alert>
+    </page-component>
     <page-component [component]="components.badges" (onTry)="playground.open($event)">
       <demo-badges></demo-badges>
     </page-component>
@@ -37,9 +40,6 @@
     <page-component [component]="components.modals" (onTry)="playground.open($event)">
       <demo-modals></demo-modals>
     </page-component>
-    <page-component [component]="components.notifications" (onTry)="playground.open($event)">
-      <demo-notifications></demo-notifications>
-    </page-component>
     <page-component [component]="components.paginations" (onTry)="playground.open($event)">
       <demo-paginations></demo-paginations>
     </page-component>
@@ -69,6 +69,9 @@
     </page-component>
     <page-component [component]="components.tabs" (onTry)="playground.open($event)">
       <demo-tabs></demo-tabs>
+    </page-component>
+     <page-component [component]="components.toast" (onTry)="playground.open($event)">
+      <demo-toast></demo-toast>
     </page-component>
   </div>
 </div>

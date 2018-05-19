@@ -1,6 +1,7 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
 
 
+import {NglAlertModule} from './alert/module';
 import {NglBadgesModule} from './badges/module';
 import {NglBreadcrumbsModule} from './breadcrumbs/module';
 import {NglButtonsModule} from './buttons/module';
@@ -13,7 +14,7 @@ import {NglImagesModule} from './images/module';
 import {NglLookupsModule} from './lookups/module';
 import {NglMenusModule} from './menus/module';
 import {NglModalsModule} from './modals/module';
-import {NglNotificationsModule} from './notifications/module';
+import {NglToastModule} from './toast/module';
 import {NglPaginationsModule} from './paginations/module';
 import {NglPickModule} from './pick/module';
 import {NglPicklistModule} from './picklist/module';
@@ -32,6 +33,7 @@ export {INglConfig} from './config/config.interface';
 export {NglConfig} from './config/config';
 
 const MODULES = [
+  NglAlertModule,
   NglBadgesModule,
   NglBreadcrumbsModule,
   NglButtonsModule,
@@ -44,7 +46,7 @@ const MODULES = [
   NglLookupsModule,
   NglMenusModule,
   NglModalsModule,
-  NglNotificationsModule,
+  NglToastModule,
   NglPaginationsModule,
   NglPickModule,
   NglPicklistModule,

@@ -13,6 +13,7 @@ import {PageComponent} from './page';
 
 import {Plunker} from './playground/plunker';
 
+import {DemoAlert} from './demo/alert/alert';
 import {DemoBadges} from './demo/badges/badges';
 import {DemoBreadcrumbs} from './demo/breadcrumbs/breadcrumbs';
 import {DemoButtons} from './demo/buttons/buttons';
@@ -25,7 +26,7 @@ import {DemoAvatars} from './demo/images/images';
 import {DemoLookups} from './demo/lookups/lookups';
 import {DemoMenus} from './demo/menus/menus';
 import {DemoModals} from './demo/modals/modals';
-import {DemoNotifications} from './demo/notifications/notifications';
+import {DemoToast} from './demo/toast/toast';
 import {DemoPaginations} from './demo/paginations/paginations';
 import {DemoPick} from './demo/pick/pick';
 import {DemoPicklist} from './demo/picklist/picklist';
@@ -39,9 +40,9 @@ import {DemoTabs} from './demo/tabs/tabs';
 
 const DEMO_COMPONENTS = [
   DemoComponent, Plunker, PageComponent,
-  DemoBadges, DemoBreadcrumbs, DemoButtons, DemoDatatables, DemoDatepickers, DemoDynamicIcons,
-  DemoForms, DemoIcons, DemoAvatars, DemoLookups, DemoMenus,
-  DemoModals, DemoNotifications, DemoPaginations, DemoPick, DemoPicklist,
+  DemoAlert, DemoBadges, DemoBreadcrumbs, DemoButtons, DemoDatatables, DemoDatepickers,
+  DemoDynamicIcons, DemoForms, DemoIcons, DemoAvatars, DemoLookups, DemoMenus,
+  DemoModals, DemoToast, DemoPaginations, DemoPick, DemoPicklist,
   DemoPills, DemoPopovers, DemoProgressbar, DemoRatings, DemoSections,
   DemoSpinners, DemoTabs,
 ];
