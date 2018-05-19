@@ -1,0 +1,17 @@
+<div>
+  <div class="slds-grid slds-grid_align-spread slds-p-bottom_x-small">
+    <span>Setup Assistant</span>
+    <span aria-hidden="true">
+      <strong>{{value}}% Complete</strong>
+    </span>
+  </div>
+  <ngl-progress-bar [value]="value" [size]="size" [variant]="variant"></ngl-progress-bar>
+</div>
+
+<div class="slds-grid slds-m-top_large" style="height: 50px;">
+  <div class="slds-align-middle slds-col">
+    <button type="button" nglButton="neutral" (click)="random()">Randomize</button>
+    <button type="button" nglButton="neutral" (click)="changeVariant()">Change Variant</button>
+    <button type="button" nglButton="neutral" (click)="changeSize()">Change Size</button>
+  </div>
+</div>

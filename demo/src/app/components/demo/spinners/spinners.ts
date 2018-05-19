@@ -6,11 +6,11 @@ import {Component} from '@angular/core';
 })
 export class DemoSpinners {
 
-  type: string = null;
-  size: string = 'large';
+  variant: string = null;
+  size = 'large';
 
   change() {
-    this.type = this.type === 'brand' ? null : 'brand';
+    this.variant = this.variant === 'brand' ? null : 'brand';
     this.size = this.size === 'large' ? 'small' : 'large';
   }
 }

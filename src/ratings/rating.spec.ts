@@ -12,7 +12,7 @@ const createTestComponent = (html?: string) =>
 const COLOR_ON = '#FFB75D';
 
 function getStars(element: HTMLElement): HTMLElement[] {
-  return selectElements(element, '.slds-show--inline-block');
+  return selectElements(element, '.slds-show_inline-block');
 }
 
 function getICons(element: HTMLElement): HTMLElement[] {
@@ -198,20 +198,20 @@ describe('Rating Component', () => {
     fixture.detectChanges();
 
     const icons = getICons(nativeElement);
-    icons.forEach(icon => expect(icon).toHaveCssClass('slds-icon--small'));
+    icons.forEach(icon => expect(icon).toHaveCssClass('slds-icon_small'));
 
     componentInstance.size = 'large';
     fixture.detectChanges();
     icons.forEach(icon => {
-      expect(icon).not.toHaveCssClass('slds-icon--small');
-      expect(icon).toHaveCssClass('slds-icon--large');
+      expect(icon).not.toHaveCssClass('slds-icon_small');
+      expect(icon).toHaveCssClass('slds-icon_large');
     });
 
     componentInstance.size = null;
     fixture.detectChanges();
     icons.forEach(icon => {
-      expect(icon).not.toHaveCssClass('slds-icon--small');
-      expect(icon).not.toHaveCssClass('slds-icon--large');
+      expect(icon).not.toHaveCssClass('slds-icon_small');
+      expect(icon).not.toHaveCssClass('slds-icon_large');
     });
   });
 

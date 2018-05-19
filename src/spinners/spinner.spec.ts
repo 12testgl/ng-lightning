@@ -7,11 +7,11 @@ const createTestComponent = (html?: string) =>
   createGenericTestComponent(TestComponent, html) as ComponentFixture<TestComponent>;
 
 function getSpinnerElement(element: Element): HTMLDivElement {
-  return <HTMLDivElement>element.querySelector('.slds-spinner');
+  return <HTMLDivElement>element.firstElementChild;
 }
 
-function getSpinnerContainer(element: Element): HTMLDivElement {
-  return <HTMLDivElement>element.firstElementChild;
+function getAlternativeTextElement(element: Element): HTMLDivElement {
+  return getSpinnerElement(element).querySelector('.slds-assistive-text');
 }
 
 describe('Spinner Component', () => {
@@ -22,42 +22,46 @@ describe('Spinner Component', () => {
     const fixture = createTestComponent();
 
     const spinner = getSpinnerElement(fixture.nativeElement);
-    const image: HTMLImageElement = <HTMLImageElement>spinner.firstChild;
-    const container = getSpinnerContainer(fixture.nativeElement);
 
     expect(spinner).toBeDefined();
-    expect(spinner).toHaveCssClass('slds-spinner--medium');
-    expect(container).not.toHaveCssClass('slds-spinner_container');
-    expect(image).toBeDefined();
+    expect(spinner).toHaveCssClass('slds-spinner_medium');
   });
 
   it('should render a large spinner based on input', () => {
-    const fixture = createTestComponent(`<ngl-spinner [size]="'large'" ></ngl-spinner>`);
+    const fixture = createTestComponent(`<ngl-spinner [size]="size" ></ngl-spinner>`);
     const spinner = getSpinnerElement(fixture.nativeElement);
-    expect(spinner).toHaveCssClass('slds-spinner--large');
-  });
+    expect(spinner).toHaveCssClass('slds-spinner_large');
 
-  it('should render a themed spinner based on input', () => {
-    const fixture = createTestComponent(`<ngl-spinner type="brand" ></ngl-spinner>`);
-    const spinner = getSpinnerElement(fixture.nativeElement);
-    expect(spinner).toHaveCssClass('slds-spinner--brand');
-  });
-
-  it('should apply container class if attribute exists', () => {
-    const fixture = createTestComponent(`<ngl-spinner container></ngl-spinner>`);
-    const container = getSpinnerContainer(fixture.nativeElement);
-    expect(container).toHaveCssClass('slds-spinner_container');
-  });
-
-  it('should apply container class based on input', () => {
-    const fixture = createTestComponent(`<ngl-spinner [container]="container"></ngl-spinner>`);
-    const {nativeElement, componentInstance} = fixture;
-    const container = getSpinnerContainer(nativeElement);
-    expect(container).toHaveCssClass('slds-spinner_container');
-
-    componentInstance.container = false;
+    fixture.componentInstance.size = null;
     fixture.detectChanges();
-    expect(container).not.toHaveCssClass('slds-spinner_container');
+    expect(spinner).toHaveCssClass('slds-spinner_medium');
+    expect(spinner).not.toHaveCssClass('slds-spinner_large');
+
+    fixture.componentInstance.size = 'small';
+    fixture.detectChanges();
+    expect(spinner).toHaveCssClass('slds-spinner_small');
+    expect(spinner).not.toHaveCssClass('slds-spinner_medium');
+  });
+
+  it('should render a spinner variant based on input', () => {
+    const fixture = createTestComponent(`<ngl-spinner [variant]="variant" ></ngl-spinner>`);
+    const spinner = getSpinnerElement(fixture.nativeElement);
+    expect(spinner).toHaveCssClass('slds-spinner_brand');
+
+    fixture.componentInstance.variant = null;
+    fixture.detectChanges();
+    expect(spinner).not.toHaveCssClass('slds-spinner_brand');
+
+    fixture.componentInstance.variant = 'inverse';
+    fixture.detectChanges();
+    expect(spinner).toHaveCssClass('slds-spinner_inverse');
+    expect(spinner).not.toHaveCssClass('slds-spinner_brand');
+  });
+
+  it('should have assistive text', () => {
+    const fixture = createTestComponent(`<ngl-spinner alternativeText="loading" ></ngl-spinner>`);
+    const altEl = getAlternativeTextElement(fixture.nativeElement);
+    expect(altEl.innerText).toEqual('loading');
   });
 
 });
@@ -66,5 +70,6 @@ describe('Spinner Component', () => {
   template: `<ngl-spinner></ngl-spinner>`,
 })
 export class TestComponent {
-  container = true;
+  size = 'large';
+  variant = 'brand';
 }

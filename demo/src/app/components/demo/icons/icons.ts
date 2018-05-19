@@ -7,9 +7,9 @@ import {Component} from '@angular/core';
 export class DemoIcons {
 
   icons: any[] = [
-    { icon: 'announcement', type: 'default' },
-    { category: 'standard', icon: 'case_comment', size: 'large' },
-    { category: 'custom', icon: '2', size: 'large' },
+    { iconName: 'announcement', variant: 'default' },
+    { iconName: 'standard:case_comment', size: 'large' },
+    { iconName: 'custom:custom2', size: 'large' },
   ];
 
   icon = this.icons[0];

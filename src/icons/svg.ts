@@ -2,7 +2,7 @@ import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@ang
 import {NglConfig, NglConfigurable} from '../config/config';
 
 @Component({
-  selector: 'svg[nglIcon]',
+  selector: 'svg[nglIconName]',
   templateUrl: './svg.pug',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -12,13 +12,14 @@ import {NglConfig, NglConfigurable} from '../config/config';
 @NglConfigurable()
 export class NglIconSvg {
 
-  @Input('nglIconCategory') category: string = 'utility';
-  @Input('nglIcon') icon: string;
+  @Input('nglIconName') set iconName(iconName: string) {
+    const [icon, type] = iconName.split(':').reverse();
+    this.iconPath = `${this.config.get('svgPath')}/${type || 'utility'}-sprite/svg/symbols.svg#${icon}`;
+  }
+
   @Input() xPos: string = '0';
 
-  constructor(private config: NglConfig, private cd: ChangeDetectorRef) {}
+  iconPath: string;
 
-  iconPath() {
-    return `${this.config.get('svgPath')}/${this.category}-sprite/svg/symbols.svg#${this.icon}`;
-  }
+  constructor(private config: NglConfig, private cd: ChangeDetectorRef) {}
 }

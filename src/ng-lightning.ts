@@ -6,6 +6,7 @@ import {NglBreadcrumbsModule} from './breadcrumbs/module';
 import {NglButtonsModule} from './buttons/module';
 import {NglDatatablesModule} from './datatables/module';
 import {NglDatepickersModule} from './datepickers/module';
+import {NglDynamicIconsModule} from './dynamicicons/module';
 import {NglFormsModule} from './forms/module';
 import {NglIconsModule} from './icons/module';
 import {NglImagesModule} from './images/module';
@@ -18,6 +19,7 @@ import {NglPickModule} from './pick/module';
 import {NglPicklistModule} from './picklist/module';
 import {NglPillsModule} from './pills/module';
 import {NglPopoversModule} from './popovers/module';
+import {NglProgressBarModule} from './progressbar/module';
 import {NglRatingsModule} from './ratings/module';
 import {NglSectionsModule} from './sections/module';
 import {NglSpinnersModule} from './spinners/module';
@@ -35,6 +37,7 @@ const MODULES = [
   NglButtonsModule,
   NglDatatablesModule,
   NglDatepickersModule,
+  NglDynamicIconsModule,
   NglFormsModule,
   NglIconsModule,
   NglImagesModule,
@@ -47,6 +50,7 @@ const MODULES = [
   NglPicklistModule,
   NglPillsModule,
   NglPopoversModule,
+  NglProgressBarModule,
   NglRatingsModule,
   NglSectionsModule,
   NglSpinnersModule,

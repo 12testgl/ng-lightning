@@ -6,11 +6,11 @@ import {Component} from '@angular/core';
 })
 export class DemoBadges {
 
-  type = 'inverse';
+  theme = 'default';
 
-  private types: string[] = ['default', 'shade', 'inverse'];
+  private types: string[] = ['default', 'shade', 'inverse', 'alt-inverse', 'success', 'info', 'warning', 'error', 'offline', 'alert-texture'];
 
   change() {
-    this.type = this.types[(this.types.indexOf(this.type) + 1) % 3];
+    this.theme = this.types[(this.types.indexOf(this.theme) + 1) % this.types.length];
   }
 }

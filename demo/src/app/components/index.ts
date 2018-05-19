@@ -18,6 +18,7 @@ import {DemoBreadcrumbs} from './demo/breadcrumbs/breadcrumbs';
 import {DemoButtons} from './demo/buttons/buttons';
 import {DemoDatatables} from './demo/datatables/datatables';
 import {DemoDatepickers} from './demo/datepickers/datepickers';
+import {DemoDynamicIcons} from './demo/dynamicicons/dynamicicons';
 import {DemoForms} from './demo/forms/forms';
 import {DemoIcons} from './demo/icons/icons';
 import {DemoAvatars} from './demo/images/images';
@@ -30,6 +31,7 @@ import {DemoPick} from './demo/pick/pick';
 import {DemoPicklist} from './demo/picklist/picklist';
 import {DemoPills} from './demo/pills/pills';
 import {DemoPopovers} from './demo/popovers/popovers';
+import {DemoProgressbar} from './demo/progressbar/progressbar';
 import {DemoRatings} from './demo/ratings/ratings';
 import {DemoSections} from './demo/sections/sections';
 import {DemoSpinners} from './demo/spinners/spinners';
@@ -37,11 +39,11 @@ import {DemoTabs} from './demo/tabs/tabs';
 
 const DEMO_COMPONENTS = [
   DemoComponent, Plunker, PageComponent,
-  DemoBadges, DemoBreadcrumbs, DemoButtons, DemoDatatables, DemoDatepickers,
+  DemoBadges, DemoBreadcrumbs, DemoButtons, DemoDatatables, DemoDatepickers, DemoDynamicIcons,
   DemoForms, DemoIcons, DemoAvatars, DemoLookups, DemoMenus,
   DemoModals, DemoNotifications, DemoPaginations, DemoPick, DemoPicklist,
-  DemoPills, DemoPopovers, DemoRatings, DemoSections, DemoSpinners,
-  DemoTabs,
+  DemoPills, DemoPopovers, DemoProgressbar, DemoRatings, DemoSections,
+  DemoSpinners, DemoTabs,
 ];
 
 @NgModule({

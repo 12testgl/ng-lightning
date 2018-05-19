@@ -2,12 +2,12 @@
   .slds-datepicker__filter--month.slds-grid.slds-grid--align-spread.slds-grow
     .slds-align-middle
       button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', -1)")
-        svg.slds-button__icon.slds-button__icon--small(nglIcon="left")
+        svg.slds-button__icon.slds-button__icon--small(nglIconName="left")
         span.slds-assistive-text Previous Month
     h2.slds-align-middle([id]="uid + '_month'", aria-live="assertive", aria-atomic="true") {{ monthLabel }}
     .slds-align-middle
       button.slds-button.slds-button--icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', 1)")
-        svg.slds-button__icon.slds-button__icon--small(nglIcon="right")
+        svg.slds-button__icon.slds-button__icon--small(nglIconName="right")
         span.slds-assistive-text Next Month
 
   ngl-date-year.slds-shrink-none([year]="current.year", (yearChange)="moveYear($event)")

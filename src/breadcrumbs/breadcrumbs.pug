@@ -1,4 +1,4 @@
 nav(role="navigation", [attr.aria-label]="assistiveText")
-  ol.slds-breadcrumb.slds-list--horizontal
+  ol.slds-breadcrumb.slds-list_horizontal.slds-wrap
     li.slds-breadcrumb__item(*ngFor="let b of breadcrumbs")
       ng-template([ngTemplateOutlet]="b.templateRef")

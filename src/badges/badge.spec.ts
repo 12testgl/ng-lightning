@@ -22,17 +22,17 @@ describe('Badge Component', () => {
   });
 
   it('should have the appropriate classes for the selected type', () => {
-    const fixture = createTestComponent(`<ngl-badge [type]="type"></ngl-badge>`);
+    const fixture = createTestComponent(`<ngl-badge [theme]="theme"></ngl-badge>`);
     const { componentInstance, nativeElement } = fixture;
 
     const badge = getBadgeElement(nativeElement);
-    expect(badge.classList.toString()).toEqual('slds-badge slds-theme--default');
+    expect(badge.classList.toString()).toEqual('slds-badge slds-theme_default');
 
-    componentInstance.type = 'shade';
+    componentInstance.theme = 'shade';
     fixture.detectChanges();
-    expect(badge.classList.toString()).toEqual('slds-badge slds-theme--shade');
+    expect(badge.classList.toString()).toEqual('slds-badge slds-theme_shade');
 
-    componentInstance.type = null;
+    componentInstance.theme = null;
     fixture.detectChanges();
     expect(badge.classList.toString()).toEqual('slds-badge');
   });
@@ -41,5 +41,5 @@ describe('Badge Component', () => {
 
 @Component({ template: '' })
 export class TestComponent {
-  type: string = 'default';
+  theme: string = 'default';
 }

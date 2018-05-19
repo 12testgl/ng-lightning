@@ -2,6 +2,6 @@
 
 ### Input
 
-  * `size?: 'small' | 'medium' | 'large' = 'medium'`: Spinner's size
-  * `type?: 'brand' |  'inverse'`:  Spinner's "flavor"
-  * `container?: boolean` = false:  Whether it creates a full overlay to dim the page
+  * `size?: string = 'medium'`: Spinner's size
+  * `variant?: 'brand' |  'inverse'`:  Spinner's "flavor"
+  * `alternativeText?: string`:  Used to describe the reason for the wait and need for a spinner

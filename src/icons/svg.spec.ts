@@ -15,7 +15,7 @@ describe('SVG icon Component', () => {
   }));
 
   it('should render correctly', () => {
-    const fixture = createTestComponent(`<svg nglIcon="warning"></svg>`);
+    const fixture = createTestComponent(`<svg nglIconName="warning"></svg>`);
     const svg = fixture.nativeElement.firstElementChild;
     const use = svg.querySelector('use');
 
@@ -24,16 +24,14 @@ describe('SVG icon Component', () => {
   });
 
   it('should change `use` path based on input', () => {
-    const fixture = createTestComponent(`<svg [nglIcon]="icon" [nglIconCategory]="category"></svg>`, false);
-    fixture.componentInstance.icon = 'icon1';
-    fixture.componentInstance.category = 'custom';
+    const fixture = createTestComponent(`<svg [nglIconName]="iconName"></svg>`, false);
+    fixture.componentInstance.iconName = 'custom:icon1';
     fixture.detectChanges();
 
     const use = fixture.nativeElement.firstElementChild.querySelector('use');
     expect(use.getAttribute('xlink:href')).toBe('/mypath/custom-sprite/svg/symbols.svg#icon1');
 
-    fixture.componentInstance.icon = 'icon2';
-    fixture.componentInstance.category = 'standard';
+    fixture.componentInstance.iconName = 'standard:icon2';
     fixture.detectChanges();
     expect(use.getAttribute('xlink:href')).toBe('/mypath/standard-sprite/svg/symbols.svg#icon2');
   });
@@ -42,8 +40,7 @@ describe('SVG icon Component', () => {
 
 @Component({ template: '' })
 export class TestComponent {
-  icon: string;
-  category: string;
+  iconName: string;
 
   constructor(config: NglConfig) {
     config.update({ svgPath: '/mypath' });

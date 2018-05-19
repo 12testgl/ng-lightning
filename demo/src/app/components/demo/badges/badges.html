@@ -1,12 +1,19 @@
-<ngl-badge>Badge</ngl-badge>
-<ngl-badge type="default">Default</ngl-badge>
-<ngl-badge type="info">Info</ngl-badge>
-<ngl-badge type="success">Success</ngl-badge>
-<ngl-badge type="warning">Warning</ngl-badge>
-<ngl-badge type="error">Error</ngl-badge>
-
-<div class="slds-m-top--large">
-  Type: <code>{{type}}</code>
-  <ngl-badge [type]="type" class="slds-m-horizontal--large">Badge</ngl-badge>
+<div class="slds-grid">
+  <ngl-badge>Badge</ngl-badge>
+  <ngl-badge theme="default">default</ngl-badge>
+  <ngl-badge theme="shade">shade</ngl-badge>
+  <ngl-badge theme="inverse">inverse</ngl-badge>
+  <ngl-badge theme="alt-inverse">alt-inverse</ngl-badge>
+  <ngl-badge theme="success">success</ngl-badge>
+</div>
+<div class="slds-grid slds-m-top_medium">
+  <ngl-badge theme="info">info</ngl-badge>
+  <ngl-badge theme="warning">warning</ngl-badge>
+  <ngl-badge theme="error">error</ngl-badge>
+  <ngl-badge theme="offline">offline</ngl-badge>
+  <ngl-badge theme="alert-texture">alert-texture</ngl-badge>
+</div>
+<div class="slds-m-top_large slds-grid slds-grid_vertical-align-center">
   <button type="button" nglButton="neutral" (click)="change()">Change</button>
+  <ngl-badge [theme]="theme" class="slds-m-horizontal_large">{{theme}}</ngl-badge>
 </div>

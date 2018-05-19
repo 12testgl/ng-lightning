@@ -17,7 +17,7 @@ include ./menu
         ng-content(select="[nglPolymorphicLabel]")
 
     .slds-input-has-icon.slds-grow([ngClass]="{'slds-input-has-icon--right': searchIcon }")
-      svg.slds-input__icon.slds-icon-text-default(nglIcon="search", *ngIf="searchIcon")
+      svg.slds-input__icon.slds-icon-text-default(nglIconName="search", *ngIf="searchIcon")
       input.slds-input.slds-lookup__search-input(#lookupInput, [id]="inputId", type="text", aria-autocomplete="list", role="combobox", autocomplete="off",
                      [attr.aria-expanded]="!!expanded", [attr.aria-activedescendant]="optionId(activeIndex)",
                      [ngModel]="inputValue", (ngModelChange)="onInputChange($event)", (keydown.Esc)="close($event)", [placeholder]="placeholder || ''",

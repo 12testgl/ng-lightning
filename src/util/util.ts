@@ -1,4 +1,4 @@
-import {ElementRef, Renderer2} from '@angular/core';
+import {ElementRef, Renderer2, SimpleChange} from '@angular/core';
 
 export function toBoolean(value: any): boolean {
   switch (value) {
@@ -55,5 +55,23 @@ function setClass(instance: IReplaceClass, klasses: string | string[], isAdd: bo
     (Array.isArray(klasses) ? klasses : [klasses]).forEach(k => {
       instance.renderer[isAdd ? 'addClass' : 'removeClass'](instance.element.nativeElement, k);
     });
+  }
+}
+
+export function changeClass(prefix: string, change: SimpleChange, elRef: ElementRef, renderer: Renderer2, defaultValue?: string) {
+  if (!change) {
+    return;
+  }
+
+  const el = elRef.nativeElement;
+
+  const previousValue = change.previousValue || defaultValue;
+  if (!change.firstChange && previousValue) {
+    renderer.removeClass(el, `${prefix}${previousValue}`);
+  }
+
+  const currentValue = change.currentValue || defaultValue;
+  if (change.currentValue || defaultValue) {
+    renderer.addClass(el, `${prefix}${currentValue}`);
   }
 }

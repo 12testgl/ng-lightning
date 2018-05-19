@@ -5,5 +5,10 @@ import {Component} from '@angular/core';
   templateUrl: './sections.html',
 })
 export class DemoSections {
-  open: boolean = false;
+  open: boolean = true;
+  collapsable: boolean = true;
+
+  change() {
+    this.collapsable = !this.collapsable;
+  }
 }

@@ -2,4 +2,4 @@
 
 ### Input
 
-  * `type?: string`: Define badges [theme](https://www.lightningdesignsystem.com/components/utilities/themes/#color).
+  * `type?: string`: Define the badge's [theme](https://www.lightningdesignsystem.com/components/utilities/themes/#color).

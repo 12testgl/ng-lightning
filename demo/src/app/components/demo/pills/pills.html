@@ -2,7 +2,7 @@
 
 <ngl-pill><a href="javascript:void(0)">Default</a></ngl-pill>
 <ngl-pill>
-  <ngl-icon category="standard" icon="feedback" nglPillImage></ngl-icon>
+  <ngl-icon iconName="standard:feedback" nglPillImage></ngl-icon>
   <a href="javascript:void(0)">With icon</a>
 </ngl-pill>
 <ngl-pill>
@@ -17,6 +17,6 @@
 <div class="slds-clearfix slds-p-vertical--xx-small"></div>
 
 <ngl-pill (nglPillRemove)="remove(pill)" *ngFor="let pill of pills">
-  <ngl-icon category="standard" icon="account" nglPillImage></ngl-icon>
+  <ngl-icon iconName="standard:account" nglPillImage></ngl-icon>
   <a href="javascript:void(0)">{{pill}}</a>
 </ngl-pill>
