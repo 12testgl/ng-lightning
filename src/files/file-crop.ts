@@ -3,20 +3,20 @@ import {Directive, ElementRef, Renderer2, Input } from '@angular/core';
 @Directive({
   selector: '[nglCrop]',
 })
-export class NglFigureCrop {
+export class NglFileCrop {
 
   @Input() set nglCrop(ratio: '16-by-9' | '4-by-3' | '1-by-1') {
     const nativeElement = this.element.nativeElement;
 
     if (this._ratio) {
-      this.renderer.removeClass(nativeElement, `slds-image__crop--${this._ratio}`);
+      this.renderer.removeClass(nativeElement, `slds-file__crop_${this._ratio}`);
     }
 
     if (ratio) {
-      this.renderer.addClass(nativeElement, 'slds-image__crop');
-      this.renderer.addClass(nativeElement, `slds-image__crop--${ratio}`);
+      this.renderer.addClass(nativeElement, 'slds-file__crop');
+      this.renderer.addClass(nativeElement, `slds-file__crop_${ratio}`);
     } else {
-      this.renderer.removeClass(nativeElement, 'slds-image__crop');
+      this.renderer.removeClass(nativeElement, 'slds-file__crop');
     }
 
     this._ratio = ratio;

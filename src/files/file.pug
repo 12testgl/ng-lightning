@@ -1,0 +1,10 @@
+figure
+  ng-content
+  figcaption.slds-file__title(*ngIf="title", [ngClass]="fileClasses()")
+    .slds-media.slds-media_small.slds-media_center
+      .slds-media__figure.slds-line-height_reset(*ngIf="icon")
+        ngl-icon([iconName]="icon", size="x-small")
+      .slds-media__body
+        span.slds-file__text.slds-truncate([attr.title]="title") {{title}}
+.slds-file__actions-menu(*ngIf="actions")
+  ng-template([ngTemplateOutlet]="actions.templateRef")

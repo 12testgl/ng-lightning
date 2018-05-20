@@ -1,0 +1,26 @@
+<div class="slds-text-title_caps slds-m-top_small slds-m-bottom_small">File</div>
+
+<ngl-file [title]="title" [icon]="iconName" [overlay]="overlay" style="width: 20rem;">
+  <a href="javascript:void(0)" [nglCrop]="ratio">
+    <img src="https://www.lightningdesignsystem.com/assets/images/placeholder-img@16x9.jpg" alt="16x9 image" />
+    <ngl-icon *ngIf="!overlay" [iconName]="iconName" class="slds-file__icon"></ngl-icon>
+  </a>
+
+  <ng-template nglFileActions>
+    <div class="slds-button-group" role="group">
+      <button type="button" nglButtonIcon="base" class="slds-button--icon-x-small">
+        <ngl-icon iconName="download"></ngl-icon>
+      </button>
+      <button type="button" nglButtonIcon="base" class="slds-button--icon-x-small">
+        <ngl-icon iconName="down"></ngl-icon>
+      </button>
+    </div>
+  </ng-template>
+</ngl-file>
+
+<div class="slds-m-top_small">
+  <button type="button" nglButton="neutral" (click)="changeRatio()">Change Ratio</button>
+  <button type="button" nglButton="neutral" (click)="toggleTitle()">Toggle title</button>
+  <button type="button" nglButton="neutral" (click)="toggleIcon()">Toggle Icon</button>
+  <button type="button" nglButton="neutral" (click)="overlay = !overlay">Toggle Overlay</button>
+</div>

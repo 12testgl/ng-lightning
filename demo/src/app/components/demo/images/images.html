@@ -11,14 +11,3 @@
    <ngl-avatar [src]="src" [size]="size" [variant]="variant"></ngl-avatar>
  </div>
 </div>
-
-<div class="slds-text-title_caps slds-m-top_small slds-m-bottom_small">Figure</div>
-<figure nglFigure [nglTitle]="'Image ' + ratio" style="width: 20rem;">
-  <a href="javascript:void(0)" [nglCrop]="ratio">
-    <img src="https://www.lightningdesignsystem.com/assets/images/placeholder-img@16x9.jpg" alt="16x9 image" />
-  </a>
-</figure>
-
-<div class="slds-m-top_small">
-  <button type="button" nglButton="neutral" (click)="changeRatio()">Change Ratio</button>
-</div>

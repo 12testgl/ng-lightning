@@ -15,7 +15,7 @@
 # `<figure[nglFigure]>`
 
 ### Input
-  * `nglTitle?`: Image caption
+  * `title?`: Image caption
 
 ### Content
 

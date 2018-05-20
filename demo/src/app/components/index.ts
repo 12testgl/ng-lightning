@@ -14,6 +14,7 @@ import {PageComponent} from './page';
 import {Plunker} from './playground/plunker';
 
 import {DemoAlert} from './demo/alert/alert';
+import {DemoFiles} from './demo/files/files';
 import {DemoBadges} from './demo/badges/badges';
 import {DemoBreadcrumbs} from './demo/breadcrumbs/breadcrumbs';
 import {DemoButtons} from './demo/buttons/buttons';
@@ -41,7 +42,7 @@ import {DemoTabs} from './demo/tabs/tabs';
 const DEMO_COMPONENTS = [
   DemoComponent, Plunker, PageComponent,
   DemoAlert, DemoBadges, DemoBreadcrumbs, DemoButtons, DemoDatatables, DemoDatepickers,
-  DemoDynamicIcons, DemoForms, DemoIcons, DemoAvatars, DemoLookups, DemoMenus,
+  DemoDynamicIcons, DemoFiles, DemoForms, DemoIcons, DemoAvatars, DemoLookups, DemoMenus,
   DemoModals, DemoToast, DemoPaginations, DemoPick, DemoPicklist,
   DemoPills, DemoPopovers, DemoProgressbar, DemoRatings, DemoSections,
   DemoSpinners, DemoTabs,
