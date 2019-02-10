@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer2, Input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, Input } from '@angular/core';
 
 export type NglFileCropValue = '16-by-9' | '4-by-3' | '1-by-1';
 

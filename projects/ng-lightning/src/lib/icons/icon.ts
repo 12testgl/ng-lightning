@@ -1,7 +1,7 @@
-import {Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, Attribute, Optional, OnChanges} from '@angular/core';
-import {toBoolean, replaceClass} from '../util/util';
-import {NglButton} from '../buttons/button';
-import {NglButtonIcon} from '../buttons/button-icon';
+import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, Attribute, Optional, OnChanges } from '@angular/core';
+import { toBoolean, replaceClass } from '../util/util';
+import { NglButton } from '../buttons/button';
+import { NglButtonIcon } from '../buttons/button-icon';
 
 @Component({
   selector: 'ngl-icon, [ngl-icon]',

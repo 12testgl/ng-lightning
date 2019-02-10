@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglAlert} from './alert';
-import {NglAlertClose} from './alert-close';
-import {NglIconsModule} from '../icons/module';
+import { NglAlert } from './alert';
+import { NglAlertClose } from './alert-close';
+import { NglIconsModule } from '../icons/module';
 
 const NGL_ALERT_DIRECTIVES = [
   NglAlert,

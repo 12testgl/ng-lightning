@@ -1,5 +1,5 @@
-import {Input, Output, EventEmitter, ElementRef, Renderer2, ChangeDetectorRef, OnDestroy} from '@angular/core';
-import {isInt} from '../../util/util';
+import { Input, Output, EventEmitter, ElementRef, Renderer2, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { isInt } from '../../util/util';
 
 export class NglCommonNotify implements OnDestroy {
 

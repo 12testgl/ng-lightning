@@ -1,5 +1,5 @@
-import {Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding} from '@angular/core';
-import {NglConfig, NglConfigurable} from '../config/config';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { NglConfig, NglConfigurable } from '../config/config';
 
 @Component({
   // tslint:disable-next-line:component-selector

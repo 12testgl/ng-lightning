@@ -1,11 +1,11 @@
-import {Directive, Input, ElementRef, ComponentRef, TemplateRef, ViewContainerRef,
+import { Directive, Input, ElementRef, ComponentRef, TemplateRef, ViewContainerRef,
         Renderer2, ComponentFactoryResolver, Injector, EmbeddedViewRef, ComponentFactory,
-        Output, EventEmitter, NgZone, OnDestroy} from '@angular/core';
+        Output, EventEmitter, NgZone, OnDestroy } from '@angular/core';
 import * as Tether from 'tether';
-import {take} from 'rxjs/operators';
-import {NglPopover, Direction} from './popover';
-import {placement} from './placements';
-import {toBoolean} from '../util/util';
+import { take } from 'rxjs/operators';
+import { NglPopover, Direction } from './popover';
+import { placement } from './placements';
+import { toBoolean } from '../util/util';
 
 @Directive({
   selector: '[nglPopover]',

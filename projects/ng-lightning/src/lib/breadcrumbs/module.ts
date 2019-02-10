@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglBreadcrumbs} from './breadcrumbs';
-import {NglBreadcrumb} from './breadcrumb';
+import { NglBreadcrumbs } from './breadcrumbs';
+import { NglBreadcrumb } from './breadcrumb';
 
 const NGL_BREADCRUMB_DIRECTIVES = [
   NglBreadcrumbs,

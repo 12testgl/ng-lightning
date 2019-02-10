@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglIcon} from './icon';
-import {NglIconSvg} from './svg';
+import { NglIcon } from './icon';
+import { NglIconSvg } from './svg';
 
 const NGL_ICON_DIRECTIVES = [
   NglIcon,

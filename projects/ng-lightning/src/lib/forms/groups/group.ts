@@ -1,6 +1,6 @@
-import {Component, Input, ChangeDetectionStrategy, HostBinding, ContentChild, TemplateRef, OnChanges, AfterContentInit} from '@angular/core';
-import {uniqueId} from '../../util/util';
-import {NglFormLabelTemplate, getFormLabel} from '../form-label';
+import { Component, Input, ChangeDetectionStrategy, HostBinding, ContentChild, TemplateRef, OnChanges, AfterContentInit } from '@angular/core';
+import { uniqueId } from '../../util/util';
+import { NglFormLabelTemplate, getFormLabel } from '../form-label';
 
 @Component({
   // tslint:disable-next-line:component-selector

@@ -1,9 +1,9 @@
-import {TestBed, ComponentFixture, async} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {Component, DebugElement} from '@angular/core';
-import {createGenericTestComponent, dispatchEvent, dispatchKeyEvent} from '../../../test/util/helpers';
-import {NglPicklistModule} from './module';
-import {getOptionElements} from './picklist.spec';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { Component, DebugElement } from '@angular/core';
+import { createGenericTestComponent, dispatchEvent, dispatchKeyEvent } from '../../../test/util/helpers';
+import { NglPicklistModule } from './module';
+import { getOptionElements } from './picklist.spec';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;

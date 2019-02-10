@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output, OnChanges, ChangeDetectionStrategy} from '@angular/core';
-import {toBoolean} from '../util/util';
+import { Component, EventEmitter, Input, Output, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { toBoolean } from '../util/util';
 
 export interface NglPage { number: number | string; disabled?: boolean; }
 

@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {NglIconsModule} from '../icons/module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NglIconsModule } from '../icons/module';
 import { NglInternalOutletModule } from '../util/outlet.module';
 
 import { NglFile } from './file';

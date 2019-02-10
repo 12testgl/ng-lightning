@@ -1,5 +1,5 @@
-import {Component, ElementRef, Renderer2, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {NglCommonNotify} from '../common/notify/notify';
+import { Component, ElementRef, Renderer2, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { NglCommonNotify } from '../common/notify/notify';
 
 @Component({
   selector: 'ngl-toast',

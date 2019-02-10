@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglPagination} from './pagination';
+import { NglPagination } from './pagination';
 
 @NgModule({
   declarations: [NglPagination],

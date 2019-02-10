@@ -1,7 +1,7 @@
-import {Directive, Input, ContentChild} from '@angular/core';
-import {NglDatatableCell} from './cell';
-import {NglDatatableHeadingTemplate} from './heading';
-import {toBoolean} from '../util/util';
+import { Directive, Input, ContentChild } from '@angular/core';
+import { NglDatatableCell } from './cell';
+import { NglDatatableHeadingTemplate } from './heading';
+import { toBoolean } from '../util/util';
 
 @Directive({
   // tslint:disable-next-line:directive-selector

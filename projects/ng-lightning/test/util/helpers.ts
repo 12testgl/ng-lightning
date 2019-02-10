@@ -1,8 +1,8 @@
 /**
  * Testing helpers
  */
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {NglConfig, NGL_CONFIG} from '../../src/lib/config/config';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { NglConfig, NGL_CONFIG } from '../../src/lib/config/config';
 
 // Default configuration for every TestComponent
 beforeEach(() => {

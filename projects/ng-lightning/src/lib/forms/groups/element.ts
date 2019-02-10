@@ -1,9 +1,9 @@
-import {Component, Input, ChangeDetectionStrategy, ContentChild, Optional, ElementRef, Renderer2, TemplateRef,
-        OnChanges, AfterContentInit} from '@angular/core';
-import {NglFormGroupAlternate} from './group-alt';
-import {NglFormCheckbox} from '../elements/input';
-import {NglFormLabelTemplate, getFormLabel} from '../form-label';
-import {uniqueId} from '../../util/util';
+import { Component, Input, ChangeDetectionStrategy, ContentChild, Optional, ElementRef, Renderer2, TemplateRef,
+        OnChanges, AfterContentInit } from '@angular/core';
+import { NglFormGroupAlternate } from './group-alt';
+import { NglFormCheckbox } from '../elements/input';
+import { NglFormLabelTemplate, getFormLabel } from '../form-label';
+import { uniqueId } from '../../util/util';
 
 @Component({
   selector: 'ngl-form-group-element',

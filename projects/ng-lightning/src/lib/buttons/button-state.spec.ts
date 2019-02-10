@@ -1,8 +1,8 @@
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {createGenericTestComponent, selectElements} from '../../../test/util/helpers';
-import {NglButtonsModule} from './module';
-import {NglIconsModule} from '../icons/module';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { createGenericTestComponent, selectElements } from '../../../test/util/helpers';
+import { NglButtonsModule } from './module';
+import { NglIconsModule } from '../icons/module';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;

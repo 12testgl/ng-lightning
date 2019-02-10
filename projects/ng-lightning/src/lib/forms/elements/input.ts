@@ -1,6 +1,6 @@
-import {Directive, HostBinding, Optional} from '@angular/core';
-import {NglFormGroup} from '../groups/group';
-import {NglFormGroupAlternate} from '../groups/group-alt';
+import { Directive, HostBinding, Optional } from '@angular/core';
+import { NglFormGroup } from '../groups/group';
+import { NglFormGroupAlternate } from '../groups/group-alt';
 
 
 @Directive({

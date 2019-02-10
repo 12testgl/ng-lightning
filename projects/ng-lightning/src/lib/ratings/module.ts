@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglRating} from './rating';
-import {NglRatingIconTemplate} from './icons';
-import {NglIconsModule} from '../icons/module';
+import { NglRating } from './rating';
+import { NglRatingIconTemplate } from './icons';
+import { NglIconsModule } from '../icons/module';
 
 const DIRECTIVES = [
   NglRating,

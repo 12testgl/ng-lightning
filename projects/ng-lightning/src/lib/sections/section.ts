@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, HostBinding, ChangeDetectionStrategy} from '@angular/core';
-import {uniqueId} from '../util/util';
+import { Component, Input, Output, EventEmitter, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { uniqueId } from '../util/util';
 
 @Component({
   selector: 'ngl-expandable-section',

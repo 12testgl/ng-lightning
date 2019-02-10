@@ -1,6 +1,6 @@
-import {Directive, Input, Output, EventEmitter, HostListener, ElementRef, OnInit, OnDestroy, ContentChildren, QueryList, Renderer2} from '@angular/core';
-import {NglDropdownItem} from './dropdown-item';
-import {toBoolean} from '../util/util';
+import { Directive, Input, Output, EventEmitter, HostListener, ElementRef, OnInit, OnDestroy, ContentChildren, QueryList, Renderer2 } from '@angular/core';
+import { NglDropdownItem } from './dropdown-item';
+import { toBoolean } from '../util/util';
 
 const openEventEmitter = new EventEmitter<any>();
 

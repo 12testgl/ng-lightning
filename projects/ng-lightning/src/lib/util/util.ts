@@ -1,4 +1,4 @@
-import {ElementRef, Renderer2, SimpleChange} from '@angular/core';
+import { ElementRef, Renderer2, SimpleChange } from '@angular/core';
 
 export function toBoolean(value: any): boolean {
   switch (value) {

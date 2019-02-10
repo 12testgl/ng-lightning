@@ -1,9 +1,9 @@
-import {TestBed, ComponentFixture, async} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {createGenericTestComponent, selectElements, dispatchEvent, dispatchKeyEvent} from '../../../test/util/helpers';
-import {By} from '@angular/platform-browser';
-import {NglDatepickersModule} from './module';
-import {NglDatepicker} from './datepicker';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { createGenericTestComponent, selectElements, dispatchEvent, dispatchKeyEvent } from '../../../test/util/helpers';
+import { By } from '@angular/platform-browser';
+import { NglDatepickersModule } from './module';
+import { NglDatepicker } from './datepicker';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;

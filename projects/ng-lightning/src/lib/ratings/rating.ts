@@ -1,8 +1,8 @@
-import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener,
-        HostBinding, ContentChild, ViewChild, TemplateRef, ChangeDetectorRef, OnInit, AfterContentInit} from '@angular/core';
-import {NglRatingIconTemplate} from './icons';
-import {NglConfig, NglConfigurable} from '../config/config';
-import {toBoolean} from '../util/util';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener,
+        HostBinding, ContentChild, ViewChild, TemplateRef, ChangeDetectorRef, OnInit, AfterContentInit } from '@angular/core';
+import { NglRatingIconTemplate } from './icons';
+import { NglConfig, NglConfigurable } from '../config/config';
+import { toBoolean } from '../util/util';
 
 @Component({
   selector: 'ngl-rating',

@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglPopover} from './popover';
-import {NglPopoverTrigger} from './trigger';
-import {NglPopoverBehavior} from './behavior';
+import { NglPopover } from './popover';
+import { NglPopoverTrigger } from './trigger';
+import { NglPopoverBehavior } from './behavior';
 
 const NGL_POPOVER_DIRECTIVES = [
   NglPopover,

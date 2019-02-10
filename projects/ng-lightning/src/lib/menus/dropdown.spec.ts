@@ -1,9 +1,9 @@
-import {TestBed, ComponentFixture, async} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {NglDropdown} from './dropdown';
-import {createGenericTestComponent, dispatchKeyEvent} from '../../../test/util/helpers';
-import {By} from '@angular/platform-browser';
-import {NglMenusModule} from './module';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { NglDropdown } from './dropdown';
+import { createGenericTestComponent, dispatchKeyEvent } from '../../../test/util/helpers';
+import { By } from '@angular/platform-browser';
+import { NglMenusModule } from './module';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;

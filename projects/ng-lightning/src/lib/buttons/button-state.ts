@@ -1,5 +1,5 @@
-import {Directive, Input, Output, EventEmitter, HostListener, ElementRef, Renderer2} from '@angular/core';
-import {toBoolean} from '../util/util';
+import { Directive, Input, Output, EventEmitter, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import { toBoolean } from '../util/util';
 
 @Directive({
   selector: '[nglButtonState]',

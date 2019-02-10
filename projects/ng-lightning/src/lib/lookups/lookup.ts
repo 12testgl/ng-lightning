@@ -4,9 +4,9 @@ import {
 } from '@angular/core';
 import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
 import { skip, tap, debounceTime, distinctUntilChanged, switchMap, publish, refCount } from 'rxjs/operators';
-import {NglLookupItemTemplate, NglLookupLabelTemplate} from './item';
-import {NglLookupScopeItem} from './scope-item';
-import {uniqueId, isObject} from '../util/util';
+import { NglLookupItemTemplate, NglLookupLabelTemplate } from './item';
+import { NglLookupScopeItem } from './scope-item';
+import { uniqueId, isObject } from '../util/util';
 
 @Component({
   selector: 'ngl-lookup',

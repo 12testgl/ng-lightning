@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglSpinner} from './spinner';
+import { NglSpinner } from './spinner';
 
 @NgModule({
   declarations: [NglSpinner],

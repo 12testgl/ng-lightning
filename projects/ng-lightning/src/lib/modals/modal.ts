@@ -1,6 +1,6 @@
-import {Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild, ChangeDetectionStrategy} from '@angular/core';
-import {toBoolean, uniqueId} from '../util/util';
-import {NglModalHeaderTemplate, NglModalTaglineTemplate, NglModalFooterTemplate} from './templates';
+import { Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild, ChangeDetectionStrategy } from '@angular/core';
+import { toBoolean, uniqueId } from '../util/util';
+import { NglModalHeaderTemplate, NglModalTaglineTemplate, NglModalFooterTemplate } from './templates';
 
 @Component({
   selector: 'ngl-modal',

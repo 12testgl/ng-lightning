@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, HostBinding, TemplateRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, HostBinding, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'ngl-file',

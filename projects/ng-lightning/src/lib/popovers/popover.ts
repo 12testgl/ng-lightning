@@ -1,6 +1,6 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer2,
-        HostListener, HostBinding, AfterViewInit} from '@angular/core';
-import {replaceClass, toBoolean, uniqueId} from '../util/util';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer2,
+        HostListener, HostBinding, AfterViewInit } from '@angular/core';
+import { replaceClass, toBoolean, uniqueId } from '../util/util';
 
 export type Direction = 'top' | 'right' | 'bottom' | 'left';
 

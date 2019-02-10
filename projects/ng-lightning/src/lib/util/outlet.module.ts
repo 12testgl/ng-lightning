@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglInternalOutlet} from './outlet';
+import { NglInternalOutlet } from './outlet';
 
 @NgModule({
   imports: [CommonModule],

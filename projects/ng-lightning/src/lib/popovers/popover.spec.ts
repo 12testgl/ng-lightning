@@ -1,8 +1,8 @@
-import {async, fakeAsync, tick, TestBed, ComponentFixture} from '@angular/core/testing';
-import {Component, Injectable, OnDestroy} from '@angular/core';
-import {createGenericTestComponent, dispatchEvent} from '../../../test/util/helpers';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component, Injectable, OnDestroy } from '@angular/core';
+import { createGenericTestComponent, dispatchEvent } from '../../../test/util/helpers';
 import * as Tether from '../../../test/mock/tether';
-import {NglPopoversModule} from './module';
+import { NglPopoversModule } from './module';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;

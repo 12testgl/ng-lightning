@@ -1,10 +1,10 @@
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {NglRating} from './rating';
-import {NglRatingsModule} from './module';
-import {createGenericTestComponent, dispatchKeyEvent, dispatchEvent, selectElements} from '../../../test/util/helpers';
-import {By} from '@angular/platform-browser';
-import {NglConfig} from '../config/config';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { NglRating } from './rating';
+import { NglRatingsModule } from './module';
+import { createGenericTestComponent, dispatchKeyEvent, dispatchEvent, selectElements } from '../../../test/util/helpers';
+import { By } from '@angular/platform-browser';
+import { NglConfig } from '../config/config';
 
 const createTestComponent = (html?: string) =>
   createGenericTestComponent(TestComponent, html) as ComponentFixture<TestComponent>;

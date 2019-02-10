@@ -2,9 +2,9 @@ import {
   Component, Input, ChangeDetectorRef, ContentChild, ContentChildren, QueryList, ElementRef, Renderer2,
   HostBinding, Output, EventEmitter, AfterContentInit, OnDestroy
 } from '@angular/core';
-import {Subscription} from 'rxjs';
-import {NglDatatableColumn} from './column';
-import {NglDatatableLoadingOverlay, NglDatatableNoRowsOverlay} from './overlays';
+import { Subscription } from 'rxjs';
+import { NglDatatableColumn } from './column';
+import { NglDatatableLoadingOverlay, NglDatatableNoRowsOverlay } from './overlays';
 
 export interface INglDatatableSort {
   key: string;

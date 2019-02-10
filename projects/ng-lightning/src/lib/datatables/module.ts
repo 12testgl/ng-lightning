@@ -1,16 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {NglInternalOutletModule} from '../util/outlet.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NglInternalOutletModule } from '../util/outlet.module';
 
-import {NglDatatable} from './datatable';
-import {NglDatatableColumn} from './column';
-import {NglDatatableCell} from './cell';
-import {NglDatatableHeadingTemplate} from './heading';
-import {NglDatatableLoadingOverlay, NglDatatableNoRowsOverlay} from './overlays';
-import {NglIconsModule} from '../icons/module';
+import { NglDatatable } from './datatable';
+import { NglDatatableColumn } from './column';
+import { NglDatatableCell } from './cell';
+import { NglDatatableHeadingTemplate } from './heading';
+import { NglDatatableLoadingOverlay, NglDatatableNoRowsOverlay } from './overlays';
+import { NglIconsModule } from '../icons/module';
 
-import {NglInternalDatatableHeadCell} from './head';
-import {NglInternalDatatableCell} from './cell-internal';
+import { NglInternalDatatableHeadCell } from './head';
+import { NglInternalDatatableCell } from './cell-internal';
 
 export {INglDatatableSort, INglDatatableRowClick} from './datatable';
 

@@ -1,5 +1,5 @@
-import {Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ElementRef, Renderer2} from '@angular/core';
-import {NglLookupScopeItem} from './scope-item';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ElementRef, Renderer2 } from '@angular/core';
+import { NglLookupScopeItem } from './scope-item';
 
 @Component({
   selector: 'ngl-internal-lookup-scope',

@@ -2,10 +2,10 @@ import {
   Component, ChangeDetectionStrategy, Input, Output, EventEmitter, ContentChild, ViewChild, ElementRef,
   OnDestroy, AfterContentInit
 } from '@angular/core';
-import {filter as rxFilter} from 'rxjs/operators';
-import {NglPicklistItemTemplate} from './item';
-import {NglPick} from '../pick/pick';
-import {toBoolean} from '../util/util';
+import { filter as rxFilter } from 'rxjs/operators';
+import { NglPicklistItemTemplate } from './item';
+import { NglPick } from '../pick/pick';
+import { toBoolean } from '../util/util';
 
 @Component({
   selector: 'ngl-picklist[nglPick]',

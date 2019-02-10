@@ -1,9 +1,9 @@
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {createGenericTestComponent, dispatchKeyEvent} from '../../../test/util/helpers';
-import {By} from '@angular/platform-browser';
-import {NglModal} from './modal';
-import {NglModalsModule} from './module';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { createGenericTestComponent, dispatchKeyEvent } from '../../../test/util/helpers';
+import { By } from '@angular/platform-browser';
+import { NglModal } from './modal';
+import { NglModalsModule } from './module';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;

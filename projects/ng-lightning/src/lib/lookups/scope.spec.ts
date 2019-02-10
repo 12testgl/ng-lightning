@@ -1,8 +1,8 @@
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {createGenericTestComponent, selectElements} from '../../../test/util/helpers';
-import {NglLookupsModule} from './module';
-import {expectMenuExpanded, getPill} from './lookup.spec';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { createGenericTestComponent, selectElements } from '../../../test/util/helpers';
+import { NglLookupsModule } from './module';
+import { expectMenuExpanded, getPill } from './lookup.spec';
 
 const createTestComponent = (html?: string) =>
   createGenericTestComponent(TestComponent, html) as ComponentFixture<TestComponent>;

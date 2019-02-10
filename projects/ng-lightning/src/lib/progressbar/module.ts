@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {NglProgressBar} from './progressbar';
+import { NglProgressBar } from './progressbar';
 
 @NgModule({
   declarations: [NglProgressBar],

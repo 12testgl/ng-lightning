@@ -1,5 +1,5 @@
-import {Directive, Input} from '@angular/core';
-import {NglFormElement} from './element';
+import { Directive, Input } from '@angular/core';
+import { NglFormElement } from './element';
 
 @Directive({
   selector: 'input[nglFormControl][required], textarea[nglFormControl][required], select[nglFormControl][required]',

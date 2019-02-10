@@ -1,4 +1,4 @@
-import {Component, Input, ChangeDetectionStrategy, OnChanges} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line:component-selector

@@ -1,6 +1,6 @@
-import {Component, Input, ChangeDetectionStrategy, HostBinding, ContentChild, AfterContentInit} from '@angular/core';
-import {NglFormGroup} from './group';
-import {NglFormLabelTemplate} from '../form-label';
+import { Component, Input, ChangeDetectionStrategy, HostBinding, ContentChild, AfterContentInit } from '@angular/core';
+import { NglFormGroup } from './group';
+import { NglFormLabelTemplate } from '../form-label';
 
 @Component({
   // tslint:disable-next-line:component-selector

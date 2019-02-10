@@ -1,4 +1,4 @@
-import { Component, Input, QueryList, ContentChildren, Output, EventEmitter, ElementRef, Renderer2, AfterContentInit} from '@angular/core';
+import { Component, Input, QueryList, ContentChildren, Output, EventEmitter, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { isInt } from '../util/util';
 import { NglTab } from './tab';
 

@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, Renderer2, OnInit, HostBinding} from '@angular/core';
-import {replaceClass} from '../util/util';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, Renderer2, OnInit, HostBinding } from '@angular/core';
+import { replaceClass } from '../util/util';
 
 @Component({
   selector: 'ngl-avatar',

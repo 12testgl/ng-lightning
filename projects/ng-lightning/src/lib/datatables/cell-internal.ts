@@ -1,5 +1,5 @@
-import {Component, ChangeDetectionStrategy, Input, HostBinding, OnChanges} from '@angular/core';
-import {NglDatatableColumn} from './column';
+import { Component, ChangeDetectionStrategy, Input, HostBinding, OnChanges } from '@angular/core';
+import { NglDatatableColumn } from './column';
 
 @Component({
   // tslint:disable-next-line:component-selector

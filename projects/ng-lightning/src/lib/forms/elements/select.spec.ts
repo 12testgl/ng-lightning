@@ -1,8 +1,8 @@
-import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {createGenericTestComponent} from '../../../../test/util/helpers';
-import {NglFormsModule} from '../module';
-import {getLabelElement, getRequiredElement, getErrorElement} from './input.spec';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { createGenericTestComponent } from '../../../../test/util/helpers';
+import { NglFormsModule } from '../module';
+import { getLabelElement, getRequiredElement, getErrorElement } from './input.spec';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
