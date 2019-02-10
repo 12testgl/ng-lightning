@@ -1,6 +1,19 @@
-ng-content(select="[nglPillImage]")
-ng-content(select="a")
-span.slds-pill__label(*ngIf="unlinked")
-  ng-content
-button.slds-button.slds-button--icon.slds-pill__remove(*ngIf="removable", type="button", (click)="remove()")
+// Icon / Avatar
+span.slds-pill__icon_container(*ngIf="pillIcon")
+  ng-container(*ngIf="isTemplateRef(pillIcon); else defaultTpl", [ngTemplateOutlet]="pillIcon")
+  ng-template(#defaultTpl)
+    ngl-icon(*ngIf="icon; else avatarTpl", [iconName]="icon")
+    ng-template(#avatarTpl)
+      ngl-avatar([src]="avatar", variant="circle")
+
+// Label
+ng-container(*ngIf="linked; else unlinked")
+  ng-content(select="a")
+ng-template(#unlinked)
+  span.slds-pill__label
+    ng-content
+
+// Remove Icon
+button.slds-button.slds-button_icon.slds-pill__remove(*ngIf="canRemove && removable", type="button", [title]="removeTitle", (click)="onRemove($event)")
   svg.slds-button__icon(nglIconName="close")
+  span.slds-assistive-text(*ngIf="removeTitle") {{removeTitle}}

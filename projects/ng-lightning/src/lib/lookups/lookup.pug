@@ -6,7 +6,7 @@ include ./menu
   //- With selection
   .slds-form-element__control(*ngIf="pick")
     .slds-pill_container
-      ngl-pill((nglPillRemove)="clear()") {{resolveLabel(pick)}}
+      ngl-pill((remove)="clear()") {{resolveLabel(pick)}}
 
   //- Default
   .slds-form-element__control.slds-grid(*ngIf="!pick", [class.slds-box--border]="polymorphic")

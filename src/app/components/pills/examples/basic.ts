@@ -23,4 +23,8 @@ export class DemoPillsBasic implements OnInit {
   remove(pill: string) {
     this.pills = this.pills.filter(_pill => _pill !== pill);
   }
+
+  log() {
+    console.log('pill was removed.');
+  }
 }

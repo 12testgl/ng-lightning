@@ -1,19 +1,27 @@
-.slds-text-title--caps.slds-m-bottom--small Pill examples
-ngl-pill
-  a(href="javascript:void(0)") Default
-ngl-pill
-  ngl-icon(iconName="standard:feedback", nglPillImage)
-  |
+.slds-text-title_caps.slds-m-bottom_small Pill examples
+ngl-pill((remove)="log($event)")
+  a(href="javascript:void(0)") Pill
+
+ngl-pill(icon="standard:feedback", (remove)="log($event)")
   a(href="javascript:void(0)") With icon
-ngl-pill
-  ngl-avatar(type="circle", src="assets/images/avatar2.jpg", nglPillImage)
-  |
-  a(href="javascript:void(0)") With portrait
-ngl-pill Unlinked
-.slds-text-title--caps.slds-m-bottom--small.slds-m-top--x-large Removable pills
+
+ngl-pill(avatar="assets/images/avatar2.jpg", (remove)="log($event)")
+  a(href="javascript:void(0)") With avatar
+
+ngl-pill([icon]="warningTpl", hasError="true", (remove)="log($event)")
+  a(href="javascript:void(0)") Error
+  ng-template(#warningTpl): ngl-icon(iconName="utility:warning", variant="error", title="error")
+
+ngl-pill.slds-pill_bare((remove)="log($event)")
+  a(href="javascript:void(0)") Bare
+
+ngl-pill((remove)="log($event)")
+  | Unlinked
+
+.slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Removable pills
 button(type="button", nglButton="brand", (click)="add()") Add
-.slds-clearfix.slds-p-vertical--xx-small
-ngl-pill((nglPillRemove)="remove(pill)", *ngFor="let pill of pills")
-  ngl-icon(iconName="standard:account", nglPillImage)
+.slds-clearfix.slds-p-vertical_xx-small
+ngl-pill((remove)="remove(pill)", *ngFor="let pill of pills")
+  ngl-icon(iconName="standard:account")
   |
   a(href="javascript:void(0)") {{pill}}

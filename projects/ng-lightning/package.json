@@ -19,6 +19,7 @@
   "author": "Tasos Bekos <tbekos@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
+    "@angular/cdk": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/forms": "^6.0.0-rc.0 || ^6.0.0",
