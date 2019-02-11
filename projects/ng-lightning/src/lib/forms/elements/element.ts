@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ContentChild, TemplateRef, OnChanges, AfterContentInit } from '@angular/core';
-import { uniqueId, toBoolean } from '../../util/util';
+import { uniqueId } from '../../util/util';
+import { toBoolean } from '../../util/convert';
 import { NglFormInput } from './input';
 import { NglFormLabelTemplate, getFormLabel } from '../form-label';
 

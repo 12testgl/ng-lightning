@@ -1,5 +1,6 @@
 import { Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild, ChangeDetectionStrategy } from '@angular/core';
-import { toBoolean, uniqueId } from '../util/util';
+import { uniqueId } from '../util/util';
+import { InputBoolean, toBoolean } from '../util/convert';
 import { NglModalHeaderTemplate, NglModalTaglineTemplate, NglModalFooterTemplate } from './templates';
 
 @Component({
@@ -15,12 +16,7 @@ export class NglModal {
 
   @Input() size: string;
 
-  @Input() set directional(directional: string | boolean) {
-    this._directional = toBoolean(directional);
-  }
-  get directional() {
-    return this._directional;
-  }
+  @Input() @InputBoolean() directional = false;
 
   @ViewChild('closeButton') closeButton: ElementRef;
 
@@ -56,7 +52,6 @@ export class NglModal {
   @ContentChild(NglModalFooterTemplate) footer: NglModalFooterTemplate;
 
   private _open = true;
-  private _directional = false;
 
   @HostListener('keydown.esc', ['$event'])
   close(evt?: Event) {

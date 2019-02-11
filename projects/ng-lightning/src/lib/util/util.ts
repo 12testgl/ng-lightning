@@ -1,19 +1,5 @@
 import { ElementRef, Renderer2, SimpleChange } from '@angular/core';
 
-export function toBoolean(value: any): boolean {
-  switch (value) {
-    case '':
-      return true;
-
-    case 'false':
-    case '0':
-      return false;
-
-    default:
-      return !!value;
-  }
-}
-
 // Check if given value is integer. Cast strings as potential integers as well.
 // See: http://stackoverflow.com/questions/14636536/how-to-check-if-a-variable-is-an-integer-in-javascript
 export function isInt(value: any): boolean {

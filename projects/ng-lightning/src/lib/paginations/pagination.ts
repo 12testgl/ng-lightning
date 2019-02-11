@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnChanges, ChangeDetectionStrategy } from '@angular/core';
-import { toBoolean } from '../util/util';
+import { InputBoolean } from '../util/convert';
 
 export interface NglPage { number: number | string; disabled?: boolean; }
 
@@ -27,17 +27,9 @@ export class NglPagination implements OnChanges {
   @Input() previousText = 'Previous';
   @Input() nextText = 'Next';
   @Input() lastText = 'Last';
-
-  @Input() set boundaryLinks(boundaryLinks: string | boolean) {
-    this._boundaryLinks = toBoolean(boundaryLinks);
-  }
-  get boundaryLinks() {
-    return this._boundaryLinks;
-  }
+  @Input() @InputBoolean() boundaryLinks = false;
 
   totalPages: number;
-
-  private _boundaryLinks = false;
 
   hasPrevious() {
     return this.current > 1;

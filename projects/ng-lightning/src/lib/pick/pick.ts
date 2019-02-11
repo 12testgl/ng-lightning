@@ -1,6 +1,6 @@
 import { Directive, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { toBoolean } from '../util/util';
+import { InputBoolean } from '../util/convert';
 
 @Directive({
   selector: '[nglPick]',
@@ -9,7 +9,6 @@ export class NglPick implements AfterContentInit {
 
   selected: any;
   values = new BehaviorSubject(null);
-  isMultiple = false;
 
   @Input('nglPick') set setSelected(selected: string) {
     this.selected = selected;
@@ -21,9 +20,7 @@ export class NglPick implements AfterContentInit {
   @Output() nglPickChange = new EventEmitter();
   @Output() nglOptionDestroyed = new EventEmitter();
 
-  @Input('nglPickMultiple') set setIsMultiple(isMultiple: any) {
-    this.isMultiple = toBoolean(isMultiple);
-  }
+  @Input('nglPickMultiple') @InputBoolean() isMultiple = false;
 
   ngAfterContentInit() {
     this.values.next(this.selected);

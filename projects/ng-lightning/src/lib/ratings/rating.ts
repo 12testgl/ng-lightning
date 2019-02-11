@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostLi
         HostBinding, ContentChild, ViewChild, TemplateRef, ChangeDetectorRef, OnInit, AfterContentInit } from '@angular/core';
 import { NglRatingIconTemplate } from './icons';
 import { NglConfig, NglConfigurable } from '../config/config';
-import { toBoolean } from '../util/util';
+import { InputBoolean } from '../util/convert';
 
 @Component({
   selector: 'ngl-rating',
@@ -22,10 +22,11 @@ export class NglRating implements OnInit, AfterContentInit {
   currentRate: number;
 
   @Input() icon = 'favorite';
+
   @Input() size: 'x-small' | 'small' | 'large';
-  @Input() set isReadonly(readonly: any) {
-    this.readonly = toBoolean(readonly);
-  }
+
+  @Input('isReadonly') @InputBoolean() readonly = false;
+
   @Input() set rate(rate: number) {
     this.inputRate = rate;
     this.currentRate = rate;
@@ -50,7 +51,6 @@ export class NglRating implements OnInit, AfterContentInit {
 
   _template: TemplateRef<any>;
   private _max = 5;
-  private readonly = false;
   private inputRate: number;
 
   constructor(private config: NglConfig, private cd: ChangeDetectorRef) {

@@ -2,16 +2,6 @@ import * as util from './util';
 
 describe('utility', () => {
 
-  it('`toBoolean`', () => {
-    const { toBoolean } = util;
-    expect(toBoolean('')).toBe(true);
-    expect(toBoolean('false')).toBe(false);
-    expect(toBoolean('0')).toBe(false);
-
-    expect(toBoolean(true)).toBe(true);
-    expect(toBoolean(false)).toBe(false);
-  });
-
   it('`isInt`', () => {
     const { isInt } = util;
 

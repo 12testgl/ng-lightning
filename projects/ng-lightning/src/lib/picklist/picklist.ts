@@ -5,7 +5,7 @@ import {
 import { filter as rxFilter } from 'rxjs/operators';
 import { NglPicklistItemTemplate } from './item';
 import { NglPick } from '../pick/pick';
-import { toBoolean } from '../util/util';
+import { InputBoolean } from '../util/convert';
 
 @Component({
   selector: 'ngl-picklist[nglPick]',
@@ -29,23 +29,14 @@ export class NglPicklist implements AfterContentInit, OnDestroy {
     return this._data;
   }
 
-  @Input() set fluid(fluid: boolean | string) {
-    this._fluid = toBoolean(fluid);
-  }
-  get fluid() {
-    return this._fluid;
-  }
+  @Input() @InputBoolean() fluid = false;
 
-  @Input() set disabled(disabled: boolean | string) {
-    this._disabled = toBoolean(disabled);
-  }
-  get disabled() {
-    return this._disabled;
-  }
+  @Input() @InputBoolean() disabled = false;
 
   @Input() dropdownListClass: any;
 
   @Input('filter') filterType: string | Function;
+
   @Input() filterPlaceholder = '';
 
   @Input() set open(value: boolean) {
@@ -72,8 +63,6 @@ export class NglPicklist implements AfterContentInit, OnDestroy {
   private _data: any[];
   private _open = false;
   private _changeSubscription: any;
-  private _disabled = false;
-  private _fluid = false;
   private filterActiveIndex = 0;
   private hasFilterFocus = false;
 

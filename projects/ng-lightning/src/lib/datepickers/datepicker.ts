@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { uniqueId, toBoolean } from '../util/util';
+import { uniqueId } from '../util/util';
+import { InputBoolean } from '../util/convert';
 
 export interface NglInternalDate { year: number; month: number; day: number; disabled?: boolean; }
 
@@ -30,10 +31,7 @@ export class NglDatepicker {
   }
   @Output() dateChange = new EventEmitter();
 
-  showToday = true;
-  @Input('showToday') set _showToday(showToday: boolean) {
-    this.showToday = toBoolean(showToday);
-  }
+  @Input() @InputBoolean() showToday = true;
 
   firstDayOfWeek = 0;
   @Input('firstDayOfWeek') set _firstDayOfWeek(firstDayOfWeek: number) {

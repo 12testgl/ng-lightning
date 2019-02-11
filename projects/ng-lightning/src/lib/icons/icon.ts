@@ -1,5 +1,6 @@
 import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, Attribute, Optional, OnChanges } from '@angular/core';
-import { toBoolean, replaceClass } from '../util/util';
+import { replaceClass } from '../util/util';
+import { toBoolean } from '../util/convert';
 import { NglButton } from '../buttons/button';
 import { NglButtonIcon } from '../buttons/button-icon';
 
