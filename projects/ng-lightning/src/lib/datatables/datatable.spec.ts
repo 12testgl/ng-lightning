@@ -109,13 +109,13 @@ describe('`NglDatatable`', () => {
   it('should support custom cell template per column', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
-        <ngl-datatable-column key="id">
+        <ngl-datatable-column heading key="id">
           <ng-template nglDatatableCell let-value>{{value}}:</ng-template>
         </ngl-datatable-column>
-        <ngl-datatable-column>
+        <ngl-datatable-column heading>
           <ng-template nglDatatableCell let-row="row" let-i="index">{{i}} = {{row.name}}</ng-template>
         </ngl-datatable-column>
-        <ngl-datatable-column key="number"></ngl-datatable-column>
+        <ngl-datatable-column heading key="number"></ngl-datatable-column>
       </table>`);
     expect(getData(fixture.nativeElement)).toEqual([
       [ '1:', '0 = PP', '80' ],
@@ -128,8 +128,8 @@ describe('`NglDatatable`', () => {
   it('should support custom header class per column', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
-        <ngl-datatable-column headClass="class1"></ngl-datatable-column>
-        <ngl-datatable-column [headClass]="{ class2: exists }"></ngl-datatable-column>
+        <ngl-datatable-column heading headClass="class1"></ngl-datatable-column>
+        <ngl-datatable-column heading [headClass]="{ class2: exists }"></ngl-datatable-column>
       </table>`);
 
     const rows = getHeadings(fixture.nativeElement);
@@ -144,8 +144,8 @@ describe('`NglDatatable`', () => {
   it('should support custom cell class per column', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
-        <ngl-datatable-column [cellClass]="class1"></ngl-datatable-column>
-        <ngl-datatable-column [cellClass]="class2"></ngl-datatable-column>
+        <ngl-datatable-column heading [cellClass]="class1"></ngl-datatable-column>
+        <ngl-datatable-column heading [cellClass]="class2"></ngl-datatable-column>
       </table>`);
     fixture.componentInstance.class1 = 'custom-class1';
     fixture.detectChanges();
@@ -169,7 +169,7 @@ describe('`NglDatatable`', () => {
   it('should support truncate input', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
-        <ngl-datatable-column key="name" truncate="true"></ngl-datatable-column>
+        <ngl-datatable-column heading key="name" truncate="true"></ngl-datatable-column>
       </table>`);
     fixture.detectChanges();
 
@@ -184,8 +184,8 @@ describe('`NglDatatable`', () => {
   it('should handle sortable columns', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
-        <ngl-datatable-column key="id" sortable></ngl-datatable-column>
-        <ngl-datatable-column [sortable]="sortable"></ngl-datatable-column>
+        <ngl-datatable-column heading key="id" sortable></ngl-datatable-column>
+        <ngl-datatable-column heading [sortable]="sortable"></ngl-datatable-column>
       </table>`);
     fixture.componentInstance.sortable = false;
     fixture.detectChanges();
@@ -251,7 +251,7 @@ describe('`NglDatatable`', () => {
   it('should not re-render templates in cell if no input has changed', () => {
     const fixture = createTestComponent(`
       <table ngl-datatable [data]="data">
-        <ngl-datatable-column>
+        <ngl-datatable-column heading>
           <ng-template nglDatatableCell><button type="button" (click)="cb()"></button></ng-template>
         </ngl-datatable-column>
       </table>`);
@@ -292,7 +292,7 @@ describe('`NglDatatable`', () => {
   it('should hande row click', () => {
     const fixture = createTestComponent(`
         <table ngl-datatable [data]="data" (rowClick)="rowClick($event)">
-          <ngl-datatable-column key="id"></ngl-datatable-column>
+          <ngl-datatable-column heading key="id"></ngl-datatable-column>
         </table>`);
 
     const {componentInstance} = fixture;
@@ -317,10 +317,10 @@ describe('`NglDatatable`', () => {
     expect(getHeadingsTitle(fixture.nativeElement)).toEqual(['My title']);
   });
 
-  it('should not display `undefined` title', () => {
+  it('should not display empty title', () => {
     const fixture = createTestComponent(`
         <table ngl-datatable>
-          <ngl-datatable-column>
+          <ngl-datatable-column heading>
             <ng-template nglDatatableHeading>Custom heading</ng-template>
           </ngl-datatable-column>
         </table>`);
@@ -339,6 +339,13 @@ describe('`NglDatatable`', () => {
     for (let i = 0, ii = fixture.componentInstance.data.length; i < ii; i++) {
       expect(rows[i]).toBe(newRows[ii - i - 1]);
     }
+  });
+
+  it('should throw if required input is not provided', () => {
+    expect(() => createTestComponent(`
+      <table ngl-datatable [data]="data">
+        <ngl-datatable-column></ngl-datatable-column>
+      </table>`)).toThrowError();
   });
 });
 

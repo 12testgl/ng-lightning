@@ -13,12 +13,15 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, HostBi
 })
 export class NglInternalDatatableHeadCell {
 
-  @HostBinding('attr.title')
   @Input() heading: string;
   @Input() headingTpl: TemplateRef<any>;
 
   get header() {
     return this.headingTpl || this.heading;
+  }
+
+  get attrTitle() {
+    return this.heading || null;
   }
 
   @HostBinding('class.slds-is-sortable')

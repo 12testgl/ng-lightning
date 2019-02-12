@@ -1,10 +1,10 @@
 a.slds-th__action.slds-text-link_reset(*ngIf="sortable; else baseTpl", (click)="sortChange()", role="button" tabindex="0")
   span.slds-assistive-text Sort by:
   .slds-grid.slds-grid_vertical-align-center.slds-has-flexi-truncate
-    span.slds-truncate([attr.title]="heading", [nglInternalOutlet]="header")
+    span.slds-truncate([attr.title]="attrTitle", [nglInternalOutlet]="header")
 
     span.slds-icon_container.slds-icon-utility-arrowdown
       svg.slds-icon.slds-icon-text-default.slds-is-sortable__icon(nglIconName="arrowdown")
 
 ng-template(#baseTpl)
-  .slds-truncate([attr.title]="heading", [nglInternalOutlet]="header")
+  .slds-truncate([attr.title]="attrTitle", [nglInternalOutlet]="header")
