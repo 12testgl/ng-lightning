@@ -1,0 +1,8 @@
+.slds-form-element__control
+  .slds-checkbox([class.slds-checkbox_stacked]="stacked")
+    abbr.slds-required(*ngIf="required", title="required") *
+    ng-content
+    label.slds-checkbox__label([attr.for]="_uid")
+      span.slds-checkbox_faux
+      span.slds-form-element__label([nglInternalOutlet]="label")
+.slds-form-element__help(*ngIf="error", [id]="errorId") {{error}}

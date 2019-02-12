@@ -1,0 +1,69 @@
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-checkbox(label="Required")
+      input(ngl, type="checkbox", [(ngModel)]="required")
+
+  .slds-col_padded
+    ngl-checkbox(label="Error")
+      input(ngl, type="checkbox", [(ngModel)]="hasError")
+
+  .slds-col_padded
+    ngl-checkbox(label="Disabled")
+      input(ngl, type="checkbox", [(ngModel)]="disabled")
+
+
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-checkbox(label="Checkbox Label", [error]="hasError ? error : null")
+      input(ngl, type="checkbox", [required]="required", [disabled]="disabled")
+
+  .slds-col_padded
+    ng-template(#customCheckbox)
+      i Template Label
+    ngl-checkbox([label]="customCheckbox", [error]="hasError ? error : null")
+      input(ngl, type="checkbox", [required]="required", [disabled]="disabled")
+
+  .slds-col_padded
+    ngl-checkbox(label="Stacked layout", [error]="hasError ? error : null", stacked)
+      input(ngl, type="checkbox", [required]="required", [disabled]="disabled")
+
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-checkbox-toggle(label="Toggle Label", [error]="hasError ? error : null")
+      input(ngl, type="checkbox", [required]="required", [disabled]="disabled")
+
+  .slds-col_padded
+    ng-template(#customCheckbox)
+      i Custom Label
+    ngl-checkbox-toggle([label]="customCheckbox", [error]="hasError ? error : null")
+      input(ngl, type="checkbox", [required]="required", [disabled]="disabled")
+
+  .slds-col_padded
+    ngl-checkbox-toggle(label="Stacked layout", [error]="hasError ? error : null", enabledText="Active", disabledText="Inactive")
+      input(ngl, type="checkbox", [required]="required", [disabled]="disabled")
+
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-checkbox-button(label="Toggle Label")
+      input(ngl, type="checkbox", [disabled]="disabled")
+
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    fieldset(ngl-checkbox-group, label="Checkbox Group Label", [error]="hasError ? error : null", [required]="required")
+      ngl-checkbox-option(label="Checkbox Label 1")
+        input(ngl, type="checkbox", [disabled]="disabled")
+      ngl-checkbox-option(label="Checkbox Label 2")
+        input(ngl, type="checkbox", [disabled]="disabled")
+
+  .slds-col_padded
+    fieldset(ngl-checkbox-group, label="Checkbox Group Label", [error]="hasError ? error : null", [required]="required", [type]="'button'")
+      ngl-checkbox-option(label="Mon")
+        input(ngl, type="checkbox", [disabled]="disabled")
+      ngl-checkbox-option(label="Tue")
+        input(ngl, type="checkbox", [disabled]="disabled")
+      ngl-checkbox-option(label="Wed")
+        input(ngl, type="checkbox", [disabled]="disabled")
+      ngl-checkbox-option(label="Thu")
+        input(ngl, type="checkbox", [disabled]="disabled")
+      ngl-checkbox-option(label="Fri")
+        input(ngl, type="checkbox", [disabled]="disabled")

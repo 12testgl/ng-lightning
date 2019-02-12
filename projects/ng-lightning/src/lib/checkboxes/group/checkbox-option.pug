@@ -1,0 +1,8 @@
+ng-content
+//- List
+label.slds-checkbox__label(*ngIf="type === 'list'", [attr.for]="input.id")
+  span.slds-checkbox_faux
+  span.slds-form-element__label([nglInternalOutlet]="label")
+//- Button
+label.slds-checkbox_button__label(*ngIf="type === 'button'", [attr.for]="input.id")
+  span.slds-checkbox_faux([nglInternalOutlet]="label")

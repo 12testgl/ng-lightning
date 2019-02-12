@@ -5,6 +5,7 @@ import { NglAvatarModule } from './avatar/module';
 import { NglBadgesModule } from './badges/module';
 import { NglBreadcrumbsModule } from './breadcrumbs/module';
 import { NglButtonsModule } from './buttons/module';
+import { NglCheckboxesModule } from './checkboxes/module';
 import { NglDatatablesModule } from './datatables/module';
 import { NglDatepickersModule } from './datepickers/module';
 import { NglDynamicIconsModule } from './dynamicicons/module';
@@ -33,6 +34,7 @@ const MODULES = [
   NglBadgesModule,
   NglBreadcrumbsModule,
   NglButtonsModule,
+  NglCheckboxesModule,
   NglDatatablesModule,
   NglDatepickersModule,
   NglDynamicIconsModule,
