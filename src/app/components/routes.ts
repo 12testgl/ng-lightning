@@ -4,6 +4,7 @@ export const routes = [
   { path: 'badges', loadChildren: './badges/badges.module#NglDemoBadgesModule' },
   { path: 'breadcrumbs', loadChildren: './breadcrumbs/breadcrumbs.module#NglDemoBreadcrumbsModule' },
   { path: 'buttons', loadChildren: './buttons/buttons.module#NglDemoButtonsModule' },
+  { path: 'checkboxes', loadChildren: './checkboxes/checkboxes.module#NglDemoCheckboxesModule' },
   { path: 'datatables', loadChildren: './datatables/datatables.module#NglDemoDatatablesModule' },
   { path: 'datepickers', loadChildren: './datepickers/datepickers.module#NglDemoDatepickersModule' },
   { path: 'dynamicicons', loadChildren: './dynamicicons/dynamicicons.module#NglDemoDynamicIconsModule' },
