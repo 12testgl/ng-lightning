@@ -16,9 +16,7 @@ import { isTemplateRef } from '../util/check';
   templateUrl: './pill.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class.slds-pill]'     : 'true',
-    '[class.slds-has-error]': 'hasError',
-    '[class.slds-pill_link]': 'linked',
+    '[class.slds-pill]': 'true',
   },
 })
 export class NglPill implements OnInit {
