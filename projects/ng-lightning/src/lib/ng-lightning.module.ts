@@ -23,6 +23,7 @@ import { NglPopoversModule } from './popovers/module';
 import { NglProgressBarModule } from './progressbar/module';
 import { NglRatingsModule } from './ratings/module';
 import { NglSectionsModule } from './sections/module';
+import { NglSelectModule } from './select/module';
 import { NglSpinnersModule } from './spinners/module';
 import { NglTabsModule } from './tabs/module';
 import { INglConfig } from './config/config.interface';
@@ -52,6 +53,7 @@ const MODULES = [
   NglProgressBarModule,
   NglRatingsModule,
   NglSectionsModule,
+  NglSelectModule,
   NglSpinnersModule,
   NglTabsModule,
 ];
