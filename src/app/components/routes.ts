@@ -25,5 +25,6 @@ export const routes = [
   { path: 'select', loadChildren: './select/select.module#NglDemoSelectModule' },
   { path: 'spinners', loadChildren: './spinners/spinners.module#NglDemoSpinnersModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#NglDemoTabsModule' },
+  { path: 'textarea', loadChildren: './textarea/textarea.module#NglDemoTextareaModule' },
   { path: 'toast', loadChildren: './toast/toast.module#NglDemoToastModule' },
 ];

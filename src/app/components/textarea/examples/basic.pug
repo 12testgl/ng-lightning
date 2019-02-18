@@ -1,0 +1,18 @@
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-checkbox(label="Required")
+      input(ngl, type="checkbox", [(ngModel)]="required")
+
+  .slds-col_padded
+    ngl-checkbox(label="Error")
+      input(ngl, type="checkbox", [(ngModel)]="hasError")
+
+  .slds-col_padded
+    ngl-checkbox(label="Disabled")
+      input(ngl, type="checkbox", [(ngModel)]="disabled")
+
+
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-textarea(label="Textarea Label", [error]="hasError ? error : null")
+      textarea(ngl, [required]="required", [disabled]="disabled", placeholder="Placeholder Text")
