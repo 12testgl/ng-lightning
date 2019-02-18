@@ -1,0 +1,8 @@
+ng-content
+//- List
+label.slds-radio__label(*ngIf="type === 'list'", [attr.for]="input.id")
+  span.slds-radio_faux
+  span.slds-form-element__label([nglInternalOutlet]="label")
+//- Button
+label.slds-radio_button__label(*ngIf="type === 'button'", [attr.for]="input.id")
+  span.slds-radio_faux([nglInternalOutlet]="label")

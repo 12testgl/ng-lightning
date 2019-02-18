@@ -1,0 +1,37 @@
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ngl-checkbox(label="Required")
+      input(ngl, type="checkbox", [(ngModel)]="required")
+
+  .slds-col_padded
+    ngl-checkbox(label="Error")
+      input(ngl, type="checkbox", [(ngModel)]="hasError")
+
+  .slds-col_padded
+    ngl-checkbox(label="Disabled")
+      input(ngl, type="checkbox", [(ngModel)]="disabled")
+
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center.slds-m-top_large
+  .slds-col_padded
+    ng-template(#lbl)
+       i Radio Label 1
+    fieldset(ngl-radio-group, label="Radio Group Label", [error]="hasError ? error : null", [required]="required")
+      ngl-radio-option([label]="lbl")
+        input(ngl, type="radio", [disabled]="disabled")
+      ngl-radio-option(label="Radio Label 2")
+        input(ngl, type="radio", [disabled]="disabled")
+
+  .slds-col_padded
+    ng-template(#groupLabel)
+       i Custom Radio Group Label
+    fieldset(ngl-radio-group, [label]="groupLabel", [error]="hasError ? error : null", [required]="required", type="button")
+      ngl-radio-option(label="Mon")
+        input(ngl, type="radio", [disabled]="disabled")
+      ngl-radio-option(label="Tue")
+        input(ngl, type="radio", [disabled]="disabled")
+      ngl-radio-option(label="Wed")
+        input(ngl, type="radio", [disabled]="disabled")
+      ngl-radio-option(label="Thu")
+        input(ngl, type="radio", [disabled]="disabled")
+      ngl-radio-option(label="Fri")
+        input(ngl, type="radio", [disabled]="disabled")

@@ -19,6 +19,7 @@ export const routes = [
   { path: 'pills', loadChildren: './pills/pills.module#NglDemoPillsModule' },
   { path: 'popovers', loadChildren: './popovers/popovers.module#NglDemoPopoversModule' },
   { path: 'progressbar', loadChildren: './progressbar/progressbar.module#NglDemoProgressBarModule' },
+  { path: 'radios', loadChildren: './radios/radios.module#NglDemoRadiosModule' },
   { path: 'ratings', loadChildren: './ratings/ratings.module#NglDemoRatingsModule' },
   { path: 'sections', loadChildren: './sections/sections.module#NglDemoSectionsModule' },
   { path: 'spinners', loadChildren: './spinners/spinners.module#NglDemoSpinnersModule' },
