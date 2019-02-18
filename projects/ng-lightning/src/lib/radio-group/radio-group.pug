@@ -1,0 +1,10 @@
+legend.slds-form-element__legend.slds-form-element__label
+  abbr.slds-required(*ngIf="required", title="required") *
+  span([nglInternalOutlet]="label")
+.slds-form-element__control
+  .slds-radio_button-group(*ngIf="type === 'button'; else contentTpl")
+    ng-container(*ngTemplateOutlet="contentTpl")
+.slds-form-element__help(*ngIf="error", [id]="errorId") {{error}}
+
+ng-template(#contentTpl)
+  ng-content
