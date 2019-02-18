@@ -22,6 +22,7 @@ export const routes = [
   { path: 'radios', loadChildren: './radios/radios.module#NglDemoRadiosModule' },
   { path: 'ratings', loadChildren: './ratings/ratings.module#NglDemoRatingsModule' },
   { path: 'sections', loadChildren: './sections/sections.module#NglDemoSectionsModule' },
+  { path: 'select', loadChildren: './select/select.module#NglDemoSelectModule' },
   { path: 'spinners', loadChildren: './spinners/spinners.module#NglDemoSpinnersModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#NglDemoTabsModule' },
   { path: 'toast', loadChildren: './toast/toast.module#NglDemoToastModule' },

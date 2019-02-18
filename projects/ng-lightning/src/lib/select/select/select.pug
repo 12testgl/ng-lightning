@@ -1,0 +1,7 @@
+label.slds-form-element__label([attr.for]="_uid")
+  abbr.slds-required(*ngIf="required", title="required") *
+  span([nglInternalOutlet]="label")
+.slds-form-element__control
+  .slds-select_container
+    ng-content
+.slds-form-element__help(*ngIf="error", [id]="errorId") {{error}}

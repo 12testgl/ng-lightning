@@ -24,6 +24,7 @@ import { NglProgressBarModule } from './progressbar/module';
 import { NglRadiosModule } from './radio-group/module';
 import { NglRatingsModule } from './ratings/module';
 import { NglSectionsModule } from './sections/module';
+import { NglSelectModule } from './select/module';
 import { NglSpinnersModule } from './spinners/module';
 import { NglTabsModule } from './tabs/module';
 import { INglConfig } from './config/config.interface';
@@ -54,6 +55,7 @@ const MODULES = [
   NglRadiosModule,
   NglRatingsModule,
   NglSectionsModule,
+  NglSelectModule,
   NglSpinnersModule,
   NglTabsModule,
 ];
