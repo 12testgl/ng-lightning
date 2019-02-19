@@ -12,6 +12,7 @@
   * `size?: 'string'`: Modal size. Possible values are empty, `medium` and `large`.
   * `directional?: boolean = false`: Whether buttons inside footer spread to both left and right.
   * `closeButtonAssistiveText? = 'Close'`: Text read aloud by screen readers when the user focuses on the Close Button.
+  * `dismissOnClickOutside?: boolean = true`: Modal can be dismissed by clicking outside of it.
 
 ### Output
 

@@ -12,11 +12,11 @@ function getModal(element: HTMLElement): HTMLElement {
   return <HTMLElement>element.querySelector('.slds-modal');
 }
 
-function getHeader(element: HTMLElement) {
+function getHeader(element: HTMLElement): HTMLElement {
   return element.querySelector('.slds-modal__header > h2');
 }
 
-function getFooter(element: HTMLElement) {
+function getFooter(element: HTMLElement): HTMLElement {
   return element.querySelector('.slds-modal__footer');
 }
 
@@ -154,6 +154,29 @@ describe('`NglModal`', () => {
     fixture.detectChanges();
     expect(footer).not.toHaveCssClass('slds-modal__footer_directional');
   });
+
+  it('should close when clicking outside and `dismissOnClickOutside` is true', () => {
+    const fixture = createTestComponent(`
+      <ngl-modal open="true" [header]="header" (openChange)="closeCallback($event)" [dismissOnClickOutside]="dismissOnClickOutside"></ngl-modal>`, false);
+    fixture.componentInstance.dismissOnClickOutside = false;
+    fixture.detectChanges();
+
+    const header = getHeader(fixture.nativeElement);
+    header.click();
+    expect(fixture.componentInstance.closeCallback).not.toHaveBeenCalled();
+
+    const modal = getModal(fixture.nativeElement);
+    modal.click();
+    expect(fixture.componentInstance.closeCallback).not.toHaveBeenCalled();
+
+    fixture.componentInstance.dismissOnClickOutside = true;
+    fixture.detectChanges();
+
+    header.click();
+    expect(fixture.componentInstance.closeCallback).not.toHaveBeenCalled();
+    modal.click();
+    expect(fixture.componentInstance.closeCallback).toHaveBeenCalled();
+  });
 });
 
 @Component({
@@ -163,8 +186,10 @@ describe('`NglModal`', () => {
     </ngl-modal>`,
 })
 export class TestComponent {
+  dismissOnClickOutside: boolean;
   open = true;
   openChange = jasmine.createSpy('openChange');
   directional: boolean;
   header = 'Modal Header';
+  closeCallback = jasmine.createSpy('close');
 }
