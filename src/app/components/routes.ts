@@ -8,7 +8,6 @@ export const routes = [
   { path: 'datepickers', loadChildren: './datepickers/datepickers.module#NglDemoDatepickersModule' },
   { path: 'dynamicicons', loadChildren: './dynamicicons/dynamicicons.module#NglDemoDynamicIconsModule' },
   { path: 'files', loadChildren: './files/files.module#NglDemoFilesModule' },
-  { path: 'forms', loadChildren: './forms/forms.module#NglDemoFormsModule' },
   { path: 'icons', loadChildren: './icons/icons.module#NglDemoIconsModule' },
   { path: 'lookups', loadChildren: './lookups/lookups.module#NglDemoLookupsModule' },
   { path: 'menus', loadChildren: './menus/menus.module#NglDemoMenusModule' },

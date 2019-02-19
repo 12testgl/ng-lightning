@@ -9,7 +9,6 @@ import { NglDatatablesModule } from './datatables/module';
 import { NglDatepickersModule } from './datepickers/module';
 import { NglDynamicIconsModule } from './dynamicicons/module';
 import { NglFilesModule } from './files/module';
-import { NglFormsModule } from './forms/module';
 import { NglIconsModule } from './icons/module';
 import { NglLookupsModule } from './lookups/module';
 import { NglMenusModule } from './menus/module';
@@ -38,7 +37,6 @@ const MODULES = [
   NglDatepickersModule,
   NglDynamicIconsModule,
   NglFilesModule,
-  NglFormsModule,
   NglIconsModule,
   NglLookupsModule,
   NglMenusModule,
