@@ -10,6 +10,7 @@ export const routes = [
   { path: 'dynamicicons', loadChildren: './dynamicicons/dynamicicons.module#NglDemoDynamicIconsModule' },
   { path: 'files', loadChildren: './files/files.module#NglDemoFilesModule' },
   { path: 'icons', loadChildren: './icons/icons.module#NglDemoIconsModule' },
+  { path: 'inputs', loadChildren: './inputs/inputs.module#NglDemoInputsModule' },
   { path: 'lookups', loadChildren: './lookups/lookups.module#NglDemoLookupsModule' },
   { path: 'menus', loadChildren: './menus/menus.module#NglDemoMenusModule' },
   { path: 'modals', loadChildren: './modals/modals.module#NglDemoModalsModule' },
