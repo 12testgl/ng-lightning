@@ -28,7 +28,6 @@ function getBackdrop(element: HTMLElement) {
   return element.querySelector('.slds-backdrop');
 }
 
-
 describe('`NglModal`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglModalsModule]}));
@@ -176,6 +175,49 @@ describe('`NglModal`', () => {
     expect(fixture.componentInstance.closeCallback).not.toHaveBeenCalled();
     modal.click();
     expect(fixture.componentInstance.closeCallback).toHaveBeenCalled();
+  });
+
+  describe('should prevent body scrolling', () => {
+    let fixture, containerEl;
+
+    beforeEach(() => {
+      fixture = createTestComponent(`
+        <ngl-modal [open]="open" style="display:block; height: 1000px;">
+          <div style="height: 100000000px">Loooooong body</div>
+        </ngl-modal>
+      `, false);
+
+      containerEl = fixture.nativeElement;
+      while (containerEl.tagName !== 'HTML') {
+        containerEl = containerEl.parentNode;
+      }
+
+      containerEl.style.height = '500px';
+    });
+
+    afterEach(() => {
+      containerEl.style.height = null;
+    });
+
+    it('based on input', () => {
+      fixture.componentInstance.open = true;
+      fixture.detectChanges();
+      expect(containerEl).toHaveCssClass('cdk-global-scrollblock');
+
+      fixture.componentInstance.open = false;
+      fixture.detectChanges();
+      expect(containerEl).not.toHaveCssClass('cdk-global-scrollblock');
+    });
+
+    it('in conjunction with "ngIf"', () => {
+      fixture.componentInstance.open = true;
+      fixture.detectChanges();
+      expect(containerEl).toHaveCssClass('cdk-global-scrollblock');
+
+      fixture.componentInstance.open = false;
+      fixture.detectChanges();
+      expect(containerEl).not.toHaveCssClass('cdk-global-scrollblock');
+    });
   });
 });
 

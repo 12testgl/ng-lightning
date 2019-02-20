@@ -1,17 +1,17 @@
-import { Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild,
+         ChangeDetectionStrategy, Inject, OnChanges, SimpleChanges, AfterContentInit, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { BlockScrollStrategy, ViewportRuler } from '@angular/cdk/overlay';
 import { uniqueId } from '../util/util';
-import { InputBoolean, toBoolean } from '../util/convert';
+import { InputBoolean } from '../util/convert';
 import { NglModalHeaderTemplate, NglModalTaglineTemplate, NglModalFooterTemplate } from './templates';
 
 @Component({
   selector: 'ngl-modal',
   templateUrl: './modal.html',
-  host: {
-    'tabindex': '0',
-  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglModal {
+export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
   @Input() header = '';
 
   @Input() size: string;
@@ -24,18 +24,7 @@ export class NglModal {
 
   contentId = uniqueId('modal-content');
 
-  @Input() set open(_open: any) {
-    _open = toBoolean(_open);
-    if (_open === this.open) { return; }
-
-    this._open = _open;
-    if (this.open) {
-      setTimeout(() => this.closeButton.nativeElement.focus());
-    }
-  }
-  get open() {
-    return this._open;
-  }
+  @Input() @InputBoolean() open = true;
 
   get hasHeader() {
     return this.header || this.headerTpl;
@@ -53,7 +42,11 @@ export class NglModal {
 
   @Input() @InputBoolean() dismissOnClickOutside = true;
 
-  private _open = true;
+  private scrollStrategy: BlockScrollStrategy;
+
+  constructor(viewportRuler: ViewportRuler, @Inject(DOCUMENT) document: any) {
+    this.scrollStrategy = new BlockScrollStrategy(viewportRuler, document);
+  }
 
   @HostListener('keydown.esc', ['$event'])
   close(evt?: Event) {
@@ -61,6 +54,16 @@ export class NglModal {
       evt.stopPropagation();
     }
     this.openChange.emit(false);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('open' in changes) {
+      this.handleOpen();
+    }
+  }
+
+  ngAfterContentInit() {
+    this.handleOpen();
   }
 
   @HostListener('click', ['$event'])
@@ -72,6 +75,20 @@ export class NglModal {
     const { classList } = evt.target;
     if (classList.contains('slds-modal') || classList.contains('slds-modal__container')) {
       this.close();
+    }
+  }
+
+  ngOnDestroy() {
+    this.handleOpen(false);
+    this.scrollStrategy = null;
+  }
+
+  private handleOpen(open = this.open) {
+    if (open) {
+      this.scrollStrategy.enable();
+      setTimeout(() => this.closeButton.nativeElement.focus());
+    } else {
+      this.scrollStrategy.disable();
     }
   }
 }
