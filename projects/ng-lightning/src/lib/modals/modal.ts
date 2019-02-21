@@ -1,6 +1,7 @@
 import { Component, Input, Output, ElementRef, EventEmitter, HostListener, ViewChild, ContentChild,
          ChangeDetectionStrategy, Inject, OnChanges, SimpleChanges, AfterContentInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import { BlockScrollStrategy, ViewportRuler } from '@angular/cdk/overlay';
 import { uniqueId } from '../util/util';
 import { InputBoolean } from '../util/convert';
@@ -42,9 +43,15 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
 
   @Input() @InputBoolean() dismissOnClickOutside = true;
 
+  /** The class that traps and manages focus within the dialog. */
+  private focusTrap: FocusTrap;
+
+  /** Element that was focused before the dialog was opened. Save this to restore upon close. */
+  private elementFocusedBeforeDialogWasOpened: HTMLElement | null = null;
+
   private scrollStrategy: BlockScrollStrategy;
 
-  constructor(viewportRuler: ViewportRuler, @Inject(DOCUMENT) document: any) {
+  constructor(private focusTrapFactory: FocusTrapFactory, viewportRuler: ViewportRuler, @Inject(DOCUMENT) private document: any, private element: ElementRef) {
     this.scrollStrategy = new BlockScrollStrategy(viewportRuler, document);
   }
 
@@ -85,9 +92,20 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
 
   private handleOpen(open = this.open) {
     if (open) {
+      if (this.document) {
+        this.elementFocusedBeforeDialogWasOpened = this.document.activeElement as HTMLElement;
+      }
+
+      this.focusTrap = this.focusTrapFactory.create(this.element.nativeElement);
+      this.focusTrap.focusInitialElementWhenReady();
       this.scrollStrategy.enable();
-      setTimeout(() => this.closeButton.nativeElement.focus());
     } else {
+      if (this.elementFocusedBeforeDialogWasOpened && typeof this.elementFocusedBeforeDialogWasOpened.focus === 'function') {
+        this.elementFocusedBeforeDialogWasOpened.focus();
+      }
+      if (this.focusTrap) {
+        this.focusTrap.destroy();
+      }
       this.scrollStrategy.disable();
     }
   }

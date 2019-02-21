@@ -219,6 +219,27 @@ describe('`NglModal`', () => {
       expect(containerEl).not.toHaveCssClass('cdk-global-scrollblock');
     });
   });
+
+  it('return focus on previously focused element when closed', () => {
+    const fixture = createTestComponent(`
+        <div id="focused" tabindex="0"></div>
+        <ngl-modal [open]="open"><button type="button"></button></ngl-modal>
+      `, false);
+    fixture.componentInstance.open = false;
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement.firstElementChild;
+    el.focus();
+    expect(document.activeElement).toBe(el);
+
+    fixture.componentInstance.open = true;
+    fixture.detectChanges();
+    expect(document.activeElement).not.toBe(el);
+
+    fixture.componentInstance.open = false;
+    fixture.detectChanges();
+    expect(document.activeElement).toBe(el);
+  });
 });
 
 @Component({

@@ -1,7 +1,7 @@
 section.slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-modal_' + size : '']",
                               [attr.aria-hidden]="!open", [attr.aria-labelledby]="headingId", [attr.aria-describedby]="contentId"
                               aria-modal="true", role="dialog", tabindex="-1")
-  .slds-modal__container(cdkTrapFocus)
+  .slds-modal__container
     //- Header
     header.slds-modal__header([class.slds-modal__header_empty]="!hasHeader")
 
