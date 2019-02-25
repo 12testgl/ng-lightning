@@ -1,26 +1,27 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, Renderer2, OnInit, HostBinding } from '@angular/core';
-import { replaceClass } from '../util/util';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, Renderer2, HostBinding, OnInit, OnChanges } from '@angular/core';
+import { HostService } from '../common/host/host.service';
 
 @Component({
   selector: 'ngl-avatar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './avatar.html',
+  providers: [HostService],
 })
-export class NglAvatar implements OnInit {
+export class NglAvatar implements OnInit, OnChanges {
   @Input() src = '';
 
   @HostBinding('attr.title')
   @Input() alternativeText = '';
 
-  @Input() set size(value: string) {
-    this.updateClass(this._size, value);
-    this._size = value;
-  }
+  /*
+   * The size of the avatar.
+   */
+  @Input() size: string;
 
-  @Input() set variant(value: string) {
-    this.updateClass(this._variant, value);
-    this._variant = value;
-  }
+  /*
+   * The variant changes the shape of the avatar.
+   */
+  @Input() variant: string;
 
   @Input() initials: string;
 
@@ -28,22 +29,10 @@ export class NglAvatar implements OnInit {
 
   @Output() error = new EventEmitter();
 
-  private _variant: string;
-  private _size: string;
   private _imgError = false;
 
-  constructor(public element: ElementRef, public renderer: Renderer2) {
+  constructor(private element: ElementRef, renderer: Renderer2, private hostService: HostService) {
     renderer.addClass(element.nativeElement, 'slds-avatar');
-  }
-
-  ngOnInit() {
-    if (!this._variant) {
-      this.renderer.addClass(this.element.nativeElement, 'slds-avatar_rectangle');
-    }
-
-    if (!this._size) {
-      this.renderer.addClass(this.element.nativeElement, 'slds-avatar_medium');
-    }
   }
 
   fallbackIconClass() {
@@ -60,7 +49,18 @@ export class NglAvatar implements OnInit {
     this.error.emit();
   }
 
-  private updateClass(oldValue: string, newValue: string) {
-    replaceClass(this, `slds-avatar_${oldValue}`, newValue ? `slds-avatar_${newValue}` : '');
+  ngOnInit() {
+    this.setHostClass();
+  }
+
+  ngOnChanges() {
+    this.setHostClass();
+  }
+
+  private setHostClass() {
+    this.hostService.updateClass(this.element, {
+      [`slds-avatar_${this.size || 'medium'}`]: true,
+      [`slds-avatar_${this.variant || 'rectangle'}`]: true,
+    });
   }
 }

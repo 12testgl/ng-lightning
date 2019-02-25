@@ -1,12 +1,13 @@
-import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, OnChanges, SimpleChanges } from '@angular/core';
-import { changeClass } from '../util/util';
+import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, OnInit, OnChanges } from '@angular/core';
+import { HostService } from '../common/host/host.service';
 
 @Component({
   selector: 'ngl-progress-bar',
   templateUrl: './progressbar.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [HostService],
 })
-export class NglProgressBar implements OnChanges {
+export class NglProgressBar implements OnInit, OnChanges {
 
   /**
    * The percentage value of the progress bar.
@@ -31,16 +32,25 @@ export class NglProgressBar implements OnChanges {
 
   private _value: number;
 
-  constructor(public element: ElementRef, public renderer: Renderer2) {
+  constructor(private element: ElementRef, private renderer: Renderer2, private hostService: HostService) {
     this.renderer.addClass(this.element.nativeElement, 'slds-progress-bar');
     this.renderer.setAttribute(this.element.nativeElement, 'role', 'progressbar');
     this.renderer.setAttribute(this.element.nativeElement, 'aria-valuemin', '0');
     this.renderer.setAttribute(this.element.nativeElement, 'aria-valuemax', '100');
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    const { size: changedSize, variant: changedVariant } = changes;
-    changeClass(`slds-progress-bar_`, changedSize, this.element, this.renderer);
-    changeClass(`slds-progress-bar_`, changedVariant, this.element, this.renderer);
+  ngOnInit() {
+    this.setHostClass();
+  }
+
+  ngOnChanges() {
+    this.setHostClass();
+  }
+
+  private setHostClass() {
+    this.hostService.updateClass(this.element, {
+      [`slds-progress-bar_${this.size}`]: !!this.size,
+      [`slds-progress-bar_${this.variant}`]: !!this.variant,
+    });
   }
 }

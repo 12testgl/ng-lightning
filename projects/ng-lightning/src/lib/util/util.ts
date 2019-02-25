@@ -44,21 +44,3 @@ function setClass(instance: IReplaceClass, klasses: string | string[], isAdd: bo
     });
   }
 }
-
-export function changeClass(prefix: string, change: SimpleChange, elRef: ElementRef, renderer: Renderer2, defaultValue?: string) {
-  if (!change) {
-    return;
-  }
-
-  const el = elRef.nativeElement;
-
-  const previousValue = change.previousValue || defaultValue;
-  if (!change.firstChange && previousValue) {
-    renderer.removeClass(el, `${prefix}${previousValue}`);
-  }
-
-  const currentValue = change.currentValue || defaultValue;
-  if (change.currentValue || defaultValue) {
-    renderer.addClass(el, `${prefix}${currentValue}`);
-  }
-}

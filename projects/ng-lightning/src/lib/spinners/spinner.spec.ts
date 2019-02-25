@@ -52,6 +52,7 @@ describe('Spinner Component', () => {
     fixture.componentInstance.variant = null;
     fixture.detectChanges();
     expect(spinner).not.toHaveCssClass('slds-spinner_brand');
+    expect(spinner).not.toHaveCssClass('slds-spinner_null');
 
     fixture.componentInstance.variant = 'inverse';
     fixture.detectChanges();
