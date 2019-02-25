@@ -6,7 +6,7 @@ section.slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-mo
     header.slds-modal__header([class.slds-modal__header_empty]="!hasHeader")
 
       //- Close button
-      button.slds-button.slds-button_icon.slds-button_icon-inverse.slds-modal__close(type="button", (click)="close()")
+      button.slds-button.slds-button_icon.slds-button_icon-inverse.slds-modal__close(*ngIf="showClose", type="button", (click)="close()")
         svg.slds-button__icon.slds-button__icon_large(nglIconName="utility:close")
         span.slds-assistive-text(*ngIf="closeButtonAssistiveText") {{closeButtonAssistiveText}}
 

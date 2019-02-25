@@ -119,7 +119,7 @@ describe('`NglModal`', () => {
 
   it('should support custom assistive text for close button', () => {
     const fixture = createTestComponent(`
-      <ngl-modal closeButtonAssistiveText="Custom close text"></ngl-modal>`);
+      <ngl-modal [(open)]="open" closeButtonAssistiveText="Custom close text"></ngl-modal>`);
     const button = getCloseButton(fixture.nativeElement).querySelector('.slds-assistive-text');
     expect(button.textContent).toBe('Custom close text');
   });
@@ -239,6 +239,12 @@ describe('`NglModal`', () => {
     fixture.componentInstance.open = false;
     fixture.detectChanges();
     expect(document.activeElement).toBe(el);
+  });
+
+  it('should not show close if output is not binded', () => {
+    const fixture = createTestComponent(`<ngl-modal [open]="open"></ngl-modal>`);
+    expect(fixture.componentInstance.openChange).not.toHaveBeenCalled();
+    expect(getCloseButton(fixture.nativeElement)).toBeFalsy();
   });
 });
 

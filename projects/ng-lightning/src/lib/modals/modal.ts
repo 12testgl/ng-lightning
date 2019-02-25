@@ -6,6 +6,7 @@ import { BlockScrollStrategy, ViewportRuler } from '@angular/cdk/overlay';
 import { uniqueId } from '../util/util';
 import { InputBoolean } from '../util/convert';
 import { NglModalHeaderTemplate, NglModalTaglineTemplate, NglModalFooterTemplate } from './templates';
+import { hasObservers } from '../util/hasObservers';
 
 @Component({
   selector: 'ngl-modal',
@@ -40,6 +41,8 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
   @ContentChild(NglModalFooterTemplate) footer: NglModalFooterTemplate;
 
   @Input() @InputBoolean() dismissOnClickOutside = true;
+
+  @hasObservers('openChange') showClose: boolean;
 
   /** The class that traps and manages focus within the dialog. */
   private focusTrap: FocusTrap;
