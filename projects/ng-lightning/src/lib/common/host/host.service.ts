@@ -5,29 +5,25 @@ export class HostService {
   private classMap = {};
   private renderer: Renderer2;
 
-  updateClass(elRef: ElementRef, classMap: object): void {
-    const el = elRef.nativeElement;
-    this.removeClass(el, this.classMap, this.renderer);
-    this.classMap = { ...classMap };
-    this.addClass(el, this.classMap, this.renderer);
-  }
+  updateClass({ nativeElement }: ElementRef, classMap: object): void {
+    const newClassMap = {};
+    const remove = { ...this.classMap };
 
-  private removeClass(el: HTMLElement, classMap: object, renderer: Renderer2): void {
-    for (const i in classMap) {
-      if (classMap.hasOwnProperty(i)) {
-        renderer.removeClass(el, i);
-      }
-    }
-  }
+    Object.keys(classMap).filter(i => classMap[i]).forEach(i => {
+      newClassMap[i] = true;
 
-  private addClass(el: HTMLElement, classMap: object, renderer: Renderer2): void {
-    for (const i in classMap) {
-      if (classMap.hasOwnProperty(i)) {
-        if (classMap[i]) {
-          renderer.addClass(el, i);
-        }
+      if (!this.classMap[i]) {
+        this.renderer.addClass(nativeElement, i);
       }
-    }
+
+      if (remove[i]) {
+        remove[i] = false;
+      }
+    });
+
+    Object.keys(remove).filter(i => remove[i]).forEach(i => this.renderer.removeClass(nativeElement, i));
+
+    this.classMap = newClassMap;
   }
 
   constructor(rendererFactory2: RendererFactory2) {
