@@ -3,6 +3,7 @@ export const routes = [
   { path: 'avatar', loadChildren: './avatar/avatar.module#NglDemoAvatarModule' },
   { path: 'badges', loadChildren: './badges/badges.module#NglDemoBadgesModule' },
   { path: 'breadcrumbs', loadChildren: './breadcrumbs/breadcrumbs.module#NglDemoBreadcrumbsModule' },
+  { path: 'buttonicons', loadChildren: './buttonicons/buttonicons.module#NglDemoButtonIconsModule' },
   { path: 'buttons', loadChildren: './buttons/buttons.module#NglDemoButtonsModule' },
   { path: 'checkboxes', loadChildren: './checkboxes/checkboxes.module#NglDemoCheckboxesModule' },
   { path: 'datatables', loadChildren: './datatables/datatables.module#NglDemoDatatablesModule' },

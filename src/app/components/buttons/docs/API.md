@@ -4,14 +4,6 @@
 
   * `nglButton?: 'success' | 'neutral' | 'brand' | 'destructive' | 'inverse'`: Buttons theme.
 
-
-# `[nglButtonIcon]`
-
-### Input
-
-  * `nglButtonIcon?: 'container' | 'border' | 'border-filled' | 'small' | '' = 'border'`: Buttons container.
-
-
 # `[nglButtonState]`
 
 ### Input

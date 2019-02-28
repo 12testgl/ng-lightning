@@ -2,7 +2,6 @@ import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, Attri
 import { replaceClass } from '../util/util';
 import { toBoolean } from '../util/convert';
 import { NglButton } from '../buttons/button';
-import { NglButtonIcon } from '../buttons/button-icon';
 
 @Component({
   selector: 'ngl-icon, [ngl-icon]',
@@ -24,9 +23,9 @@ export class NglIcon implements OnChanges {
   constructor(public element: ElementRef, public renderer: Renderer2,
               @Attribute('state') private state: string,
               @Attribute('button') button: string,
-              @Optional() nglButton: NglButton, @Optional() nglButtonIcon: NglButtonIcon) {
+              @Optional() nglButton: NglButton) {
 
-    this.button = button === null ? !!(nglButton || nglButtonIcon) : toBoolean(button);
+    this.button = button === null ? !!nglButton : toBoolean(button);
     if (state) {
       renderer.addClass(element.nativeElement, `slds-text-${state}`);
     }
