@@ -1,4 +1,5 @@
-Easily style plain buttons, or create stateful and button icons.
+Buttons are clickable items used to perform an action.
 
-Add the `nglButtonState` to turn any button into a stateful component and
-and `state` attribute to your `<ngl-icon>`.
+You can create buttons in several ways: a button with a label only, or a button with a label and icon. For an icon-only button, use `ngButtonIcon` instead.
+
+Use the `variant` input to apply additional styling.

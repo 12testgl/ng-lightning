@@ -7,8 +7,12 @@ import { NglIconsModule } from '../icons/module';
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
-function getButtonElement(element: Element): HTMLButtonElement {
-  return <HTMLButtonElement>element.querySelector('button');
+function getButtonElement(element: Element) {
+  return element.querySelector('button');
+}
+
+function getIconElement(element: Element) {
+  return element.querySelector('svg');
 }
 
 describe('`nglButton`', () => {
@@ -19,43 +23,60 @@ describe('`nglButton`', () => {
     const fixture = createTestComponent();
     const button = getButtonElement(fixture.nativeElement);
     expect(button).toHaveCssClass('slds-button');
+    expect(button).toHaveCssClass('slds-button_neutral');
+    expect(button.textContent).toBe('Go');
+
+    expect(getIconElement(button)).toBeFalsy();
   });
 
-  it('should render icon correctly', () => {
-    const fixture = createTestComponent(`<button [nglButton]="style"><ngl-icon iconName="download" align="left"></ngl-icon> Download</button>`);
+  it('should render based on variant input', () => {
+    const fixture = createTestComponent(`<button nglButton [variant]="variant"></button>`);
+    const { componentInstance, nativeElement } = fixture;
+    const button = getButtonElement(nativeElement);
+
+    componentInstance.variant = 'brand';
+    fixture.detectChanges();
+    expect(button).toHaveCssClass('slds-button_brand');
+
+    componentInstance.variant = 'base';
+    fixture.detectChanges();
+    expect(button).not.toHaveCssClass('slds-button_base');
+    expect(button).not.toHaveCssClass('slds-button_brand');
+
+    componentInstance.variant = 'destructive';
+    fixture.detectChanges();
+    expect(button).toHaveCssClass('slds-button_destructive');
+  });
+
+  it('should render default icon', () => {
+    const fixture = createTestComponent(`<button nglButton iconName="utility:settings"></button>`);
     const button = getButtonElement(fixture.nativeElement);
-    const icon = button.querySelector('svg');
+    const icon = getIconElement(button);
     expect(icon).toHaveCssClass('slds-button__icon');
     expect(icon).toHaveCssClass('slds-button__icon_left');
   });
 
-  it('should render dynamic style', () => {
-    const fixture = createTestComponent();
-    const { componentInstance } = fixture;
-
+  it('should render icon based on input position', () => {
+    const fixture = createTestComponent(`<button nglButton iconName="utility:settings" [iconPosition]="position"></button>`);
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button--brand');
+    let icon = getIconElement(button);
+    expect(icon).toHaveCssClass('slds-button__icon');
+    expect(icon).toHaveCssClass('slds-button__icon_left');
 
-    componentInstance.style = 'destructive';
+    fixture.componentInstance.position = 'right';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button--destructive');
-    expect(button).not.toHaveCssClass('slds-button--brand');
-
-    componentInstance.style = null;
-    fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button');
-    expect(button).not.toHaveCssClass('slds-button--destructive');
-    expect(button).not.toHaveCssClass('slds-button--brand');
+    icon = getIconElement(button);
+    expect(icon).toHaveCssClass('slds-button__icon');
+    expect(icon).toHaveCssClass('slds-button__icon_right');
   });
 });
 
 
 @Component({
-  template: `<button [nglButton]="style">Go <</button>`,
+  template: `<button nglButton>Go</button>`,
 })
 export class TestComponent {
-  style = 'brand';
+  variant: string;
   size: string;
+  position: string;
 }

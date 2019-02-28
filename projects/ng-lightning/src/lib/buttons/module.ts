@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NglButton } from './button';
-import { NglButtonState } from './button-state';
+import { NglIconsModule } from '../icons/module';
+// import { NglButtonState } from './button-state';
 
 const NGL_BUTTON_DIRECTIVES = [
   NglButton,
-  NglButtonState,
+  // NglButtonState,
 ];
 
 @NgModule({
   declarations: NGL_BUTTON_DIRECTIVES,
   exports: NGL_BUTTON_DIRECTIVES,
-  imports: [CommonModule],
+  imports: [CommonModule, NglIconsModule],
 })
 export class NglButtonsModule {}

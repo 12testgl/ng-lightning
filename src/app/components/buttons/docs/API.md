@@ -1,15 +1,7 @@
-# `[nglButton]`
+# [nglButton]
 
-### Input
-
-  * `nglButton?: 'success' | 'neutral' | 'brand' | 'destructive' | 'inverse'`: Buttons theme.
-
-# `[nglButtonState]`
-
-### Input
-
-  * `nglButtonState: boolean`: Whether button is active or not.
-
-### Output
-
-  * `nglButtonStateChange: EventEmitter<boolean>`: the requested state change.
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| `[variant]` | appearance of the button |  `base`, `neutral`, `brand`, `outline-brand`, `destructive`, `text-destructive`, `inverse`, `success` | `neutral` |
+| `[iconName]` | LDS name of the icon in `utility:info` format | string | |
+| `[iconPosition]` | LDS name of the icon in `utility:info` format | string | `left` |

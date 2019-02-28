@@ -1,13 +1,27 @@
-button(type="button", nglButton="success") Success
-button(type="button", nglButton="neutral") Neutral
-button(type="button", [nglButton]="selected ? 'destructive' : 'neutral'")
-  ngl-icon(iconName="download", align="left") Delete
+.slds-text-title_caps.slds-m-bottom_small Variations
+each val in ['base', 'neutral', 'brand', 'outline-brand', 'destructive', 'text-destructive', 'success']
+  button(type="button", nglButton, variant=val) #{val}
 
-button(type="button", nglButton="neutral", (click)="change()") Change
+.slds-text-title_caps.slds-m-bottom_small With icon
+button(type="button", nglButton, iconName="utility:download") Download
+button(type="button", nglButton, variant="brand", iconName="utility:edit", iconPosition="left") Edit
+button(type="button", nglButton, variant="destructive", iconName="utility:delete", iconPosition="right") Delete
 
-div.slds-text-title--caps.slds-m-top--x-large.slds-m-bottom--small Stateful
+.slds-text-title_caps.slds-m-bottom_small Inverse
+div(style="background-color: #16325c; padding: 12px;")
+  button(type="button", nglButton, variant="inverse") Download
+  button(type="button", nglButton, variant="inverse", iconName="utility:edit") Edit
+  button(type="button", nglButton, variant="inverse" iconName="utility:delete", iconPosition="right") Delete
 
-button(type="button", nglButton="neutral", [(nglButtonState)]="selected")
-  ngl-icon(iconName="add", state="not-selected") Follow
-  ngl-icon(iconName="check", state="selected") Following
-  ngl-icon(iconName="close", state="selected-focus") Unfollow
+//- button(type="button", nglButton="neutral") Neutral
+//- button(type="button", [nglButton]="selected ? 'destructive' : 'neutral'")
+//-   ngl-icon(iconName="download", align="left") Delete
+
+//- button(type="button", nglButton="neutral", (click)="change()") Change
+
+//- div.slds-text-title--caps.slds-m-top--x-large.slds-m-bottom--small Stateful
+
+//- button(type="button", nglButton="neutral", [(nglButtonState)]="selected")
+//-   ngl-icon(iconName="add", state="not-selected") Follow
+//-   ngl-icon(iconName="check", state="selected") Following
+//-   ngl-icon(iconName="close", state="selected-focus") Unfollow
