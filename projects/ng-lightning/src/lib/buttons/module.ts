@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { NglButton } from './button';
 import { NglIconsModule } from '../icons/module';
-// import { NglButtonState } from './button-state';
+import { NglButtonStateful } from './button-stateful';
+import { NglButtonStateOn, NglButtonStateOff, NglButtonStateHover } from './button-states';
 
 const NGL_BUTTON_DIRECTIVES = [
   NglButton,
-  // NglButtonState,
+  NglButtonStateful,
+  NglButtonStateOn,
+  NglButtonStateOff,
+  NglButtonStateHover
 ];
 
 @NgModule({

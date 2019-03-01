@@ -13,15 +13,15 @@ div(style="background-color: #16325c; padding: 12px;")
   button(type="button", nglButton, variant="inverse", iconName="utility:edit") Edit
   button(type="button", nglButton, variant="inverse" iconName="utility:delete", iconPosition="right") Delete
 
-//- button(type="button", nglButton="neutral") Neutral
-//- button(type="button", [nglButton]="selected ? 'destructive' : 'neutral'")
-//-   ngl-icon(iconName="download", align="left") Delete
 
-//- button(type="button", nglButton="neutral", (click)="change()") Change
+div.slds-text-title--caps.slds-m-top--x-large.slds-m-bottom--small Stateful
 
-//- div.slds-text-title--caps.slds-m-top--x-large.slds-m-bottom--small Stateful
+button(type="button", nglButtonStateful, [(state)]="selected")
+  ngl-state-on(iconName="check") Following
+  ngl-state-off(iconName="add") Follow
+  ngl-state-hover(iconName="close") Unfollow
 
-//- button(type="button", nglButton="neutral", [(nglButtonState)]="selected")
-//-   ngl-icon(iconName="add", state="not-selected") Follow
-//-   ngl-icon(iconName="check", state="selected") Following
-//-   ngl-icon(iconName="close", state="selected-focus") Unfollow
+button(type="button", nglButtonStateful, variant="brand", [(state)]="selected")
+  ngl-state-on Following
+  ngl-state-off Follow
+  ngl-state-hover Unfollow
