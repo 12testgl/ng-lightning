@@ -88,4 +88,34 @@ describe('utility', () => {
       expect(instance.renderer.removeClass).toHaveBeenCalledWith(null, 'r2');
     });
   });
+
+  describe('ngClassCombine', () => {
+    const { ngClassCombine } = util;
+    const expected = { a: true, b: true, c: true, x: true, y: false };
+
+    it('will work with string', () => {
+      const ng = 'a b c';
+      expect(ngClassCombine(ng, { x: true, y: false })).toEqual(expected);
+      expect(ng).toEqual('a b c');
+    });
+
+    it('will work with string[]', () => {
+      const ng = ['a', 'b', 'c'];
+      expect(ngClassCombine(ng, { x: true, y: false })).toEqual(expected);
+      expect(ng).toEqual(['a', 'b', 'c']);
+    });
+
+    it('will work with Set<string>', () => {
+      const ng = new Set(['a', 'b', 'c']);
+      expect(ngClassCombine(ng, { x: true, y: false })).toEqual(expected);
+      expect(ng.has('x')).toBe(false);
+      expect(ng.has('y')).toBe(false);
+    });
+
+    it('will work with Objects', () => {
+      const ng = {a: true, b: true, c: true};
+      expect(ngClassCombine(ng, { x: true, y: false })).toEqual(expected);
+      expect(ng).toEqual({ a: true, b: true, c: true });
+    });
+  });
 });

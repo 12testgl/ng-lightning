@@ -1,73 +1,84 @@
-import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, Attribute, Optional, OnChanges } from '@angular/core';
-import { replaceClass } from '../util/util';
-import { toBoolean } from '../util/convert';
-import { NglButton } from '../buttons/button';
+import { Component, Input, ChangeDetectionStrategy, OnInit, OnChanges, ElementRef } from '@angular/core';
+import { HostService } from '../common/host/host.service';
+import { isRequired } from '../util/isRequired';
+import { ngClassCombine } from '../util/util';
+
+export function normalizeIconName(iconName: string) {
+  return iconName.indexOf(':') > -1 ? iconName : `utility:${iconName}`;
+}
 
 @Component({
   selector: 'ngl-icon, [ngl-icon]',
   templateUrl: './icon.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [HostService],
 })
-export class NglIcon implements OnChanges {
+export class NglIcon implements OnInit, OnChanges {
 
-  @Input() iconName: string;
-  @Input() variant: 'default' | 'warning' | 'error';
-  @Input() align: 'left' | 'right';
-  @Input() size: 'x-small' | 'small' | 'large';
-  @Input() alternativeText: string;
-  @Input() svgClass: string | string[];
-
-  private button: boolean;
-  private _containerClass: string[];
-
-  constructor(public element: ElementRef, public renderer: Renderer2,
-              @Attribute('state') private state: string,
-              @Attribute('button') button: string,
-              @Optional() nglButton: NglButton) {
-
-    this.button = button === null ? !!nglButton : toBoolean(button);
-    if (state) {
-      renderer.addClass(element.nativeElement, `slds-text-${state}`);
-    }
-    renderer.addClass(element.nativeElement, 'slds-icon_container');
+  @isRequired
+  @Input() set iconName(iconName: string) {
+    this._iconName = normalizeIconName(iconName);
+  }
+  get iconName() {
+    return this._iconName;
   }
 
-  ngOnChanges(changes?: any) {
-    const { containerClass } = this;
-    replaceClass(this, this._containerClass, containerClass);
-    this._containerClass = containerClass;
+  /**
+   * The appearance of a `utility` icon.
+   */
+  @Input() variant: 'default' | 'warning' | 'error' | 'light' | 'inverse' = 'default';
+
+  /**
+   * The size of the icon.
+   */
+  @Input() size: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large';
+
+  /**
+   * Text used to describe the icon for accessibility.
+   */
+  @Input() alternativeText: string;
+
+  /**
+   * CSS classes that are applied to the SVG.
+   */
+  @Input() svgClass: string | string[] | Set<string> | { [klass: string]: any };
+
+  private _iconName: string;
+
+  constructor(private el: ElementRef, private hostService: HostService) {}
+
+  ngOnInit() {
+    this.setHostClass();
+  }
+
+  ngOnChanges() {
+    this.setHostClass();
   }
 
   svgClasses() {
-    const classes = Array.isArray(this.svgClass) ? <string[]>this.svgClass : [this.svgClass || ''];
+    const [category] = this.iconName.split(':');
+    const isUtility = category === 'utility';
+    const isDefaultOrInverse = this.variant === 'default' || this.variant === 'inverse';
 
-    const prefix = this.button ? 'slds-button__icon' : 'slds-icon';
-    classes.push(this.state ? 'slds-button__icon_stateful' : prefix);
+    const classes = {
+      [`slds-icon_${this.size}`]: !!this.size && this.size !== 'medium',
+      [`slds-icon-text-${isDefaultOrInverse ? 'default' : this.variant}`]: isDefaultOrInverse ?
+        (this.variant === 'default' ? isUtility : !isUtility)
+        : !!this.variant,
+    };
 
-    if (this.size) {
-      classes.push(`${prefix}_${this.size}`);
-    }
-
-    if (this.variant) {
-      classes.push(`slds-icon-text-${this.variant}`);
-    }
-
-    if (this.align || this.state) {
-      classes.push(`slds-button__icon_${this.align || 'left'}`);
-    }
-
-    return classes;
+    return ngClassCombine(this.svgClass, classes);
   }
 
-  private get containerClass() {
-    return [`slds-icon-${this.normalizedIconName.replace(/(:|_)/g, '-')}`];
-  }
+  private setHostClass() {
+    const [category, icon] = this.iconName.split(':');
+    const kebabCaseName = icon.replace(/_/g, '-');
 
-  private get normalizedIconName() {
-    if (this.iconName.indexOf(':') < 0) {
-      return `utility:${this.iconName}`;
-    }
-    return this.iconName;
+    this.hostService.updateClass(this.el, {
+      [`slds-icon_container`]: category !== 'utility',
+      [`slds-icon_container_circle`]: category === 'action',
+      [`slds-icon-${category}-${kebabCaseName}`]: category !== 'utility' && category !== 'doctype',
+    });
   }
 
 }

@@ -44,3 +44,28 @@ function setClass(instance: IReplaceClass, klasses: string | string[], isAdd: bo
     });
   }
 }
+
+export function ngClassCombine(ngClasses: string | string[] | Set<string> | { [klass: string]: any }, customClasses: { [klass: string]: any }) {
+  if (!ngClasses) {
+    return customClasses;
+  }
+
+  // Convert string and Set to array
+  if (typeof ngClasses === 'string') {
+    ngClasses = ngClasses.split(/\s+/);
+  } else  if (ngClasses instanceof Set) {
+    const a = [];
+    ngClasses.forEach(v => a.push(v));
+    ngClasses = a;
+  }
+
+  // Convert array to object
+  if (Array.isArray(ngClasses)) {
+    ngClasses = ngClasses.reduce((o: Object, klass: string) => {
+      o[klass] = true;
+      return o;
+    }, {});
+  }
+
+  return {...ngClasses, ...customClasses};
+}

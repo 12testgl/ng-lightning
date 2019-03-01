@@ -31,11 +31,11 @@ describe('Icon Component', () => {
     const { host, icon, alternativeText } = getElements(nativeElement);
     const use = icon.querySelector('use');
 
-    expect(host).toHaveCssClass('slds-icon_container');
+    expect(host).not.toHaveCssClass('slds-icon_container');
     expect(icon).toHaveCssClass('slds-icon');
     expect(icon).not.toHaveCssClass('slds-icon-text-error');
     expect(icon).not.toHaveCssClass('slds-icon-text-warning');
-    expect(icon).not.toHaveCssClass('slds-icon-text-default');
+    expect(icon).toHaveCssClass('slds-icon-text-default');
     expect(use.getAttribute('xlink:href')).toBe('/mypath/utility-sprite/svg/symbols.svg#warning');
     expect(alternativeText).toEqual('Help!');
   });
@@ -121,9 +121,9 @@ describe('Icon Component', () => {
 
     componentInstance.category = 'utility';
     fixture.detectChanges();
-    expect(host).toHaveCssClass('slds-icon_container');
+    expect(host).not.toHaveCssClass('slds-icon_container');
     expect(host).not.toHaveCssClass('slds-icon-standard-add');
-    expect(icon).not.toHaveCssClass('slds-icon-text-default');
+    expect(icon).toHaveCssClass('slds-icon-text-default');
     expect(use.getAttribute('xlink:href')).toBe('/mypath/utility-sprite/svg/symbols.svg#add');
   });
 

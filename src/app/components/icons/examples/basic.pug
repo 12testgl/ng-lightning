@@ -1,30 +1,29 @@
-.slds-grid
-  .slds-col
-    .slds-text-title_caps.slds-m-bottom_x-small Utility
-    ngl-icon(iconName="connected_apps", variant="default")
-    ngl-icon(iconName="warning", variant="warning", alternativeText="Warning")
-    ngl-icon(iconName="close", variant="error")
-  .slds-col
-    .slds-text-title_caps.slds-m-bottom_x-small Standard
-    ngl-icon(iconName="standard:answer_public")
-    ngl-icon(iconName="standard:investment_account", variant="default")
-    ngl-icon(iconName="standard:avatar")
-.slds-grid.slds-m-top_large
-  .slds-col
-    .slds-text-title_caps.slds-m-bottom_x-small Doctype
-    ngl-icon(iconName="doctype:image", size="large")
-    ngl-icon(iconName="doctype:link")
-    ngl-icon(iconName="doctype:html", size="small")
-  .slds-col
-    .slds-text-title_caps.slds-m-bottom_x-small Action
-    ngl-icon.slds-icon_container_circle(iconName="action:web_link")
-    ngl-icon(iconName="action:download", size="large", svgClass="slds-p-around_x-small")
-.slds-grid.slds-m-top_large
-  .slds-col
-    .slds-text-title_caps.slds-m-bottom_x-small Custom
-    ngl-icon(iconName="custom:custom1")
-    ngl-icon(iconName="custom:custom10")
-.slds-grid.slds-m-top_large(style="height: 50px;")
-  .slds-align-middle.slds-col
-    button(type="button", nglButton="neutral", (click)="change()") Change
-    ngl-icon([iconName]="icon.iconName", [size]="icon.size", [variant]="icon.variant")
+.slds-text-title_caps.slds-m-bottom_x-small Basic Icons
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center
+  ngl-icon(iconName="doctype:audio", alternativeText="Audio file")
+  ngl-icon(iconName="standard:event", alternativeText="Event")
+  ngl-icon(iconName="utility:connected_apps", alternativeText="Connected")
+  ngl-icon(iconName="utility:warning", alternativeText="Warning!", variant="warning")
+  ngl-icon(iconName="utility:error", alternativeText="Error!", variant="error")
+  ngl-icon(iconName="utility:image", alternativeText="Utility image")
+  ngl-icon(iconName="doctype:image", alternativeText="Doc image")
+  ngl-icon(iconName="action:call", size="small" alternativeText="Click to Call")
+
+.slds-text-title_caps.slds-m-bottom_x-small.slds-m-top_large Color variants
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center
+  ngl-icon(iconName="utility:lock", variant="default")
+  ngl-icon(iconName="utility:lock", variant="light")
+  ngl-icon(iconName="utility:lock", variant="error")
+  ngl-icon(iconName="utility:lock", variant="warning")
+
+.slds-text-title_caps.slds-m-bottom_x-small.slds-m-top_large Sizes
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center
+  ngl-icon(iconName="utility:lock", size="xx-small")
+  ngl-icon(iconName="utility:lock", size="x-small")
+  ngl-icon(iconName="utility:lock", size="small")
+  ngl-icon(iconName="utility:lock")
+  ngl-icon(iconName="utility:lock", size="large")
+
+.slds-text-title_caps.slds-m-bottom_x-small.slds-m-top_large Inverse
+.slds-grid.slds-grid_pull-padded.slds-grid_vertical-align-center(style="background-color: #16325c; padding: 12px;")
+  ngl-icon(iconName="utility:lock", variant="inverse")

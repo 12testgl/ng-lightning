@@ -1,5 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 import { NglConfig, NglConfigurable } from '../config/config';
+import { normalizeIconName } from './icon';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,16 +11,16 @@ import { NglConfig, NglConfigurable } from '../config/config';
 @NglConfigurable()
 export class NglIconSvg {
 
-  @HostBinding('attr.aria-hidden') ariaHidden = 'true';
-
   @Input('nglIconName') set iconName(iconName: string) {
-    const [icon, type] = iconName.split(':').reverse();
-    this.iconPath = `${this.config.get('svgPath')}/${type || 'utility'}-sprite/svg/symbols.svg#${icon}`;
+    const [category, icon] = normalizeIconName(iconName).split(':');
+    this.iconPath = `${this.config.get('svgPath')}/${category}-sprite/svg/symbols.svg#${icon}`;
   }
 
   @Input() xPos = '0';
 
   iconPath: string;
 
-  constructor(private config: NglConfig, private cd: ChangeDetectorRef) {}
+  constructor(private config: NglConfig, private cd: ChangeDetectorRef, el: ElementRef, renderer: Renderer2) {
+    renderer.setAttribute(el.nativeElement, 'aria-hidden', 'true');
+  }
 }
