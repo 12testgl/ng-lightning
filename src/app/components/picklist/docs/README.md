@@ -1,7 +1,8 @@
-You can easily create a picklist just by combining the `<ngl-picklist>` with the `nglPick` directive. Picklists, commonly known as dropdown menus, allow the user to select one or multiple options from a list.
+ Picklist - a variation of `ngl-combobox` - is an input element that enables single or multiple selections from a list of predifined options. The result of the selection(s) is displayed as the value of the input.
 
-When using the `ngl-picklist` component you can use the `filter` attribute to
-set a filtering method for the items. The available options are a `string`,
-which is taken to be a property or each item's backing object, a user provided
-`function` to be used for filtering or no value at all. In the latter case,
-each item is assumed to provide an implementation of the `toString` method.
+**Keyboard interactions**:
+
+  * Character keys highlight the first matching option
+  * `Up` and `Down` arrow keys cycle through the available options in the list and update the input field’s `aria-activedescendant` value
+  * `Enter` key selects highlighted option and collapses the results list
+  * `Escape` key collapses the results list

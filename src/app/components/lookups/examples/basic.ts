@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-demo-lookups-basic',
@@ -9,52 +9,24 @@ import { map } from 'rxjs/operators';
 })
 export class DemoLookupsBasic {
 
-  superhero: string = null;
-  value = '';
-  address = '';
-  hero: string = null;
-
   superheroes = ['Hulk', 'Flash', 'Superman', 'Batman', 'Spiderman', 'Iron Man', 'Thor', 'Wolverine', 'Deadpool'];
-  superheroeines = ['Catwoman', 'She-Hulk', 'Wonder Woman', 'Batwoman', 'Invisible Woman'];
+  filteredHeroes$: Observable<any[]>;
+  superhero: string = null;
 
-  scopes = [
-    { value: 'All', iconName: 'standard:groups' },
-    { value: 'Men', iconName: 'standard:user' },
-    { value: 'Women', iconName: 'standard:lead' },
-  ];
+  inputCtrl = new FormControl();
 
-  scope = this.scopes[0];
+  open: boolean;
 
-  constructor(private http: HttpClient ) {}
-
-  lookup = (query: string, source = this.superheroes): string[] => {
-    if (!query) {
-      return null;
-    }
-
-    return source.filter((d: string) => d.toLowerCase().indexOf(query.toLowerCase()) > -1);
+  constructor() {
+    this.filteredHeroes$ = this.inputCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => !val ? [...this.superheroes] : this.filter(val))
+      );
   }
 
-  // This function is now safe to pass around
-  lookupAsync = (query: string): Observable<any[]> => {
-    if (!query) {
-      return null;
-    }
-
-    return this.http.get(`//maps.googleapis.com/maps/api/geocode/json?address=${query}`)
-      .pipe(map((response: any) => response.results));
-  }
-
-  lookupPolymorphic = (query: string): string[] => {
-    let heroes: string[];
-    if (this.scope.value === 'Men') {
-      heroes = [ ...this.superheroes ];
-    } else if (this.scope.value === 'Women') {
-      heroes = [ ...this.superheroeines ];
-    } else {
-      heroes = [ ...this.superheroes, ...this.superheroeines ];
-    }
-
-    return this.lookup(query, heroes);
+  private filter(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.superheroes.filter(hero => hero.toLowerCase().indexOf(filterValue) > -1);
   }
 }

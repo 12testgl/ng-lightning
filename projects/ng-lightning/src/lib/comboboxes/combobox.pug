@@ -1,0 +1,54 @@
+label.slds-form-element__label([attr.for]="inputEl.id", [nglInternalOutlet]="label")
+.slds-form-element__control
+  .slds-combobox_container([class.slds-has-selection]="hasLookupSingleSelection")
+    .slds-combobox.slds-dropdown-trigger.slds-dropdown-trigger_click([attr.aria-expanded]="open",
+                                                                     aria-haspopup="listbox",
+                                                                     role="combobox",
+                                                                     [class.slds-is-open]="open",
+                                                                     [attr.aria-owns]="uid")
+      .slds-combobox__form-element.slds-input-has-icon(role="none",
+                            [class.slds-input-has-icon_group-right]="loading",
+                            [class.slds-input-has-icon_right]="!loading")
+        ng-content(select="input")
+
+        .slds-input__icon-group.slds-input__icon-group_right(*ngIf="loading; else iconRight")
+          .slds-spinner.slds-spinner_brand.slds-spinner_x-small.slds-input__spinner(role="status")
+            span.slds-assistive-text Loading
+            .slds-spinner__dot-a
+            .slds-spinner__dot-b
+
+          ng-template([ngTemplateOutlet]="iconRight")
+
+        //- Button
+        ng-template(#iconRight)
+          button.slds-button.slds-button_icon.slds-input__icon.slds-input__icon_right(*ngIf="hasLookupSingleSelection; else iconTpl",
+                                                                                      type="button",
+                                                                                      (click)="onClearSelection()",
+                                                                                      title="Remove selected option")
+            svg.slds-button__icon(nglIconName="utility:close")
+            span.slds-assistive-text Remove selected option
+
+        ng-template(#iconTpl)
+          span.slds-icon_container.slds-input__icon.slds-input__icon_right
+            svg.slds-icon.slds-icon_x-small.slds-icon-text-default([nglIconName]="inputIconRight()")
+
+      .slds-dropdown.slds-dropdown_fluid([attr.id]="uid", role="listbox", [ngClass]="dropdownClass()")
+        ul.slds-listbox.slds-listbox_vertical(role="presentation")
+          li(*ngFor="let d of data; trackBy: trackByOption", nglComboboxOption,
+             [value]="d.value",
+             [label]="d.label",
+             [disabled]="d.disabled",
+             [selected]="isSelected(d.value)")
+
+          //- Loading
+          li.slds-listbox__item(*ngIf="loadingMore", role="presentation")
+            .slds-align_absolute-center.slds-p-top_medium
+              .slds-spinner.slds-spinner_x-small.slds-spinner_inline(role="status")
+                .slds-assistive-text Loading
+                .slds-spinner__dot-a
+                .slds-spinner__dot-b
+
+          //- No matches
+          li.slds-listbox__item(*ngIf="hasNoMatches()", role="presentation", aria-live="polite")
+            .slds-align_absolute-center
+              span(role="status") No matches found.

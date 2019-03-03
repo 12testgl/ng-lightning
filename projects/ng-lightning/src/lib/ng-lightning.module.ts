@@ -7,19 +7,18 @@ import { NglBreadcrumbsModule } from './breadcrumbs/module';
 import { NglButtonIconsModule } from './buttonicons/module';
 import { NglButtonsModule } from './buttons/module';
 import { NglCheckboxesModule } from './checkboxes/module';
+import { NglComboboxesModule } from './comboboxes/module';
 import { NglDatatablesModule } from './datatables/module';
 import { NglDatepickersModule } from './datepickers/module';
 import { NglDynamicIconsModule } from './dynamicicons/module';
 import { NglFilesModule } from './files/module';
 import { NglIconsModule } from './icons/module';
 import { NglInputsModule } from './inputs/module';
-import { NglLookupsModule } from './lookups/module';
 import { NglMenusModule } from './menus/module';
 import { NglModalsModule } from './modals/module';
 import { NglToastModule } from './toast/module';
 import { NglPaginationsModule } from './paginations/module';
 import { NglPickModule } from './pick/module';
-import { NglPicklistModule } from './picklist/module';
 import { NglPillsModule } from './pills/module';
 import { NglPopoversModule } from './popovers/module';
 import { NglProgressBarModule } from './progressbar/module';
@@ -42,19 +41,18 @@ const MODULES = [
   NglButtonIconsModule,
   NglButtonsModule,
   NglCheckboxesModule,
+  NglComboboxesModule,
   NglDatatablesModule,
   NglDatepickersModule,
   NglDynamicIconsModule,
   NglFilesModule,
   NglIconsModule,
   NglInputsModule,
-  NglLookupsModule,
   NglMenusModule,
   NglModalsModule,
   NglToastModule,
   NglPaginationsModule,
   NglPickModule,
-  NglPicklistModule,
   NglPillsModule,
   NglPopoversModule,
   NglProgressBarModule,

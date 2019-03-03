@@ -28,6 +28,10 @@ gulp.task('pug:compile', function libBuildHtml() {
   const _pug = require('pug');
   const glob = require('glob');
   const md = require('markdown-it')();
+  const mdHtml = require('markdown-it')({
+    html: true,    // Enable HTML tags in source
+    breaks: true,  // Convert '\n' in paragraphs into <br>
+  });
 
   function safe(string) {
     const replaceChars = { '{': `{{ '{' }}`, '}': `{{ '}' }}` };
@@ -77,7 +81,7 @@ gulp.task('pug:compile', function libBuildHtml() {
 
         // Docs
         const docsDir = path.dirname(file.path) + '/docs';
-        const readme = md.render(fs.readFileSync(`${docsDir}/README.md`, 'UTF-8'));
+        const readme = mdHtml.render(fs.readFileSync(`${docsDir}/README.md`, 'UTF-8'));
         const api = md.render(fs.readFileSync(`${docsDir}/API.md`, 'UTF-8'));
 
         const examples = glob.sync('**.pug', { cwd: examplesDirectory }).map((file) => {

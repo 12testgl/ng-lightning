@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
-import { DemoPicklistComponent } from './picklist.component';
+import { DemoComboboxesComponent } from './comboboxes.component';
 
 // Examples
-import { DemoPicklistBasic } from './examples/basic';
-import { DemoPicklistMultiple } from './examples/multiple';
+import { DemoComboboxesBasic } from './examples/basic';
 
 const routes: Routes = [
-  { path: '', component: DemoPicklistComponent },
+  { path: '', component: DemoComboboxesComponent },
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(routes),
     NglModule,
     NglDemoExampleModule,
   ],
   declarations: [
-    DemoPicklistComponent,
-    DemoPicklistBasic,
-    DemoPicklistMultiple,
+    DemoComboboxesComponent,
+    DemoComboboxesBasic,
   ],
 })
-export class NglDemoPicklistModule {}
+export class NglDemoComboboxesModule {}

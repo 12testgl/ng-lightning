@@ -1,0 +1,13 @@
+div Multiple results:
+ngl-combobox(label="Which states do you prefer?",
+            [options]="filteredStates$ | async",
+            [(open)]="open",
+            multiple,
+            [(selection)]="selectedStates",
+            variant="lookup")
+  input(nglCombobox, type="text", placeholder="Select multiple", [formControl]="inputCtrl")
+|
+|
+.slds-m-top_xx-small(*ngIf="selectedStates")
+  ng-container(*ngFor="let state of selectedStates")
+    ngl-pill((remove)="remove(state)") {{ state }}

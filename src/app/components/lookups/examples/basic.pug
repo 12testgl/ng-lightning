@@ -1,32 +1,12 @@
-.slds-text-title--caps.slds-m-bottom--small Static results
-ngl-lookup(label='Who is your favorite superhero?', [lookup]='lookup', [(pick)]='superhero', debounce='0', placeholder='Hint: type `man` or `r`')
-.slds-m-top--small(*ngIf='superhero')
+ngl-combobox(label="Who is your favorite superhero?",
+             [options]="filteredHeroes$ | async",
+             [(open)]="open",
+             [(selection)]="superhero",
+             variant="lookup")
+  input(nglCombobox, type="text", placeholder="Hint: type `man` or `r`", [formControl]="inputCtrl")
+|
+|
+.slds-m-top_x-small(*ngIf="superhero")
   | My favorite superhero is
-  b {{superhero}}
-.slds-text-title--caps.slds-m-top--x-large.slds-m-bottom--small Asynchronous object results with custom template
-button.slds-m-bottom--large(type='button', nglButton='neutral', (click)="value='Athens'") Search for: Athens
-button.slds-m-bottom--large(type='button', nglButton='destructive', (click)='address = null', [disabled]='!address') Clear
-ngl-lookup([(value)]='value', [lookup]='lookupAsync', field='formatted_address', [(pick)]='address')
-  ng-template(nglLookupLabel) Type an address:
   |
-  .slds-text-body--small(nglLookupHeader) Most relevant cities
-  |
-  ng-template(ngllookupitem, let-ctx)
-    .slds-media__body
-      .slds-lookup__result-text {{ctx.formatted_address}}
-      |
-      span.slds-lookup__result-meta.slds-text-body--small Place ID: {{ctx.place_id}}
-.slds-m-top--large(*ngIf='address')
-  | Selected place ID:
-  b {{address.place_id}}
-.slds-text-title--caps.slds-m-top--x-large.slds-m-bottom--small Polymorphic
-ngl-lookup([lookup]='lookupPolymorphic', [(pick)]='hero', debounce='0', [placeholder]="'Search ' + scope.value")
-  ng-template(nglLookupLabel) Who is your favorite superhero/superheroeine?
-  |
-  span(nglPolymorphicLabel)
-    svg.slds-icon.slds-icon--small([nglIconName]='scope.iconName', [ngClass]="'slds-icon-' + scope.iconName.replace(':', '-')")
-  |
-  ng-template(nglPolymorphicItem, [scopes]='scopes', (scopeChange)='scope = $event', let-item)
-    p.slds-truncate
-      svg.slds-icon.slds-icon--small.slds-m-right--small([nglIconName]='item.iconName', [ngClass]="'slds-icon-' + scope.iconName.replace(':', '-')")
-      | {{ item.value }}
+  strong {{ superhero }}

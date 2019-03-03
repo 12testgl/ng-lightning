@@ -1,0 +1,14 @@
+.slds-media.slds-listbox__option.slds-listbox__option_plain.slds-media_small.slds-media_center(
+      role="option",
+      [attr.id]="uid",
+      [class.slds-has-focus]="active",
+      [class.slds-is-selected]="selected",
+      [attr.aria-selected]="selected || null",
+      [style.cursor]="disabled ? 'default' : null")
+  span.slds-media__figure.slds-listbox__option-icon
+    span.slds-icon_container.slds-icon-utility-check.slds-current-color(*ngIf="selected")
+      svg.slds-icon.slds-icon_x-small(nglIconName="utility:check")
+  span.slds-media__body
+    span.slds-truncate([class.slds-disabled-text]="disabled")
+      span.slds-assistive-text(*ngIf="selected") Current Selection:
+      | {{ label }}

@@ -1,0 +1,15 @@
+div Async results:
+ngl-combobox(label="Search for a wikipedia page",
+            [options]="wikiResults$ | async",
+            [open]="open",
+            (openChange)="openChange($event)",
+            [(selection)]="wikiPage",
+            [loading]="wikiLoading",
+            variant="lookup")
+  input(nglCombobox, type="text", placeholder="Please type something...", [formControl]="inputCtrl")
+|
+|
+.slds-m-top_x-small(*ngIf="wikiPage")
+  | You selected:
+  |
+  strong {{ wikiPage }}

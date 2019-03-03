@@ -1,0 +1,9 @@
+ngl-combobox(label="Multiple",
+             multiple,
+             [options]="states",
+             [(open)]="open",
+             [(selection)]="selection")
+  input(nglCombobox, placeholder="Select many Options")
+.slds-m-top_xx-small(*ngIf="states")
+    ng-container(*ngFor="let state of selection")
+      ngl-pill((remove)="remove(state)") {{ state }}

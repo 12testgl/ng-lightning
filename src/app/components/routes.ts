@@ -6,6 +6,7 @@ export const routes = [
   { path: 'buttonicons', loadChildren: './buttonicons/buttonicons.module#NglDemoButtonIconsModule' },
   { path: 'buttons', loadChildren: './buttons/buttons.module#NglDemoButtonsModule' },
   { path: 'checkboxes', loadChildren: './checkboxes/checkboxes.module#NglDemoCheckboxesModule' },
+  { path: 'comboboxes', loadChildren: './comboboxes/comboboxes.module#NglDemoComboboxesModule' },
   { path: 'datatables', loadChildren: './datatables/datatables.module#NglDemoDatatablesModule' },
   { path: 'datepickers', loadChildren: './datepickers/datepickers.module#NglDemoDatepickersModule' },
   { path: 'dynamicicons', loadChildren: './dynamicicons/dynamicicons.module#NglDemoDynamicIconsModule' },
