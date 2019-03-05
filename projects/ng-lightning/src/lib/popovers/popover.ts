@@ -1,65 +1,108 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, ChangeDetectorRef, Renderer2,
-        HostListener, HostBinding, AfterViewInit } from '@angular/core';
-import { replaceClass, uniqueId } from '../util/util';
-import { toBoolean } from '../util/convert';
-
-export type Direction = 'top' | 'right' | 'bottom' | 'left';
+import { Component, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef,
+  TemplateRef, ElementRef, Renderer2, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import { uniqueId } from '../util/util';
+import { Placement, POSITION_MAP } from '../util/overlay-position';
+import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
+import { Variant, Size } from './trigger';
+import { HostService } from '../common/host/host.service';
+import { isTemplateRef } from '../util/check';
 
 @Component({
-  selector: 'ngl-popover',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // tslint:disable-next-line:component-selector
+  selector: 'section[ngl-popover]',
   templateUrl: './popover.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [HostService],
+  host: {
+    'role': 'dialog',
+    '[class.slds-popover]': 'true',
+  },
 })
-export class NglPopover implements AfterViewInit {
+export class NglPopover implements OnInit, OnDestroy {
 
-  @Output() afterViewInit = new EventEmitter();
+  template: string | TemplateRef<void>;
 
-  @Output() interaction = new EventEmitter<boolean>();
+  header: string | TemplateRef<void>;
 
-  @Input() header: string;
-  @Input() footer: string;
+  footer: string | TemplateRef<void>;
 
-  @Input() set theme(theme: any) {
-    replaceClass(this, `slds-theme--${this._theme}`, theme ? `slds-theme--${theme}` : '');
-    this._theme = theme;
+  closeTitle: string;
+
+  set size(size: Size) {
+    this._size = size;
+    this.setHostClass();
   }
 
-  @Input() set nglTooltip(isTooltip: any) {
-    this.renderer[toBoolean(isTooltip) ? 'addClass' : 'removeClass'](this.element.nativeElement, 'slds-popover--tooltip');
+  set variant(variant: Variant) {
+    this._variant = variant;
+    this.inverseCloseButton = ['walkthrough', 'feature', 'error'].indexOf(this._variant) > -1;
+    this.setHostClass();
   }
 
-  set nubbin(direction: Direction) {
-    replaceClass(this, `slds-nubbin--${this._nubbin}`, direction ? `slds-nubbin--${direction}` : '');
-    this._nubbin = direction;
+  set placement(placement: Placement) {
+    this._nubbin = POSITION_MAP[placement].nubbin;
+    this.setHostClass();
   }
 
-  uid = uniqueId('popover');
-
-   @HostBinding('attr.aria-labelledby')
-   get labelledby() {
+  @HostBinding('attr.aria-labelledby')
+  get labelledby() {
     return this.header ? `${this.uid}-heading` : null;
-   }
-
-  private _nubbin: Direction;
-  private _theme: string;
-
-  constructor(public element: ElementRef, public renderer: Renderer2, public changeDetector: ChangeDetectorRef) {
-    this.renderer.addClass(this.element.nativeElement, 'slds-popover');
-
-    // Prevent position changes of "close by" elements
-    this.renderer.setStyle(this.element.nativeElement, 'position', 'absolute');
-
-    this.renderer.setAttribute(this.element.nativeElement, 'aria-describedby', this.uid);
   }
 
-  ngAfterViewInit() {
-    this.afterViewInit.emit();
+  @HostBinding('attr.aria-describedby')
+  get describedby() {
+    return this.template ? this.uid : null;
   }
 
-  @HostListener('mouseenter', ['$event', 'true'])
-  @HostListener('mouseleave', ['$event', 'false'])
-  interactiveHandler(evt: Event, isEnter: boolean) {
-    this.interaction.emit(isEnter);
+  close = new EventEmitter();
+
+  isTemplateRef = isTemplateRef;
+  canClose: boolean;
+  uid = uniqueId('popover');
+  inverseCloseButton: boolean;
+
+  private _nubbin: Placement;
+  private _size: Size;
+  private _variant: Variant;
+
+  /** The class that traps and manages focus within the dialog. */
+  private focusTrap: FocusTrap;
+
+  constructor(
+    private hostService: HostService,
+    public element: ElementRef,
+    public renderer: Renderer2,
+    private focusTrapFactory: FocusTrapFactory,
+    private cd: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.focusTrap = this.focusTrapFactory.create(this.element.nativeElement);
+    this.focusTrap.focusInitialElementWhenReady();
+  }
+
+  ngOnDestroy() {
+  if (this.focusTrap) {
+      this.focusTrap.destroy();
+      this.focusTrap = null;
+    }
+  }
+
+  markForCheck() {
+    this.cd.markForCheck();
+  }
+
+  onClose() {
+    this.close.emit();
+  }
+
+  private setHostClass() {
+    this.hostService.updateClass(this.element, {
+      [`slds-nubbin_${this._nubbin}`]: !!this._nubbin,
+      [`slds-m-${this._nubbin}_small`]: !!this._nubbin,
+      [`slds-popover_${this._size}`]: !!this._size,
+      [`slds-popover_walkthrough`]: this._variant === 'feature',
+      [`slds-popover_${this._variant}`]: !!this._variant,
+    });
   }
 
 }

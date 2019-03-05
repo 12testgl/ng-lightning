@@ -29,4 +29,5 @@ export const routes = [
   { path: 'tabs', loadChildren: './tabs/tabs.module#NglDemoTabsModule' },
   { path: 'textarea', loadChildren: './textarea/textarea.module#NglDemoTextareaModule' },
   { path: 'toast', loadChildren: './toast/toast.module#NglDemoToastModule' },
+  { path: 'tooltips', loadChildren: './tooltips/tooltips.module#NglDemoTooltipsModule' },
 ];

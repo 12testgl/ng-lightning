@@ -1,194 +1,307 @@
-import { Directive, Input, ElementRef, ComponentRef, TemplateRef, ViewContainerRef,
-        Renderer2, ComponentFactoryResolver, Injector, EmbeddedViewRef, ComponentFactory,
-        Output, EventEmitter, NgZone, OnDestroy } from '@angular/core';
-import * as Tether from 'tether';
-import { take } from 'rxjs/operators';
-import { NglPopover, Direction } from './popover';
-import { placement } from './placements';
-import { InputBoolean } from '../util/convert';
+import { Directive, Input, ElementRef, TemplateRef, ViewContainerRef, OnDestroy, OnChanges,
+  SimpleChanges, Output, EventEmitter, Renderer2, HostListener } from '@angular/core';
+import { OverlayRef, Overlay, FlexibleConnectedPositionStrategy } from '@angular/cdk/overlay';
+import { ESCAPE } from '@angular/cdk/keycodes';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { Subject, merge, Subscription } from 'rxjs';
+import { map, filter, mapTo } from 'rxjs/operators';
+import { NglPopover } from './popover';
+import { POSITION_MAP, DEFAULT_POPOVER_POSITIONS, getPlacementName, Placement } from '../util/overlay-position';
+import { hasObservers } from '../util/hasObservers';
+import { toBoolean } from '../util/convert';
+
+export type Size = 'small' | 'medium' | 'large' | 'full-width';
+export type Variant = 'walkthrough' | 'feature' | 'warning' | 'error' | 'panel';
 
 @Directive({
   selector: '[nglPopover]',
   exportAs: 'nglPopover',
 })
-export class NglPopoverTrigger implements OnDestroy {
+export class NglPopoverTrigger implements OnChanges, OnDestroy {
 
-  @Input() nglPopover: string | TemplateRef<any>;
+  /**
+   * The body as string or the connected template reference to show.
+   */
+  @Input('nglPopover') template: string | TemplateRef<void>;
 
-  @Input() nglPopoverHeader: string;
-  @Input() nglPopoverFooter: string;
+  /**
+   * The header as string or the connected template reference to show.
+   */
+  @Input('nglPopoverHeader') header: string | TemplateRef<void>;
 
-  @Input() set nglPopoverPlacement(_placement: Direction) {
-    this.placement = _placement || 'top';
-    this.setTether();
+  /**
+   * The footer as string or the connected template reference to show.
+   */
+  @Input('nglPopoverFooter') footer: string | TemplateRef<void>;
+
+  /**
+   * Determines the variant of the popover.
+   */
+  @Input('nglPopoverVariant') variant: Variant;
+
+  /**
+   * Determines the size of the popover.
+   */
+  @Input('nglPopoverSize') size: Size;
+
+  /**
+   * Position relative to host element.
+   */
+  @Input('nglPopoverPlacement')
+  set placement(_placement: Placement) {
+    _placement = _placement || 'top';
+    if (_placement === this._placement) {
+      return;
+    }
+
+    this._placement = _placement;
+
+    if (this.overlayRef) {
+      this.updatePosition();
+    }
+  }
+  get placement() {
+    return this._placement;
   }
 
-  @Input() set nglPopoverTheme(theme: string) {
-    this.theme = theme;
-    this.setPopover();
+  /**
+   * Whether the floating popover is visible.
+   */
+  @Input('nglPopoverOpen')
+  set nglOpen(_open: any) {
+    _open = toBoolean(_open) && (['backdrop', 'x', 'escape'].indexOf(_open) === -1);
+    _open ? this.create() : this.detach();
+    this._open = _open;
+  }
+  get nglOpen() {
+    return this._open;
   }
 
-  @Input() nglTooltip: string | boolean;
+  /**
+   * Close button title (and assistive text).
+   */
+  @Input('nglPopovercloseTitle') closeTitle = 'Close dialog';
 
-  @Input() set nglPopoverDelay(delay: any | any[]) {
-    delay = Array.isArray(delay) ? delay : [delay, delay];
-    [this.openDelay, this.closeDelay] = delay.map(Number);
-  }
+  /** Emit an event when actual popover is shown or hidden */
+  @Output() nglPopoverOpenChange = new EventEmitter<any>();
 
-  @Input('nglInteractive') @InputBoolean() interactive = false;
+  @hasObservers('nglPopoverOpenChange') canClose: boolean;
 
-  @Input() set nglOpen(open: boolean) {
-    this.toggle(open, open ? this.openDelay : this.closeDelay);
-  }
+  /** Names of properties that should be proxy to child component. */
+  private needProxyProperties = new Set([
+    'template',
+    'header',
+    'footer',
+    'placement',
+    'variant',
+    'size',
+    'closeTitle',
+    'canClose',
+  ]);
+  private _placement: Placement = 'top';
+  private _open: boolean;
+  private portal: ComponentPortal<NglPopover>;
+  private overlayRef: OverlayRef | null;
+  private popover: NglPopover | null;
+  private backdrop = new Subject<void>();
+  private closeSubscription: Subscription;
+  private positionChangesSubscription: Subscription;
+  private globalClickEventUnsubscriber: Function = null;
+  private clickEventUnsubscriber: Function = null;
+  private globalClickTimeout: number;
 
-  // Emit an event when actual popover is shown or hidden
-  @Output() nglPopoverToggled = new EventEmitter<boolean>();
+  constructor(
+    private element: ElementRef,
+    private renderer: Renderer2,
+    private viewContainerRef: ViewContainerRef,
+    private overlay: Overlay) {}
 
-  private popover: NglPopover;
-  private popoverFactory: ComponentFactory<NglPopover>;
-  private componentRef: ComponentRef<NglPopover>;
-  private viewRef: EmbeddedViewRef<any>;
-  private placement: Direction = 'top';
-  private theme: string;
-  private tether: Tether;
-  private openDelay = 0;
-  private closeDelay = 0;
-  private toggleTimeout: any = null;
-  private interactiveSubscription: any = null;
-
-  constructor(private element: ElementRef, private viewContainer: ViewContainerRef, private injector: Injector,
-              private ngZone: NgZone,
-              private renderer: Renderer2, componentFactoryResolver: ComponentFactoryResolver) {
-    this.popoverFactory = componentFactoryResolver.resolveComponentFactory(NglPopover);
-  }
-
-  // Expose open method
-  open(delay = this.openDelay) {
-    this.toggle(true, delay);
-  }
-
-  // Expose close method
-  close(delay = this.closeDelay) {
-    this.toggle(false, delay);
-  }
-
-  position(async = true) {
-    this.ngZone.runOutsideAngular(() => {
-      if (async) {
-        setTimeout(() => this.tether.position());
-      } else {
-        this.tether.position();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.nglOpen && !changes.nglOpen.firstChange) {
+      const open = changes.nglOpen.currentValue;
+      if (!toBoolean(open) || open === 'x' || open === 'escape') {
+        this.element.nativeElement.focus();
       }
+    }
+
+    if (this.nglOpen) {
+      this.updateProxies(changes);
+
+      Promise.resolve().then(() => {
+        this.overlayRef.updatePosition();
+      });
+
+      this.popover.markForCheck();
+    }
+  }
+
+  @HostListener('click', ['$event'])
+  onclick(evt: Event) {
+    evt.preventDefault();
+    this.toggle();
+  }
+
+  ngOnDestroy(): void {
+    this.detach();
+
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
+
+    this.close();
+  }
+
+  private open(): void {
+    if (!this.nglOpen) {
+      this.nglPopoverOpenChange.emit(true);
+    }
+  }
+
+  private close(reason: any = false): void {
+    if (this.nglOpen) {
+      this.nglPopoverOpenChange.emit(reason);
+    }
+  }
+
+  private toggle(): void {
+    this.nglOpen ? this.close() : this.open();
+  }
+
+  private create(): void {
+    if (this.nglOpen) {
+      return;
+    }
+
+    this.detach();
+
+    const overlayRef = this.createOverlay();
+
+    this.portal = this.portal || new ComponentPortal(NglPopover, this.viewContainerRef);
+    this.popover = overlayRef.attach(this.portal).instance;
+
+    this.needProxyProperties.forEach(property => this.updatePopover(property, this[ property ]));
+    this.popover.markForCheck();
+
+    this.clearGlobalClickTimeout();
+    this.globalClickTimeout = setTimeout(() => {
+      this.subscribeToClickEvents();
     });
+
+    this.closeSubscription = this.popoverClosingActions()
+      .subscribe(reason => this.close(reason));
   }
 
-  ngOnDestroy() {
-    this.destroy();
-  }
-
-  private toggle(open: boolean, delay: number) {
-    if (this.toggleTimeout !== null) {
-      clearTimeout(this.toggleTimeout);
-      this.toggleTimeout = null;
+  /** Detaches the currently attached popover. */
+  private detach(): void {
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
+      this.overlayRef.detach();
     }
 
-    const toggleFn = (open ? this.create : this.destroy).bind(this);
+    this.unsubscribeFromClickEvents();
 
-    if (delay > 0) {
-      this.toggleTimeout = setTimeout(() => {
-        this.toggleTimeout = null;
-        toggleFn();
-      }, delay);
-    } else {
-      toggleFn();
-    }
-  }
-
-  private setTether(create = false) {
-    if (!this.tether && !create) { return; }
-
-    const { attachment, targetAttachment, offset } = placement(this.placement);
-    const options = {
-      element: this.popover.element.nativeElement,
-      target: this.element.nativeElement,
-      attachment,
-      targetAttachment,
-      offset,
-    };
-
-    if (create) {
-      this.tether = new Tether(options);
-    } else {
-      this.tether.setOptions(options);
+    if (this.closeSubscription) {
+      this.closeSubscription.unsubscribe();
+      this.closeSubscription = null;
     }
 
-    this.setPopover();
-  }
-
-  private setPopover() {
-    if (!this.popover) { return; }
-
-    const { opposite } = placement(this.placement);
-    this.popover.nubbin = opposite;
-    this.popover.theme = this.theme;
-    this.popover.nglTooltip = this.nglTooltip;
-  }
-
-  private create() {
-    if (this.componentRef) { return; }
-
-    const { nodes, viewRef } = this.getProjectableNodes();
-    this.viewRef = viewRef;
-
-    this.componentRef = this.viewContainer.createComponent(this.popoverFactory, 0, this.injector, [nodes]);
-    this.popover = this.componentRef.instance;
-    this.popover.header = this.nglPopoverHeader;
-    this.popover.footer = this.nglPopoverFooter;
-    this.popover.afterViewInit.pipe(take(1)).subscribe(() => this.position(false));
-
-    if (this.interactive) {
-      this.interactiveSubscription = this.popover.interaction.subscribe((enter: boolean) => this.nglOpen = enter);
+    if (this.positionChangesSubscription) {
+      this.positionChangesSubscription.unsubscribe();
+      this.positionChangesSubscription = null;
     }
 
-    this.setTether(true);
-
-    // To avoid unexpected behavior when template "lives" inside an OnPush
-    // component, explicitlly request change detection to run on creation.
-    this.popover.changeDetector.markForCheck();
-
-    this.nglPopoverToggled.emit(true);
-  }
-
-  private getProjectableNodes(): { nodes: any[], viewRef?: EmbeddedViewRef<any> } {
-    if (this.nglPopover instanceof TemplateRef) {
-      const viewRef: EmbeddedViewRef<any> = this.viewContainer.createEmbeddedView(<TemplateRef<any>>this.nglPopover);
-      return { nodes: viewRef.rootNodes, viewRef };
-    } else {
-      return { nodes: [this.renderer.createText(<string>this.nglPopover)] };
-    }
-  }
-
-  private destroy() {
-    if (!this.componentRef) { return; }
-
-    this.tether.destroy();
-    this.tether = null;
-
-    // Cleanup template view
-    if (this.viewRef) {
-      this.viewContainer.remove(this.viewContainer.indexOf(this.viewRef));
-      this.viewRef = null;
-    }
-
-    this.viewContainer.remove(this.viewContainer.indexOf(this.componentRef.hostView));
-    this.componentRef.destroy();
-    this.componentRef = null;
     this.popover = null;
+  }
 
-    if (this.interactiveSubscription) {
-      this.interactiveSubscription.unsubscribe();
+  /** Create the overlay config and position strategy */
+  private createOverlay(): OverlayRef {
+    if (this.overlayRef) {
+      return this.overlayRef;
     }
 
-    this.nglPopoverToggled.emit(false);
+    // Create connected position strategy that listens for scroll events to reposition.
+    const strategy = this.overlay.position()
+      .flexibleConnectedTo(this.element)
+      .withFlexibleDimensions(false)
+      .withViewportMargin(8)
+      .withPush(false);
+
+    this.positionChangesSubscription = strategy.positionChanges
+      .pipe(map(change => getPlacementName(change)))
+      .subscribe((placement: Placement) => {
+        this.updatePosition();
+        this.updatePopover('placement', placement);
+        this.popover.markForCheck();
+      });
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy: strategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+    });
+
+    this.updatePosition();
+
+    return this.overlayRef;
+  }
+
+  /** Updates the position of the current popover. */
+  private updatePosition(): void {
+    const position = <FlexibleConnectedPositionStrategy>this.overlayRef.getConfig().positionStrategy;
+
+    position.withPositions([
+      POSITION_MAP[this.placement].position,
+      ...DEFAULT_POPOVER_POSITIONS,
+    ]);
+  }
+
+  private updatePopover(key: string, value: any): void {
+    this.popover[ key ] = value;
+  }
+
+  /** Set inputs of child components when this component's inputs change. */
+  private updateProxies(changes: SimpleChanges): void {
+    Object.keys(changes)
+      .filter(key => this.needProxyProperties.has(key))
+      .forEach(key => this.updatePopover(key, this[key]));
+  }
+
+  /** Returns a stream that emits whenever an action that should close the popover occurs. */
+  private popoverClosingActions() {
+    const backdrop = this.backdrop.pipe(mapTo('backdrop'));
+    const close = this.popover.close.pipe(mapTo('x'));
+    const escape = this.overlayRef.keydownEvents().pipe(filter(event => event.keyCode === ESCAPE), mapTo('escape'));
+    return merge(backdrop, close, escape);
+  }
+
+  private handleGlobalClickEvent($event: any) {
+    if ($event.$nglStop) {
+      return;
+    }
+    this.backdrop.next();
+  }
+
+  private subscribeToClickEvents() {
+    this.unsubscribeFromClickEvents();
+
+    // Prevent document listener to close it, since click happened inside
+    this.clickEventUnsubscriber = this.renderer.listen(this.popover.element.nativeElement, 'click', ($event: any) => $event.$nglStop = true);
+
+    this.globalClickEventUnsubscriber = this.renderer.listen('document', 'click', this.handleGlobalClickEvent.bind(this));
+  }
+
+  private unsubscribeFromClickEvents() {
+    if (this.clickEventUnsubscriber) {
+      this.clickEventUnsubscriber();
+      this.clickEventUnsubscriber = null;
+    }
+
+    if (this.globalClickEventUnsubscriber) {
+      this.globalClickEventUnsubscriber();
+      this.globalClickEventUnsubscriber = null;
+    }
+  }
+
+  private clearGlobalClickTimeout() {
+    clearTimeout(this.globalClickTimeout);
   }
 }

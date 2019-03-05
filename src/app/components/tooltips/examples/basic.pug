@@ -1,0 +1,32 @@
+ng-template(#tip)
+  strong {{ placement }}
+    |  placement. Initially open!
+  |   Dolor sit amet,
+  i consectetur adipisicing
+  |  elit. Cum, quaerat?
+ng-template(#tip2)
+  | Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.
+div
+  | Quisque scelerisque lectus vel sodales semper.
+  | Sed
+  a([nglTooltip]="tip", [nglTooltipPlacement]="placement", [(nglTooltipOpen)]="open")  hover
+  |   vehicula sapien, vitae tristique nisl viverra vitae. Aliquam erat volutpat. Ut accumsan metus vel hendrerit sagittis.
+.slds-m-top_x-large
+  span(nglTooltip="...which always keep showing!", nglTooltipOpen="true", nglTooltipPlacement="right") You can also make tooltips
+.slds-button-group.slds-m-top_xx-large(role="group")
+  button(type="button", (click)="change('top')", nglButton="neutral") Top
+  button(type="button", (click)="change('left')", nglButton="neutral") Left
+  button(type="button", (click)="change('right')", nglButton="neutral") Right
+  button(type="button", (click)="change('bottom')", nglButton="neutral") Bottom
+  button(type="button", (click)="open = !open", nglButton="neutral") Toggle
+.slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Open and close with delay
+button(type="button", nglButton="neutral", nglTooltip="I open and close with 1 second delay...", nglTooltipDelay="1000", [(nglTooltipOpen)]="open1", #x="nglTooltip") Hover or Focus
+.slds-m-top_medium
+  button(type="button", nglButton="neutral", (click)="x.open(0)") Open immediately
+  button(type="button", nglButton="neutral", (click)="x.close(0)") Close immediately
+.slds-text-title--caps.slds-m-bottom--small.slds-m-top--x-large Interaction
+a([nglTooltip]="interactive", nglTooltipInteractive="true", nglTooltipDelay="500", [(nglTooltipOpen)]="open2") Hover...
+ng-template(#interactive)
+  | Try clicking
+  |
+  a(href="https://github.com/ng-lightning/ng-lightning", target="_blank") this link

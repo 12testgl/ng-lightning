@@ -34,7 +34,6 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.3",
     "rxjs": "~6.4.0",
-    "tether": "^1.4.5",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -47,7 +46,6 @@
     "@types/jasmine": "^2.8.9",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "~8.9.4",
-    "@types/tether": "^1.4.4",
     "codelyzer": "^4.5.0",
     "del": "^3.0.0",
     "glob": "^7.1.3",

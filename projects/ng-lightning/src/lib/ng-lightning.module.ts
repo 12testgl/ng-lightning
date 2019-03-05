@@ -30,6 +30,7 @@ import { NglSelectModule } from './select/module';
 import { NglSpinnersModule } from './spinners/module';
 import { NglTabsModule } from './tabs/module';
 import { NglTextareaModule } from './textarea/module';
+import { NglTooltipsModule } from './tooltips/module';
 import { INglConfig } from './config/config.interface';
 import { NglConfig, NGL_CONFIG } from './config/config';
 
@@ -64,6 +65,7 @@ const MODULES = [
   NglSpinnersModule,
   NglTabsModule,
   NglTextareaModule,
+  NglTooltipsModule,
 ];
 
 @NgModule({

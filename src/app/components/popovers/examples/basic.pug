@@ -1,45 +1,89 @@
+.slds-m-top_x-large
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="right", [(nglPopoverOpen)]="open1") Click me
+
+.slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Placement
+.slds-button-group(role='group')
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="top", [(nglPopoverOpen)]="open.top") Top
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="right", [(nglPopoverOpen)]="open.right") Right
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="bottom", [(nglPopoverOpen)]="open.bottom") Bottom
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="left", [(nglPopoverOpen)]="open.left") Left
+
+.slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Size
+.slds-button-group(role='group')
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverSize="small", [(nglPopoverOpen)]="open.small") Small
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverSize="medium", [(nglPopoverOpen)]="open.medium") Medium
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverSize="large", [(nglPopoverOpen)]="open.large") Large
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverSize="full-width", [(nglPopoverOpen)]="open['full-width']") Full-width
+
+.slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large With header & footer
+.slds-button-group(role='group')
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverHeader="Header", nglPopoverFooter="Footer", [(nglPopoverOpen)]="open['header-footer']") Header & Footer
+
+.slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Variant
+.slds-button-group(role='group')
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverVariant="walkthrough", nglPopoverHeader="Header", [nglPopoverFooter]="walkthrough", [(nglPopoverOpen)]="open.walkthrough") Walkthrough
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverVariant="feature", [(nglPopoverOpen)]="open.feature") Feature
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverVariant="warning", [nglPopoverHeader]="warning", [(nglPopoverOpen)]="open.warning") Warning
+  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverVariant="error", [nglPopoverHeader]="error", [(nglPopoverOpen)]="open.error") Error
+  button(type="button", nglButton="neutral", [nglPopover]="panelbody", nglPopoverVariant="panel", [nglPopoverHeader]="panelheader", [(nglPopoverOpen)]="open.panel") Panel
+
 ng-template(#tip)
-  .slds-text-title--caps
-    strong {{ placement }}
-    |  placement. Initially open!
-  |   Dolor sit amet,
-  i consectetur adipisicing
-  |  elit. Cum, quaerat?
-ng-template(#tip2)
   | Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.
-div
-  | Quisque scelerisque lectus vel sodales semper.
-  | Sed
-  a([nglPopover]='tip', [nglPopoverPlacement]='placement', [nglOpen]='open', (mouseenter)='open = true', (mouseleave)='open = false') hover
-  |   vehicula sapien,
-  |   vitae tristique
-  a([nglPopover]='tip2', nglPopoverBehavior, nglPopoverHeader='Header Title', nglPopoverFooter='Footer Item') behavior
-  |  nisl viverra vitae. Aliquam erat volutpat. Ut accumsan metus vel hendrerit sagittis.
-.slds-m-top--x-large
-  button(type='button', nglButton='neutral', [nglPopover]='tip2', nglPopoverTheme='success', [nglOpen]='openClick1', (click)='openClick1 = !openClick1') Click me
-  |
-  button(type='button', nglButton='neutral', [nglPopover]='tip2', nglPopoverTheme='warning', [nglOpen]='openClick2', (click)='openClick2 = !openClick2') ...and me!
-.slds-m-top--x-large
-  span(nglPopover='...which always keep showing!', nglOpen='true', nglPopoverPlacement='right', ngltooltip) You can also make tooltips
-.slds-button-group.slds-m-top--xx-large(role='group')
-  button(type='button', (click)="change('top')", nglButton='neutral') Top
-  |
-  button(type='button', (click)="change('left')", nglButton='neutral') Left
-  |
-  button(type='button', (click)="change('right')", nglButton='neutral') Right
-  |
-  button(type='button', (click)="change('bottom')", nglButton='neutral') Bottom
-  |
-  button(type='button', (click)='open = !open', nglButton='neutral') Toggle
-.slds-text-title--caps.slds-m-bottom--small.slds-m-top--x-large Open and close with delay
-a(nglPopover='I open and close with 1 second delay...', nglPopoverBehavior, ngltooltip, nglPopoverDelay='1000', #x='nglPopover') Hover me!
-.slds-m-top--medium
-  button(type='button', nglButton='neutral', (click)='x.open(0)') Open immediately
-  |
-  button(type='button', nglButton='neutral', (click)='x.close(0)') Close immediately
-.slds-text-title--caps.slds-m-bottom--small.slds-m-top--x-large Interaction
-ng-template(#interactive)
-  | Try clicking
-  |
-  a(href='https://github.com/ng-lightning/ng-lightning', target='_blank') this link
-a([nglPopover]='interactive', nglInteractive='true', nglPopoverDelay='500', nglPopoverBehavior, ngltooltip) Hover...
+
+ng-template(#walkthrough)
+  .slds-grid.slds-grid_vertical-align-center
+    span.slds-text-title Step 4 of 4
+    button.slds-button.slds-button_brand.slds-col_bump-left((click)="open.walkthrough = false") Finish
+
+ng-template(#warning)
+  .slds-media.slds-media_center.slds-has-flexi-truncate
+    .slds-media__figure
+      span.slds-icon_container.slds-icon-utility-warning
+        ngl-icon(iconName="utility:warning", size="x-small")
+    .slds-media__body
+      h2.slds-truncate.slds-text-heading_medium Warning
+
+ng-template(#error)
+  .slds-media.slds-media_center.slds-has-flexi-truncate
+    .slds-media__figure
+      span.slds-icon_container.slds-icon-utility-error
+        ngl-icon(iconName="utility:error", size="x-small", variant="inverse")
+    .slds-media__body
+      h2.slds-truncate.slds-text-heading_medium Error
+
+ng-template(#panelheader)
+  .slds-media.slds-media_center.slds-m-bottom_small
+    span.slds-icon_container.slds-icon-standard-account.slds-media__figure
+      ngl-icon(iconName="standard:account")
+    .slds-media__body
+      h2.slds-text-heading_medium.slds-hyphenate
+        a(href='javascript:void(0);') Tesla Motors
+  .slds-grid.slds-wrap.slds-grid_pull-padded
+    .slds-p-horizontal_small.slds-size_1-of-2.slds-p-bottom_x-small
+      dl
+        dt
+          p.slds-popover_panel__label.slds-truncate(title='Billing Address') Billing Address
+        dd
+          p.slds-truncate(title='3500 Deer Creek Rd.') 3500 Deer Creek Rd.
+          p.slds-truncate(title='Palo Alto, CA 94304') Palo Alto, CA 94304
+
+ng-template(#panelbody)
+  dl.slds-popover__body-list
+    dt.slds-m-bottom_small
+      .slds-media.slds-media_center
+        .slds-media__figure
+          span.slds-icon_container.slds-icon-standard-opportunity
+            ngl-icon(iconName="standard:opportunity")
+            span.slds-assistive-text Opportunities
+        .slds-media__body
+          p.slds-text-heading_small.slds-hyphenate Opportunities (2+)
+    dd.slds-m-top_x-small
+      p.slds-truncate
+        a Tesla - Mule ESB
+      dl.slds-list_horizontal.slds-wrap.slds-text-body_small
+        dt.slds-item_label.slds-text-color_weak.slds-truncate Value
+        dd.slds-item_detail.slds-text-color_weak.slds-truncate $500,000
+        dt.slds-item_label.slds-text-color_weak.slds-truncate Close Date
+        dd.slds-item_detail.slds-text-color_weak.slds-truncate Dec 15, 2015
+    dd.slds-m-top_x-small.slds-text-align_right
+      a View All

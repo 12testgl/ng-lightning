@@ -1,17 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-demo-popovers-basic',
   templateUrl: './basic.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoPopoversBasic {
-  placement: string;
-  open = true;
-  openClick1 = false;
-  openClick2 = false;
-
-  change(placement: string) {
-    this.open = true;
-    this.placement = placement;
-  }
+  open = {};
+  open1 = true;
 }

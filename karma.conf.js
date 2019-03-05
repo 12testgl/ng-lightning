@@ -43,7 +43,6 @@ module.exports = function(config) {
         {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false},
 
         // Other libraries
-        {pattern: 'node_modules/tether/dist/js/tether.min.js', included: true, watched: false},
         {pattern: 'karma-shim.js', included: true, watched: true},
 
         // Our built application code
@@ -60,8 +59,6 @@ module.exports = function(config) {
       '/mypath/standard-sprite/svg/symbols.svg': '/base/test/fixtures/fake',
       '/mypath/custom-sprite/svg/symbols.svg': '/base/test/fixtures/fake',
       '/image1.jpg': '/base/test/fixtures/fake',
-
-      '/tether': '/base/node_modules/tether/dist/js/tether.min.js'
     },
 
     preprocessors: {

@@ -11,7 +11,6 @@ System.config({
   baseURL: '/base',
   paths: {
     'npm:': 'node_modules/',
-    'tether': 'temp/test/mock/tether',
   },
   map: {
     'temp': 'temp',

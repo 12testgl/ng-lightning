@@ -1,5 +1,21 @@
+// Close button
+button.slds-button.slds-button_icon.slds-button_icon-small.slds-float_right.slds-popover__close(
+  *ngIf="canClose",
+  [title]="closeTitle",
+  [class.slds-button_icon-inverse]="inverseCloseButton",
+  (click)="onClose()")
+  svg.slds-button__icon(nglIconName="close")
+  span.slds-assistive-text(*ngIf="closeTitle") {{closeTitle}}
+
+// Header
 header.slds-popover__header(*ngIf="header")
-  h2.slds-text-heading--small([id]="uid + '-heading'") {{header}}
-.slds-popover__body([id]="uid")
-  ng-content
-footer.slds-popover__footer(*ngIf="footer") {{footer}}
+  div(*ngIf="isTemplateRef(header); else defaultTpl", [id]="labelledby")
+    ng-container([ngTemplateOutlet]="header")
+  ng-template(#defaultTpl)
+    h2.slds-text-heading_small([id]="labelledby") {{header}}
+
+// Body
+.slds-popover__body([id]="uid", [nglInternalOutlet]="template")
+
+// Footer
+footer.slds-popover__footer(*ngIf="footer", [nglInternalOutlet]="footer")
