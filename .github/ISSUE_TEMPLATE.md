@@ -3,7 +3,7 @@ Thanks for raising an issue! (For *questions*, we recommend instead using https:
 
 To help us help you, if you've found a bug please consider the following:
 
-* If you can demonstrate the bug using https://plnkr.co, please do. Use the 'TRY IN PLUNKER' button next to the components in http://ng-lightning.github.io/ng-lightning/#/components.
+* If you can demonstrate the bug using https://stackblitz.com, please do. Use the 'Stackblitz' button inside the component's examples in http://ng-lightning.github.io/ng-lightning/#/components.
 * Make sure you include information about the browser, and which version of ng-lightning you're using
 
 Reproductions should be small, self-contained, correct examples – http://sscce.org.

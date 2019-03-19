@@ -15,7 +15,7 @@ If you think you've found a bug, please create a new issue. Be sure to include t
 
 Please include as much detail as possible to help us properly address your issue. If we need to triage issues and constantly ask people for more detail, that's time taken away from actually fixing issues. Help us be as efficient as possible by including a lot of detail in your issues.
 
-A minimal reproduce scenario using http://plnkr.co/ allows us to quickly confirm a bug (or point out coding problem) as well as confirm that we are fixing the right problem.
+A minimal reproduce scenario using Stackblitz allows us to quickly confirm a bug (or point out coding problem) as well as confirm that we are fixing the right problem.
 
 ## Pull Requests
 If you want to contribute code, please use a pull request. This is the fastest way to evaluate your code and to merge it into the code base.

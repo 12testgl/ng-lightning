@@ -45,13 +45,14 @@ gulp.task('pug:compile', function libBuildHtml() {
 
   function highlightExample(filepath) {
     // Typescript
-    const ts = highlightTS(fs.readFileSync(`${filepath}.ts`, 'UTF-8'));
+    const tsRaw = fs.readFileSync(`${filepath}.ts`, 'UTF-8');
+    const ts = highlightTS(tsRaw);
 
     // HTML
     const pugSrc = _pug.renderFile(`${filepath}.pug`, { pretty: true, doctype: 'html' });
     const html = Prism.highlight(`${pugSrc}`.trim(), Prism.languages.markup);
 
-    return { ts: ts, html };
+    return { ts, tsRaw: `${encodeURIComponent(tsRaw)}`, html, htmlRaw: `${encodeURIComponent(pugSrc)}` };
   }
 
   return gulp.src(pugSrc, { base: './' })

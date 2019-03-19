@@ -21,8 +21,10 @@ header.component__header.slds-border_bottom.slds-grid.slds-wrap.slds-m-bottom_me
           pre.language-typescript
             code !{example.ts}
 
-        .slds-m-top_large
-          app-demo-example-docs([ts]=`ts${example.id}`, [markup]=`markup${example.id}`)
+        .slds-is-relative.slds-m-top_large
+          app-demo-example-docs(dir=self.dir, file=example.id,
+                                [ts]=`ts${example.id}`, [markup]=`markup${example.id}`,
+                                tsRaw=`${example.tsRaw}`, markupRaw=`${example.htmlRaw}`)
 
 .slds-m-vertical_medium
   .callout
