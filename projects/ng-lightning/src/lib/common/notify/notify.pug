@@ -1,5 +1,5 @@
 mixin icon()
-  ngl-icon(*ngIf="iconName", [iconName]="iconName", size="x-small")&attributes(attributes)
+  ngl-icon(*ngIf="iconName", [iconName]="iconName", size="x-small", variant="")&attributes(attributes)
 
 mixin close()
   button.slds-button.slds-button_icon.slds-notify__close.slds-button_icon-inverse(*ngIf="dismissible", type="button", (click)="close('button', $event)")

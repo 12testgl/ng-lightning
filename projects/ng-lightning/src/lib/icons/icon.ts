@@ -26,7 +26,7 @@ export class NglIcon implements OnInit, OnChanges {
   /**
    * The appearance of a `utility` icon.
    */
-  @Input() variant: 'default' | 'warning' | 'error' | 'light' | 'inverse' = 'default';
+  @Input() variant: 'default' | 'warning' | 'error' | 'light' | 'inverse' | null = 'default';
 
   /**
    * The size of the icon.

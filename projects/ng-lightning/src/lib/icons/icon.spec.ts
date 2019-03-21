@@ -63,11 +63,12 @@ describe('Icon Component', () => {
     expect(icon).not.toHaveCssClass('slds-icon-text-warning');
     expect(icon).not.toHaveCssClass('slds-icon-text-default');
 
-    componentInstance.variant = 'false';
+    componentInstance.variant = null;
     fixture.detectChanges();
     expect(icon).not.toHaveCssClass('slds-icon-text-error');
     expect(icon).not.toHaveCssClass('slds-icon-text-warning');
     expect(icon).not.toHaveCssClass('slds-icon-text-default');
+    expect(icon).not.toHaveCssClass('slds-icon-text-null');
   });
 
   it('should set size based on input', () => {

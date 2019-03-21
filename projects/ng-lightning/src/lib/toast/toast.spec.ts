@@ -146,6 +146,7 @@ describe('`ngl-toast`', () => {
 
     const icon = fixture.nativeElement.querySelector('ngl-icon');
     expect(icon).toBeDefined();
+    expect(icon.querySelector('svg')).not.toHaveCssClass('slds-icon-text-default');
     const use = icon.querySelector('use');
     expect(use.getAttribute('xlink:href')).toBe('assets/icons/utility-sprite/svg/symbols.svg#info');
   }));
