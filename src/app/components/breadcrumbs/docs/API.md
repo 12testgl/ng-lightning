@@ -1,8 +1,7 @@
-# `<ngl-breadcrumbs>`
+# <ngl-breadcrumbs>
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| `[assistiveText]` | assistive text for accessibility purposes | string | |
+| `[assistiveText]` | Assistive text for accessibility. | string | |
 
-# `*nglBreadcrumb`
-
+# *nglBreadcrumb

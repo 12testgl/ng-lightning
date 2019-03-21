@@ -2,13 +2,13 @@
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| `[variant]` | severity of the displayed message for theming | 'error' \| 'info' \| 'success' \| 'warning' | 'info' |
-| `[iconName]` | helper icon in `'utility:info'` format | string | |
-| `[duration]` | number of milliseconds after which, the close event will be triggered with an emitted reason of `'timeout'` | number | |
-| `[assistiveText]` | assistive text for accessibility | string | |
-| `[closeButtonAssistiveText]` | visually hidden label for the close button | string | `'Close'` |
-| `[dismissible]` | it can suppress the appearance of close button, even if `(close)` is bound | boolean | |
-| `(close)` | emits the close event reason, like `'button'` and `'timeout'`. If not bound or if `dismissible` is false, the close button will not be shown. | `EventEmitter<string>` | |
+| `[variant]` | Severity of the displayed message for theming. | 'error' \| 'info' \| 'success' \| 'warning' | 'info' |
+| `[iconName]` | Helper icon in `'utility:info'` format. | string | |
+| `[duration]` | Number of milliseconds after which, the close event will be triggered with an emitted reason of `'timeout'`. | number | |
+| `[assistiveText]` | Assistive text for accessibility. | string | |
+| `[closeButtonAssistiveText]` | Visually hidden label for the close button. | string | 'Close' |
+| `[dismissible]` | It can suppress the appearance of close button, even if `(close)` is bound. | boolean | |
+| `(close)` | Emits the close event reason, like `'button'` and `'timeout'`. If not bound or if `dismissible` is false, the close button will not be shown. | EventEmitter<string> | |
 
 # Export API
 

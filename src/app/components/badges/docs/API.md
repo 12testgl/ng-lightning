@@ -1,5 +1,5 @@
-# `<ngl-badge>`
+# <ngl-badge>
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| `[type]` | badge's [theme](https://www.lightningdesignsystem.com/components/utilities/themes/#color) | string | |
+| `[type]` | Badge's [theme](https://www.lightningdesignsystem.com/components/utilities/themes/#color). | string | |
