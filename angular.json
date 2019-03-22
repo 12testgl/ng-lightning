@@ -167,5 +167,8 @@
       }
     }
   },
+  "cli": {
+    "packageManager": "yarn"
+  },
   "defaultProject": "ng-lightning-app"
 }

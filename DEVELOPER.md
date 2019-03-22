@@ -27,7 +27,7 @@ git remote add upstream git@github.com:ng-lightning/ng-lightning.git
 Get all the necessary dependencies needed to build, test and run demo page by running:
 
 ```bash
-npm install
+yarn install
 ```
 
 ## Commands
@@ -35,12 +35,12 @@ npm install
 ### Build
 
 ```bash
-npm run build
+yarn build
 ```
 
 The best way to see your changes in action, is to use our demo page locally. Run:
 ```bash
-npm start
+yarn start
 ```
 which will create a development server accessible through `http:localhost:1111`.
 
@@ -48,12 +48,12 @@ which will create a development server accessible through `http:localhost:1111`.
 ### Tests
 
 ```bash
-npm test
+yarn test
 ```
 
 If you want to run your tests in watch mode, you can use:
 ```bash
-npm run tdd
+yarn tdd
 ```
 
 #### Saucelabs
@@ -71,10 +71,10 @@ The setup assumes that eiter `process.env.SAUCE_USERNAME` and `process.env.SAUCE
 
 When you believe it's time to release a new version, you can do it through an interactive process, by using:
 ```bash
-npm run release
+yarn release
 ```
 
 Demo site published to `gh-pages` branch can be updated at any time using:
 ```bash
-npm run demo:release
+yarn demo:release
 ```
