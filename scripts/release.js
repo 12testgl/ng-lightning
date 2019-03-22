@@ -6,7 +6,7 @@ const root = require('app-root-path').path;
 const git = require('simple-git')( root );
 const child_process = require('child_process');
 
-const packageFile = `${root}/package.json`;
+const packageFile = `${root}/projects/ng-lightning/package.json`;
 const changelogFile = `${root}/CHANGELOG.md`;
 
 function requestReleaseType(current) {
@@ -69,7 +69,7 @@ function runVersion( version ) {
 function publish(version) {
   var deferred = q.defer();
   console.log('Publishing...');
-  child_process.exec('gulp prepublish && npm publish ./demo/node_modules/ng-lightning', function (err, stdout, stderr){
+  child_process.exec('gulp prepublish && npm publish ./dist/ng-lightning', function (err, stdout, stderr){
     if (err) {
       console.log('child processes failed with error code: ', err);
       deferred.reject();

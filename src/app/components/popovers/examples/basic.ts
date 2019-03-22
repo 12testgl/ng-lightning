@@ -6,6 +6,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoPopoversBasic {
-  open = {};
+  open: any = {};
   open1 = true;
 }

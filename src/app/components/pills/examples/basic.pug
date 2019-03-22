@@ -1,21 +1,21 @@
 .slds-text-title_caps.slds-m-bottom_small Pill examples
-ngl-pill((remove)="log($event)")
+ngl-pill((remove)="log()")
   a(nglPillAction, href="javascript:void(0)") Pill
 
-ngl-pill(icon="standard:feedback", (remove)="log($event)")
+ngl-pill(icon="standard:feedback", (remove)="log()")
   a(nglPillAction, href="javascript:void(0)") Icon
 
-ngl-pill(avatar="assets/images/avatar2.jpg", (remove)="log($event)")
+ngl-pill(avatar="assets/images/avatar2.jpg", (remove)="log()")
   a(nglPillAction, href="javascript:void(0)") Avatar
 
-ngl-pill([icon]="warningTpl", hasError="true", (remove)="log($event)")
+ngl-pill([icon]="warningTpl", hasError="true", (remove)="log()")
   ng-template(#warningTpl): ngl-icon(iconName="utility:error", variant="error", title="error")
   a(nglPillAction, href="javascript:void(0)") Error
 
-ngl-pill.slds-pill_bare((remove)="log($event)")
+ngl-pill.slds-pill_bare((remove)="log()")
   a(nglPillAction, href="javascript:void(0)") Bare
 
-ngl-pill((remove)="log($event)") Unlinked
+ngl-pill((remove)="log()") Unlinked
 
 ngl-pill No remove
 

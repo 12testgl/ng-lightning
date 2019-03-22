@@ -1,4 +1,4 @@
-import { isDevMode, EventEmitter } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 export function hasObservers(output: string) {
 
@@ -16,7 +16,7 @@ export function hasObservers(output: string) {
 
     Object.defineProperty(target, propName, {
       get(): boolean {
-        if (isDevMode() && !(this[output] instanceof EventEmitter)) {
+        if (!(this[output] instanceof EventEmitter)) {
           throw Error(`[ng-lightning] ${target.constructor.name}: "${output}" is not an EventEmitter`);
         }
         return (<EventEmitter<any>>this[output]).observers.length > 0;

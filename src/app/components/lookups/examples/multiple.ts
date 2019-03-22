@@ -10,6 +10,7 @@ import { map, startWith } from 'rxjs/operators';
 export class DemoLookupsMultiple {
 
   inputCtrl = new FormControl();
+  open = false;
 
   filteredStates$: Observable<any[]>;
   selectedStates: string[];

@@ -1,14 +1,8 @@
 // https://netbasal.com/how-to-add-angular-component-input-validation
 
-import { isDevMode } from '@angular/core';
-
 const noop = () => {};
 
 export function isRequired(target: any, prop: string) {
-
-  if (!isDevMode()) {
-    return;
-  }
 
   const NG_ON_ONIT_NAME = 'ngOnInit';
 

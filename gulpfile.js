@@ -3,6 +3,7 @@ const pug = require('gulp-pug');
 const data = require('gulp-data');
 const changed = require('gulp-changed');
 const del = require('del');
+const pkg = require('./projects/ng-lightning/package.json');
 
 const pugSrc = [
   'projects/ng-lightning/src/lib',
@@ -96,9 +97,17 @@ gulp.task('pug:compile', function libBuildHtml() {
       doctype: 'html',
       self: true,
       pretty: true,
-      locals: {},
+      locals: {
+        now: +new Date(),
+        version: pkg.version,
+      },
     }).on('error', function (err) { console.log(err); }))
     .pipe(gulp.dest('./'))
+});
+
+gulp.task('prepublish', function prepublish_impl() {
+  return gulp.src(['*.md', 'LICENSE'])
+    .pipe(gulp.dest('dist/ng-lightning'));
 });
 
 gulp.task('pug', gulp.series('pug:clean', 'pug:compile'));

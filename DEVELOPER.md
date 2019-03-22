@@ -38,12 +38,12 @@ npm install
 npm run build
 ```
 
-If you want to watch your source files for changes and build every time use:
+The best way to see your changes in action, is to use our demo page locally. Run:
 ```bash
 npm start
 ```
+which will create a development server accessible through `http:localhost:1111`.
 
-**Note**: Generated output is placed into the `demo/node_modules/ng-lightning` folder.
 
 ### Tests
 
@@ -56,11 +56,6 @@ If you want to run your tests in watch mode, you can use:
 npm run tdd
 ```
 
-You can control log level with extra command line argument. For example:
-```bash
-npm run tdd -- --logLevel=ERROR
-```
-
 #### Saucelabs
 If you want and already have a personal account, you can run tests on Saucelabs, just by passing the `--saucelabs` flag.
 The setup assumes that eiter `process.env.SAUCE_USERNAME` and `process.env.SAUCE_ACCESS_KEY` are set or a `saucelabs.json` file exists inside the root folder, with the following format.
@@ -71,17 +66,6 @@ The setup assumes that eiter `process.env.SAUCE_USERNAME` and `process.env.SAUCE
   "accessKey": "YOUR_SAUCE_ACCESS_KEY"
 }
 ```
-
-### Demo
-
-The best way to see your changes in action, is to use our demo page locally. Run:
-```bash
-npm run demo
-```
-which will create a development server accessible through `http:localhost:1111`.
-In conjunction with `npm start` in another command tab you have a fully working environment!
-
-All demo resources can be found in the `/demo` folder.
 
 ## Release
 
