@@ -30,8 +30,6 @@ import { NglSpinnersModule } from './spinners/module';
 import { NglTabsModule } from './tabs/module';
 import { NglTextareaModule } from './textarea/module';
 import { NglTooltipsModule } from './tooltips/module';
-import { INglConfig } from './config/config.interface';
-import { NglConfig, NGL_CONFIG } from './config/config';
 
 const MODULES = [
   NglAlertModule,
@@ -69,14 +67,4 @@ const MODULES = [
 @NgModule({
   exports: MODULES,
 })
-export class NglModule {
-  static forRoot(config: INglConfig = {}): ModuleWithProviders {
-    return {
-      ngModule: NglModule,
-      providers: [
-        { provide: NGL_CONFIG, useValue: config },
-        NglConfig,
-      ],
-   };
- }
-}
+export class NglModule {}

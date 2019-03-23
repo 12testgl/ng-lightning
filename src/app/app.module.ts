@@ -31,7 +31,7 @@ const routes: Routes = [
       useHash: true,
       scrollPositionRestoration: 'enabled',
     }),
-    NglModule.forRoot(),
+    NglModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

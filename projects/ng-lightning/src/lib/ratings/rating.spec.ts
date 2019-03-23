@@ -4,7 +4,7 @@ import { NglRating } from './rating';
 import { NglRatingsModule } from './module';
 import { createGenericTestComponent, dispatchFixtureKeyEvent, selectElements, dispatchEvent } from '../../../test/util';
 import { By } from '@angular/platform-browser';
-import { NglConfig } from '../config/config';
+import { NGL_RATING_CONFIG, NglRatingConfig } from './config';
 
 const createTestComponent = (html?: string) =>
   createGenericTestComponent(TestComponent, html) as ComponentFixture<TestComponent>;
@@ -224,18 +224,6 @@ describe('Rating Component', () => {
     expect(icons.map(icon => rgb2hex(icon.style.fill))).toEqual([on, on, on, off, off]);
   });
 
-  it('should have configurable on/off color', () => {
-    const on = '#000000';
-    const off = '#FFFFFF';
-    const fixture = createTestComponent(`<ngl-rating rate="3"></ngl-rating>`);
-
-    fixture.componentInstance.updateConfig(on, off);
-    fixture.detectChanges();
-
-    const icons = getICons(fixture.nativeElement);
-    expect(icons.map(icon => rgb2hex(icon.style.fill))).toEqual([on, on, on, off, off]);
-  });
-
   describe('with custom icon', function () {
     let fixture: ComponentFixture<TestComponent>;
 
@@ -266,6 +254,26 @@ describe('Rating Component', () => {
       expect(stars.map(el => el.textContent)).toEqual(['0/true/100', '1/true/100', '2/true/100', '3/false/65', '4/false/0']);
     });
   });
+
+  describe('custom configuration', () => {
+    const on = '#000000';
+    const off = '#FFFFFF';
+
+    beforeEach(() => TestBed.configureTestingModule({
+      declarations: [TestComponent],
+      imports: [NglRatingsModule],
+      providers: [
+        { provide: NGL_RATING_CONFIG, useValue: <NglRatingConfig>{ colorOn: on, colorOff: off } },
+      ],
+    }));
+
+    it('should have configurable on/off color', () => {
+      const fixture = createTestComponent(`<ngl-rating rate="3"></ngl-rating>`);
+
+      const icons = getICons(fixture.nativeElement);
+      expect(icons.map(icon => rgb2hex(icon.style.fill))).toEqual([on, on, on, off, off]);
+    });
+  });
 });
 
 @Component({
@@ -277,10 +285,4 @@ export class TestComponent {
   readonly = false;
   size: string;
   change = jasmine.createSpy('change');
-
-  constructor(private config: NglConfig) {}
-
-  updateConfig(ratingColorOn: string, ratingColorOff: string) {
-    this.config.update({ ratingColorOn, ratingColorOff });
-  }
 }

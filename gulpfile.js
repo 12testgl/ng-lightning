@@ -66,7 +66,6 @@ gulp.task('pug:compile', function libBuildHtml() {
           { file: 'install', lang: 'clike' },
           { file: 'usage', lang: 'typescript' },
           { file: 'config', lang: 'typescript' },
-          { file: 'config-runtime', lang: 'typescript' },
         ].forEach(({file, lang}) => {
           const src = fs.readFileSync(`${directory}/${file}.md`, 'UTF-8');
           const md = src;

@@ -8,6 +8,7 @@ import { DemoRatingsComponent } from './ratings.component';
 
 // Examples
 import { DemoRatingsBasic } from './examples/basic';
+import { DemoRatingsConfig } from './examples/config';
 
 const routes: Routes = [
   { path: '', component: DemoRatingsComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   declarations: [
     DemoRatingsComponent,
     DemoRatingsBasic,
+    DemoRatingsConfig,
   ],
 })
 export class NglDemoRatingsModule {}

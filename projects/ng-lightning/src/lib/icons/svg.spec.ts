@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent } from '../../../test/util';
 import { NglIconsModule } from './module';
-import { NglConfig } from '../config/config';
+import { NGL_ICON_CONFIG, NglIconConfig } from './config';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -38,11 +38,12 @@ describe('SVG icon Component', () => {
 
 });
 
-@Component({ template: '' })
+@Component({
+  template: '',
+  providers: [
+    { provide: NGL_ICON_CONFIG, useValue: <NglIconConfig>{ svgPath: '/mypath' } },
+  ],
+})
 export class TestComponent {
   iconName: string;
-
-  constructor(config: NglConfig) {
-    config.update({ svgPath: '/mypath' });
-  }
 }

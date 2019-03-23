@@ -1,8 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener,
-        HostBinding, ContentChild, ViewChild, TemplateRef, ChangeDetectorRef, OnInit, AfterContentInit } from '@angular/core';
+        HostBinding, ContentChild, ViewChild, TemplateRef, OnInit, AfterContentInit, Optional, Inject } from '@angular/core';
 import { NglRatingIconTemplate } from './icons';
-import { NglConfig, NglConfigurable } from '../config/config';
 import { InputBoolean } from '../util/convert';
+import { NGL_RATING_CONFIG, NglRatingConfig } from './config';
 
 @Component({
   selector: 'ngl-rating',
@@ -15,7 +15,6 @@ import { InputBoolean } from '../util/convert';
     '[attr.aria-valuemax]': 'max',
   },
 })
-@NglConfigurable()
 export class NglRating implements OnInit, AfterContentInit {
 
   range: number[] = [];
@@ -53,8 +52,10 @@ export class NglRating implements OnInit, AfterContentInit {
   private _max = 5;
   private inputRate: number;
 
-  constructor(private config: NglConfig, private cd: ChangeDetectorRef) {
-    this.nglOnConfigChanges();
+  constructor(@Optional() @Inject(NGL_RATING_CONFIG) defaultConfig: NglRatingConfig) {
+    const config = { ...new NglRatingConfig(), ...defaultConfig };
+    this.colorOn = config.colorOn;
+    this.colorOff = config.colorOff;
   }
 
   ngOnInit() {
@@ -63,11 +64,6 @@ export class NglRating implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this._template = this.iconTemplate ? this.iconTemplate.templateRef : this.defaultTemplate;
-  }
-
-  nglOnConfigChanges() {
-    this.colorOn = this.config.get('ratingColorOn');
-    this.colorOff = this.config.get('ratingColorOff');
   }
 
   update(value: number) {

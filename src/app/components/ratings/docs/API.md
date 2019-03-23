@@ -19,3 +19,10 @@
 | `$implicit` | Whether icon should be active or not. | boolean |
 | `index` | Icon index. | number |
 | `fill` | Fill percentage. An integer value between 0 and 100. | number |
+
+
+# NGL_RATING_CONFIG<NglRatingConfig>
+
+Injection token that can be used to specify default rating options.
+
+Available properties: `colorOn`,  `colorOff`

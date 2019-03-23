@@ -1,10 +1,8 @@
+import { NGL_ICON_CONFIG, NglIconConfig } from 'ng-ligthning';
+
 @NgModule({
-  imports: [
+  providers: [
     ...,
-    NglModule.forRoot({
-      svgPath: '/my/path', // Override this specific property
-      ...
-    })
+    { provide: NGL_ICON_CONFIG, useValue: <NglIconConfig>{ svgPath: '/my/path' } },
   ],
 })
-export class AppModule {}

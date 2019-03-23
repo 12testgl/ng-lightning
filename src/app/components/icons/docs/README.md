@@ -5,3 +5,6 @@ All available icons can be found [here](https://lightningdesignsystem.com/icons)
 Use the `variant` and `size` to customize the styling. The `variant` input changes the appearance of a utility icon. For example, the *error* variant adds a red fill.
 
 If you want to make additional changes to the color or styling of an icon, use the `svgClass` input (similar to `ngClass`)  to apply extra classes to the SVG element.
+
+**Changing the default behavior**
+You can configure your app's default path to SVG icons by configuring and providing your options using the `NGL_ICON_CONFIG` injection token.

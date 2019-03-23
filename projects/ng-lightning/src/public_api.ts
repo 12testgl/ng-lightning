@@ -6,5 +6,7 @@ export { NglModule } from './lib/ng-lightning.module';
 
 export { NglComboboxOptionItem } from './lib/comboboxes/combobox';
 export { INglDatatableSort, INglDatatableRowClick } from './lib/datatables/module';
-export { INglConfig } from './lib/config/config.interface';
-export { NglConfig } from './lib/config/config';
+
+// Configuration
+export { NGL_ICON_CONFIG, NglIconConfig } from './lib/icons/config';
+export { NGL_RATING_CONFIG, NglRatingConfig  } from './lib/ratings/config';

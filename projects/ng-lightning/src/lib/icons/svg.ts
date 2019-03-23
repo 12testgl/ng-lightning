@@ -1,6 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
-import { NglConfig, NglConfigurable } from '../config/config';
+import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, Inject, Optional } from '@angular/core';
 import { normalizeIconName } from './icon';
+import { NglIconConfig, NGL_ICON_CONFIG } from './config';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,19 +8,25 @@ import { normalizeIconName } from './icon';
   templateUrl: './svg.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-@NglConfigurable()
 export class NglIconSvg {
+
+  path: string;
 
   @Input('nglIconName') set iconName(iconName: string) {
     const [category, icon] = normalizeIconName(iconName).split(':');
-    this.iconPath = `${this.config.get('svgPath')}/${category}-sprite/svg/symbols.svg#${icon}`;
+    this.iconPath = `${this.path}/${category}-sprite/svg/symbols.svg#${icon}`;
   }
 
   @Input() xPos = '0';
 
   iconPath: string;
 
-  constructor(private config: NglConfig, private cd: ChangeDetectorRef, el: ElementRef, renderer: Renderer2) {
+  constructor(@Optional() @Inject(NGL_ICON_CONFIG) defaultConfig: NglIconConfig,
+              el: ElementRef,
+              renderer: Renderer2) {
     renderer.setAttribute(el.nativeElement, 'aria-hidden', 'true');
+
+    const config = { ...new NglIconConfig(), ...defaultConfig };
+    this.path = config.svgPath;
   }
 }
