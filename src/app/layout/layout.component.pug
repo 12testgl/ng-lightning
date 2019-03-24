@@ -1,0 +1,26 @@
+.slds-container_x-large.slds-container_center
+  .slds-grid.slds-wrap.slds-grow
+    .header.slds-p-around_large.slds-grow.slds-order_1
+      a.slds-text-link_reset(routerLink='/')
+        .header__logo
+        span.slds-assistive-text ng-lightning
+        .header__title NG-LIGHTNING
+
+    aside.aside.slds-grow.slds-order_2.slds-small-order_2.slds-medium-order_1.slds-large-order_1
+      .slds-nav-vertical__section
+        ul
+          li.slds-nav-vertical__item(routerLinkActive="slds-is-active")
+            a.slds-nav-vertical__action.slds-truncate(routerLink="/get-started") Get Started
+      .slds-nav-vertical__section
+        ul
+          li.slds-nav-vertical__item(routerLinkActive="slds-is-active")
+            a.slds-nav-vertical__action.slds-truncate(routerLink="/support") Support
+      .slds-nav-vertical__section
+        h2.slds-nav-vertical__title Components
+        ul
+          li.slds-nav-vertical__item(*ngFor="let link of links", routerLinkActive="slds-is-active")
+            a.slds-nav-vertical__action.slds-truncate([routerLink]="'/components/' + link.path")
+              | {{ getLabel(link) }}
+
+    .main.slds-grow.slds-size_1-of-1.slds-order_1.slds-small-order_1.slds-medium-order_2.slds-large-order_2.slds-p-horizontal_large.slds-p-bottom_large
+      router-outlet

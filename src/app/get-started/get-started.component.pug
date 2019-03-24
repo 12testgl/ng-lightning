@@ -1,0 +1,65 @@
+header.page__header.slds-border_bottom.slds-grid.slds-wrap.slds-m-bottom_medium
+  .slds-has-flexi-truncate.slds-align-middle
+    h1 Get Started
+
+div
+  .callout Installation
+  p
+    | Install through
+    |
+    code npm
+    | :
+  |
+  pre.language-clike(ngNonBindable)
+    code !{self.install}
+
+//- Documentation
+div
+  .callout Reading the documentation
+  p
+    | Each component has API documentation, examples, and a working demo. They can be found
+    |
+    |
+    a(routerLink="/components") here
+    | .
+
+//- Usage instructions
+div
+  .callout Usage
+  |
+  p
+    | Once installed you need to import our main module into your application module by calling
+    code NglModule.forRoot()
+    | . You should end up with code similar to this:
+
+  pre.language-typescript
+    code !{self.usage}
+
+//- Configuration
+div
+  .callout Configuration
+  |
+  p
+    | Optionally, you can pass an object to the
+    |
+    code forRoot
+    |  method, to configure
+    |
+    code ng-lightning
+    |  during the initialization of the application, in order to provide your own default values.
+    |   For example:
+  pre.language-typescript
+    code !{self.config}
+
+  p.slds-m-top_small
+    | Currently available options can be found
+    |
+    a(href="https://github.com/ng-lightning/ng-lightning/blob/master/src/config/config.interface.ts") here
+    | .
+  p.slds-m-top_large
+    | If you want to change some config properties during runtime, you can easily achieve it by utilizing the
+    |
+    code update
+    |  method like this:
+  pre.language-typescript
+    code !{self['config-runtime']}

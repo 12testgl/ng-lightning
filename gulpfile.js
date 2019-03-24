@@ -58,7 +58,7 @@ gulp.task('pug:compile', function libBuildHtml() {
     .pipe(changed('./', { extension: '.html' }))
     .pipe(data(function(file) {
       // Intro
-      if (file.path.endsWith('intro.pug')) {
+      if (file.path.endsWith('get-started.component.pug')) {
         const directory = path.dirname(file.path);
 
         const docs = {};

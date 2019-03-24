@@ -1,10 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  templateUrl: './intro.html',
+  templateUrl: './get-started.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class.intro]': 'true',
-  },
 })
-export class IntroComponent {}
+export class GetStartedComponent {}
