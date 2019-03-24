@@ -30,10 +30,17 @@ map: {
 ```
 
 #### Dependencies
-This library depends on Salesforce's LDS markup and CSS (tested with 2.5.0). We don't ship any CSS file, but you have to take care of including LDS CSS rules in your page. There are various ways to achieve this, for example compiling through their source files ([`@salesforce-ux/design-system`](https://github.com/salesforce-ux/design-system)) or by adding this into your `<head>`:
+This library depends on Salesforce's LDS markup and CSS (tested with 2.8.0). We don't ship any CSS file, but you have to take care of including LDS CSS rules in your page. There are various ways to achieve this, for example compiling through their source files ([`@salesforce-ux/design-system`](https://github.com/salesforce-ux/design-system)) or by adding this into your `<head>`:
 
 ```html
 <link rel="stylesheet" href="https://unpkg.com/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css">
+```
+
+Also, you'll have to include a small set of structural styles for [`CDK overlays`](https://material.angular.io/cdk/overlay/overview) to work correctly.
+You can do so by importing the prebuilt styles:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/@angular/cdk@7.3.5/overlay-prebuilt.css">
 ```
 
 #### SVG Icons
