@@ -3,31 +3,31 @@
 
     div
 
-    .slds-grid.slds-grid_align-center
-      .slds-p-around_x-large.slds-text-align_center
+    .slds-grid.slds-grid_align-center.slds-p-around_small
+      .slds-text-align_center
         h1.intro__title NG-LIGHTNING
         .slds-text-heading_small Native Angular components & directives for Lightning Design System
 
-    .slds-grid.slds-grid_align-center
+    .slds-grid.slds-grid_align-center.slds-p-around_small
       img(src="assets/images/shield.svg", style="height: 200px;")
 
-    .slds-grid.slds-grid_align-center.slds-grid_vertical.slds-text-align_center.slds-p-around_x-large
+    .slds-grid.slds-grid_align-center.slds-grid_vertical.slds-text-align_center.slds-p-around_small
       div
         a.slds-button.slds-button_brand.intro__button(routerLink="/get-started") GET STARTED
         a.slds-button.slds-button_outline-brand.intro__button.intro__button_outline(routerLink="/components") DOCUMENTATION
-      .slds-m-top_small
+      .slds-p-vertical_small
         | View the
         |
-        a.slds-m-top_small(href="https://github.com/ng-lightning/ng-lightning", target="_blank") source
+        a(href="https://github.com/ng-lightning/ng-lightning", target="_blank") source
         |  on GitHub
         span.slds-m-horizontal_x-small ·
         | Current release:
         |
-        a.slds-m-top_small(href="https://www.npmjs.com/package/ng-lightning", target="_blank") v#{self.version}
+        a(href="https://www.npmjs.com/package/ng-lightning", target="_blank") v#{self.version}
 
     div
 
-.slds-container_x-large.slds-container_center.slds-p-around_x-large
+.slds-container_x-large.slds-container_center.slds-p-horizontal_x-large.slds-p-bottom_x-large
   .slds-grid.slds-wrap
     .slds-col_padded.slds-text-align_center.slds-size_1-of-1.slds-large-size_1-of-3
       .callout BUILDING FOR THE FUTURE
