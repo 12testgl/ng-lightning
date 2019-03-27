@@ -6,6 +6,7 @@ import { NglBadgesModule } from './badges/module';
 import { NglBreadcrumbsModule } from './breadcrumbs/module';
 import { NglButtonIconsModule } from './buttonicons/module';
 import { NglButtonsModule } from './buttons/module';
+import { NglCarouselModule } from './carousel/module';
 import { NglCheckboxesModule } from './checkboxes/module';
 import { NglComboboxesModule } from './comboboxes/module';
 import { NglDatatablesModule } from './datatables/module';
@@ -38,6 +39,7 @@ const MODULES = [
   NglBreadcrumbsModule,
   NglButtonIconsModule,
   NglButtonsModule,
+  NglCarouselModule,
   NglCheckboxesModule,
   NglComboboxesModule,
   NglDatatablesModule,

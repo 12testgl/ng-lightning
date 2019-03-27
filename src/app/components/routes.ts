@@ -5,6 +5,7 @@ export const routes = [
   { path: 'breadcrumbs', loadChildren: './breadcrumbs/breadcrumbs.module#NglDemoBreadcrumbsModule' },
   { path: 'buttonicons', loadChildren: './buttonicons/buttonicons.module#NglDemoButtonIconsModule' },
   { path: 'buttons', loadChildren: './buttons/buttons.module#NglDemoButtonsModule' },
+  { path: 'carousel', loadChildren: './carousel/carousel.module#NglDemoCarouselModule' },
   { path: 'checkboxes', loadChildren: './checkboxes/checkboxes.module#NglDemoCheckboxesModule' },
   { path: 'comboboxes', loadChildren: './comboboxes/comboboxes.module#NglDemoComboboxesModule' },
   { path: 'datatables', loadChildren: './datatables/datatables.module#NglDemoDatatablesModule' },

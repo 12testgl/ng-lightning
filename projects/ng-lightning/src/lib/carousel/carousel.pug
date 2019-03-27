@@ -1,0 +1,21 @@
+.slds-carousel__stage
+  //- Play/Pause button
+  span.slds-carousel__autoplay(*ngIf="autoScroll")
+    button.slds-button.slds-button_icon.slds-button_icon-border-filled.slds-button_icon-x-small([attr.aria-pressed]="!playing",
+          [title]="playLabel()", (click)="togglePlay()")
+      svg.slds-button__icon([nglIconName]="playing ? 'utility:pause' : 'utility:right'")
+      span.slds-assistive-text {{ playLabel() }}
+
+  //- Images
+  .slds-carousel__panels([style.transform]="'translateX(' + (-active * 100) + '%)'")
+    ng-content
+
+  //- Indicators
+  ul.slds-carousel__indicators(#indicatorsEl, role="tablist", (keydown)="onKeyboard($event)")
+    li.slds-carousel__indicator(*ngFor="let image of images; let i = index", role="presentation")
+      a.slds-carousel__indicator-action(nglCarouselIndicator, href="javascript:void(0);", role="tab",
+                                        [isActive]="isActive(i)", [image]="getImage(i)",
+                                        [attr.aria-controls]="image.uid",
+                                        [title]="image.header",
+                                        (click)="onIndicatorClick(i)")
+        span.slds-assistive-text {{ image.header }}
