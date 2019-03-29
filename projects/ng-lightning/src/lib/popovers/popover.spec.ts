@@ -32,6 +32,12 @@ function getAssistiveTextEl(element: HTMLElement): HTMLElement {
   return <HTMLElement>element.querySelector('.slds-assistive-text');
 }
 
+export function expectPlacementStyles(element: HTMLElement, styles: any) {
+  const { top, right, bottom, left } = element.style;
+  const expected = [styles.top, styles.right, styles.bottom, styles.left].map(e => e || '');
+  expect([top, right, bottom, left]).toEqual(expected);
+}
+
 function getOutsidePopoverElement(element: HTMLElement): HTMLElement {
   return <HTMLElement>element.children[1];
 }
@@ -76,22 +82,35 @@ describe('Popovers', () => {
     expect(popoverEl).toBeFalsy();
   });
 
-  it('should change nubbin based on placement', () => {
+  it('should change nubbin and styles based on placement', () => {
     fixture = createTestComponent();
     const { componentInstance } = fixture;
     const popoverEl = getPopoverElement();
 
     expect(popoverEl).toHaveCssClass('slds-nubbin_bottom');
+    expectPlacementStyles(popoverEl, { bottom: '1rem'});
 
     componentInstance.placement = 'left';
     fixture.detectChanges();
     expect(popoverEl).toHaveCssClass('slds-nubbin_right');
     expect(popoverEl).not.toHaveCssClass('slds-nubbin_bottom');
+    expectPlacementStyles(popoverEl, { right: '1rem' });
+
+    componentInstance.placement = 'right-top';
+    fixture.detectChanges();
+    expect(popoverEl).toHaveCssClass('slds-nubbin_left-top');
+    expectPlacementStyles(popoverEl, { left: '1rem', top: '-1.5rem' });
+
+    componentInstance.placement = 'left-bottom';
+    fixture.detectChanges();
+    expect(popoverEl).toHaveCssClass('slds-nubbin_right-bottom');
+    expectPlacementStyles(popoverEl, { right: '1rem', bottom: '-1.5rem' });
 
     componentInstance.placement = 'bottom';
     fixture.detectChanges();
     expect(popoverEl).toHaveCssClass('slds-nubbin_top');
     expect(popoverEl).not.toHaveCssClass('slds-nubbin_right');
+    expectPlacementStyles(popoverEl, { top: '1rem' });
   });
 
   it('should change variant based on input', () => {

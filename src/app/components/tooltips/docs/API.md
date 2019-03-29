@@ -4,7 +4,7 @@
 | -------- | ----------- | ---- | ------- |
 | `[nglTooltip]` | The content as string or the connected template reference to show. | string \| TemplateRef | |
 | `[nglTooltipOpen]` | Whether the floating tooltip is visible. Be sure to use two-way binding, for example: `[(nglTooltipOpen)]="open"` | boolean | |
-| `[nglTooltipPlacement]` | Position relative to host element. | 'top' \| 'right' \| 'bottom' \| 'left' | 'top' |
+| `[nglTooltipPlacement]` | Position relative to host element. | 'top' \| 'top-left' \| 'top-right' \| 'right' \| 'right-top' \| 'right-bottom' \| 'bottom' \| 'bottom-left' \| 'bottom-right' \| 'left' \| 'left-top' \| 'left-bottom' | 'top' |
 | `[nglTooltipDelay]` | Delay in milliseconds until it opens/closes. If you wish to specify different delays for opening and closing, you may provide an array of two different values. | number \| number[] | |
 | `[nglTooltipInteractive]` | Give the possibility to interact with the content of the tooltip. User has to move the cursor to the tooltip before it starts closing (this lapse of time has its duration set by the nglTooltipDelay option). | boolean | false |
 | `(nglTooltipOpenChange)` | Emit an event when the tooltip should show or hide. | boolean | |

@@ -97,11 +97,16 @@ export class NglPopover implements OnInit, OnDestroy {
 
   private setHostClass() {
     this.hostService.updateClass(this.element, {
-      [`slds-nubbin_${this._nubbin}`]: !!this._nubbin,
-      [`slds-m-${this._nubbin}_small`]: !!this._nubbin,
+      [`slds-nubbin_${this._nubbin}`]: true,
       [`slds-popover_${this._size}`]: !!this._size,
       [`slds-popover_walkthrough`]: this._variant === 'feature',
       [`slds-popover_${this._variant}`]: !!this._variant,
+    });
+
+    const [direction, align] = this._nubbin.split('-');
+    this.hostService.updateStyle(this.element, {
+      [direction]: '1rem',
+      [align]: align ? '-1.5rem' : false, // space of nubbin from the edge
     });
   }
 

@@ -6,13 +6,17 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoTooltipsBasic {
-  placement = 'top';
+
+  placements = ['top', 'right', 'bottom', 'left'];
+
+  placement = this.placements[0];
+
   open = true;
   open1 = false;
   open2 = true;
 
-  change(placement: string) {
-    this.open = true;
-    this.placement = placement;
+  change() {
+    const i = this.placements.indexOf(this.placement);
+    this.placement = this.placements[(i + 1) % 4];
   }
 }

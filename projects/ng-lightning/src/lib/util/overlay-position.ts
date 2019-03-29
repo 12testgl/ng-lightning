@@ -13,14 +13,14 @@ export const POSITION_MAP: { [ key: string ]: { position: ConnectionPositionPair
   },
   'top-left': {
     position: new ConnectionPositionPair(
-      { originX: 'start', originY: 'top' },
+      { originX: 'center', originY: 'top' },
       { overlayX: 'start', overlayY: 'bottom' }
     ),
     nubbin: 'bottom-left'
   },
   'top-right': {
     position: new ConnectionPositionPair(
-      { originX: 'end', originY: 'top' },
+      { originX: 'center', originY: 'top' },
       { overlayX: 'end', overlayY: 'bottom' }
     ),
     nubbin: 'bottom-right'
@@ -34,14 +34,14 @@ export const POSITION_MAP: { [ key: string ]: { position: ConnectionPositionPair
   },
   'right-top': {
     position: new ConnectionPositionPair(
-      { originX: 'end', originY: 'top' },
+      { originX: 'end', originY: 'center' },
       { overlayX: 'start', overlayY: 'top' }
     ),
     nubbin: 'left-top'
   },
   'right-bottom': {
     position: new ConnectionPositionPair(
-      { originX: 'end', originY: 'bottom' },
+      { originX: 'end', originY: 'center' },
       { overlayX: 'start', overlayY: 'bottom' }
     ),
     nubbin: 'left-bottom'
@@ -55,14 +55,14 @@ export const POSITION_MAP: { [ key: string ]: { position: ConnectionPositionPair
   },
   'bottom-left': {
     position: new ConnectionPositionPair(
-      { originX: 'start', originY: 'bottom' },
+      { originX: 'center', originY: 'bottom' },
       { overlayX: 'start', overlayY: 'top' }
     ),
     nubbin: 'top-left'
   },
   'bottom-right': {
     position: new ConnectionPositionPair(
-      { originX: 'end', originY: 'bottom' },
+      { originX: 'center', originY: 'bottom' },
       { overlayX: 'end', overlayY: 'top' }
     ),
     nubbin: 'top-right'
@@ -76,14 +76,14 @@ export const POSITION_MAP: { [ key: string ]: { position: ConnectionPositionPair
   },
   'left-top': {
     position: new ConnectionPositionPair(
-      { originX: 'start', originY: 'top' },
+      { originX: 'start', originY: 'center' },
       { overlayX: 'end', overlayY: 'top' }
     ),
     nubbin: 'right-top'
   },
   'left-bottom': {
     position: new ConnectionPositionPair(
-      { originX: 'start', originY: 'bottom' },
+      { originX: 'start', originY: 'center' },
       { overlayX: 'end', overlayY: 'bottom' }
     ),
     nubbin: 'right-bottom'

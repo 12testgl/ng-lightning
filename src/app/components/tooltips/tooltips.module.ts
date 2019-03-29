@@ -8,6 +8,7 @@ import { DemoTooltipsComponent } from './tooltips.component';
 
 // Examples
 import { DemoTooltipsBasic } from './examples/basic';
+import { DemoTooltipsPlacement } from './examples/placement';
 
 const routes: Routes = [
   { path: '', component: DemoTooltipsComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   declarations: [
     DemoTooltipsComponent,
     DemoTooltipsBasic,
+    DemoTooltipsPlacement,
   ],
 })
 export class NglDemoTooltipsModule {}

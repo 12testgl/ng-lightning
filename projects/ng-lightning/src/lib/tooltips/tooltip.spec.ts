@@ -3,6 +3,7 @@ import { Component, Injectable, OnDestroy, ViewChild } from '@angular/core';
 import { createGenericTestComponent, dispatchEvent } from '../../../test/util';
 import { NglTooltipsModule } from './module';
 import { HostService } from '../common/host/host.service';
+import { expectPlacementStyles } from '../popovers/popover.spec';
 import { NglTooltipTrigger } from './trigger';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
@@ -73,16 +74,29 @@ describe('Tooltips', () => {
     const tooltipEl = getTooltipElement();
 
     expect(tooltipEl).toHaveCssClass('slds-nubbin_bottom');
+    expectPlacementStyles(tooltipEl, { bottom: '1rem' });
 
     componentInstance.placement = 'left';
     fixture.detectChanges();
     expect(tooltipEl).toHaveCssClass('slds-nubbin_right');
     expect(tooltipEl).not.toHaveCssClass('slds-nubbin_bottom');
+    expectPlacementStyles(tooltipEl, { right: '1rem' });
+
+    componentInstance.placement = 'right-top';
+    fixture.detectChanges();
+    expect(tooltipEl).toHaveCssClass('slds-nubbin_left-top');
+    expectPlacementStyles(tooltipEl, { left: '1rem', top: '-1.5rem' });
+
+    componentInstance.placement = 'left-bottom';
+    fixture.detectChanges();
+    expect(tooltipEl).toHaveCssClass('slds-nubbin_right-bottom');
+    expectPlacementStyles(tooltipEl, { right: '1rem', bottom: '-1.5rem' });
 
     componentInstance.placement = 'bottom';
     fixture.detectChanges();
     expect(tooltipEl).toHaveCssClass('slds-nubbin_top');
     expect(tooltipEl).not.toHaveCssClass('slds-nubbin_right');
+    expectPlacementStyles(tooltipEl, { top: '1rem' });
   });
 
   it('should destroy tooltip when host is destroyed', () => {

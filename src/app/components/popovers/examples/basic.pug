@@ -3,10 +3,8 @@
 
 .slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Placement
 .slds-button-group(role='group')
-  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="top", [(nglPopoverOpen)]="open.top") Top
-  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="right", [(nglPopoverOpen)]="open.right") Right
-  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="bottom", [(nglPopoverOpen)]="open.bottom") Bottom
-  button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement="left", [(nglPopoverOpen)]="open.left") Left
+  each val in ['top', 'top-left', 'top-right', 'right', 'right-top', 'right-bottom', 'bottom', 'bottom-left', 'bottom-right', 'left', 'left-top', 'left-bottom']
+    button(type="button", nglButton="neutral", [nglPopover]="tip", nglPopoverPlacement=val, [(nglPopoverOpen)]=`open['${val}']`) #{val}
 
 .slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Size
 .slds-button-group(role='group')

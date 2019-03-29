@@ -40,8 +40,13 @@ export class NglTooltip {
 
   private setHostClass() {
     this.hostService.updateClass(this.element, {
-      [`slds-nubbin_${this._nubbin}`]: !!this._nubbin,
-      [`slds-m-${this._nubbin}_small`]: !!this._nubbin,
+      [`slds-nubbin_${this._nubbin}`]: true,
+    });
+
+    const [direction, align] = this._nubbin.split('-');
+    this.hostService.updateStyle(this.element, {
+      [direction]: '1rem',
+      [align]: align ? '-1.5rem' : false, // space of nubbin from the edge
     });
   }
 }

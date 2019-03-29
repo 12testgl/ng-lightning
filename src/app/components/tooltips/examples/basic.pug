@@ -11,14 +11,11 @@ div
   | Sed
   a([nglTooltip]="tip", [nglTooltipPlacement]="placement", [(nglTooltipOpen)]="open")  hover
   |   vehicula sapien, vitae tristique nisl viverra vitae. Aliquam erat volutpat. Ut accumsan metus vel hendrerit sagittis.
+.slds-button-group.slds-m-top_xx-large(role="group")
+  button(type="button", (click)="change()", nglButton="neutral") Change placement
+  button(type="button", (click)="open = !open", nglButton="neutral") Toggle
 .slds-m-top_x-large
   span(nglTooltip="...which always keep showing!", nglTooltipOpen="true", nglTooltipPlacement="right") You can also make tooltips
-.slds-button-group.slds-m-top_xx-large(role="group")
-  button(type="button", (click)="change('top')", nglButton="neutral") Top
-  button(type="button", (click)="change('left')", nglButton="neutral") Left
-  button(type="button", (click)="change('right')", nglButton="neutral") Right
-  button(type="button", (click)="change('bottom')", nglButton="neutral") Bottom
-  button(type="button", (click)="open = !open", nglButton="neutral") Toggle
 .slds-text-title_caps.slds-m-bottom_small.slds-m-top_x-large Open and close with delay
 button(type="button", nglButton="neutral", nglTooltip="I open and close with 1 second delay...", nglTooltipDelay="1000", [(nglTooltipOpen)]="open1", #x="nglTooltip") Hover or Focus
 .slds-m-top_medium
