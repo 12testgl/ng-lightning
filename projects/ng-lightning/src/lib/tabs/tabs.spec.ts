@@ -20,7 +20,7 @@ function getTabHeaders(element: HTMLElement): HTMLElement[] {
 }
 
 function getTabContent(element: HTMLElement): string {
-  return element.querySelector('.slds-tabs_default__content').textContent;
+  return element.querySelector('.slds-tabs_default__content.slds-show').textContent;
 }
 
 function expectHeaders(element: HTMLElement, expected: string[]) {
@@ -45,6 +45,22 @@ describe('Tabs Component', () => {
   it('should render the tab headers', () => {
     const fixture = createTestComponent();
     expectHeaders(fixture.nativeElement, ['First', 'Second',  'Third tab', 'Fourth tab']);
+  });
+
+  it('should have the proper aria attributes for headers and content', () => {
+    const fixture = createTestComponent();
+
+    const items = selectElements(fixture.nativeElement, 'li.slds-tabs_default__item');
+    const contents = selectElements(fixture.nativeElement, '.slds-tabs_default__content');
+
+    expect(items.length).toBe(4);
+    expect(contents.length).toBe(4);
+    for (let i = 0; i < 4; i++) {
+      const item = items[i];
+      const content = contents[i];
+      expect(item.getAttribute('aria-controls')).toEqual(content.getAttribute('id'));
+      expect(content.getAttribute('aria-labelledby')).toEqual(item.getAttribute('id'));
+    }
   });
 
   it('should render tab headers based on template', () => {
@@ -123,7 +139,9 @@ describe('Tabs Component', () => {
         <ng-template ngl-tab id="another" #anotherTab="nglTab">Another tab</ng-template>
       </ngl-tabset>
       <button (click)="selectedTab = anotherTab"></button>
-    `);
+    `, false);
+    fixture.componentInstance.selectedTab = 0;
+    fixture.detectChanges();
     const button = fixture.nativeElement.querySelector('button');
 
     expect(getTabContent(fixture.nativeElement)).not.toBe('Another tab');

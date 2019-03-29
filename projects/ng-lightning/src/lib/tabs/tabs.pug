@@ -1,11 +1,14 @@
 ul([ngClass]="'slds-tabs_' + variant + '__nav'", role="tablist",
    (keydown.ArrowLeft)="move($event, -1)", (keydown.ArrowRight)="move($event, 1)")
-  li(*ngFor="let tab of tabs",
+  li(*ngFor="let tab of tabs; trackBy: trackByTab",
      [ngClass]="'slds-tabs_' + variant + '__item'",
      [class.slds-is-active]="tab.active",
+     [id]="tab.uid + '__item'",
+     [attr.aria-controls]="tab.uid",
      (click)="select(tab)",
      role="presentation")
     a([nglInternalOutlet]="tab.label", [ngClass]="'slds-tabs_' + variant + '__link'", role="tab",
       [attr.aria-selected]="tab.active", [attr.tabindex]="tab.active ? 0 : 1")
-div([ngClass]="'slds-tabs_' + variant + '__content'", role="tabpanel")
-  ng-template([ngTemplateOutlet]="activeTab?.templateRef")
+div(*ngFor="let tab of tabs; trackBy: trackByTab", [id]="tab.uid", [attr.aria-labelledby]="tab.uid + '__item'", [ngClass]="tabClass(tab)", role="tabpanel")
+  ng-container(*ngIf="tab.active")
+    ng-template([ngTemplateOutlet]="tab?.templateRef")

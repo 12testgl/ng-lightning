@@ -4,14 +4,11 @@ ngl-tabset([(selected)]="selectedTab", [variant]="variant")
   |
   ngl-tab(*ngFor="let detail of details", (activate)="tabChange(detail, 'active')", (deactivate)="tabChange(detail, 'inactive')")
     ng-template(ngl-tab-label)
-      | Detail
-      i {{ detail }}
+      | Detail <i>{{ detail }}</i>
+
     |
     ng-template(ngl-tab-content)
-      p
-        | Some detail text for
-        b {{detail}}
-        | .
+      p Some detail text for <b>{{detail}}</b>.
       |
       button(type="button", nglButton="destructive", (click)="removeDetail(detail)") Remove
   |

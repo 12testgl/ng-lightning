@@ -29,6 +29,6 @@ export class DemoTabsBasic {
 
   protected removeDetail(detail: Object) {
     this.details = this.details.filter((d) => d !== detail);
-    setTimeout(() => this.selectedTab = 'sum');
+    this.selectedTab = 'sum';
   }
 }

@@ -1,4 +1,5 @@
 import { Directive, Input, TemplateRef, Output, EventEmitter, Optional } from '@angular/core';
+import { uniqueId } from '../util/util';
 
 /*
  * <ng-template ngl-tab label="...">
@@ -15,6 +16,8 @@ export class NglTab {
   @Input() label: string | TemplateRef<any>;
   @Output() activate = new EventEmitter<NglTab>();
   @Output() deactivate = new EventEmitter<NglTab>();
+
+  uid = uniqueId('tab');
 
   private _active = false;
 

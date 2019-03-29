@@ -60,6 +60,17 @@ export class NglTabs implements AfterContentInit {
     this.select( tabs[(tabs.length + selectedIndex + moves) % tabs.length] );
   }
 
+  tabClass(tab: NglTab) {
+    return {
+      [`slds-tabs_${this.variant}__content`]: true,
+      [`slds-${tab.active ? 'show' : 'hide'}`]: true,
+    };
+  }
+
+  trackByTab(index, tab: NglTab) {
+    return tab.uid;
+  }
+
   private activate() {
     if (this.activeTab) {
       this.activeTab.active = false;
