@@ -4,6 +4,7 @@
 | -------- | ----------- | ---- | ------- |
 | `[selected]` | Desired tab to activate. This can be either the `index` number, the tab's id *(id="myid")* or the actual `NglTab` instance. | string \| number \| NglTab | |
 | `[variant]` | Whether the tabset is [scoped](https://www.lightningdesignsystem.com/components/tabs#scoped) or not. | 'default' \| 'scoped' | 'default' |
+| `[lazy]` | Whether every tab's content is instantiated when visible, and destroyed when hidden. | boolean | true |
 | `(selectedChange)` | Emits when a tab is selected. | EventEmitter<NglTab> | |
 
 

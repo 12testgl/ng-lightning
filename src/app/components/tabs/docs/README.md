@@ -1,6 +1,6 @@
 An *intuitive*, *efficient* and *fully accessible* implementation of tabset/tabs.
 
-Each pane is only instantiated while it is visible. Panes which are not visible are released and do not have associated memory, DOM and change detection cost.
+Each pane is only instantiated while it is visible. Panes which are not visible are released and do not have associated memory, DOM and change detection cost. Nevertheless, if you want to change this behavior just set `lazy="false"` to `<ngl-tabset>`.
 
 Tab's header can contain HTML either by passing a template reference as `label` or by using the more verbose syntax, with `<ngl-tab>`, `<ngl-tab-label>` and `<ngl-tab-content>`. 
 

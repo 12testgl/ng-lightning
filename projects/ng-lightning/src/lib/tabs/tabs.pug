@@ -10,5 +10,5 @@ ul([ngClass]="'slds-tabs_' + variant + '__nav'", role="tablist",
     a([nglInternalOutlet]="tab.label", [ngClass]="'slds-tabs_' + variant + '__link'", role="tab",
       [attr.aria-selected]="tab.active", [attr.tabindex]="tab.active ? 0 : 1")
 div(*ngFor="let tab of tabs; trackBy: trackByTab", [id]="tab.uid", [attr.aria-labelledby]="tab.uid + '__item'", [ngClass]="tabClass(tab)", role="tabpanel")
-  ng-container(*ngIf="tab.active")
+  ng-container(*ngIf="!lazy || tab.active")
     ng-template([ngTemplateOutlet]="tab?.templateRef")

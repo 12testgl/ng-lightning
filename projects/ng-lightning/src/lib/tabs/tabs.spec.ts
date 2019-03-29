@@ -165,6 +165,29 @@ describe('Tabs Component', () => {
     expect(tabs).toHaveCssClass('slds-tabs_scoped__nav');
   });
 
+  it('should have the proper aria attributes for headers and content', () => {
+    const fixture = createTestComponent(`
+      <ngl-tabset selected="1" [lazy]="lazy">
+        <ng-template ngl-tab>Tab 0</ng-template>
+        <ng-template ngl-tab>Tab 1</ng-template>
+        <ng-template ngl-tab>Tab 2</ng-template>
+      </ngl-tabset>
+    `);
+    const contents = selectElements(fixture.nativeElement, '.slds-tabs_default__content');
+
+    expect(contents.length).toBe(3);
+    for (let i = 0; i < 3; i++) {
+      expect(contents[i].textContent).toEqual(i === 1 ? `Tab ${i}` : '');
+    }
+
+    fixture.componentInstance.lazy = false;
+    fixture.detectChanges();
+    expect(contents.length).toBe(3);
+    for (let i = 0; i < 3; i++) {
+      expect(contents[i].textContent).toEqual(`Tab ${i}`);
+    }
+  });
+
 });
 
 @Component({
@@ -184,6 +207,7 @@ describe('Tabs Component', () => {
 export class TestComponent {
   selectedTab: string | number = 'two';
   titleCaps: string | boolean = false;
+  lazy = true;
   change = jasmine.createSpy('selectedChange').and.callFake(($event: any) => {
     this.selectedTab = $event;
   });

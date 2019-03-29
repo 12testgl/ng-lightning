@@ -1,6 +1,7 @@
 import { Component, Input, QueryList, ContentChildren, Output, EventEmitter, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { isInt } from '../util/util';
 import { NglTab } from './tab';
+import { InputBoolean } from '../util/convert';
 
 @Component({
   selector: 'ngl-tabset',
@@ -33,6 +34,11 @@ export class NglTabs implements AfterContentInit {
   }
 
   @Output() selectedChange = new EventEmitter<NglTab>();
+
+  /**
+   * Whether every tab's content is instantiated when visible, and destroyed when hidden.
+   */
+  @Input() @InputBoolean() lazy = true;
 
   private _variant: 'default' | 'scoped';
 

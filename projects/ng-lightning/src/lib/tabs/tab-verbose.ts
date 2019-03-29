@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, Output, EventEmitter, ContentChild, AfterContentInit } from '@angular/core';
+import { Directive, TemplateRef, ContentChild, AfterContentInit } from '@angular/core';
 import { NglTab } from './tab';
 
 /*
@@ -27,10 +27,6 @@ export class NglTabContent {
   providers: [ {provide: NglTab, useExisting: NglTabVerbose} ],
 })
 export class NglTabVerbose extends NglTab implements AfterContentInit {
-  @Input() id: string;
-  @Input() label: string | TemplateRef<any>;
-  @Output() activate = new EventEmitter<NglTab>();
-  @Output() deactivate = new EventEmitter<NglTab>();
 
   @ContentChild(NglTabContent) contentTemplate: NglTabContent;
   @ContentChild(NglTabLabel) labelTemplate: NglTabLabel;
