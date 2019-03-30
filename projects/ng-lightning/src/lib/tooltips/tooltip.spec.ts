@@ -97,6 +97,11 @@ describe('Tooltips', () => {
     expect(tooltipEl).toHaveCssClass('slds-nubbin_top');
     expect(tooltipEl).not.toHaveCssClass('slds-nubbin_right');
     expectPlacementStyles(tooltipEl, { top: '1rem' });
+
+    componentInstance.placement = 'left-bottom-corner';
+    fixture.detectChanges();
+    expect(tooltipEl).toHaveCssClass('slds-nubbin_right-bottom-corner');
+    expectPlacementStyles(tooltipEl, { right: '1rem', bottom: '-0.75rem' });
   });
 
   it('should destroy tooltip when host is destroyed', () => {

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, ElementRef, Renderer2, HostBinding } from '@angular/core';
-import { Placement, POSITION_MAP } from '../util/overlay-position';
+import { Placement, POSITION_MAP, getPlacementStyles } from '../util/overlay-position';
 import { HostService } from '../common/host/host.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class NglTooltip {
     private hostService: HostService,
     private cd: ChangeDetectorRef) {}
 
-    markForCheck() {
+  markForCheck() {
     this.cd.markForCheck();
   }
 
@@ -43,10 +43,6 @@ export class NglTooltip {
       [`slds-nubbin_${this._nubbin}`]: true,
     });
 
-    const [direction, align] = this._nubbin.split('-');
-    this.hostService.updateStyle(this.element, {
-      [direction]: '1rem',
-      [align]: align ? '-1.5rem' : false, // space of nubbin from the edge
-    });
+    this.hostService.updateStyle(this.element, getPlacementStyles(this._nubbin));
   }
 }

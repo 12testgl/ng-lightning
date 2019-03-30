@@ -1,7 +1,7 @@
 import { Component, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef,
   TemplateRef, ElementRef, Renderer2, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { uniqueId, ngClassCombine } from '../util/util';
-import { Placement, POSITION_MAP } from '../util/overlay-position';
+import { Placement, POSITION_MAP, getPlacementStyles } from '../util/overlay-position';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import { Variant, Size } from './trigger';
 import { HostService } from '../common/host/host.service';
@@ -114,11 +114,7 @@ export class NglPopover implements OnInit, OnDestroy {
       [`slds-popover_${this._variant}`]: !!this._variant,
     }));
 
-    const [direction, align] = this._nubbin.split('-');
-    this.hostService.updateStyle(this.element, {
-      [direction]: '1rem',
-      [align]: align ? '-1.5rem' : false, // space of nubbin from the edge
-    });
+    this.hostService.updateStyle(this.element, getPlacementStyles(this._nubbin));
   }
 
 }

@@ -2,24 +2,36 @@ ng-template(#tip)
   | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer bibendum dapibus nulla ac imperdiet.
   | Aenean ut efficitur nunc.
 
-.slds-m-around_xx-large(style="max-width: 600px;")
-  .slds-grid.slds-grid_align-center.slds-gutters_direct-medium
+.slds-m-around_xx-large(style="max-width: 700px;")
+  .slds-grid.slds-grid_align-center.slds-gutters_direct-medium.slds-m-bottom_xx-small
+    button(type="button", nglButton, nglTooltipPlacement='top-left-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.tlc") top-left-corner
     button(type="button", nglButton, nglTooltipPlacement='top-left', [nglTooltip]="tip", [(nglTooltipOpen)]="open.tl") top-left
     button(type="button", nglButton, nglTooltipPlacement='top', [nglTooltip]="tip", [(nglTooltipOpen)]="open.t") top
     button(type="button", nglButton, nglTooltipPlacement='top-right', [nglTooltip]="tip", [(nglTooltipOpen)]="open.tr") top-right
-  .slds-grid.slds-grid_align-spread
+    button(type="button", nglButton, nglTooltipPlacement='top-right-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.trc") top-right-corner
+  .slds-grid.slds-grid_align-spread.slds-m-bottom_xx-small
     .slds-col
       .slds-grid.slds-grid_vertical
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='left-top-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.ltc") left-top-corner
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='left-top', [nglTooltip]="tip", [(nglTooltipOpen)]="open.lt") left-top
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='left', [nglTooltip]="tip", [(nglTooltipOpen)]="open.l") left
-        span: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='left-bottom', [nglTooltip]="tip", [(nglTooltipOpen)]="open.lb") left-bottom
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='left-bottom', [nglTooltip]="tip", [(nglTooltipOpen)]="open.lb") left-bottom
+        span: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='left-bottom-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.lbc") left-bottom-corner
+    .slds-col
+      .slds-grid.slds-grid_vertical-align-center(style="height: 100%;")
+        .slds-col
+          strong 20 placement choices
     .slds-col
       .slds-grid.slds-grid_vertical.slds-grid_align-end
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='right-top-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.rtc") right-top-corner
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='right-top', [nglTooltip]="tip", [(nglTooltipOpen)]="open.rt") right-top
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='right', [nglTooltip]="tip", [(nglTooltipOpen)]="open.r") right
-        span: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='right-bottom', [nglTooltip]="tip", [(nglTooltipOpen)]="open.rb") right-bottom
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='right-bottom', [nglTooltip]="tip", [(nglTooltipOpen)]="open.rb") right-bottom
+        span: button.slds-button_stretch(type="button", nglButton, nglTooltipPlacement='right-bottom-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.rbc") right-bottom-corner
   .slds-grid.slds-grid_align-center.slds-gutters_direct-medium
+    button(type="button", nglButton, nglTooltipPlacement='bottom-left-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.blc") bottom-left-corner
     button(type="button", nglButton, nglTooltipPlacement='bottom-left', [nglTooltip]="tip", [(nglTooltipOpen)]="open.bl") bottom-left
     button(type="button", nglButton, nglTooltipPlacement='bottom', [nglTooltip]="tip", [(nglTooltipOpen)]="open.b") bottom
     button(type="button", nglButton, nglTooltipPlacement='bottom-right', [nglTooltip]="tip", [(nglTooltipOpen)]="open.br") bottom-right
+    button(type="button", nglButton, nglTooltipPlacement='bottom-right-corner', [nglTooltip]="tip", [(nglTooltipOpen)]="open.brc") bottom-right-corner
 

@@ -1,23 +1,36 @@
-div(style="max-width: 600px;")
-  .slds-grid.slds-grid_align-center.slds-gutters_direct-medium
+.slds-m-around_xx-large(style="max-width: 700px;")
+  .slds-grid.slds-grid_align-center.slds-gutters_direct-medium.slds-m-bottom_xx-small
+    button(type="button", nglButton, nglPopoverPlacement='top-left-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.tlc") top-left-corner
     button(type="button", nglButton, nglPopoverPlacement='top-left', [nglPopover]="tip", [(nglPopoverOpen)]="open.tl") top-left
     button(type="button", nglButton, nglPopoverPlacement='top', [nglPopover]="tip", [(nglPopoverOpen)]="open.t") top
     button(type="button", nglButton, nglPopoverPlacement='top-right', [nglPopover]="tip", [(nglPopoverOpen)]="open.tr") top-right
-  .slds-grid.slds-grid_align-spread
+    button(type="button", nglButton, nglPopoverPlacement='top-right-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.trc") top-right-corner
+  .slds-grid.slds-grid_align-spread.slds-m-bottom_xx-small
     .slds-col
       .slds-grid.slds-grid_vertical
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='left-top-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.ltc") left-top-corner
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='left-top', [nglPopover]="tip", [(nglPopoverOpen)]="open.lt") left-top
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='left', [nglPopover]="tip", [(nglPopoverOpen)]="open.l") left
-        span: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='left-bottom', [nglPopover]="tip", [(nglPopoverOpen)]="open.lb") left-bottom
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='left-bottom', [nglPopover]="tip", [(nglPopoverOpen)]="open.lb") left-bottom
+        span: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='left-bottom-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.lbc") left-bottom-corner
+    .slds-col
+      .slds-grid.slds-grid_vertical-align-center(style="height: 100%;")
+        .slds-col
+          strong 20 placement choices
     .slds-col
       .slds-grid.slds-grid_vertical.slds-grid_align-end
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='right-top-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.rtc") right-top-corner
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='right-top', [nglPopover]="tip", [(nglPopoverOpen)]="open.rt") right-top
         span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='right', [nglPopover]="tip", [(nglPopoverOpen)]="open.r") right
-        span: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='right-bottom', [nglPopover]="tip", [(nglPopoverOpen)]="open.rb") right-bottom
+        span.slds-m-bottom_xx-small: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='right-bottom', [nglPopover]="tip", [(nglPopoverOpen)]="open.rb") right-bottom
+        span: button.slds-button_stretch(type="button", nglButton, nglPopoverPlacement='right-bottom-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.rbc") right-bottom-corner
   .slds-grid.slds-grid_align-center.slds-gutters_direct-medium
+    button(type="button", nglButton, nglPopoverPlacement='bottom-left-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.blc") bottom-left-corner
     button(type="button", nglButton, nglPopoverPlacement='bottom-left', [nglPopover]="tip", [(nglPopoverOpen)]="open.bl") bottom-left
     button(type="button", nglButton, nglPopoverPlacement='bottom', [nglPopover]="tip", [(nglPopoverOpen)]="open.b") bottom
     button(type="button", nglButton, nglPopoverPlacement='bottom-right', [nglPopover]="tip", [(nglPopoverOpen)]="open.br") bottom-right
+    button(type="button", nglButton, nglPopoverPlacement='bottom-right-corner', [nglPopover]="tip", [(nglPopoverOpen)]="open.brc") bottom-right-corner
+
 
 ng-template(#tip)
   | Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.

@@ -111,6 +111,11 @@ describe('Popovers', () => {
     expect(popoverEl).toHaveCssClass('slds-nubbin_top');
     expect(popoverEl).not.toHaveCssClass('slds-nubbin_right');
     expectPlacementStyles(popoverEl, { top: '1rem' });
+
+    componentInstance.placement = 'left-bottom-corner';
+    fixture.detectChanges();
+    expect(popoverEl).toHaveCssClass('slds-nubbin_right-bottom-corner');
+    expectPlacementStyles(popoverEl, { right: '1rem', bottom: '-0.75rem' });
   });
 
   it('should change variant based on input', () => {

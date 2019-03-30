@@ -234,7 +234,7 @@ export class NglPopoverTrigger implements OnChanges, OnDestroy {
       .withPush(false);
 
     this.positionChangesSubscription = strategy.positionChanges
-      .pipe(map(change => getPlacementName(change)), distinctUntilChanged())
+      .pipe(map(change => getPlacementName(change, this.placement)), distinctUntilChanged())
       .subscribe((placement: Placement) => {
         this.updatePosition();
         this.updatePopover('placement', placement);
