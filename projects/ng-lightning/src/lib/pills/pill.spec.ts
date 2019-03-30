@@ -32,20 +32,20 @@ describe('NglPill', () => {
     const pill = getPill(fixture.nativeElement);
     const action = getActionEl(pill);
     const removeButton = getRemoveButton(pill);
-    expect(pill).toHaveCssClass('slds-pill');
-    expect(pill).toHaveCssClass('slds-pill_link');
+    expect(pill).toHaveClass('slds-pill');
+    expect(pill).toHaveClass('slds-pill_link');
     expect(action.tagName).toBe('A');
-    expect(action.firstElementChild).toHaveCssClass('slds-pill__label');
+    expect(action.firstElementChild).toHaveClass('slds-pill__label');
     expect(action.firstElementChild.tagName).toBe('SPAN');
     expect(action.textContent.trim()).toBe('I am a pill!');
-    expect(removeButton).toHaveCssClass('slds-pill__remove');
+    expect(removeButton).toHaveClass('slds-pill__remove');
   });
 
   it('should render unlinked correctly', () => {
     const fixture = createTestComponent(`<ngl-pill>I am unlinked!</ngl-pill>`);
     const pill = getPill(fixture.nativeElement);
     const text = getLabelEl(pill);
-    expect(pill).not.toHaveCssClass('slds-pill_link');
+    expect(pill).not.toHaveClass('slds-pill_link');
     expect(text.tagName).toBe('SPAN');
     expect(text.textContent.trim()).toBe('I am unlinked!');
   });
@@ -53,14 +53,14 @@ describe('NglPill', () => {
   it('should render with error correctly', () => {
     const fixture = createTestComponent(`<ngl-pill hasError="true"></ngl-pill>`);
     const pill = getPill(fixture.nativeElement);
-    expect(pill).toHaveCssClass('slds-pill');
-    expect(pill).toHaveCssClass('slds-has-error');
+    expect(pill).toHaveClass('slds-pill');
+    expect(pill).toHaveClass('slds-has-error');
   });
 
   it('should render icon correctly', () => {
     const fixture = createTestComponent(`<ngl-pill icon="standard:feedback"></ngl-pill>`);
     const pill = getPill(fixture.nativeElement);
-    expect(pill.firstElementChild).toHaveCssClass('slds-pill__icon_container');
+    expect(pill.firstElementChild).toHaveClass('slds-pill__icon_container');
   });
 
   it('should render avatar template correctly', () => {
@@ -72,8 +72,8 @@ describe('NglPill', () => {
       </ngl-pill>
     `);
     const pill = getPill(fixture.nativeElement);
-    expect(pill.firstElementChild).toHaveCssClass('slds-pill__icon_container');
-    expect(pill.firstElementChild.firstElementChild).toHaveCssClass('slds-avatar');
+    expect(pill.firstElementChild).toHaveClass('slds-pill__icon_container');
+    expect(pill.firstElementChild.firstElementChild).toHaveClass('slds-avatar');
   });
 
   it('should not render the remove button without `remove` bound', () => {

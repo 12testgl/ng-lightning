@@ -13,19 +13,19 @@ describe('File Crop', () => {
   it('should set ratio based on input', () => {
     const fixture = createTestComponent();
     const el = fixture.nativeElement.firstElementChild;
-    expect(el).toHaveCssClass('slds-file__crop');
-    expect(el).toHaveCssClass('slds-file__crop_4-by-3');
+    expect(el).toHaveClass('slds-file__crop');
+    expect(el).toHaveClass('slds-file__crop_4-by-3');
 
     fixture.componentInstance.ratio = null;
     fixture.detectChanges();
-    expect(el).not.toHaveCssClass('slds-file__crop');
-    expect(el).not.toHaveCssClass('slds-file__crop_4-by-3');
+    expect(el).not.toHaveClass('slds-file__crop');
+    expect(el).not.toHaveClass('slds-file__crop_4-by-3');
 
     fixture.componentInstance.ratio = '16-by-9';
     fixture.detectChanges();
-    expect(el).toHaveCssClass('slds-file__crop');
-    expect(el).toHaveCssClass('slds-file__crop_16-by-9');
-    expect(el).not.toHaveCssClass('slds-file__crop_4-by-3');
+    expect(el).toHaveClass('slds-file__crop');
+    expect(el).toHaveClass('slds-file__crop_16-by-9');
+    expect(el).not.toHaveClass('slds-file__crop_4-by-3');
   });
 });
 

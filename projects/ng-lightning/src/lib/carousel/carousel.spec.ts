@@ -44,7 +44,7 @@ describe('`NglCarousel`', () => {
     const fixture = createTestComponent();
     const { nativeElement } = fixture;
 
-    expect(nativeElement.firstElementChild).toHaveCssClass('slds-carousel');
+    expect(nativeElement.firstElementChild).toHaveClass('slds-carousel');
 
     expect(getPlayButton(nativeElement)).toBeTruthy();
 

@@ -17,9 +17,9 @@ describe('`ngl-dynamic-icon-waffle`', () => {
     const fixture = createTestComponent();
     const host = fixture.nativeElement.firstElementChild.firstElementChild;
 
-    expect(host).toHaveCssClass('slds-button');
-    expect(host).toHaveCssClass('slds-icon-waffle_container');
-    expect(host.firstElementChild).toHaveCssClass('slds-icon-waffle');
+    expect(host).toHaveClass('slds-button');
+    expect(host).toHaveClass('slds-icon-waffle_container');
+    expect(host.firstElementChild).toHaveClass('slds-icon-waffle');
   });
 });
 

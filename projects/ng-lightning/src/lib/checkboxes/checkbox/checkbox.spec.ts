@@ -14,7 +14,7 @@ describe('`NglCheckbox`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
-    expect(element).toHaveCssClass('slds-form-element');
+    expect(element).toHaveClass('slds-form-element');
 
     const labelEl = getLabelElement(element);
     expect(labelEl).toHaveText('My label');
@@ -42,7 +42,7 @@ describe('`NglCheckbox`', () => {
     fixture.componentInstance.required = true;
     fixture.detectChanges();
     const abbrEl = getRequiredElement(fixture.nativeElement);
-    expect(abbrEl).toHaveCssClass('slds-required');
+    expect(abbrEl).toHaveClass('slds-required');
 
     fixture.componentInstance.required = false;
     fixture.detectChanges();
@@ -52,7 +52,7 @@ describe('`NglCheckbox`', () => {
   it('should show support stacked layout', () => {
     const fixture = createTestComponent(`<ngl-checkbox label stacked><input ngl type="checkbox" /></ngl-checkbox>`);
     const el = fixture.nativeElement.querySelector('.slds-checkbox');
-    expect(el).toHaveCssClass('slds-checkbox_stacked');
+    expect(el).toHaveClass('slds-checkbox_stacked');
   });
 
   it('should show error correctly', () => {

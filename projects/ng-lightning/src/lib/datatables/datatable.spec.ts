@@ -45,17 +45,17 @@ function expectSortedHeadings(element: HTMLElement, expected: string[]) {
     const text = getHeadingText(e);
     const expectation = expected[index];
     if (expectation.startsWith('+')) {
-      expect(e).toHaveCssClass('slds-is-sorted');
-      expect(e).toHaveCssClass('slds-is-sorted_asc');
+      expect(e).toHaveClass('slds-is-sorted');
+      expect(e).toHaveClass('slds-is-sorted_asc');
       expect(e.getAttribute('aria-sort')).toEqual('ascending');
       expect(expectation).toEqual(`+${text}`);
     } else if (expectation.startsWith('-')) {
-      expect(e).toHaveCssClass('slds-is-sorted');
-      expect(e).toHaveCssClass('slds-is-sorted_desc');
+      expect(e).toHaveClass('slds-is-sorted');
+      expect(e).toHaveClass('slds-is-sorted_desc');
       expect(e.getAttribute('aria-sort')).toEqual('descending');
       expect(expectation).toEqual(`-${text}`);
     } else {
-      expect(e).not.toHaveCssClass('slds-is-sorted');
+      expect(e).not.toHaveClass('slds-is-sorted');
       expect(e.getAttribute('aria-sort')).toEqual('none');
       expect(expectation).toEqual(text);
     }
@@ -70,7 +70,7 @@ describe('`NglDatatable`', () => {
     const fixture = createTestComponent();
 
     const tableEl = fixture.nativeElement.firstElementChild;
-    expect(tableEl).toHaveCssClass('slds-table');
+    expect(tableEl).toHaveClass('slds-table');
 
     expect(getHeadingsText(fixture.nativeElement)).toEqual(['ID', 'Name', 'Number']);
     expect(getHeadingsTitle(fixture.nativeElement)).toEqual(['ID', 'Name', 'Number']);
@@ -133,12 +133,12 @@ describe('`NglDatatable`', () => {
       </table>`);
 
     const rows = getHeadings(fixture.nativeElement);
-    expect(rows[0]).toHaveCssClass('class1');
-    expect(rows[1]).toHaveCssClass('class2');
+    expect(rows[0]).toHaveClass('class1');
+    expect(rows[1]).toHaveClass('class2');
 
     fixture.componentInstance.exists = false;
     fixture.detectChanges();
-    expect(rows[1]).not.toHaveCssClass('class2');
+    expect(rows[1]).not.toHaveClass('class2');
   });
 
   it('should support custom cell class per column', () => {
@@ -152,17 +152,17 @@ describe('`NglDatatable`', () => {
 
     const rows = getRows(fixture.nativeElement).map(row => selectElements(row, 'td'));
     rows.forEach(([first, second]) => {
-      expect(first).toHaveCssClass('custom-class1');
-      expect(second).not.toHaveCssClass('custom-class1');
+      expect(first).toHaveClass('custom-class1');
+      expect(second).not.toHaveClass('custom-class1');
     });
 
     fixture.componentInstance.class1 = null;
     fixture.componentInstance.class2 = ['apply-me', 'apply-this'];
     fixture.detectChanges();
     rows.forEach(([first, second]) => {
-      expect(first).not.toHaveCssClass('custom-class1');
-      expect(second).toHaveCssClass('apply-me');
-      expect(second).toHaveCssClass('apply-this');
+      expect(first).not.toHaveClass('custom-class1');
+      expect(second).toHaveClass('apply-me');
+      expect(second).toHaveClass('apply-this');
     });
   });
 
@@ -176,7 +176,7 @@ describe('`NglDatatable`', () => {
     const rows = getRows(fixture.nativeElement).map(row => selectElements(row, 'td'));
     rows.forEach(([td], index) => {
       const el = td.firstElementChild;
-      expect(el).toHaveCssClass('slds-truncate');
+      expect(el).toHaveClass('slds-truncate');
       expect(el.getAttribute('title')).toBe(fixture.componentInstance.data[index].name);
     });
   });
@@ -192,15 +192,15 @@ describe('`NglDatatable`', () => {
 
     const [first, second] = getHeadings(fixture.nativeElement);
 
-    expect(first).toHaveCssClass('slds-is-sortable');
+    expect(first).toHaveClass('slds-is-sortable');
     expect(first.querySelector('a')).toBeDefined();
 
-    expect(second).not.toHaveCssClass('slds-is-sortable');
+    expect(second).not.toHaveClass('slds-is-sortable');
     expect(second.querySelector('a')).toBeNull();
 
     fixture.componentInstance.sortable = true;
     fixture.detectChanges();
-    expect(second).toHaveCssClass('slds-is-sortable');
+    expect(second).toHaveClass('slds-is-sortable');
     expect(second.querySelector('a')).toBeDefined();
   });
 

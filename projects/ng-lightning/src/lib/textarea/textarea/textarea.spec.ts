@@ -18,13 +18,13 @@ describe('`NglTextarea`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
-    expect(element).toHaveCssClass('slds-form-element');
+    expect(element).toHaveClass('slds-form-element');
 
     const labelEl = getLabelElement(element);
     expect(labelEl).toHaveText('My label');
 
     const inputEl = getInputElement(element);
-    expect(inputEl).toHaveCssClass('slds-textarea');
+    expect(inputEl).toHaveClass('slds-textarea');
 
     const inputId = inputEl.getAttribute('id');
     expect(inputId).toEqual(labelEl.getAttribute('for'));
@@ -37,7 +37,7 @@ describe('`NglTextarea`', () => {
     fixture.componentInstance.required = true;
     fixture.detectChanges();
     const abbrEl = getRequiredElement(fixture.nativeElement);
-    expect(abbrEl).toHaveCssClass('slds-required');
+    expect(abbrEl).toHaveClass('slds-required');
 
     fixture.componentInstance.required = false;
     fixture.detectChanges();

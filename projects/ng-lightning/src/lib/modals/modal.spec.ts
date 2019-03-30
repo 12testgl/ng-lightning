@@ -35,7 +35,7 @@ describe('`NglModal`', () => {
   it('should render correctly if open', () => {
     const fixture = createTestComponent();
     const modal = getModal(fixture.nativeElement);
-    expect(modal).toHaveCssClass('slds-fade-in-open');
+    expect(modal).toHaveClass('slds-fade-in-open');
     expect(modal.getAttribute('aria-hidden')).toBe('false');
 
     const header = getHeader(modal);
@@ -43,12 +43,12 @@ describe('`NglModal`', () => {
     expect(header.id).toEqual(modal.getAttribute('aria-labelledby'));
 
     const content = modal.querySelector('.slds-modal__content');
-    expect(content.firstElementChild).toHaveCssClass('slds-p-around_medium');
+    expect(content.firstElementChild).toHaveClass('slds-p-around_medium');
     expect(content.textContent.trim()).toBe('Body content.');
     expect(content.id).toEqual(modal.getAttribute('aria-describedby'));
 
     const backdrop = getBackdrop(fixture.nativeElement);
-    expect(backdrop).toHaveCssClass('slds-backdrop_open');
+    expect(backdrop).toHaveClass('slds-backdrop_open');
   });
 
   it('should render correctly if closed', () => {
@@ -57,22 +57,22 @@ describe('`NglModal`', () => {
     fixture.detectChanges();
 
     const modal = getModal(fixture.nativeElement);
-    expect(modal).not.toHaveCssClass('slds-fade-in-open');
+    expect(modal).not.toHaveClass('slds-fade-in-open');
     expect(modal.getAttribute('aria-hidden')).toBe('true');
 
     const backdrop = getBackdrop(fixture.nativeElement);
-    expect(backdrop).not.toHaveCssClass('slds-backdrop_open');
+    expect(backdrop).not.toHaveClass('slds-backdrop_open');
   });
 
   it('should render correctly without header', () => {
     const fixture = createTestComponent();
     const headerEl = fixture.nativeElement.querySelector('.slds-modal__header');
-    expect(headerEl).not.toHaveCssClass('slds-modal__header_empty');
+    expect(headerEl).not.toHaveClass('slds-modal__header_empty');
     expect(getHeader(fixture.nativeElement)).toBeTruthy();
 
     fixture.componentInstance.header = null;
     fixture.detectChanges();
-    expect(headerEl).toHaveCssClass('slds-modal__header_empty');
+    expect(headerEl).toHaveClass('slds-modal__header_empty');
     expect(getHeader(fixture.nativeElement)).toBeFalsy();
   });
 
@@ -96,7 +96,7 @@ describe('`NglModal`', () => {
     const headerEl = fixture.nativeElement.querySelector('.slds-modal__header');
     const taglineEl = headerEl.lastElementChild;
     expect(taglineEl.tagName).toBe('P');
-    expect(taglineEl).toHaveCssClass('slds-m-top_x-small');
+    expect(taglineEl).toHaveClass('slds-m-top_x-small');
     expect(taglineEl.textContent).toBe('Custom tagline');
   });
 
@@ -131,7 +131,7 @@ describe('`NglModal`', () => {
       </ngl-modal>`);
     const footer = fixture.nativeElement.querySelector('.slds-modal__footer');
     expect(footer).toHaveText('Modal Header in footer');
-    expect(footer).not.toHaveCssClass('slds-modal__footer_directional');
+    expect(footer).not.toHaveClass('slds-modal__footer_directional');
 
     fixture.componentInstance.header = 'Changed header';
     fixture.detectChanges();
@@ -147,11 +147,11 @@ describe('`NglModal`', () => {
     fixture.detectChanges();
 
     const footer = getFooter(fixture.nativeElement);
-    expect(footer).toHaveCssClass('slds-modal__footer_directional');
+    expect(footer).toHaveClass('slds-modal__footer_directional');
 
     fixture.componentInstance.directional = false;
     fixture.detectChanges();
-    expect(footer).not.toHaveCssClass('slds-modal__footer_directional');
+    expect(footer).not.toHaveClass('slds-modal__footer_directional');
   });
 
   it('should close when clicking outside and `dismissOnClickOutside` is true', () => {
@@ -202,21 +202,21 @@ describe('`NglModal`', () => {
     it('based on input', () => {
       fixture.componentInstance.open = true;
       fixture.detectChanges();
-      expect(containerEl).toHaveCssClass('cdk-global-scrollblock');
+      expect(containerEl).toHaveClass('cdk-global-scrollblock');
 
       fixture.componentInstance.open = false;
       fixture.detectChanges();
-      expect(containerEl).not.toHaveCssClass('cdk-global-scrollblock');
+      expect(containerEl).not.toHaveClass('cdk-global-scrollblock');
     });
 
     it('in conjunction with "ngIf"', () => {
       fixture.componentInstance.open = true;
       fixture.detectChanges();
-      expect(containerEl).toHaveCssClass('cdk-global-scrollblock');
+      expect(containerEl).toHaveClass('cdk-global-scrollblock');
 
       fixture.componentInstance.open = false;
       fixture.detectChanges();
-      expect(containerEl).not.toHaveCssClass('cdk-global-scrollblock');
+      expect(containerEl).not.toHaveClass('cdk-global-scrollblock');
     });
   });
 

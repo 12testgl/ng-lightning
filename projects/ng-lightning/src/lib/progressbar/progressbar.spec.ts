@@ -24,7 +24,7 @@ describe('ProgressBar Component', () => {
     const value = getProgressBarValueElement(progressbar);
 
     expect(progressbar).toBeDefined();
-    expect(progressbar).toHaveCssClass('slds-progress-bar');
+    expect(progressbar).toHaveClass('slds-progress-bar');
     expect(progressbar.getAttribute('role')).toBe('progressbar');
     expect(progressbar.getAttribute('aria-valuemin')).toBe('0');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
@@ -68,28 +68,28 @@ describe('ProgressBar Component', () => {
   it('should change size of progress bar based on input', () => {
     const fixture = createTestComponent(`<ngl-progress-bar value="20" [size]="size" ></ngl-progress-bar>`);
     const progressbar = getProgressBarElement(fixture.nativeElement);
-    expect(progressbar).toHaveCssClass('slds-progress-bar_large');
+    expect(progressbar).toHaveClass('slds-progress-bar_large');
 
     const value = getProgressBarValueElement(progressbar);
     expect(value.style.width).toBe('20%');
 
     fixture.componentInstance.size = null;
     fixture.detectChanges();
-    expect(progressbar).not.toHaveCssClass('slds-progress-bar_large');
+    expect(progressbar).not.toHaveClass('slds-progress-bar_large');
 
     fixture.componentInstance.size = 'small';
     fixture.detectChanges();
-    expect(progressbar).toHaveCssClass('slds-progress-bar_small');
+    expect(progressbar).toHaveClass('slds-progress-bar_small');
   });
 
   it('should render a progress bar variant based on input', () => {
     const fixture = createTestComponent(`<ngl-progress-bar [value]="value" [variant]="variant" ></ngl-progress-bar>`);
     const progressbar = getProgressBarElement(fixture.nativeElement);
-    expect(progressbar).toHaveCssClass('slds-progress-bar_circular');
+    expect(progressbar).toHaveClass('slds-progress-bar_circular');
 
     fixture.componentInstance.variant = null;
     fixture.detectChanges();
-    expect(progressbar).not.toHaveCssClass('slds-progress-bar_circular');
+    expect(progressbar).not.toHaveClass('slds-progress-bar_circular');
   });
 
 });

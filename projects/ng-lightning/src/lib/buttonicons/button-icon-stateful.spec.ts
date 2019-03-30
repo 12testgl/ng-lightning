@@ -22,9 +22,9 @@ describe('`NglButtonIconStateful`', () => {
     const fixture = createTestComponent();
     const button = getButtonElement(fixture.nativeElement);
 
-    expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button_icon');
-    expect(button).toHaveCssClass('slds-button_icon-border');
+    expect(button).toHaveClass('slds-button');
+    expect(button).toHaveClass('slds-button_icon');
+    expect(button).toHaveClass('slds-button_icon-border');
 
     const assistive = getAssistiveElement(fixture.nativeElement);
     expect(assistive.textContent).toBe('Help');
@@ -34,17 +34,17 @@ describe('`NglButtonIconStateful`', () => {
     const fixture = createTestComponent();
     const { componentInstance } = fixture;
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).not.toHaveCssClass('slds-not-selected');
+    expect(button).not.toHaveClass('slds-not-selected');
     expect(button.getAttribute('aria-pressed')).toBe('false');
 
     componentInstance.selected = true;
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-is-selected');
+    expect(button).toHaveClass('slds-is-selected');
     expect(button.getAttribute('aria-pressed')).toBe('true');
 
     componentInstance.selected = false;
     fixture.detectChanges();
-    expect(button).not.toHaveCssClass('slds-not-selected');
+    expect(button).not.toHaveClass('slds-not-selected');
     expect(button.getAttribute('aria-pressed')).toBe('false');
 
   });
@@ -76,17 +76,17 @@ describe('`NglButtonIconStateful`', () => {
     const { componentInstance, nativeElement } = fixture;
 
     const button = getButtonElement(nativeElement);
-    expect(button).toHaveCssClass('slds-button_icon-border');
+    expect(button).toHaveClass('slds-button_icon-border');
 
     componentInstance.variant = 'border-filled';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_icon-border-filled');
-    expect(button).not.toHaveCssClass('slds-button_icon-border');
+    expect(button).toHaveClass('slds-button_icon-border-filled');
+    expect(button).not.toHaveClass('slds-button_icon-border');
 
     componentInstance.variant = null;
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_icon-border');
-    expect(button).not.toHaveCssClass('slds-button_icon-border-filled');
+    expect(button).toHaveClass('slds-button_icon-border');
+    expect(button).not.toHaveClass('slds-button_icon-border-filled');
   });
 
   it('should handle size', () => {
@@ -97,12 +97,12 @@ describe('`NglButtonIconStateful`', () => {
 
     componentInstance.size = 'small';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_icon-small');
+    expect(button).toHaveClass('slds-button_icon-small');
 
     componentInstance.size = 'x-small';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_icon-x-small');
-    expect(button).not.toHaveCssClass('slds-button_icon-small');
+    expect(button).toHaveClass('slds-button_icon-x-small');
+    expect(button).not.toHaveClass('slds-button_icon-small');
   });
 
 });

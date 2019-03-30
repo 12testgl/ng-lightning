@@ -35,8 +35,8 @@ describe('Expandable Section Component', () => {
       const contentEl = getContentEl(nativeElement);
 
       fixture.detectChanges();
-      expect(sectionEl).toHaveCssClass('slds-section');
-      expect(sectionEl).not.toHaveCssClass('slds-is-open');
+      expect(sectionEl).toHaveClass('slds-section');
+      expect(sectionEl).not.toHaveClass('slds-is-open');
       expect(titleActionEl.textContent.trim()).toBe('Section title');
       expect(titleActionEl.getAttribute('aria-controls')).toBe(contentEl.getAttribute('id'));
       expect(getContentEl(nativeElement).textContent).toBe('Body');
@@ -52,13 +52,13 @@ describe('Expandable Section Component', () => {
 
       componentInstance.open = true;
       fixture.detectChanges();
-      expect(sectionEl).toHaveCssClass('slds-is-open');
+      expect(sectionEl).toHaveClass('slds-is-open');
       expect(titleActionEl.getAttribute('aria-expanded')).toBe('true');
       expect(contentEl.getAttribute('aria-hidden')).toBe('false');
 
       componentInstance.open = false;
       fixture.detectChanges();
-      expect(sectionEl).not.toHaveCssClass('slds-is-open');
+      expect(sectionEl).not.toHaveClass('slds-is-open');
       expect(titleActionEl.getAttribute('aria-expanded')).toBe('false');
       expect(contentEl.getAttribute('aria-hidden')).toBe('true');
     });
@@ -70,11 +70,11 @@ describe('Expandable Section Component', () => {
 
       titleEl.click();
       fixture.detectChanges();
-      expect(sectionEl).toHaveCssClass('slds-is-open');
+      expect(sectionEl).toHaveClass('slds-is-open');
 
       titleEl.click();
       fixture.detectChanges();
-      expect(sectionEl).not.toHaveCssClass('slds-is-open');
+      expect(sectionEl).not.toHaveClass('slds-is-open');
     });
   });
 
@@ -86,7 +86,7 @@ describe('Expandable Section Component', () => {
       componentInstance.collapsable = false;
       fixture.detectChanges();
       expect(getArrowEl(nativeElement)).toBeNull();
-      expect(getTitleEl(nativeElement)).toHaveCssClass('slds-theme_shade');
+      expect(getTitleEl(nativeElement)).toHaveClass('slds-theme_shade');
       expect(getTitleActionEl(nativeElement)).toBeNull();
       expect(getContentEl(nativeElement).getAttribute('aria-hidden')).toBe('false');
       expect(getContentEl(nativeElement).getAttribute('id')).toBeNull();
@@ -100,7 +100,7 @@ describe('Expandable Section Component', () => {
       componentInstance.open = false;
       componentInstance.collapsable = false;
       fixture.detectChanges();
-      expect(sectionEl).toHaveCssClass('slds-is-open');
+      expect(sectionEl).toHaveClass('slds-is-open');
     });
 
     it('should not toggle when clicking on title', () => {
@@ -111,11 +111,11 @@ describe('Expandable Section Component', () => {
 
       componentInstance.collapsable = false;
       fixture.detectChanges();
-      expect(sectionEl).toHaveCssClass('slds-is-open');
+      expect(sectionEl).toHaveClass('slds-is-open');
 
       titleEl.click();
       fixture.detectChanges();
-      expect(sectionEl).toHaveCssClass('slds-is-open');
+      expect(sectionEl).toHaveClass('slds-is-open');
     });
   });
 });

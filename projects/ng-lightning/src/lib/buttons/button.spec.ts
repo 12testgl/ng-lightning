@@ -22,8 +22,8 @@ describe('`nglButton`', () => {
   it('should render the default button', () => {
     const fixture = createTestComponent();
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button_neutral');
+    expect(button).toHaveClass('slds-button');
+    expect(button).toHaveClass('slds-button_neutral');
     expect(button.textContent).toBe('Go');
 
     expect(getIconElement(button)).toBeFalsy();
@@ -36,38 +36,38 @@ describe('`nglButton`', () => {
 
     componentInstance.variant = 'brand';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_brand');
+    expect(button).toHaveClass('slds-button_brand');
 
     componentInstance.variant = 'base';
     fixture.detectChanges();
-    expect(button).not.toHaveCssClass('slds-button_base');
-    expect(button).not.toHaveCssClass('slds-button_brand');
+    expect(button).not.toHaveClass('slds-button_base');
+    expect(button).not.toHaveClass('slds-button_brand');
 
     componentInstance.variant = 'destructive';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_destructive');
+    expect(button).toHaveClass('slds-button_destructive');
   });
 
   it('should render default icon', () => {
     const fixture = createTestComponent(`<button nglButton iconName="utility:settings"></button>`);
     const button = getButtonElement(fixture.nativeElement);
     const icon = getIconElement(button);
-    expect(icon).toHaveCssClass('slds-button__icon');
-    expect(icon).toHaveCssClass('slds-button__icon_left');
+    expect(icon).toHaveClass('slds-button__icon');
+    expect(icon).toHaveClass('slds-button__icon_left');
   });
 
   it('should render icon based on input position', () => {
     const fixture = createTestComponent(`<button nglButton iconName="utility:settings" [iconPosition]="position"></button>`);
     const button = getButtonElement(fixture.nativeElement);
     let icon = getIconElement(button);
-    expect(icon).toHaveCssClass('slds-button__icon');
-    expect(icon).toHaveCssClass('slds-button__icon_left');
+    expect(icon).toHaveClass('slds-button__icon');
+    expect(icon).toHaveClass('slds-button__icon_left');
 
     fixture.componentInstance.position = 'right';
     fixture.detectChanges();
     icon = getIconElement(button);
-    expect(icon).toHaveCssClass('slds-button__icon');
-    expect(icon).toHaveCssClass('slds-button__icon_right');
+    expect(icon).toHaveClass('slds-button__icon');
+    expect(icon).toHaveClass('slds-button__icon_right');
   });
 });
 

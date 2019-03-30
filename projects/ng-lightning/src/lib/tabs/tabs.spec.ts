@@ -37,9 +37,9 @@ describe('Tabs Component', () => {
     const host = getTabsContainer(fixture.nativeElement);
     const tabs = getTabsElement(host);
 
-    expect(host).toHaveCssClass('slds-tabs_default');
+    expect(host).toHaveClass('slds-tabs_default');
     expect(tabs.tagName).toBe('UL');
-    expect(tabs).toHaveCssClass('slds-tabs_default__nav');
+    expect(tabs).toHaveClass('slds-tabs_default__nav');
   });
 
   it('should render the tab headers', () => {
@@ -160,9 +160,9 @@ describe('Tabs Component', () => {
     const host = getTabsContainer(fixture.nativeElement);
     const tabs = getTabsElement(host);
 
-    expect(host).toHaveCssClass('slds-tabs_scoped');
-    expect(host).not.toHaveCssClass('slds-tabs_default');
-    expect(tabs).toHaveCssClass('slds-tabs_scoped__nav');
+    expect(host).toHaveClass('slds-tabs_scoped');
+    expect(host).not.toHaveClass('slds-tabs_default');
+    expect(tabs).toHaveClass('slds-tabs_scoped__nav');
   });
 
   it('should have the proper aria attributes for headers and content', () => {

@@ -53,8 +53,8 @@ describe('Popovers', () => {
     fixture = createTestComponent();
     const popoverEl = getPopoverElement();
     const bodyEl = getBodyEl(popoverEl);
-    expect(popoverEl).toHaveCssClass('slds-popover');
-    expect(popoverEl).toHaveCssClass('slds-nubbin_bottom'); // Top placement
+    expect(popoverEl).toHaveClass('slds-popover');
+    expect(popoverEl).toHaveClass('slds-nubbin_bottom'); // Top placement
     expect(popoverEl.getAttribute('role')).toBe('dialog');
     expect(getCloseButtonEl(popoverEl)).toBeTruthy();
     expect(bodyEl.textContent.trim()).toBe('I am a string');
@@ -81,17 +81,17 @@ describe('Popovers', () => {
     const { componentInstance } = fixture;
     const popoverEl = getPopoverElement();
 
-    expect(popoverEl).toHaveCssClass('slds-nubbin_bottom');
+    expect(popoverEl).toHaveClass('slds-nubbin_bottom');
 
     componentInstance.placement = 'left';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-nubbin_right');
-    expect(popoverEl).not.toHaveCssClass('slds-nubbin_bottom');
+    expect(popoverEl).toHaveClass('slds-nubbin_right');
+    expect(popoverEl).not.toHaveClass('slds-nubbin_bottom');
 
     componentInstance.placement = 'bottom';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-nubbin_top');
-    expect(popoverEl).not.toHaveCssClass('slds-nubbin_right');
+    expect(popoverEl).toHaveClass('slds-nubbin_top');
+    expect(popoverEl).not.toHaveClass('slds-nubbin_right');
   });
 
   it('should change variant based on input', () => {
@@ -101,33 +101,33 @@ describe('Popovers', () => {
 
     componentInstance.variant = 'walkthrough';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_walkthrough');
+    expect(popoverEl).toHaveClass('slds-popover_walkthrough');
 
     componentInstance.variant = 'warning';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_warning');
-    expect(popoverEl).not.toHaveCssClass('slds-popover_walkthrough');
+    expect(popoverEl).toHaveClass('slds-popover_warning');
+    expect(popoverEl).not.toHaveClass('slds-popover_walkthrough');
 
     componentInstance.variant = 'error';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_error');
-    expect(popoverEl).not.toHaveCssClass('slds-popover_warning');
+    expect(popoverEl).toHaveClass('slds-popover_error');
+    expect(popoverEl).not.toHaveClass('slds-popover_warning');
 
     componentInstance.variant = 'panel';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_panel');
-    expect(popoverEl).not.toHaveCssClass('slds-popover_error');
+    expect(popoverEl).toHaveClass('slds-popover_panel');
+    expect(popoverEl).not.toHaveClass('slds-popover_error');
 
     componentInstance.variant = 'feature';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_feature');
-    expect(popoverEl).toHaveCssClass('slds-popover_walkthrough');
-    expect(popoverEl).not.toHaveCssClass('slds-popover_panel');
+    expect(popoverEl).toHaveClass('slds-popover_feature');
+    expect(popoverEl).toHaveClass('slds-popover_walkthrough');
+    expect(popoverEl).not.toHaveClass('slds-popover_panel');
 
     componentInstance.variant = null;
     fixture.detectChanges();
-    expect(popoverEl).not.toHaveCssClass('slds-popover_feature');
-    expect(popoverEl).not.toHaveCssClass('slds-popover_walkthrough');
+    expect(popoverEl).not.toHaveClass('slds-popover_feature');
+    expect(popoverEl).not.toHaveClass('slds-popover_walkthrough');
   });
 
   it('should change size based on input', () => {
@@ -137,19 +137,19 @@ describe('Popovers', () => {
 
     componentInstance.size = 'small';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_small');
+    expect(popoverEl).toHaveClass('slds-popover_small');
 
     componentInstance.size = 'medium';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_medium');
+    expect(popoverEl).toHaveClass('slds-popover_medium');
 
     componentInstance.size = 'large';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_large');
+    expect(popoverEl).toHaveClass('slds-popover_large');
 
     componentInstance.size = 'full-width';
     fixture.detectChanges();
-    expect(popoverEl).toHaveCssClass('slds-popover_full-width');
+    expect(popoverEl).toHaveClass('slds-popover_full-width');
   });
 
   it('should destroy popover when host is destroyed', () => {

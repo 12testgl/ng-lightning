@@ -18,32 +18,32 @@ describe('`ngl-toast`', () => {
     const fixture = createTestComponent();
     const hostElement = fixture.nativeElement.querySelector('.slds-notify');
 
-    expect(hostElement).toHaveCssClass('slds-notify_toast');
+    expect(hostElement).toHaveClass('slds-notify_toast');
     expect(hostElement.getAttribute('role')).toBe('status');
-    expect(hostElement).toHaveCssClass('slds-theme_info');
+    expect(hostElement).toHaveClass('slds-theme_info');
 
     const closeButton = getCloseButton(fixture);
-    expect(closeButton).toHaveCssClass('slds-notify__close');
+    expect(closeButton).toHaveClass('slds-notify__close');
   });
 
   it('should change variant based on input', () => {
     const fixture = createTestComponent('<ngl-toast [variant]="variant"></ngl-toast>');
     const hostElement = fixture.nativeElement.querySelector('.slds-notify');
 
-    expect(hostElement).toHaveCssClass('slds-theme_error');
-    expect(hostElement).not.toHaveCssClass('slds-theme_info');
+    expect(hostElement).toHaveClass('slds-theme_error');
+    expect(hostElement).not.toHaveClass('slds-theme_info');
 
     fixture.componentInstance.variant = 'success';
     fixture.detectChanges();
 
-    expect(hostElement).not.toHaveCssClass('slds-theme_error');
-    expect(hostElement).toHaveCssClass('slds-theme_success');
+    expect(hostElement).not.toHaveClass('slds-theme_error');
+    expect(hostElement).toHaveClass('slds-theme_success');
 
     fixture.componentInstance.variant = null;
     fixture.detectChanges();
 
-    expect(hostElement).not.toHaveCssClass('slds-theme_success');
-    expect(hostElement).toHaveCssClass('slds-theme_info');
+    expect(hostElement).not.toHaveClass('slds-theme_success');
+    expect(hostElement).toHaveClass('slds-theme_info');
   });
 
   it('should have the proper assistive texts', () => {
@@ -146,7 +146,7 @@ describe('`ngl-toast`', () => {
 
     const icon = fixture.nativeElement.querySelector('ngl-icon');
     expect(icon).toBeDefined();
-    expect(icon.querySelector('svg')).not.toHaveCssClass('slds-icon-text-default');
+    expect(icon.querySelector('svg')).not.toHaveClass('slds-icon-text-default');
     const use = icon.querySelector('use');
     expect(use.getAttribute('xlink:href')).toBe('assets/icons/utility-sprite/svg/symbols.svg#info');
   }));

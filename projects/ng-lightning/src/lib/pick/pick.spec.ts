@@ -56,17 +56,17 @@ describe('`Pick`', () => {
 
     fixture.componentInstance.selected = 'op1';
     fixture.detectChanges();
-    expect(options[0]).toHaveCssClass('my-active-class');
-    expect(options[0]).not.toHaveCssClass('slds-button_brand');
-    expect(options[1]).not.toHaveCssClass('another-class');
-    expect(options[0]).not.toHaveCssClass('slds-button_brand');
+    expect(options[0]).toHaveClass('my-active-class');
+    expect(options[0]).not.toHaveClass('slds-button_brand');
+    expect(options[1]).not.toHaveClass('another-class');
+    expect(options[0]).not.toHaveClass('slds-button_brand');
 
     fixture.componentInstance.selected = 'op2';
     fixture.detectChanges();
-    expect(options[0]).not.toHaveCssClass('my-active-class');
-    expect(options[0]).not.toHaveCssClass('slds-button_brand');
-    expect(options[1]).toHaveCssClass('another-class');
-    expect(options[0]).not.toHaveCssClass('slds-button_brand');
+    expect(options[0]).not.toHaveClass('my-active-class');
+    expect(options[0]).not.toHaveClass('slds-button_brand');
+    expect(options[1]).toHaveClass('another-class');
+    expect(options[0]).not.toHaveClass('slds-button_brand');
   });
 
   it('should have proper selected value when `nglPickOption` is clicked', () => {

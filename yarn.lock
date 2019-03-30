@@ -387,6 +387,13 @@
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.16.tgz#a6cb24b1149d65293bd616923500014838e14e7d"
   integrity sha512-056oRlBBp7MDzr+HoU5su099s/s7wjZ3KcHxLfv+Byqb9MwdLUvsfLgw1VS97hsh3ddxSPyQu+olHMnoVTUY6g==
 
+"@types/jasmine_dom_matchers@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@types/jasmine_dom_matchers/-/jasmine_dom_matchers-1.4.4.tgz#1101da90543eca7e3cab1f3610f1b76a222ae56d"
+  integrity sha512-S1C3XHnkM4kduq08gGm1lAjwRMcydeakdkS2yfAPKkt8VDKcN3j/nMxbYa3XjbrWFtNo313gQvUSHj90vPTuaQ==
+  dependencies:
+    "@types/jasmine" "*"
+
 "@types/jasminewd2@^2.0.6":
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@types/jasminewd2/-/jasminewd2-2.0.6.tgz#2f57a8d9875a6c9ef328a14bd070ba14a055ac39"
@@ -4919,6 +4926,11 @@ jasmine@2.8.0:
     exit "^0.1.2"
     glob "^7.0.6"
     jasmine-core "~2.8.0"
+
+jasmine_dom_matchers@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/jasmine_dom_matchers/-/jasmine_dom_matchers-1.4.0.tgz#77770373dc718900bbf47b47db707548d468d012"
+  integrity sha1-d3cDc9xxiQC79HtH23B1SNRo0BI=
 
 jasminewd2@^2.1.0:
   version "2.2.0"

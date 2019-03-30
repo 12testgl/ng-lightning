@@ -24,40 +24,40 @@ describe('Spinner Component', () => {
     const spinner = getSpinnerElement(fixture.nativeElement);
 
     expect(spinner).toBeDefined();
-    expect(spinner).toHaveCssClass('slds-spinner_medium');
+    expect(spinner).toHaveClass('slds-spinner_medium');
   });
 
   it('should render a large spinner based on input', () => {
     const fixture = createTestComponent(`<ngl-spinner [size]="size" ></ngl-spinner>`);
     const spinner = getSpinnerElement(fixture.nativeElement);
-    expect(spinner).not.toHaveCssClass('slds-spinner_medium');
-    expect(spinner).toHaveCssClass('slds-spinner_large');
+    expect(spinner).not.toHaveClass('slds-spinner_medium');
+    expect(spinner).toHaveClass('slds-spinner_large');
 
     fixture.componentInstance.size = null;
     fixture.detectChanges();
-    expect(spinner).toHaveCssClass('slds-spinner_medium');
-    expect(spinner).not.toHaveCssClass('slds-spinner_large');
+    expect(spinner).toHaveClass('slds-spinner_medium');
+    expect(spinner).not.toHaveClass('slds-spinner_large');
 
     fixture.componentInstance.size = 'small';
     fixture.detectChanges();
-    expect(spinner).toHaveCssClass('slds-spinner_small');
-    expect(spinner).not.toHaveCssClass('slds-spinner_medium');
+    expect(spinner).toHaveClass('slds-spinner_small');
+    expect(spinner).not.toHaveClass('slds-spinner_medium');
   });
 
   it('should render a spinner variant based on input', () => {
     const fixture = createTestComponent(`<ngl-spinner [variant]="variant" ></ngl-spinner>`);
     const spinner = getSpinnerElement(fixture.nativeElement);
-    expect(spinner).toHaveCssClass('slds-spinner_brand');
+    expect(spinner).toHaveClass('slds-spinner_brand');
 
     fixture.componentInstance.variant = null;
     fixture.detectChanges();
-    expect(spinner).not.toHaveCssClass('slds-spinner_brand');
-    expect(spinner).not.toHaveCssClass('slds-spinner_null');
+    expect(spinner).not.toHaveClass('slds-spinner_brand');
+    expect(spinner).not.toHaveClass('slds-spinner_null');
 
     fixture.componentInstance.variant = 'inverse';
     fixture.detectChanges();
-    expect(spinner).toHaveCssClass('slds-spinner_inverse');
-    expect(spinner).not.toHaveCssClass('slds-spinner_brand');
+    expect(spinner).toHaveClass('slds-spinner_inverse');
+    expect(spinner).not.toHaveClass('slds-spinner_brand');
   });
 
   it('should have assistive text', () => {

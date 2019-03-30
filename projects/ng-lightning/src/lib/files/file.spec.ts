@@ -21,15 +21,15 @@ describe('File Component', () => {
   it('should render the figure element with default values', () => {
     const fixture = createTestComponent();
     const file = getFileElement(fixture.nativeElement);
-    expect(file).toHaveCssClass('slds-file');
-    expect(file).toHaveCssClass('slds-file_card');
+    expect(file).toHaveClass('slds-file');
+    expect(file).toHaveClass('slds-file_card');
     expect(getFigureCaptionElement(file)).toBeNull();
   });
 
   it('should render the caption element based on input', () => {
     const fixture = createTestComponent(`<ngl-file [text]="text"></ngl-file>`);
     const file = getFileElement(fixture.nativeElement);
-    expect(file).toHaveCssClass('slds-has-title');
+    expect(file).toHaveClass('slds-has-title');
 
     const caption = getFigureCaptionElement(file);
     const textEl = <HTMLSpanElement>caption.querySelector('.slds-file__text');
@@ -38,7 +38,7 @@ describe('File Component', () => {
 
     fixture.componentInstance.text = '';
     fixture.detectChanges();
-    expect(file).not.toHaveCssClass('slds-has-title');
+    expect(file).not.toHaveClass('slds-has-title');
   });
 });
 

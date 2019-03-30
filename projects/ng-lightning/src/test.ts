@@ -11,7 +11,8 @@ import {
 
 declare const require: any;
 
-import '../test/jasmine.config';
+// Assertions about html in Jasmine tests
+import 'jasmine_dom_matchers';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(

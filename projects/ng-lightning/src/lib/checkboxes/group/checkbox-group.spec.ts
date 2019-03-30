@@ -33,7 +33,7 @@ describe('`NglCheckboxGroup`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
-    expect(element).toHaveCssClass('slds-form-element');
+    expect(element).toHaveClass('slds-form-element');
 
     const labelEl = getLabelElement(element);
     expect(labelEl).toHaveText('Group Label');
@@ -60,13 +60,13 @@ describe('`NglCheckboxGroup`', () => {
     `);
     const element = fixture.nativeElement.firstElementChild;
 
-    expect(element).not.toHaveCssClass('slds-has-error');
+    expect(element).not.toHaveClass('slds-has-error');
     expect(getErrorElement(element)).toBeFalsy();
     fixture.componentInstance.error = 'This is an error!';
     fixture.detectChanges();
 
     const errorEl = getErrorElement(element);
-    expect(element).toHaveCssClass('slds-has-error');
+    expect(element).toHaveClass('slds-has-error');
     expect(errorEl).toHaveText('This is an error!');
 
     const inputEls = getInputElements(fixture.nativeElement);
@@ -82,7 +82,7 @@ describe('`NglCheckboxGroup`', () => {
     fixture.componentInstance.required = true;
     fixture.detectChanges();
     const abbrEl = getRequiredElement(fixture.nativeElement);
-    expect(abbrEl).toHaveCssClass('slds-required');
+    expect(abbrEl).toHaveClass('slds-required');
 
     fixture.componentInstance.required = false;
     fixture.detectChanges();
@@ -97,7 +97,7 @@ describe('`NglCheckboxGroup`', () => {
     const inputEls = getInputElements(fixture.nativeElement);
     expect(labelEls.map(e => e.getAttribute('for'))).toEqual(inputEls.map(e => e.getAttribute('id')));
 
-    labelEls.forEach(e => expect(e).toHaveCssClass('slds-checkbox__label'));
+    labelEls.forEach(e => expect(e).toHaveClass('slds-checkbox__label'));
   });
 
   it('should render button group', () => {
@@ -108,14 +108,14 @@ describe('`NglCheckboxGroup`', () => {
         <ngl-checkbox-option [label]="'Label Two'"><input ngl type="checkbox"></ngl-checkbox-option>
       </fieldset>
     `);
-    expect(fixture.nativeElement.querySelector('.slds-form-element__control').firstElementChild).toHaveCssClass('slds-checkbox_button-group');
+    expect(fixture.nativeElement.querySelector('.slds-form-element__control').firstElementChild).toHaveClass('slds-checkbox_button-group');
 
     const labelEls = getOptionLabelElements(fixture.nativeElement);
     expect(labelEls.map(e => e.textContent.trim())).toEqual(['Label One', 'Label Two']);
 
     labelEls.forEach(e => {
-      expect(e).toHaveCssClass('slds-checkbox_button__label');
-      expect(e).not.toHaveCssClass('slds-checkbox__label');
+      expect(e).toHaveClass('slds-checkbox_button__label');
+      expect(e).not.toHaveClass('slds-checkbox__label');
     });
   });
 

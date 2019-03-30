@@ -17,7 +17,7 @@ describe('`ngl-dynamic-icon-eq`', () => {
     const fixture = createTestComponent();
     const host = fixture.nativeElement.firstElementChild.firstElementChild;
 
-    expect(host).toHaveCssClass('slds-icon-eq');
+    expect(host).toHaveClass('slds-icon-eq');
   });
 });
 

@@ -28,10 +28,10 @@ describe('Tooltips', () => {
   it('should render the created tooltip correctly', () => {
     fixture = createTestComponent();
     const tooltipEl = getTooltipElement();
-    expect(tooltipEl).toHaveCssClass('slds-popover');
-    expect(tooltipEl).toHaveCssClass('slds-popover_tooltip');
+    expect(tooltipEl).toHaveClass('slds-popover');
+    expect(tooltipEl).toHaveClass('slds-popover_tooltip');
     expect(tooltipEl.getAttribute('role')).toBe('tooltip');
-    expect(tooltipEl).toHaveCssClass('slds-nubbin_bottom'); // Top placement
+    expect(tooltipEl).toHaveClass('slds-nubbin_bottom'); // Top placement
     expect(tooltipEl.textContent.trim()).toBe('I am a tooltip');
   });
 
@@ -72,17 +72,17 @@ describe('Tooltips', () => {
     const { componentInstance } = fixture;
     const tooltipEl = getTooltipElement();
 
-    expect(tooltipEl).toHaveCssClass('slds-nubbin_bottom');
+    expect(tooltipEl).toHaveClass('slds-nubbin_bottom');
 
     componentInstance.placement = 'left';
     fixture.detectChanges();
-    expect(tooltipEl).toHaveCssClass('slds-nubbin_right');
-    expect(tooltipEl).not.toHaveCssClass('slds-nubbin_bottom');
+    expect(tooltipEl).toHaveClass('slds-nubbin_right');
+    expect(tooltipEl).not.toHaveClass('slds-nubbin_bottom');
 
     componentInstance.placement = 'bottom';
     fixture.detectChanges();
-    expect(tooltipEl).toHaveCssClass('slds-nubbin_top');
-    expect(tooltipEl).not.toHaveCssClass('slds-nubbin_right');
+    expect(tooltipEl).toHaveClass('slds-nubbin_top');
+    expect(tooltipEl).not.toHaveClass('slds-nubbin_right');
   });
 
   it('should destroy tooltip when host is destroyed', () => {

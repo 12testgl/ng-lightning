@@ -26,7 +26,7 @@ describe('`NglCheckboxToggle`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
-    expect(element).toHaveCssClass('slds-form-element');
+    expect(element).toHaveClass('slds-form-element');
 
     const labelEl = getLabelElement(fixture.nativeElement);
     expect(labelEl).toHaveText('My label');
@@ -47,7 +47,7 @@ describe('`NglCheckboxToggle`', () => {
     fixture.componentInstance.required = true;
     fixture.detectChanges();
     const abbrEl = getRequiredElement(fixture.nativeElement);
-    expect(abbrEl).toHaveCssClass('slds-required');
+    expect(abbrEl).toHaveClass('slds-required');
 
     fixture.componentInstance.required = false;
     fixture.detectChanges();

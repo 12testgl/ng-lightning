@@ -33,7 +33,7 @@ describe('`NglRadioGroup`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
-    expect(element).toHaveCssClass('slds-form-element');
+    expect(element).toHaveClass('slds-form-element');
 
     const labelEl = getLabelElement(element);
     expect(labelEl).toHaveText('Group Label');
@@ -70,13 +70,13 @@ describe('`NglRadioGroup`', () => {
     `);
     const element = fixture.nativeElement.firstElementChild;
 
-    expect(element).not.toHaveCssClass('slds-has-error');
+    expect(element).not.toHaveClass('slds-has-error');
     expect(getErrorElement(element)).toBeFalsy();
     fixture.componentInstance.error = 'This is an error!';
     fixture.detectChanges();
 
     const errorEl = getErrorElement(element);
-    expect(element).toHaveCssClass('slds-has-error');
+    expect(element).toHaveClass('slds-has-error');
     expect(errorEl).toHaveText('This is an error!');
 
     const inputEls = getInputElements(fixture.nativeElement);
@@ -92,7 +92,7 @@ describe('`NglRadioGroup`', () => {
     fixture.componentInstance.required = true;
     fixture.detectChanges();
     const abbrEl = getRequiredElement(fixture.nativeElement);
-    expect(abbrEl).toHaveCssClass('slds-required');
+    expect(abbrEl).toHaveClass('slds-required');
 
     fixture.componentInstance.required = false;
     fixture.detectChanges();
@@ -107,7 +107,7 @@ describe('`NglRadioGroup`', () => {
     const inputEls = getInputElements(fixture.nativeElement);
     expect(labelEls.map(e => e.getAttribute('for'))).toEqual(inputEls.map(e => e.getAttribute('id')));
 
-    labelEls.forEach(e => expect(e).toHaveCssClass('slds-radio__label'));
+    labelEls.forEach(e => expect(e).toHaveClass('slds-radio__label'));
   });
 
   it('should render button group', () => {
@@ -118,14 +118,14 @@ describe('`NglRadioGroup`', () => {
         <ngl-radio-option [label]="'Label Two'"><input ngl type="radio"></ngl-radio-option>
       </fieldset>
     `);
-    expect(fixture.nativeElement.querySelector('.slds-form-element__control').firstElementChild).toHaveCssClass('slds-radio_button-group');
+    expect(fixture.nativeElement.querySelector('.slds-form-element__control').firstElementChild).toHaveClass('slds-radio_button-group');
 
     const labelEls = getOptionLabelElements(fixture.nativeElement);
     expect(labelEls.map(e => e.textContent.trim())).toEqual(['Label One', 'Label Two']);
 
     labelEls.forEach(e => {
-      expect(e).toHaveCssClass('slds-radio_button__label');
-      expect(e).not.toHaveCssClass('slds-radio__label');
+      expect(e).toHaveClass('slds-radio_button__label');
+      expect(e).not.toHaveClass('slds-radio__label');
     });
   });
 

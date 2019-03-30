@@ -26,16 +26,16 @@ describe('`NglCheckboxButton`', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
 
-    expect(element).toHaveCssClass('slds-checkbox_add-button');
+    expect(element).toHaveClass('slds-checkbox_add-button');
 
     const labelEl = getLabelElement(element);
-    expect(labelEl).toHaveCssClass('slds-checkbox_faux');
+    expect(labelEl).toHaveClass('slds-checkbox_faux');
 
     const assistiveEl = getAssistiveElement(labelEl);
     expect(assistiveEl).toHaveText('Add product');
 
     const inputEl = getInputElement(element);
-    expect(inputEl).toHaveCssClass('slds-assistive-text');
+    expect(inputEl).toHaveClass('slds-assistive-text');
   });
 
   it('should connect with the passed input', () => {

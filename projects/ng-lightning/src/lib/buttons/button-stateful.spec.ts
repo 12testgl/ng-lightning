@@ -18,26 +18,26 @@ describe('`nglButtonStateful`', () => {
     const fixture = createTestComponent(`<button type="button" nglButtonStateful [state]="selected"></button>`);
     const button = getButtonElement(fixture.nativeElement);
     expect(button.getAttribute('aria-live')).toBe('assertive');
-    expect(button).toHaveCssClass('slds-button');
-    expect(button).toHaveCssClass('slds-button_stateful');
-    expect(button).toHaveCssClass('slds-button_neutral');
+    expect(button).toHaveClass('slds-button');
+    expect(button).toHaveClass('slds-button_stateful');
+    expect(button).toHaveClass('slds-button_neutral');
   });
 
   it('should toggle state based on input', () => {
     const fixture = createTestComponent(`<button type="button" nglButtonStateful [state]="selected"></button>`);
     const { componentInstance } = fixture;
     const button = getButtonElement(fixture.nativeElement);
-    expect(button).toHaveCssClass('slds-not-selected');
+    expect(button).toHaveClass('slds-not-selected');
 
     componentInstance.selected = true;
     fixture.detectChanges();
-    expect(button).not.toHaveCssClass('slds-not-selected');
-    expect(button).toHaveCssClass('slds-is-selected');
+    expect(button).not.toHaveClass('slds-not-selected');
+    expect(button).toHaveClass('slds-is-selected');
 
     componentInstance.selected = false;
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-not-selected');
-    expect(button).not.toHaveCssClass('slds-is-selected');
+    expect(button).toHaveClass('slds-not-selected');
+    expect(button).not.toHaveClass('slds-is-selected');
   });
 
   it('should emit the appropriate state on click', () => {
@@ -62,13 +62,13 @@ describe('`nglButtonStateful`', () => {
 
     componentInstance.variant = 'brand';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_brand');
-    expect(button).not.toHaveCssClass('slds-button_neutral');
+    expect(button).toHaveClass('slds-button_brand');
+    expect(button).not.toHaveClass('slds-button_neutral');
 
     componentInstance.variant = 'text';
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-button_reset');
-    expect(button).not.toHaveCssClass('slds-button_brand');
+    expect(button).toHaveClass('slds-button_reset');
+    expect(button).not.toHaveClass('slds-button_brand');
   });
 
   it('should have the appropriate class when selected and focused', () => {
@@ -76,16 +76,16 @@ describe('`nglButtonStateful`', () => {
     const { componentInstance, nativeElement } = fixture;
     const button = getButtonElement(nativeElement);
 
-    expect(button).toHaveCssClass('slds-not-selected');
+    expect(button).toHaveClass('slds-not-selected');
 
     dispatchEvent(button, 'focus');
     componentInstance.selected = true;
     fixture.detectChanges();
-    expect(button).toHaveCssClass('slds-is-selected-clicked');
+    expect(button).toHaveClass('slds-is-selected-clicked');
 
     dispatchEvent(button, 'blur');
-    expect(button).not.toHaveCssClass('slds-is-selected-clicked');
-    expect(button).toHaveCssClass('slds-is-selected');
+    expect(button).not.toHaveClass('slds-is-selected-clicked');
+    expect(button).toHaveClass('slds-is-selected');
   });
 });
 

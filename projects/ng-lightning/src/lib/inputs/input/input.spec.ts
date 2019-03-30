@@ -30,13 +30,13 @@ describe('`NglInput`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const element = fixture.nativeElement.firstElementChild;
-    expect(element).toHaveCssClass('slds-form-element');
+    expect(element).toHaveClass('slds-form-element');
 
     const labelEl = getLabelElement(element);
     expect(labelEl).toHaveText('My label');
 
     const inputEl = getInputElement(element);
-    expect(inputEl).toHaveCssClass('slds-input');
+    expect(inputEl).toHaveClass('slds-input');
 
     const inputId = inputEl.getAttribute('id');
     expect(inputId).toEqual(labelEl.getAttribute('for'));
@@ -55,14 +55,14 @@ describe('`NglInput`', () => {
     const fixture = createTestComponent(`<ngl-input label [error]="error"><input ngl type="text"></ngl-input>`);
     const element = fixture.nativeElement.firstElementChild;
 
-    expect(element).not.toHaveCssClass('slds-has-error');
+    expect(element).not.toHaveClass('slds-has-error');
     expect(getErrorElement(element)).toBeFalsy();
     fixture.componentInstance.error = 'This is an error!';
     fixture.detectChanges();
 
     const errorEl = getErrorElement(element);
     const inputEl = getInputElement(element);
-    expect(element).toHaveCssClass('slds-has-error');
+    expect(element).toHaveClass('slds-has-error');
     expect(errorEl.id).toEqual(inputEl.getAttribute('aria-describedby'));
     expect(errorEl).toHaveText('This is an error!');
   });

@@ -31,15 +31,15 @@ describe('`nglDropdown`', () => {
   it('should render correctly', () => {
     const fixture = createTestComponent();
     const dropdownEl = getDropdownElement(fixture.nativeElement);
-    expect(dropdownEl).toHaveCssClass('slds-dropdown-trigger');
-    expect(dropdownEl).toHaveCssClass('slds-dropdown-trigger_click');
+    expect(dropdownEl).toHaveClass('slds-dropdown-trigger');
+    expect(dropdownEl).toHaveClass('slds-dropdown-trigger_click');
     fixture.destroy();
   });
 
   it('should be closed when initialized as closed', () => {
     const fixture = createTestComponent();
     const dropdownEl = getDropdownElement(fixture.nativeElement);
-    expect(dropdownEl).not.toHaveCssClass('slds-is-open');
+    expect(dropdownEl).not.toHaveClass('slds-is-open');
     expect(dropdownEl.getAttribute('aria-expanded')).toBe('false');
     fixture.destroy();
   });
@@ -50,7 +50,7 @@ describe('`nglDropdown`', () => {
     fixture.detectChanges();
 
     const dropdownEl = getDropdownElement(fixture.nativeElement);
-    expect(dropdownEl).toHaveCssClass('slds-is-open');
+    expect(dropdownEl).toHaveClass('slds-is-open');
     expect(dropdownEl.getAttribute('aria-expanded')).toBe('true');
     fixture.destroy();
   });

@@ -198,20 +198,20 @@ describe('Rating Component', () => {
     fixture.detectChanges();
 
     const icons = getICons(nativeElement);
-    icons.forEach(icon => expect(icon).toHaveCssClass('slds-icon_small'));
+    icons.forEach(icon => expect(icon).toHaveClass('slds-icon_small'));
 
     componentInstance.size = 'large';
     fixture.detectChanges();
     icons.forEach(icon => {
-      expect(icon).not.toHaveCssClass('slds-icon_small');
-      expect(icon).toHaveCssClass('slds-icon_large');
+      expect(icon).not.toHaveClass('slds-icon_small');
+      expect(icon).toHaveClass('slds-icon_large');
     });
 
     componentInstance.size = null;
     fixture.detectChanges();
     icons.forEach(icon => {
-      expect(icon).not.toHaveCssClass('slds-icon_small');
-      expect(icon).not.toHaveCssClass('slds-icon_large');
+      expect(icon).not.toHaveClass('slds-icon_small');
+      expect(icon).not.toHaveClass('slds-icon_large');
     });
   });
 

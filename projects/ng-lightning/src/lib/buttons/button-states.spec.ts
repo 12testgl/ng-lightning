@@ -13,19 +13,19 @@ describe('`NglButtonStates`', () => {
   it('should render "on" state', () => {
     const fixture = createTestComponent(`<ngl-state-on iconName="utility:down"></ngl-state-on>`);
     const el = fixture.nativeElement.firstElementChild;
-    expect(el).toHaveCssClass('slds-text-selected');
+    expect(el).toHaveClass('slds-text-selected');
   });
 
   it('should render "off" state', () => {
     const fixture = createTestComponent(`<ngl-state-off iconName="utility:down"></ngl-state-off>`);
     const el = fixture.nativeElement.firstElementChild;
-    expect(el).toHaveCssClass('slds-text-not-selected');
+    expect(el).toHaveClass('slds-text-not-selected');
   });
 
   it('should render "hover" state', () => {
     const fixture = createTestComponent(`<ngl-state-hover iconName="utility:down"></ngl-state-hover>`);
     const el = fixture.nativeElement.firstElementChild;
-    expect(el).toHaveCssClass('slds-text-selected-focus');
+    expect(el).toHaveClass('slds-text-selected-focus');
   });
 });
 

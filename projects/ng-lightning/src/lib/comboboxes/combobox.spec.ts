@@ -39,7 +39,7 @@ function getOptionElements(element: HTMLElement): HTMLElement[] {
 
 function expectActiveOption(inputEl: HTMLInputElement, option: HTMLElement) {
   const el = option.firstElementChild;
-  expect(el).toHaveCssClass('slds-has-focus');
+  expect(el).toHaveClass('slds-has-focus');
   expect(inputEl.getAttribute('aria-activedescendant')).toEqual(el.getAttribute('id'));
 }
 
@@ -57,8 +57,8 @@ describe('`NglCombobox`', () => {
     const { nativeElement } = fixture;
 
     const [inputEl, labelEl] = [getInput(nativeElement), getLabel(nativeElement)];
-    expect(inputEl).toHaveCssClass('slds-input');
-    expect(inputEl).toHaveCssClass('slds-combobox__input');
+    expect(inputEl).toHaveClass('slds-input');
+    expect(inputEl).toHaveClass('slds-combobox__input');
     expect(inputEl.getAttribute('id')).toBeTruthy();
     expect(inputEl.readOnly).toBe(true);
     expect(getInputIcon(nativeElement).querySelector('use').getAttribute('xlink:href')).toContain('#down');
@@ -66,7 +66,7 @@ describe('`NglCombobox`', () => {
     expect(labelEl.textContent).toEqual('Combobox label');
     expect(labelEl.getAttribute('for')).toEqual(inputEl.getAttribute('id'));
 
-    expect(nativeElement.querySelector('.slds-dropdown')).toHaveCssClass('slds-dropdown_length-5');
+    expect(nativeElement.querySelector('.slds-dropdown')).toHaveClass('slds-dropdown_length-5');
 
     expect(isOpen(fixture)).toBe(false);
 
@@ -294,7 +294,7 @@ describe('`NglCombobox`', () => {
     expect(componentInstance.onSelection).not.toHaveBeenCalled();
     expect(componentInstance.onOpen).not.toHaveBeenCalledWith();
 
-    expect(disabledOption.querySelector('.slds-media__body > .slds-truncate')).toHaveCssClass('slds-disabled-text');
+    expect(disabledOption.querySelector('.slds-media__body > .slds-truncate')).toHaveClass('slds-disabled-text');
     expect((<HTMLElement>disabledOption.querySelector('.slds-media')).style.cursor).toEqual('default');
   });
 
@@ -427,17 +427,17 @@ describe('`NglCombobox`', () => {
 
     componentInstance.length = 7;
     fixture.detectChanges();
-    expect(dropdownEl).toHaveCssClass('slds-dropdown_length-7');
+    expect(dropdownEl).toHaveClass('slds-dropdown_length-7');
 
     componentInstance.length = 10;
     fixture.detectChanges();
-    expect(dropdownEl).not.toHaveCssClass('slds-dropdown_length-7');
-    expect(dropdownEl).toHaveCssClass('slds-dropdown_length-10');
+    expect(dropdownEl).not.toHaveClass('slds-dropdown_length-7');
+    expect(dropdownEl).toHaveClass('slds-dropdown_length-10');
 
     componentInstance.length = 0;
     fixture.detectChanges();
-    expect(dropdownEl).not.toHaveCssClass('slds-dropdown_length-0');
-    expect(dropdownEl).not.toHaveCssClass('slds-dropdown_length-10');
+    expect(dropdownEl).not.toHaveClass('slds-dropdown_length-0');
+    expect(dropdownEl).not.toHaveClass('slds-dropdown_length-10');
   });
 
   describe('Lookup', () => {
@@ -449,7 +449,7 @@ describe('`NglCombobox`', () => {
       expect(inputEl.readOnly).toBe(false);
       expect(inputEl.getAttribute('aria-autocomplete')).toBe('list');
       expect(getInputIcon(nativeElement).querySelector('use').getAttribute('xlink:href')).toContain('#search');
-      expect(inputEl).not.toHaveCssClass('slds-combobox__input-value');
+      expect(inputEl).not.toHaveClass('slds-combobox__input-value');
     });
 
     it('should render correctly when an option is selected', () => {
@@ -460,7 +460,7 @@ describe('`NglCombobox`', () => {
 
       const inputEl = getInput(nativeElement);
       expect(inputEl.readOnly).toBe(true);
-      expect(inputEl).toHaveCssClass('slds-combobox__input-value');
+      expect(inputEl).toHaveClass('slds-combobox__input-value');
       expect(getInputIcon(nativeElement).querySelector('use').getAttribute('xlink:href')).toContain('#close');
     });
 

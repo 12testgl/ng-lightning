@@ -25,7 +25,7 @@ describe('Breadcrumbs Component', () => {
 
     anchors.map(el => el.parentElement).forEach(parentEl => {
       expect(parentEl.tagName).toBe('LI');
-      expect(parentEl).toHaveCssClass('slds-breadcrumb__item');
+      expect(parentEl).toHaveClass('slds-breadcrumb__item');
       expect(parentEl.parentElement.tagName).toBe('OL');
     });
   });
