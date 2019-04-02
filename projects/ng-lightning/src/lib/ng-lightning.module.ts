@@ -8,6 +8,7 @@ import { NglButtonIconsModule } from './buttonicons/module';
 import { NglButtonsModule } from './buttons/module';
 import { NglCarouselModule } from './carousel/module';
 import { NglCheckboxesModule } from './checkboxes/module';
+import { NglColorpickerModule } from './colorpicker/module';
 import { NglComboboxesModule } from './comboboxes/module';
 import { NglDatatablesModule } from './datatables/module';
 import { NglDatepickersModule } from './datepickers/module';
@@ -41,6 +42,7 @@ const MODULES = [
   NglButtonsModule,
   NglCarouselModule,
   NglCheckboxesModule,
+  NglColorpickerModule,
   NglComboboxesModule,
   NglDatatablesModule,
   NglDatepickersModule,

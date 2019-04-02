@@ -1,0 +1,16 @@
+p.slds-assistive-text([attr.id]="uid + '-instructions'") Use arrow keys to select a saturation and brightness, on an x and y axis.
+
+//- Range
+.slds-color-picker__custom-range(#rangeIndicatorContainer, [style.background]="'hsl(' + hsv.hue + ', 100%, 50%)'")
+  a.slds-color-picker__range-indicator(#rangeIndicator, href="javascript:void(0);",
+                                       aria-live="assertive", aria-atomic="true", [attr.aria-describedby]="uid + '-instructions'",
+                                       [ngStyle]="indicatorStyle()",
+                                       (keydown)="rangeIndicatorKeyboard($event)")
+    span.slds-assistive-text Saturation: {{hsv.saturation}}%. Brightness: {{hsv.value}}%.
+
+//- Hue slider and preview swatch
+.slds-color-picker__hue-and-preview
+  label.slds-assistive-text([attr.for]="uid + '-hue'") Select Hue
+  input.slds-color-picker__hue-slider(#hueSlider, type="range", min="0", max="360", [id]="uid + '-hue'",
+                                      [value]="hsv.hue", (input)="hueSliderChange($event.target.value)")
+  span(nglColorpickerSwatch, [color]="hex")

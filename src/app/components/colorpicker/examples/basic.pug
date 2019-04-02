@@ -1,0 +1,8 @@
+ngl-colorpicker([(ngModel)]="color", fieldLevelHelpTooltip="This is some useful info")
+|
+|
+pre Selected: {{ color }}
+|
+|
+button(type="button", nglButton, (click)="color = '#FF0000'") Select Red
+button(type="button", nglButton, (click)="color = null") Clear

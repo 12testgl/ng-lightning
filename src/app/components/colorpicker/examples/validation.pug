@@ -1,0 +1,9 @@
+ngl-colorpicker([formControl]="ctrl", required, fieldLevelHelpTooltip="Try colors #00xxxx and #FFxxxxx")
+|
+|
+.slds-text-heading_small.slds-m-top_large
+  span.slds-text-color_success(*ngIf="ctrl.valid") {{ ctrl.value }} is a great choice!
+  span.slds-text-color_error(*ngIf="!ctrl.valid")
+    ng-container(*ngIf="ctrl.errors['required']") Select a beautiful color.
+    ng-container(*ngIf="ctrl.errors['tooDark']") Oh no, it's way too dark!
+    ng-container(*ngIf="ctrl.errors['tooLight']") It's a bit too light!

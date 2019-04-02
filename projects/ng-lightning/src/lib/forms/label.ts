@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, TemplateRef, ElementRef, Renderer2, OnInit } from '@angular/core';
 import { InputBoolean } from '../util/convert';
 
 @Component({
@@ -6,14 +6,19 @@ import { InputBoolean } from '../util/convert';
   selector: 'label[nglFormLabel]',
   templateUrl: './label.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class.slds-form-element__label]': 'true',
-  },
 })
-export class NglFormLabel {
+export class NglFormLabel implements OnInit {
 
   @Input('nglFormLabel') label: string | TemplateRef<any>;
 
+  @Input('nglFormLabelClass') klass = 'slds-form-element__label';
+
   @Input() @InputBoolean() required: boolean;
+
+  constructor(private element: ElementRef, private renderer: Renderer2) {}
+
+  ngOnInit() {
+    this.renderer.addClass(this.element.nativeElement, this.klass);
+  }
 
 }

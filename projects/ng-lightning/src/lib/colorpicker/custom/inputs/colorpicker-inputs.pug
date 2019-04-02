@@ -1,0 +1,22 @@
+.slds-color-picker__custom-inputs
+  //- Hex input
+  .slds-form-element.slds-color-picker__input-custom-hex([class.slds-has-error]="isHexInvalid")
+    label.slds-form-element__label([attr.for]="uid + 'hex'") Hex
+    .slds-form-element__control
+      input.slds-input([id]="uid + 'hex'", type="text", maxlength="7", [value]="hex", (input)="updateHex($event.target.value)")
+
+  //- RGB inputs
+  each val in [{key: 'red', label: 'R'}, {key: 'green', label: 'G'}, {key: 'blue', label: 'B'}]
+    .slds-form-element([class.slds-has-error]=`!isColorNumberValid('${val.key}')`)
+      label.slds-form-element__label([attr.for]=`uid + '${val.key}'`)
+        abbr(title=`${val.key}`) #{val.label}
+      .slds-form-element__control
+        input.slds-input([id]=`uid + '${val.key}'`, type="text", maxlength="3",
+                         [value]=`${val.key}`, (input)=`onRGB('${val.key}', $event.target.value)`)
+
+//- Error messages
+.slds-color-picker
+  p.slds-form-error.slds-color-picker__input-custom-error(*ngIf="isHexInvalid; else rgbError") The color entered is invalid
+  ng-template(#rgbError)
+    p.slds-form-error.slds-color-picker__input-custom-error(*ngIf="!isRGBValid()") The value needs to be an integer from 0-255
+

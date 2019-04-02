@@ -1,0 +1,39 @@
+.slds-color-picker__summary
+  label([nglFormLabel]="label", nglFormLabelClass="slds-color-picker__summary-label", [attr.for]="uid + '-summary-input'", [required]="required")
+    ngl-form-help.slds-m-horizontal_xx-small(*ngIf="fieldLevelHelpTooltip", [content]="fieldLevelHelpTooltip")
+  button.slds-button.slds-color-picker__summary-button.slds-button_icon.slds-button_icon-more([title]="label",
+            [nglPopover]="tip", nglPopoverPlacement="bottom-left", [nglPopoverOpen]="open", (nglPopoverOpenChange)="openChange($event)",
+            nglPopoverClass="slds-color-picker__selector", [nglPopoverFooter]="footer", nglPopoverCloseVisible="false",
+            [disabled]="disabled")
+    span.slds-swatch(nglColorpickerSwatch, [color]="isValidInput ? color : hexCurrent")
+    svg.slds-button__icon.slds-button__icon_small.slds-m-left_xx-small(*ngIf="!disabled", nglIconName="utility:down")
+    span.slds-assistive-text {{ label }}: {{ color }}
+  .slds-form-element.slds-color-picker__summary-input
+    .slds-form-element__control([class.slds-has-error]="!isValidInput")
+      input.slds-input([id]="uid + '-summary-input'", type="text", [value]="color", (input)="onInput($event.target.value)",
+                       [disabled]="disabled", [readonly]="readonlyInput", maxlength="7")
+  p.slds-form-error(*ngIf="!isValidInput", [nglInternalOutlet]="invalidColorLabel")
+
+//- Popover
+ng-template(#tip)
+  ng-container([ngSwitch]="variant")
+    ng-container(*ngSwitchCase="'swatches'")
+      ng-template([ngTemplateOutlet]="swatches")
+    ng-container(*ngSwitchCase="'custom'")
+      ng-template([ngTemplateOutlet]="custom")
+    ngl-tabset(*ngSwitchDefault, [selected]="defaultSelectedTab", (selectedChange)="defaultSelectedTab = $event.id")
+      ng-template(ngl-tab, id="swatches", [label]="swatchTabLabel")
+        ng-template([ngTemplateOutlet]="swatches")
+      ng-template(ngl-tab, id="custom", [label]="customTabLabel")
+        ng-template([ngTemplateOutlet]="custom")
+
+ng-template(#swatches)
+  ngl-colorpicker-swatches([hex]="hexCurrent", (hexChange)="onSwatchSelection($event)", [swatchColors]="swatchColors")
+
+ng-template(#custom)
+  ngl-colorpicker-custom([hsv]="hsvCurrent", (hsvChange)="onCustomSelection($event)")
+
+ng-template(#footer)
+  .slds-color-picker__selector-footer
+    button.slds-button.slds-button_neutral(type="button", (click)="cancel()") {{ cancelButtonLabel }}
+    button.slds-button.slds-button_brand(type="button", (click)="done()", [disabled]="!canApply()") {{ submitButtonLabel }}
