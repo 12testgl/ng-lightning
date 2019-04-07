@@ -5,6 +5,7 @@
 | `[header]` | Heading text. | string | |
 | `[open]` | Whether modal is visible or not. | boolean | true |
 | `[size]` | Specifies the modal's width. | 'medium' \| 'large' | |
+| `[prompt]` | Styles the modal as a prompt. | 'success' \| 'warning' \| 'error' \| 'wrench' \| 'offline' \| 'info' | |
 | `[directional]` | Whether buttons inside footer spread to both left and right. | boolean | |
 | `[dismissOnClickOutside]` | Whether modal can be dismissed by clicking outside of it. | boolean | true |
 | `[closeButtonAssistiveText]` | Text read aloud by screen readers when the user focuses on the Close Button. | string | 'Close' |

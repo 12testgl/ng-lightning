@@ -1,9 +1,9 @@
-section.slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-modal_' + size : '']",
-                              [attr.aria-hidden]="!open", [attr.aria-labelledby]="headingId", [attr.aria-describedby]="contentId"
-                              aria-modal="true", role="dialog", tabindex="-1")
+section.slds-modal([ngClass]="modalClass()",
+                   [attr.aria-hidden]="!open", [attr.aria-labelledby]="headingId", [attr.aria-describedby]="contentId"
+                   aria-modal="true", [attr.role]="prompt ? 'alertdialog' : 'dialog'", tabindex="-1")
   .slds-modal__container
     //- Header
-    header.slds-modal__header([class.slds-modal__header_empty]="!hasHeader")
+    header.slds-modal__header([ngClass]="modalHeaderClass()")
 
       //- Close button
       button.slds-button.slds-button_icon.slds-button_icon-inverse.slds-modal__close(*ngIf="showClose", type="button", (click)="close()")
@@ -22,6 +22,6 @@ section.slds-modal([class.slds-fade-in-open]="open", [ngClass]="[size ? 'slds-mo
       ng-content
 
     //- Footer
-    footer.slds-modal__footer(*ngIf="footer", [class.slds-modal__footer_directional]="directional")
+    footer.slds-modal__footer(*ngIf="footer", [ngClass]="modalFooterClass()")
       ng-template([ngTemplateOutlet]="footer.templateRef")
 .slds-backdrop([class.slds-backdrop_open]="open")

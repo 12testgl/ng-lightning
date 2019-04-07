@@ -37,6 +37,7 @@ describe('`NglModal`', () => {
     const modal = getModal(fixture.nativeElement);
     expect(modal).toHaveCssClass('slds-fade-in-open');
     expect(modal.getAttribute('aria-hidden')).toBe('false');
+    expect(modal.getAttribute('role')).toBe('dialog');
 
     const header = getHeader(modal);
     expect(header).toHaveText('Modal Header');
@@ -246,6 +247,29 @@ describe('`NglModal`', () => {
     expect(fixture.componentInstance.openChange).not.toHaveBeenCalled();
     expect(getCloseButton(fixture.nativeElement)).toBeFalsy();
   });
+
+  it('should handle prompt correctly', () => {
+    const fixture = createTestComponent(`
+      <ngl-modal header="Header" open="true" [prompt]="prompt">
+        <ng-template nglModalFooter></ng-template>
+      </ngl-modal>`);
+    fixture.componentInstance.prompt = 'error';
+    fixture.detectChanges();
+    const modal = getModal(fixture.nativeElement);
+    expect(modal.getAttribute('role')).toBe('alertdialog');
+    expect(modal).toHaveCssClass('slds-modal_prompt');
+
+    const header = fixture.nativeElement.querySelector('.slds-modal__header');
+    expect(header).toHaveCssClass('slds-theme_error');
+
+    const footer = getFooter(fixture.nativeElement);
+    expect(footer).toHaveCssClass('slds-theme_default');
+
+    fixture.componentInstance.prompt = 'success';
+    fixture.detectChanges();
+    expect(header).not.toHaveCssClass('slds-theme_error');
+    expect(header).toHaveCssClass('slds-theme_success');
+  });
 });
 
 @Component({
@@ -259,6 +283,7 @@ export class TestComponent {
   open = true;
   openChange = jasmine.createSpy('openChange');
   directional: boolean;
+  prompt: string;
   header = 'Modal Header';
   closeCallback = jasmine.createSpy('close');
 }

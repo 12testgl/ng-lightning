@@ -42,6 +42,8 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
 
   @Input() @InputBoolean() dismissOnClickOutside = true;
 
+  @Input() prompt: 'success' | 'warning' | 'error' | 'wrench' | 'offline' | 'info';
+
   @hasObservers('openChange') showClose: boolean;
 
   /** The class that traps and manages focus within the dialog. */
@@ -89,6 +91,28 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
   ngOnDestroy() {
     this.handleOpen(false);
     this.scrollStrategy = null;
+  }
+
+  modalClass() {
+    return {
+      [`slds-modal_${this.size}`]: !!this.size,
+      [`slds-fade-in-open`]: this.open,
+      [`slds-modal_prompt`]: !!this.prompt,
+    };
+  }
+
+  modalHeaderClass() {
+    return {
+      [`slds-modal__header_empty`]: !this.hasHeader,
+      [`slds-theme_${this.prompt}`]: !!this.prompt,
+    };
+  }
+
+  modalFooterClass() {
+    return {
+      [`slds-modal__footer_directional`]: !!this.directional,
+      [`slds-theme_default`]: !!this.prompt,
+    };
   }
 
   private handleOpen(open = this.open) {

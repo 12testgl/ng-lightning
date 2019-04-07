@@ -1,0 +1,14 @@
+button(type="button", nglButton, (click)="open()") Open prompt
+
+ngl-modal([header]="'Prompt: ' + prompt", [(open)]="opened", [prompt]="prompt", dismissOnClickOutside="false")
+  .slds-p-around_medium
+    p Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis. Cillum sunt ad dolore quis aute consequat ipsum magna exercitation reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.
+  |
+  ng-template(nglModalFooter)
+    button.slds-button.slds-button_neutral((click)="cancel()") Okay
+|
+|
+fieldset.slds-m-top_large(ngl-radio-group, label="Choose prompt:", type="button")
+  each val in ['error', 'success', 'warning', 'wrench', 'offline', 'info']
+    ngl-radio-option(label=val)
+      input(ngl, type="radio", value=val, [(ngModel)]="prompt")
