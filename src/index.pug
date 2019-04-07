@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+  head
+    - var title = "Lightning Design System for Angular";
+    - var description = "Native Angular components and directives for Lightning Design System";
+    - var logo = "assets/images/shield.svg";
+
+    base(href="/")
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="shortcut icon", type="image/x-icon", href="favicon.ico")
+    title  ng-lightning - #{title}
+
+    // Search Engine
+    meta(name="description", content=`${description}: ${self.components}`)
+    meta(name="image", content=logo)
+
+    // Schema.org for Google
+    meta(itemprop="name", content=title)
+    meta(itemprop="description", content=`${description}: ${self.components}`)
+    meta(itemprop="image", content=logo)
+
+    // Twitter
+    meta(name="twitter:card", content="summary")
+    meta(name="twitter:title", content=title)
+    meta(name="twitter:description", content=`${description}: ${self.components}`)
+
+    // Open Graph general (Facebook, Pinterest & Google+)
+    meta(name="og:title", content=title)
+    meta(name="og:description", content=`${description}: ${self.components}`)
+    meta(name="og:url", content="http://ng-lightning.github.io/ng-lightning")
+    meta(name="og:site_name", content="ng-lightning")
+    meta(name="og:locale", content="en")
+    meta(name="og:type", content="website")
+    meta(property="og:image", content=logo)
+    meta(property="og:image:type", content="image/svg+xml")
+
+    script(type="application/javascript", src="https://unpkg.com/svg4everybody")
+    script(type="application/javascript").
+      svg4everybody()
+  body
+    app-root
+      div(style="position:fixed;top:49%;width:100%;text-align:center;font-size:large;") Loading...
+    script.
+      (function (i, s, o, g, r, a, m) {
+      i["GoogleAnalyticsObject"] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, "script", "https://www.google-analytics.com/analytics.js", "ga");
+      ga("create", "UA-88270678-1", "auto");
+      ga("send", "pageview");

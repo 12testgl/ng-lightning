@@ -7,7 +7,7 @@ const pkg = require('./projects/ng-lightning/package.json');
 
 const pugSrc = [
   'projects/ng-lightning/src/lib',
-  'src/app',
+  'src',
 ].map(path => `${path}/**/[^_]*.pug`);
 
 gulp.task('pug:clean', function libCleanHtml () {
@@ -94,6 +94,14 @@ gulp.task('pug:compile', function libBuildHtml() {
         });
 
         return { dir, examples, metadata, readme: safe(readme), api: safe(api) };
+      }
+
+      // index.pug
+      if (file.path.endsWith('index.pug')) {
+        const getComponents = source => fs.readdirSync(source)
+          .filter(name => fs.lstatSync(path.join(source, name)).isDirectory());
+
+        return { components: getComponents('src/app/components').join(', ') };
       }
     }))
     .pipe(pug({
