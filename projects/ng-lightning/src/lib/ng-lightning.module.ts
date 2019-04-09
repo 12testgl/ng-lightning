@@ -28,6 +28,7 @@ import { NglRadiosModule } from './radio-group/module';
 import { NglRatingsModule } from './ratings/module';
 import { NglSectionsModule } from './sections/module';
 import { NglSelectModule } from './select/module';
+import { NglSliderModule } from './slider/module';
 import { NglSpinnersModule } from './spinners/module';
 import { NglTabsModule } from './tabs/module';
 import { NglTextareaModule } from './textarea/module';
@@ -62,6 +63,7 @@ const MODULES = [
   NglRatingsModule,
   NglSectionsModule,
   NglSelectModule,
+  NglSliderModule,
   NglSpinnersModule,
   NglTabsModule,
   NglTextareaModule,

@@ -1,0 +1,9 @@
+{
+  "examples": {
+    "basic": "Basic Usage",
+    "configuration": "Min, Max and Step",
+    "size": "Sizes",
+    "validation": "Custom Validation",
+    "vertical": "Vertical"
+  }
+}

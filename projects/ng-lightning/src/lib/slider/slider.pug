@@ -1,0 +1,14 @@
+label.slds-form-element__label([attr.for]="uid")
+  span.slds-slider-label
+    span.slds-slider-label__label(*ngIf="label", [nglInternalOutlet]="label")
+    span.slds-slider-label__range {{min}} - {{max}}
+
+.slds-form-element__control
+  .slds-slider([ngClass]="sliderClass()")
+    input.slds-slider__range([id]="uid", type="range", [value]="value",
+                             [min]="min", [max]="max", [step]="step",
+                             [disabled]="disabled",
+                             [attr.aria-describedby]="hasError ? uid + '-error' : null",
+                             (input)="onInput($event.target.value)")
+    span.slds-slider__value(aria-hidden="true") {{value}}
+  .slds-form-element__help(*ngIf="hasError", [id]="uid + '-error'", [nglInternalOutlet]="error")

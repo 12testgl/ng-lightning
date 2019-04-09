@@ -1,0 +1,1 @@
+A `<ngl-slider>` component is a horizontal or vertical slider for specifying a value between two specified numbers. For example, this slider can be used to capture user input about order quantity or when you want to use an input field of type="range". To orient the slider vertically, set `vertical` input.

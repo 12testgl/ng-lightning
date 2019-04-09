@@ -1,0 +1,10 @@
+ngl-slider([formControl]="ctrl", [error]="!ctrl.valid && errorTpl")
+|
+|
+.slds-text-heading_small.slds-m-top_large
+  span.slds-text-color_success(*ngIf="ctrl.valid") {{ ctrl.value }} is a great choice!
+
+ng-template(#errorTpl)
+  ng-container(*ngIf="!ctrl.valid")
+    ng-container(*ngIf="ctrl.errors['tooSmall']") Oh no, it's way too small!
+    ng-container(*ngIf="ctrl.errors['tooBig']") It's a bit too big!
