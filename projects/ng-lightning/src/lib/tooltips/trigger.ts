@@ -108,8 +108,6 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
           this.overlayRef.updatePosition();
         }
       });
-
-      this.tooltip.markForCheck();
     }
   }
 
@@ -181,7 +179,6 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
     this.tooltip = overlayRef.attach(this.portal).instance;
 
     this.needProxyProperties.forEach(property => this.updateTooltip(property, this[ property ]));
-    this.tooltip.markForCheck();
   }
 
   /** Detaches the currently-attached tooltip. */
@@ -222,7 +219,6 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
       .subscribe((placement: Placement) => {
         this.updatePosition();
         this.updateTooltip('placement', placement);
-        this.tooltip.markForCheck();
       });
 
     this.overlayRef = this.overlay.create({

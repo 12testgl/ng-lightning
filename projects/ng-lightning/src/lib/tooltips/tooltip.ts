@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, ElementRef, Renderer2 } from '@angular/core';
 import { Placement, POSITION_MAP, getPlacementStyles } from '../util/overlay-position';
 import { HostService } from '../common/host/host.service';
+import { OnChange } from '../util/property-watch-decorator';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,18 +12,20 @@ import { HostService } from '../common/host/host.service';
 })
 export class NglTooltip {
 
+  @OnChange(function (this: NglTooltip) {
+    this.cd.markForCheck();
+  })
   template: string | TemplateRef<void>;
 
-  set placement(placement: Placement) {
-    this._nubbin = POSITION_MAP[placement].nubbin;
-    this.setHostClass();
-  }
+  @OnChange<Placement>(function (this: NglTooltip, placement) {
+    this.setHostClass(POSITION_MAP[placement].nubbin);
+  })
+  placement: Placement;
 
-  set uid(id: string) {
-    this.renderer.setAttribute(this.element.nativeElement, 'id', id);
-  }
-
-  private _nubbin: Placement;
+  @OnChange<string>(function (this: NglTooltip, value) {
+    this.renderer.setAttribute(this.element.nativeElement, 'id', value);
+  })
+  uid: string;
 
   constructor(private element: ElementRef,
               private renderer: Renderer2,
@@ -33,15 +36,11 @@ export class NglTooltip {
     this.renderer.setAttribute(this.element.nativeElement, 'role', 'tooltip');
   }
 
-  markForCheck() {
-    this.cd.markForCheck();
-  }
-
-  private setHostClass() {
+  private setHostClass(nubbin: Placement) {
     this.hostService.updateClass(this.element, {
-      [`slds-nubbin_${this._nubbin}`]: true,
+      [`slds-nubbin_${nubbin}`]: true,
     });
 
-    this.hostService.updateStyle(this.element, getPlacementStyles(this._nubbin));
+    this.hostService.updateStyle(this.element, getPlacementStyles(nubbin));
   }
 }
