@@ -44,9 +44,16 @@ describe('Tooltips', () => {
   });
 
   it('should render tooltip with string content', () => {
-    fixture = createTestComponent(`<button nglTooltip="I am a string" nglTooltipOpen="true"></button>`);
+    fixture = createTestComponent(`<button [nglTooltip]="text" nglTooltipOpen="true"></button>`, false);
+    fixture.componentInstance.text = 'I am a string';
+    fixture.detectChanges();
+
     const tooltipEl = getTooltipElement();
     expect(tooltipEl.textContent.trim()).toBe('I am a string');
+
+    fixture.componentInstance.text = 'A new string';
+    fixture.detectChanges();
+    expect(tooltipEl.textContent.trim()).toBe('A new string');
   });
 
   it('should render tooltip with template content', () => {
