@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, ElementRef, Renderer2, HostBinding } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, ElementRef, Renderer2 } from '@angular/core';
 import { Placement, POSITION_MAP, getPlacementStyles } from '../util/overlay-position';
 import { HostService } from '../common/host/host.service';
 
@@ -8,11 +8,6 @@ import { HostService } from '../common/host/host.service';
   templateUrl: './tooltip.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [HostService],
-  host: {
-    'role': 'tooltip',
-    '[class.slds-popover]': 'true',
-    '[class.slds-popover_tooltip]': 'true',
-  }
 })
 export class NglTooltip {
 
@@ -21,18 +16,22 @@ export class NglTooltip {
   set placement(placement: Placement) {
     this._nubbin = POSITION_MAP[placement].nubbin;
     this.setHostClass();
-    this.cd.detectChanges();
   }
 
-  @HostBinding('attr.id') uid: any;
+  set uid(id: string) {
+    this.renderer.setAttribute(this.element.nativeElement, 'id', id);
+  }
 
   private _nubbin: Placement;
 
-  constructor(
-    public element: ElementRef,
-    public renderer: Renderer2,
-    private hostService: HostService,
-    private cd: ChangeDetectorRef) {}
+  constructor(private element: ElementRef,
+              private renderer: Renderer2,
+              private hostService: HostService,
+              private cd: ChangeDetectorRef) {
+    this.renderer.addClass(this.element.nativeElement, 'slds-popover');
+    this.renderer.addClass(this.element.nativeElement, 'slds-popover_tooltip');
+    this.renderer.setAttribute(this.element.nativeElement, 'role', 'tooltip');
+  }
 
   markForCheck() {
     this.cd.markForCheck();
