@@ -5,7 +5,7 @@ export interface SimpleChange<T> {
   isFirstChange: () => boolean;
 }
 
-export function OnChange<T = any>(callback: (value: T, simpleChange?: SimpleChange<T>) => void) {
+export function OnChange<T = any>(callback = 'nglOnPropertyChange') {
   const cachedValueKey = Symbol();
   const isFirstChangeKey = Symbol();
   return (target: any, key: PropertyKey) => {
@@ -29,7 +29,7 @@ export function OnChange<T = any>(callback: (value: T, simpleChange?: SimpleChan
           currentValue: this[cachedValueKey],
           isFirstChange: () => this[isFirstChangeKey],
         };
-        callback.call(this, this[cachedValueKey], simpleChange);
+        this[callback](key, this[cachedValueKey], simpleChange);
       },
       get: function () {
         return this[cachedValueKey];

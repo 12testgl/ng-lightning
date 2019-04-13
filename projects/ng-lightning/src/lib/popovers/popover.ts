@@ -31,27 +31,13 @@ export class NglPopover implements OnInit, OnDestroy {
 
   closeVisible: boolean;
 
-  @OnChange(function (this: NglPopover) {
-    this.setHostClass();
-  })
-  popoverClass: any;
+  @OnChange() popoverClass: any;
 
-  @OnChange(function (this: NglPopover) {
-    this.setHostClass();
-  })
-  size: Size;
+  @OnChange() size: Size;
 
-  @OnChange<Variant>(function (this: NglPopover, variant) {
-    this.inverseCloseButton = ['walkthrough', 'feature', 'error'].indexOf(variant) > -1;
-    this.setHostClass();
-  })
-  variant: Variant;
+  @OnChange() variant: Variant;
 
-  @OnChange<Placement>(function (this: NglPopover, placement) {
-    this.nubbin = POSITION_MAP[placement].nubbin;
-    this.setHostClass();
-  })
-  placement: Placement;
+  @OnChange() placement: Placement;
 
   @HostBinding('attr.aria-labelledby')
   get labelledby() {
@@ -91,6 +77,18 @@ export class NglPopover implements OnInit, OnDestroy {
   if (this.focusTrap) {
       this.focusTrap.destroy();
       this.focusTrap = null;
+    }
+  }
+
+  nglOnPropertyChange(prop) {
+    if (prop === 'size' || prop === 'popoverClass') {
+      this.setHostClass();
+    } else if (prop === 'placement') {
+      this.nubbin = POSITION_MAP[this.placement].nubbin;
+      this.setHostClass();
+    } else if (prop === 'variant') {
+      this.inverseCloseButton = ['walkthrough', 'feature', 'error'].indexOf(this.variant) > -1;
+      this.setHostClass();
     }
   }
 

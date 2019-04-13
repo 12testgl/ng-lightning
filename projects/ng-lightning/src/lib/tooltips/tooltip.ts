@@ -12,21 +12,11 @@ import { OnChange } from '../util/property-watch-decorator';
 })
 export class NglTooltip {
 
-  @OnChange(function (this: NglTooltip) {
-    this.cd.markForCheck();
-  })
-  template: string | TemplateRef<void>;
+  @OnChange() template: string | TemplateRef<void>;
 
-  @OnChange<Placement>(function (this: NglTooltip, placement) {
-    this.nubbin = POSITION_MAP[placement].nubbin;
-    this.setHostClass();
-  })
-  placement: Placement;
+  @OnChange() placement: Placement;
 
-  @OnChange<string>(function (this: NglTooltip, value) {
-    this.renderer.setAttribute(this.element.nativeElement, 'id', value);
-  })
-  uid: string;
+  @OnChange()  uid: string;
 
   private nubbin: Placement;
 
@@ -37,6 +27,17 @@ export class NglTooltip {
     this.renderer.addClass(this.element.nativeElement, 'slds-popover');
     this.renderer.addClass(this.element.nativeElement, 'slds-popover_tooltip');
     this.renderer.setAttribute(this.element.nativeElement, 'role', 'tooltip');
+  }
+
+  nglOnPropertyChange(prop) {
+    if (prop === 'uid') {
+      this.renderer.setAttribute(this.element.nativeElement, 'id', this.uid);
+    } else if (prop === 'placement') {
+      this.nubbin = POSITION_MAP[this.placement].nubbin;
+      this.setHostClass();
+    } else if (prop === 'template') {
+      this.cd.markForCheck();
+    }
   }
 
   private setHostClass() {
