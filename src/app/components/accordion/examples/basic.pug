@@ -1,0 +1,12 @@
+ul(ngl-accordion, [(activeName)]="active")
+  ng-template(nglAccordionSection, name="A", label="Accordion Title A")
+    | This is the content area for section A
+
+  ng-template(nglAccordionSection, name="B", label="Accordion Title B")
+    | This is the content area for section B
+
+  ng-template(nglAccordionSection, name="C", label="Accordion Title C")
+    | This is the content area for section C
+
+
+.slds-m-top_large Active Section Name: <b>{{ active | json }}</b>

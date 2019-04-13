@@ -1,4 +1,5 @@
 export const routes = [
+  { path: 'accordion', loadChildren: './accordion/accordion.module#NglDemoAccordionModule' },
   { path: 'alert', loadChildren: './alert/alert.module#NglDemoAlertModule' },
   { path: 'avatar', loadChildren: './avatar/avatar.module#NglDemoAvatarModule' },
   { path: 'badges', loadChildren: './badges/badges.module#NglDemoBadgesModule' },

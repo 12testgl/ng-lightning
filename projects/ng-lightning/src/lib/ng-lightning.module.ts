@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { NglAccordionModule } from './accordion/module';
 import { NglAlertModule } from './alert/module';
 import { NglAvatarModule } from './avatar/module';
 import { NglBadgesModule } from './badges/module';
@@ -35,6 +36,7 @@ import { NglTextareaModule } from './textarea/module';
 import { NglTooltipsModule } from './tooltips/module';
 
 const MODULES = [
+  NglAccordionModule,
   NglAlertModule,
   NglAvatarModule,
   NglBadgesModule,
