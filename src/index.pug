@@ -3,7 +3,7 @@ html(lang="en")
   head
     - var title = "Lightning Design System for Angular";
     - var description = "Native Angular components and directives for Lightning Design System";
-    - var logo = "assets/images/shield.svg";
+    - var logo = "http://ng-lightning.github.io/ng-lightning/assets/images/shield.svg";
 
     base(href="/")
     meta(charset="utf-8")
@@ -26,12 +26,12 @@ html(lang="en")
     meta(name="twitter:description", content=`${description}: ${self.components}`)
 
     // Open Graph general (Facebook, Pinterest & Google+)
-    meta(name="og:title", content=title)
-    meta(name="og:description", content=`${description}: ${self.components}`)
-    meta(name="og:url", content="http://ng-lightning.github.io/ng-lightning")
-    meta(name="og:site_name", content="ng-lightning")
-    meta(name="og:locale", content="en")
-    meta(name="og:type", content="website")
+    meta(property="og:title", content=title)
+    meta(property="og:description", content=`${description}: ${self.components}`)
+    meta(property="og:url", content="http://ng-lightning.github.io/ng-lightning")
+    meta(property="og:site_name", content="ng-lightning")
+    meta(property="og:locale", content="en")
+    meta(property="og:type", content="website")
     meta(property="og:image", content=logo)
     meta(property="og:image:type", content="image/svg+xml")
 
