@@ -1,5 +1,6 @@
 import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, OnInit, OnChanges } from '@angular/core';
 import { HostService } from '../common/host/host.service';
+import { ngClassCombine } from '../util/util';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -38,6 +39,11 @@ export class NglButtonIcon implements OnInit, OnChanges {
    */
   @Input() size: string;
 
+  /**
+   * CSS classes that are applied to the SVG.
+   */
+  @Input() svgClass: string | string[] | Set<string> | { [klass: string]: any };
+
   get altText() {
     return this.alternativeText || this.title;
   }
@@ -57,9 +63,11 @@ export class NglButtonIcon implements OnInit, OnChanges {
 
   iconClass() {
     const hasVariant = this.hasVariant();
-    return {
+    const classes = {
       [`slds-button__icon_${this.size}`]: !hasVariant,
     };
+
+    return ngClassCombine(this.svgClass, classes);
   }
 
   private setHostClass() {

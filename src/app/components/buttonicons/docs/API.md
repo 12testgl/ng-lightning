@@ -6,6 +6,7 @@
 | `[alternativeText]` | Text to describe what happens when clicked, not what the icon looks like. | string | |
 | `[variant]` | Appearance of the button. |  'bare' \| 'container' \| 'brand' \| 'border' \| 'border-filled' \| 'inverse' \| 'border-inverse' | 'border' |
 | `[size]` | Bare variant can be displayed in three other sizes— `large`, `small`, `x-small`. Variants can be displayed in three smaller sizes—`small` \| `x-small` \| `xx-small`. | string | |
+| `[svgClass]` | Extra class(es) you want to apply to SVG element. | ngClass | |
 
 
 # [nglButtonIconStateful]

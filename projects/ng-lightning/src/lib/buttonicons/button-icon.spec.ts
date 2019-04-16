@@ -14,7 +14,7 @@ function getIconElement(element: Element): SVGSVGElement {
   return element.querySelector('svg');
 }
 
-function getAssistiveElement(element: Element): SVGSVGElement {
+function getAssistiveElement(element: Element): HTMLDivElement {
   return element.querySelector('.slds-assistive-text');
 }
 
@@ -103,6 +103,29 @@ describe('`NglButtonIcon`', () => {
     expect(button).not.toHaveCssClass('slds-button_icon-small');
     expect(icon).not.toHaveCssClass('slds-button__icon_x-small');
   });
+
+  it('should allow extra svg classes', () => {
+    const fixture = createTestComponent(`<button nglButtonIcon [iconName]="iconName" [svgClass]="svgClass"></button>`);
+    const { nativeElement, componentInstance } = fixture;
+
+    const icon = getIconElement(nativeElement);
+    expect(icon).toHaveCssClass('anextra');
+    expect(icon).toHaveCssClass('fancy');
+    expect(icon).toHaveCssClass('one');
+
+    componentInstance.svgClass = ['another', 'one'];
+    fixture.detectChanges();
+    expect(icon).not.toHaveCssClass('anextra');
+    expect(icon).not.toHaveCssClass('fancy');
+    expect(icon).toHaveCssClass('one');
+    expect(icon).toHaveCssClass('another');
+
+    componentInstance.svgClass = null;
+    fixture.detectChanges();
+    expect(icon).not.toHaveCssClass('one');
+    expect(icon).not.toHaveCssClass('another');
+    expect(icon).toHaveCssClass('slds-button__icon');
+  });
 });
 
 @Component({
@@ -112,4 +135,5 @@ export class TestComponent {
   iconName = 'utility:info';
   variant = 'brand';
   size: string;
+  svgClass: any = 'anextra fancy one';
 }
