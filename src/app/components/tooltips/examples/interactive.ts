@@ -5,6 +5,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './interactive.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DemoTooltipsInteractive {
-  open = false;
-}
+export class DemoTooltipsInteractive {}

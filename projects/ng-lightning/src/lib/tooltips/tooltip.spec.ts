@@ -339,6 +339,20 @@ describe('Tooltips', () => {
     fixture.detectChanges();
     expect(getTooltipElement()).toBeTruthy();
   }));
+
+  it('should be able to trigger open/close without input binding', () => {
+    fixture = createTestComponent(`<button nglTooltip="Text string" nglTooltipOpenAuto></button>`);
+    expect(getTooltipElement()).toBeFalsy();
+
+    const triggerEl = fixture.nativeElement.firstElementChild;
+    dispatchEvent(triggerEl, 'mouseenter');
+    fixture.detectChanges();
+    expect(getTooltipElement().textContent.trim()).toBe('Text string');
+
+    dispatchEvent(triggerEl, 'mouseleave');
+    fixture.detectChanges();
+    expect(getTooltipElement()).toBeFalsy();
+  });
 });
 
 @Component({

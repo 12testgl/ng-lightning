@@ -5,6 +5,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './placement.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DemoTooltipsPlacement {
-  open: any = {};
-}
+export class DemoTooltipsPlacement {}

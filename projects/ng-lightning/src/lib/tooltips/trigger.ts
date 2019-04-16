@@ -52,14 +52,19 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
   /**
    * Whether the floating tooltip is visible.
    */
-  @Input('nglTooltipOpen')
-  set nglOpen(_open: boolean) {
-    _open ? this.create() : this.detach();
-    this._open = _open;
+  @Input('nglTooltipOpen') set nglOpen(open: boolean) {
+    if (open === this.nglOpen) {
+      return;
+    }
+
+    open ? this.create() : this.detach();
+    this._open = open;
   }
   get nglOpen() {
     return this._open;
   }
+
+  @Input('nglTooltipOpenAuto') @InputBoolean() openAuto = false;
 
   /**
    * Gives the possibility to interact with the content of the popover.
@@ -158,12 +163,19 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
       if (delay > 0) {
         this.toggleTimeout = setTimeout(() => {
           this.toggleTimeout = null;
-          this.nglTooltipOpenChange.emit(open);
+          this.emitOpen(open);
         }, delay);
       } else {
-        this.nglTooltipOpenChange.emit(open);
+        this.emitOpen(open);
       }
     }
+  }
+
+  private emitOpen(open) {
+    if (this.openAuto) {
+      this.nglOpen = open;
+    }
+    this.nglTooltipOpenChange.emit(open);
   }
 
   private create(): void {
