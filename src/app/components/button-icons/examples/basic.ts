@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-demo-buttonicons-basic',
+  selector: 'app-demo-button-icons-basic',
   templateUrl: './basic.html',
 })
 export class DemoButtonIconsBasic {

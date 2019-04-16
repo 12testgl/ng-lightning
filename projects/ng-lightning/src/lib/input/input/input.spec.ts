@@ -1,7 +1,7 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent, dispatchEvent } from '../../../../test/util';
-import { NglInputsModule } from '../module';
+import { NglInputModule } from '../module';
 import { getTooltipElement } from '../../tooltips/tooltip.spec';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
@@ -25,7 +25,7 @@ export function getRequiredElement(element: Element): HTMLDivElement {
 
 describe('`NglInput`', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglInputsModule] }));
+  beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglInputModule] }));
 
   it('should render correctly', () => {
     const fixture = createTestComponent();

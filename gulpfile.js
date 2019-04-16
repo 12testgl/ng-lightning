@@ -79,22 +79,26 @@ gulp.task('pug:compile', function libBuildHtml() {
       }
 
       // Demo component
-      const examplesDirectory = path.dirname(file.path) + '/examples';
-      if (fs.existsSync(examplesDirectory)) {
+      const metadataFile = path.dirname(file.path) + '/metadata.json';
+      if (fs.existsSync(metadataFile)) {
         const dir = path.basename(path.dirname(file.path));
-        const metadata = require(path.dirname(file.path) + '/metadata.json');
+        const metadata = require(metadataFile);
 
         // Docs
         const docsDir = path.dirname(file.path) + '/docs';
         const readme = mdHtml.render(fs.readFileSync(`${docsDir}/README.md`, 'UTF-8'));
         const api = md.render(fs.readFileSync(`${docsDir}/API.md`, 'UTF-8'));
 
-        const examples = glob.sync('**.pug', { cwd: examplesDirectory }).map((file) => {
-          const id = file.replace('.pug', '');
+        const examplesDirectory = path.dirname(file.path) + '/examples';
+        const examples = Object.keys(metadata.examples).map((id) => {
           return { id, ...highlightExample(examplesDirectory + '/' + id) };
         });
 
-        return { dir, examples, metadata, readme: safe(readme), api: safe(api) };
+        const lds = 'lds' in metadata ? metadata.lds : dir;
+        const src = metadata.src || dir;
+        const title = metadata.title || dir.replace(/-/g, ' ');
+
+        return { dir, examples, metadata, readme: safe(readme), api: safe(api), title, lds, src };
       }
 
       // index.pug

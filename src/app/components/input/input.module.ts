@@ -5,13 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
-import { DemoInputsComponent } from './inputs.component';
+import { DemoInputComponent } from './input.component';
 
 // Examples
-import { DemoInputsBasic } from './examples/basic';
+import { DemoInputBasic } from './examples/basic';
 
 const routes: Routes = [
-  { path: '', component: DemoInputsComponent },
+  { path: '', component: DemoInputComponent },
 ];
 
 @NgModule({
@@ -23,8 +23,8 @@ const routes: Routes = [
     NglDemoExampleModule,
   ],
   declarations: [
-    DemoInputsComponent,
-    DemoInputsBasic,
+    DemoInputComponent,
+    DemoInputBasic,
   ],
 })
-export class NglDemoInputsModule {}
+export class NglDemoInputModule {}

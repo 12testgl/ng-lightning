@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NglModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
-import { DemoButtonIconsComponent } from './buttonicons.component';
+import { DemoRadioGroupComponent } from './radio-group.component';
 
 // Examples
-import { DemoButtonIconsBasic } from './examples/basic';
+import { DemoRadioGroupBasic } from './examples/basic';
 
 const routes: Routes = [
-  { path: '', component: DemoButtonIconsComponent },
+  { path: '', component: DemoRadioGroupComponent },
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(routes),
     NglModule,
     NglDemoExampleModule,
   ],
   declarations: [
-    DemoButtonIconsComponent,
-    DemoButtonIconsBasic,
+    DemoRadioGroupComponent,
+    DemoRadioGroupBasic,
   ],
 })
-export class NglDemoButtonIconsModule {}
+export class NglDemoRadioGroupModule {}

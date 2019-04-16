@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-demo-radios-basic',
+  selector: 'app-demo-input-basic',
   templateUrl: './basic.html',
 })
-export class DemoRadiosBasic {
+export class DemoInputBasic {
   required = true;
 
   hasError = false;

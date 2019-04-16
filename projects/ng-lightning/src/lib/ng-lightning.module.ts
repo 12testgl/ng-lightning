@@ -5,7 +5,7 @@ import { NglAlertModule } from './alert/module';
 import { NglAvatarModule } from './avatar/module';
 import { NglBadgesModule } from './badges/module';
 import { NglBreadcrumbsModule } from './breadcrumbs/module';
-import { NglButtonIconsModule } from './buttonicons/module';
+import { NglButtonIconsModule } from './button-icons/module';
 import { NglButtonsModule } from './buttons/module';
 import { NglCarouselModule } from './carousel/module';
 import { NglCheckboxesModule } from './checkboxes/module';
@@ -16,7 +16,7 @@ import { NglDatepickersModule } from './datepickers/module';
 import { NglDynamicIconsModule } from './dynamicicons/module';
 import { NglFilesModule } from './files/module';
 import { NglIconsModule } from './icons/module';
-import { NglInputsModule } from './inputs/module';
+import { NglInputModule } from './input/module';
 import { NglMenusModule } from './menus/module';
 import { NglModalsModule } from './modals/module';
 import { NglToastModule } from './toast/module';
@@ -52,7 +52,7 @@ const MODULES = [
   NglDynamicIconsModule,
   NglFilesModule,
   NglIconsModule,
-  NglInputsModule,
+  NglInputModule,
   NglMenusModule,
   NglModalsModule,
   NglToastModule,

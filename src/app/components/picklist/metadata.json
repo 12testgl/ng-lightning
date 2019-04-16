@@ -2,5 +2,6 @@
   "examples": {
     "basic": "Basic Usage",
     "multiple": "Multiple selections"
-  }
+  },
+  "src": "comboboxes"
 }

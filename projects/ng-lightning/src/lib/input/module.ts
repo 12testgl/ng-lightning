@@ -15,4 +15,4 @@ const DIRECTIVES = [
   exports: DIRECTIVES,
   imports: [CommonModule, NglFormsModule],
 })
-export class NglInputsModule {}
+export class NglInputModule {}

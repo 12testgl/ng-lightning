@@ -1,5 +1,7 @@
 {
   "examples": {
-    "basic": "Basic Usage"
-  }
+    "basic": "Basic Usage",
+    "config": "Custom configuration"
+  },
+  "lds": null
 }

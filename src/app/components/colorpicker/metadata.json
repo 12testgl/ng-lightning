@@ -3,5 +3,6 @@
     "basic": "Basic Usage",
     "customization": "Customization",
     "validation": "Custom Validation"
-  }
+  },
+  "lds": "color-picker"
 }

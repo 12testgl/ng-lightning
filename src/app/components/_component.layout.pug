@@ -2,8 +2,14 @@ header.component__header.slds-border_bottom.slds-grid.slds-wrap.slds-m-bottom_me
   .slds-has-flexi-truncate.slds-align-middle
     h1(style="text-transform: capitalize")
       block title
-        - var title = self.metadata.title || self.dir;
-        |  #{title}
+        |  #{self.title}
+  .slds-align-middle.slds-text-body_small
+    if self.lds
+      a(nglButton, iconName="utility:connected_apps", href=`https://www.lightningdesignsystem.com/components/${self.lds}`, title="External link to Salesforce Lightning Design System Site", target="_blank") Lightning
+    a(nglButton, href=`https://github.com/ng-lightning/ng-lightning/tree/master/projects/ng-lightning/src/lib/${self.src}`, target="_blank")
+      .slds-grid.slds-grid_vertical-align-center
+        img(src="assets/images/github.svg", style="height:15px; width:15px; margin-right:0.5rem;")
+        | Source
 
 .slds-m-vertical_medium.readme
   block readme

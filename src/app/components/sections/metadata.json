@@ -1,5 +1,6 @@
 {
   "examples": {
     "basic": "Basic Usage"
-  }
+  },
+  "lds": "expandable-section"
 }
