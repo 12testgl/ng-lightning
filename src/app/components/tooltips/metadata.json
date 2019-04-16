@@ -1,6 +1,7 @@
 {
   "examples": {
     "basic": "Basic Usage",
+    "config": "Global configuration",
     "delay": "Open and close with delay",
     "interactive": "Interaction with content",
     "placement": "Placement"

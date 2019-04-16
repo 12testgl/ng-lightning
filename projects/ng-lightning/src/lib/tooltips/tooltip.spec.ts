@@ -5,6 +5,7 @@ import { NglTooltipsModule } from './module';
 import { HostService } from '../common/host/host.service';
 import { expectPlacementStyles } from '../popovers/popover.spec';
 import { NglTooltipTrigger } from './trigger';
+import { NGL_TOOLTIP_CONFIG, NglTooltipConfig } from './config';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -352,6 +353,30 @@ describe('Tooltips', () => {
     dispatchEvent(triggerEl, 'mouseleave');
     fixture.detectChanges();
     expect(getTooltipElement()).toBeFalsy();
+  });
+
+  describe('custom configuration', () => {
+    const placement = 'left';
+    const openAuto = true;
+
+    beforeEach(() => TestBed.configureTestingModule({
+      providers: [
+        { provide: NGL_TOOLTIP_CONFIG, useValue: <NglTooltipConfig>{ placement, openAuto } },
+      ],
+    }));
+
+    it('should have configurable on/off color', () => {
+      fixture = createTestComponent(`<button nglTooltip="Config works"></button>`);
+      expect(getTooltipElement()).toBeFalsy();
+
+      const triggerEl = fixture.nativeElement.firstElementChild;
+      dispatchEvent(triggerEl, 'mouseenter');
+      fixture.detectChanges();
+
+      const tooltipEl = getTooltipElement();
+      expect(tooltipEl.textContent.trim()).toBe('Config works');
+      expect(tooltipEl).toHaveCssClass('slds-nubbin_right');
+    });
   });
 });
 

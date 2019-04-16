@@ -1,5 +1,5 @@
 import { Directive, Input, ElementRef, TemplateRef, ViewContainerRef, OnDestroy,
-  OnChanges, SimpleChanges, Output, EventEmitter, Renderer2, HostListener } from '@angular/core';
+  OnChanges, SimpleChanges, Output, EventEmitter, Renderer2, HostListener, Optional, Inject } from '@angular/core';
 import { OverlayRef, Overlay, FlexibleConnectedPositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { NglTooltip } from './tooltip';
 import { POSITION_MAP, DEFAULT_TOOLTIP_POSITIONS, getPlacementName, Placement } from '../util/overlay-position';
 import { uniqueId } from '../util/util';
 import { InputBoolean } from '../util/convert';
+import { NGL_TOOLTIP_CONFIG, NglTooltipConfig } from './config';
 
 @Directive({
   selector: '[nglTooltip]',
@@ -24,20 +25,19 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
    * Position relative to host element.
    */
   @Input('nglTooltipPlacement')
-  set placement(_placement: Placement) {
-    _placement = _placement || 'top';
-    if (_placement === this._placement) {
+  set placement(placement: Placement) {
+    if (placement === this.placement) {
       return;
     }
 
-    this._placement = _placement;
+    this._placement = placement;
 
     if (this.overlayRef) {
       this.updatePosition();
     }
   }
   get placement() {
-    return this._placement;
+    return this._placement || this.config.placement;
   }
 
   /**
@@ -64,12 +64,15 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
     return this._open;
   }
 
-  @Input('nglTooltipOpenAuto') @InputBoolean() openAuto = false;
+  /**
+   * Open/close without two-way binding input.
+   */
+  @Input('nglTooltipOpenAuto') @InputBoolean() openAuto: boolean;
 
   /**
    * Gives the possibility to interact with the content of the popover.
    */
-  @Input('nglTooltipInteractive') @InputBoolean() interactive = false;
+  @Input('nglTooltipInteractive') @InputBoolean() interactive: boolean;
 
   /**
    * Emit an event when actual tooltip is shown or hidden.
@@ -84,7 +87,7 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
     'placement',
     'uid',
   ]);
-  private _placement: Placement = 'top';
+  private _placement: Placement;
   private _open: boolean;
   private portal: ComponentPortal<NglTooltip>;
   private overlayRef: OverlayRef | null;
@@ -96,11 +99,17 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
   private overlayListeners = new Set<() => void>();
   private overlayElement;
 
-  constructor(
-    private element: ElementRef,
-    private renderer: Renderer2,
-    private viewContainerRef: ViewContainerRef,
-    private overlay: Overlay) {
+  private config: NglTooltipConfig;
+
+  constructor(@Optional() @Inject(NGL_TOOLTIP_CONFIG) defaultConfig: NglTooltipConfig,
+              private element: ElementRef,
+              private renderer: Renderer2,
+              private viewContainerRef: ViewContainerRef,
+              private overlay: Overlay) {
+    this.config = { ...new NglTooltipConfig(), ...defaultConfig };
+    this.openAuto = this.config.openAuto;
+    this.interactive = this.config.interactive;
+
     this.renderer.setAttribute(this.element.nativeElement, 'aria-describedby', this.uid);
   }
 

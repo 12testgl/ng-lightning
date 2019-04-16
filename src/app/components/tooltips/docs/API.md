@@ -16,3 +16,10 @@
 | `open` | "Manually" trigger open. Optionally specify a `delay` different than `nglTooltipDelay`. | (delay: number) => void |
 | `close` | "Manually" trigger close. Optionally specify a `delay` different than `nglTooltipDelay`. | (delay: number) => void |
 | `toggle` | Toggles the tooltip. | () => void |
+
+
+# NGL_TOOLTIP_CONFIG<NglTooltipConfig>
+
+Injection token that can be used to specify default rating options.
+
+Available properties: `placement`, `interactive`, `openAuto`
