@@ -1,9 +1,12 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChildren, QueryList, NgZone } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChildren, QueryList,
+         NgZone, ElementRef, AfterViewChecked, Optional, Inject } from '@angular/core';
 import { ENTER, UP_ARROW, LEFT_ARROW, DOWN_ARROW, RIGHT_ARROW, PAGE_UP, PAGE_DOWN, HOME, END } from '@angular/cdk/keycodes';
 import { take } from 'rxjs/operators';
 import { uniqueId, trapEvent } from '../util/util';
 import { InputBoolean } from '../util/convert';
 import { NglDay } from './day';
+import { NglDatepickerInput } from './input/datepicker-input';
+import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from './config';
 
 export interface NglInternalDate { year: number; month: number; day: number; disabled?: boolean; }
 
@@ -27,10 +30,10 @@ const KEYBOARD_MOVES = {
   },
   styles: [`:host { display: block; }`],
 })
-export class NglDatepicker {
-  @Input() monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  @Input() dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  @Input() dayNamesLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export class NglDatepicker implements AfterViewChecked {
+  @Input() monthNames: string[];
+  @Input() dayNamesShort: string[];
+  @Input() dayNamesLong: string[];
 
   date: NglInternalDate;
   current: NglInternalDate;
@@ -43,7 +46,7 @@ export class NglDatepicker {
   }
   @Output() dateChange = new EventEmitter();
 
-  @Input() @InputBoolean() showToday = true;
+  @Input() @InputBoolean() showToday: boolean;
 
   firstDayOfWeek = 0;
   @Input('firstDayOfWeek') set _firstDayOfWeek(firstDayOfWeek: number) {
@@ -57,7 +60,17 @@ export class NglDatepicker {
 
   @ViewChildren(NglDay) days: QueryList<NglDay>;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(@Optional() @Inject(NglDatepickerInput) private dtInput: NglDatepickerInput,
+              @Optional() @Inject(NGL_DATEPICKER_CONFIG) defaultConfig: NglDatepickerConfig,
+              private ngZone: NgZone,
+              private element: ElementRef) {
+
+    const config = { ...new NglDatepickerConfig(), ...defaultConfig };
+    this.monthNames = config.monthNames;
+    this.dayNamesShort = config.dayNamesShort;
+    this.dayNamesLong = config.dayNamesLong;
+    this.showToday = config.showToday;
+  }
 
   moveYear(year: string | number) {
     this.current.year = +year;
@@ -119,6 +132,15 @@ export class NglDatepicker {
 
   isToday(date: NglInternalDate) {
     return this.isEqualDate(date, this.today);
+  }
+
+  ngAfterViewChecked() {
+    if (this.dtInput) {
+      const el = this.element.nativeElement;
+      this.dtInput.updateDatepickerSize(el.offsetWidth, el.offsetHeight);
+
+      this.focusActiveDay();
+    }
   }
 
   private focusActiveDay() {

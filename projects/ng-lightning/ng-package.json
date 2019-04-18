@@ -3,5 +3,6 @@
   "dest": "../../dist/ng-lightning",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["date-fns"]
 }

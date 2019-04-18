@@ -1,0 +1,12 @@
+ngl-datepicker-input(label="Date", [(ngModel)]="value" #dt="ngModel", [class.slds-has-error]="!dt.valid", [showToday]="showToday")
+|
+|
+.slds-m-top_large
+  button(type="button", nglButton, (click)="gotoDate()") 09 November 2005
+  button(type="button", nglButton, variant="destructive", (click)="value = null") Clear
+.slds-m-top_small
+  ngl-checkbox-toggle(label="Show today in calendar", enabledText="Yes", disabledText="No")
+    input(ngl, type="checkbox", [(ngModel)]="showToday")
+|
+|
+.slds-m-top_large Selected: <b>{{value}}</b>

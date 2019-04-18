@@ -1,0 +1,9 @@
+ngl-datepicker-input([formControl]="ctrl", required, label="Select a date", [class.slds-has-error]="!ctrl.valid")
+|
+|
+p.slds-m-top_xx-small
+  span.slds-text-color_success(*ngIf="ctrl.valid") {{ ctrl.value }} is a great FREE choice!
+  span.slds-text-color_error(*ngIf="!ctrl.valid")
+    ng-container(*ngIf="ctrl.errors.required") Please select a date.
+    ng-container(*ngIf="ctrl.errors.noMatch") Only <b>10th of January</b> is valid!
+    ng-container(*ngIf="ctrl.errors.nglDatepickerInput?.invalid") This is not a valid date.

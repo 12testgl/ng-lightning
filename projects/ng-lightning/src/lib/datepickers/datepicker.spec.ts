@@ -12,7 +12,7 @@ function removeNonPrintable(str: string) {
   return str.replace(/[^\x20-\x7E]+/g, '');
 }
 
-function getDayElements(element: HTMLElement): HTMLElement[] {
+export function getDayElements(element: HTMLElement): HTMLElement[] {
   return selectElements(element, '.slds-day');
 }
 

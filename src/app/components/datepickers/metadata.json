@@ -1,5 +1,10 @@
 {
   "examples": {
-    "basic": "Basic Usage"
+    "basic": "Inline",
+    "input": "Input popup",
+    "format": "Date format",
+    "disabled": "Disabling parts of the datepicker",
+    "validation": "Validation",
+    "config": "Global configuration"
   }
 }
