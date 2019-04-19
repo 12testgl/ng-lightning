@@ -1,24 +1,31 @@
-import { Component, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Directive, Input, HostBinding, ElementRef } from '@angular/core';
+import { NglInternalDate } from './datepicker';
 
-@Component({
-  // tslint:disable-next-line:component-selector
+@Directive({
   selector: 'td[nglDay]',
-  templateUrl: './day.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NglDay {
 
-  @Input('nglDay') day: string | number;
+  @Input('nglDay') readonly date: NglInternalDate;
 
   @HostBinding('class.slds-disabled-text')
   @HostBinding('attr.aria-disabled')
-  @Input() nglDayDisabled: boolean;
+  @Input() readonly nglDayDisabled: boolean;
 
   @HostBinding('class.slds-is-selected')
   @HostBinding('attr.aria-selected')
-  @Input() nglDaySelected: boolean;
+  @Input() readonly nglDaySelected: boolean;
 
-  get label() {
-    return this.day < 10 ? `0${this.day}` : this.day;
+  @Input() readonly isActive;
+
+  @HostBinding('attr.tabindex')
+  get tabindex() {
+    return this.isActive ? 0 : -1;
+  }
+
+  constructor(private el: ElementRef) {}
+
+  focus() {
+    this.el.nativeElement.focus();
   }
 }

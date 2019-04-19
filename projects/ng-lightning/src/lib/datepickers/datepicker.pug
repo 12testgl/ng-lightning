@@ -1,24 +1,26 @@
 .slds-datepicker__filter.slds-grid
   .slds-datepicker__filter_month.slds-grid.slds-grid_align-spread.slds-grow
     .slds-align-middle
-      button.slds-button.slds-button_icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', -1)")
+      button.slds-button.slds-button_icon-container(type="button", (click)="moveMonth(-1)")
         svg.slds-button__icon(nglIconName="left")
         span.slds-assistive-text Previous Month
     h2.slds-align-middle([id]="uid + '_month'", aria-live="assertive", aria-atomic="true") {{ monthLabel }}
     .slds-align-middle
-      button.slds-button.slds-button_icon-container(type="button", (click)="keyboardHandler($event, 'MoveMonth', 1)")
+      button.slds-button.slds-button_icon-container(type="button", (click)="moveMonth(1)")
         svg.slds-button__icon(nglIconName="right")
         span.slds-assistive-text Next Month
 
   ngl-date-year.slds-shrink-none([year]="current.year", (yearChange)="moveYear($event)")
 
-table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'")
+table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'", (keydown)="keyboardHandler($event)")
   thead
     tr(nglWeekdays, [firstDayOfWeek]="firstDayOfWeek", [dayNamesShort]="dayNamesShort", [dayNamesLong]="dayNamesLong")
   tbody
     tr(*ngFor="let week of weeks; trackBy:indexTrackBy")
-      td(*ngFor="let date of week", (click)="select(date)", [class.slds-is-today]="isActive(date)",
-         [nglDay]="date.day", [nglDaySelected]="isSelected(date)", [nglDayDisabled]="date.disabled",
+      td(*ngFor="let date of week; trackBy:dateTrackBy", (click)="select(date)", [isActive]="isActive(date)",
+         [class.slds-is-today]="isToday(date)",
+         [nglDay]="date", [nglDaySelected]="isSelected(date)", [nglDayDisabled]="date.disabled",
          role="gridcell")
+        span.slds-day {{ date.day }}
 
 button.slds-button.slds-align_absolute-center.slds-text-link(*ngIf="showToday", (click)="selectToday()") Today

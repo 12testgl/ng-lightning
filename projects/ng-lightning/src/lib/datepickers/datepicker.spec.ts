@@ -1,9 +1,8 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { createGenericTestComponent, selectElements, dispatchFixtureKeyEvent, dispatchEvent } from '../../../test/util';
-import { By } from '@angular/platform-browser';
+import { DOWN_ARROW, LEFT_ARROW, UP_ARROW, RIGHT_ARROW, HOME, END, ENTER } from '@angular/cdk/keycodes';
+import { createGenericTestComponent, selectElements, dispatchEvent, dispatchKeyboardEvent } from '../../../test/util';
 import { NglDatepickersModule } from './module';
-import { NglDatepicker } from './datepicker';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -45,8 +44,9 @@ function clickButton(element: HTMLElement, isNext = false) {
   buttons[+isNext].click();
 }
 
-function dispatchKey(fixture: ComponentFixture<any>, key: string) {
-  dispatchFixtureKeyEvent(fixture, By.directive(NglDatepicker), `keydown.${key}`);
+function dispatchKey(fixture: ComponentFixture<any>, key: number) {
+  const table = fixture.nativeElement.querySelector('table.datepicker__month');
+  dispatchKeyboardEvent(table, 'keydown', key);
   fixture.detectChanges();
 }
 
@@ -65,11 +65,14 @@ function expectCalendar(fixture: ComponentFixture<TestComponent>, expectedDates:
         if (td.classList.contains('slds-is-selected')) {
           text = '*' + text;
         }
-        if (td.classList.contains('slds-is-today')) {
+        if (td.getAttribute('tabindex') === '0') {
           text += '+';
         }
         if (td.classList.contains('slds-disabled-text')) {
           text += '-';
+        }
+        if (td.classList.contains('slds-is-today')) {
+          text += '^';
         }
         return text;
       });
@@ -99,11 +102,11 @@ describe('`Datepicker` Component', () => {
     const fixture = createTestComponent();
 
     expectCalendar(fixture, [
-      ['29-', '30-', '31-', '01', '02', '03', '04'],
-      ['05', '06', '07', '08', '09', '10', '11'],
+      ['29-', '30-', '31-', '1', '2', '3', '4'],
+      ['5', '6', '7', '8', '9', '10', '11'],
       ['12', '13', '14', '15', '16', '17', '18'],
       ['19', '20', '21', '22', '23', '24', '25'],
-      ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ['26', '27', '28', '29', '*30+', '1-', '2-'],
     ], 'September', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ]);
       expectYearOptions(fixture.nativeElement, buildArray(1905, 2015));
@@ -123,8 +126,8 @@ describe('`Datepicker` Component', () => {
 
     fixture.componentInstance.date = new Date(2013, 7, 11); // 11 August 2013
     expectCalendar(fixture, [
-      [ '28-', '29-', '30-', '31-', '01', '02', '03' ],
-      [ '04', '05', '06', '07', '08', '09', '10' ],
+      [ '28-', '29-', '30-', '31-', '1', '2', '3' ],
+      [ '4', '5', '6', '7', '8', '9', '10' ],
       [ '*11+', '12', '13', '14', '15', '16', '17' ],
       [ '18', '19', '20', '21', '22', '23', '24' ],
       [ '25', '26', '27', '28', '29', '30', '31' ],
@@ -132,11 +135,11 @@ describe('`Datepicker` Component', () => {
 
       fixture.componentInstance.date = new Date(2014, 9, 23); // 23 October 2014
       expectCalendar(fixture, [
-        [ '28-', '29-', '30-', '01', '02', '03', '04' ],
-        [ '05', '06', '07', '08', '09', '10', '11' ],
+        [ '28-', '29-', '30-', '1', '2', '3', '4' ],
+        [ '5', '6', '7', '8', '9', '10', '11' ],
         [ '12', '13', '14', '15', '16', '17', '18' ],
         [ '19', '20', '21', '22', '*23+', '24', '25' ],
-        [ '26', '27', '28', '29', '30', '31', '01-' ],
+        [ '26', '27', '28', '29', '30', '31', '1-' ],
       ], 'October', '2014');
     });
   }));
@@ -146,11 +149,11 @@ describe('`Datepicker` Component', () => {
 
     fixture.componentInstance.date = null;
     expectCalendar(fixture, [
-      ['29-', '30-', '31-', '01', '02', '03', '04'],
-      ['05', '06', '07', '08', '09', '10', '11'],
+      ['29-', '30-', '31-', '1', '2', '3', '4'],
+      ['5', '6', '7', '8', '9', '10', '11'],
       ['12', '13', '14', '15', '16', '17', '18'],
       ['19', '20', '21', '22', '23', '24', '25'],
-      ['26', '27', '28', '29', '30+', '01-', '02-'],
+      ['26', '27', '28', '29', '30+', '1-', '2-'],
     ], 'September', '2010');
   }));
 
@@ -161,9 +164,9 @@ describe('`Datepicker` Component', () => {
     const fixture = createTestComponent(null, false);
     fixture.componentInstance.date = null;
     expectCalendar(fixture, [
-      ['28-', '29-', '30-', '31-', '01', '02', '03'],
-      ['04', '05', '06', '07', '08', '09', '10'],
-      ['11+', '12', '13', '14', '15', '16', '17'],
+      ['28-', '29-', '30-', '31-', '1', '2', '3'],
+      ['4', '5', '6', '7', '8', '9', '10'],
+      ['11+^', '12', '13', '14', '15', '16', '17'],
       ['18', '19', '20', '21', '22', '23', '24'],
       ['25', '26', '27', '28', '29', '30', '31'],
     ], 'August', '2013');
@@ -188,11 +191,11 @@ describe('`Datepicker` Component', () => {
     clickButton(fixture.nativeElement, false);
 
     expectCalendar(fixture, [
-      ['01', '02', '03', '04', '05', '06', '07'],
-      ['08', '09', '10', '11', '12', '13', '14'],
+      ['1', '2', '3', '4', '5', '6', '7'],
+      ['8', '9', '10', '11', '12', '13', '14'],
       ['15', '16', '17', '18', '19', '20', '21'],
       ['22', '23', '24', '25', '26', '27', '28'],
-      ['29', '30+', '31', '01-', '02-', '03-', '04-'],
+      ['29', '30+', '31', '1-', '2-', '3-', '4-'],
     ], 'August', '2010').then(() => {
       expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
     });
@@ -203,12 +206,12 @@ describe('`Datepicker` Component', () => {
     clickButton(fixture.nativeElement, true);
 
     expectCalendar(fixture, [
-      ['26-', '27-', '28-', '29-', '*30-', '01', '02'],
-      ['03', '04', '05', '06', '07', '08', '09'],
+      ['26-', '27-', '28-', '29-', '*30-', '1', '2'],
+      ['3', '4', '5', '6', '7', '8', '9'],
       ['10', '11', '12', '13', '14', '15', '16'],
       ['17', '18', '19', '20', '21', '22', '23'],
       ['24', '25', '26', '27', '28', '29', '30+'],
-      ['31', '01-', '02-', '03-', '04-', '05-', '06-'],
+      ['31', '1-', '2-', '3-', '4-', '5-', '6-'],
     ], 'October', '2010').then(() => {
       expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
     });
@@ -221,11 +224,11 @@ describe('`Datepicker` Component', () => {
     clickButton(fixture.nativeElement, true);
 
     expectCalendar(fixture, [
-      [ '31-', '01', '02', '03', '04', '05', '06' ],
-      [ '07', '08', '09', '10', '11', '12', '13' ],
+      [ '31-', '1', '2', '3', '4', '5', '6' ],
+      [ '7', '8', '9', '10', '11', '12', '13' ],
       [ '14', '15', '16', '17', '18', '19', '20' ],
       [ '21', '22', '23', '24', '25', '26', '27' ],
-      [ '28', '29+', '01-', '02-', '03-', '04-', '05-' ],
+      [ '28', '29+', '1-', '2-', '3-', '4-', '5-' ],
     ], 'February', '2016');
   }));
 
@@ -235,11 +238,11 @@ describe('`Datepicker` Component', () => {
     fixture.whenStable().then(() => {
       chooseYear(fixture.nativeElement, 2014);
       expectCalendar(fixture, [
-        [ '31-', '01', '02', '03', '04', '05', '06' ],
-        [ '07', '08', '09', '10', '11', '12', '13' ],
+        [ '31-', '1', '2', '3', '4', '5', '6' ],
+        [ '7', '8', '9', '10', '11', '12', '13' ],
         [ '14', '15', '16', '17', '18', '19', '20' ],
         [ '21', '22', '23', '24', '25', '26', '27' ],
-        [ '28', '29', '30+', '01-', '02-', '03-', '04-' ],
+        [ '28', '29', '30+', '1-', '2-', '3-', '4-' ],
       ], 'September', '2014');
     });
   }));
@@ -257,45 +260,45 @@ describe('`Datepicker` Component', () => {
     it('will be able to activate appropriate day', async(() => {
       const fixture = createTestComponent();
 
-      dispatchKey(fixture, 'ArrowDown');
+      dispatchKey(fixture, DOWN_ARROW);
       expectCalendar(fixture, [
-        ['26-', '27-', '28-', '29-', '*30-', '01', '02'],
-        ['03', '04', '05', '06', '07+', '08', '09'],
+        ['26-', '27-', '28-', '29-', '*30-', '1', '2'],
+        ['3', '4', '5', '6', '7+', '8', '9'],
         ['10', '11', '12', '13', '14', '15', '16'],
         ['17', '18', '19', '20', '21', '22', '23'],
         ['24', '25', '26', '27', '28', '29', '30'],
-        ['31', '01-', '02-', '03-', '04-', '05-', '06-'],
+        ['31', '1-', '2-', '3-', '4-', '5-', '6-'],
       ], 'October', '2010').then(() => {
 
-        dispatchKey(fixture, 'ArrowLeft');
-        dispatchKey(fixture, 'ArrowLeft');
+        dispatchKey(fixture, LEFT_ARROW);
+        dispatchKey(fixture, LEFT_ARROW);
         return expectCalendar(fixture, [
-          ['26-', '27-', '28-', '29-', '*30-', '01', '02'],
-          ['03', '04', '05+', '06', '07', '08', '09'],
+          ['26-', '27-', '28-', '29-', '*30-', '1', '2'],
+          ['3', '4', '5+', '6', '7', '8', '9'],
           ['10', '11', '12', '13', '14', '15', '16'],
           ['17', '18', '19', '20', '21', '22', '23'],
           ['24', '25', '26', '27', '28', '29', '30'],
-          ['31', '01-', '02-', '03-', '04-', '05-', '06-'],
+          ['31', '1-', '2-', '3-', '4-', '5-', '6-'],
         ], 'October', '2010');
       }).then(() => {
 
-        dispatchKey(fixture, 'ArrowUp');
+        dispatchKey(fixture, UP_ARROW);
         return expectCalendar(fixture, [
-          ['29-', '30-', '31-', '01', '02', '03', '04'],
-          ['05', '06', '07', '08', '09', '10', '11'],
+          ['29-', '30-', '31-', '1', '2', '3', '4'],
+          ['5', '6', '7', '8', '9', '10', '11'],
           ['12', '13', '14', '15', '16', '17', '18'],
           ['19', '20', '21', '22', '23', '24', '25'],
-          ['26', '27', '28+', '29', '*30', '01-', '02-'],
+          ['26', '27', '28+', '29', '*30', '1-', '2-'],
         ], 'September', '2010');
       }).then(() => {
 
-        dispatchKey(fixture, 'ArrowRight');
+        dispatchKey(fixture, RIGHT_ARROW);
         return expectCalendar(fixture, [
-          ['29-', '30-', '31-', '01', '02', '03', '04'],
-          ['05', '06', '07', '08', '09', '10', '11'],
+          ['29-', '30-', '31-', '1', '2', '3', '4'],
+          ['5', '6', '7', '8', '9', '10', '11'],
           ['12', '13', '14', '15', '16', '17', '18'],
           ['19', '20', '21', '22', '23', '24', '25'],
-          ['26', '27', '28', '29+', '*30', '01-', '02-'],
+          ['26', '27', '28', '29+', '*30', '1-', '2-'],
         ], 'September', '2010');
       });
     }));
@@ -303,22 +306,22 @@ describe('`Datepicker` Component', () => {
     it('will be able to activate appropriate edge day', async(() => {
       const fixture = createTestComponent();
 
-      dispatchKey(fixture, 'Home');
+      dispatchKey(fixture, HOME);
       expectCalendar(fixture, [
-        ['29-', '30-', '31-', '01+', '02', '03', '04'],
-        ['05', '06', '07', '08', '09', '10', '11'],
+        ['29-', '30-', '31-', '1+', '2', '3', '4'],
+        ['5', '6', '7', '8', '9', '10', '11'],
         ['12', '13', '14', '15', '16', '17', '18'],
         ['19', '20', '21', '22', '23', '24', '25'],
-        ['26', '27', '28', '29', '*30', '01-', '02-'],
+        ['26', '27', '28', '29', '*30', '1-', '2-'],
       ], 'September', '2010').then(() => {
 
-        dispatchKey(fixture, 'End');
+        dispatchKey(fixture, END);
         return expectCalendar(fixture, [
-          ['29-', '30-', '31-', '01', '02', '03', '04'],
-          ['05', '06', '07', '08', '09', '10', '11'],
+          ['29-', '30-', '31-', '1', '2', '3', '4'],
+          ['5', '6', '7', '8', '9', '10', '11'],
           ['12', '13', '14', '15', '16', '17', '18'],
           ['19', '20', '21', '22', '23', '24', '25'],
-          ['26', '27', '28', '29', '*30+', '01-', '02-'],
+          ['26', '27', '28', '29', '*30+', '1-', '2-'],
         ], 'September', '2010');
       });
     }));
@@ -326,11 +329,11 @@ describe('`Datepicker` Component', () => {
     it('will be able to select active day', () => {
       const fixture = createTestComponent();
 
-      dispatchKey(fixture, 'ArrowDown');
-      dispatchKey(fixture, 'ArrowLeft');
-      dispatchKey(fixture, 'ArrowLeft');
+      dispatchKey(fixture, DOWN_ARROW);
+      dispatchKey(fixture, LEFT_ARROW);
+      dispatchKey(fixture, LEFT_ARROW);
       expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
-      dispatchKey(fixture, 'Enter');
+      dispatchKey(fixture, ENTER);
       expect(fixture.componentInstance.dateChange).toHaveBeenCalledWith(new Date(2010, 9, 5));
     });
   });
@@ -363,11 +366,11 @@ describe('`Datepicker` Component', () => {
       <ngl-datepicker [date]="date" [monthNames]="customMonths" [dayNamesShort]="customDays" showToday="false"></ngl-datepicker>
     `);
     expectCalendar(fixture, [
-      ['29-', '30-', '31-', '01', '02', '03', '04'],
-      ['05', '06', '07', '08', '09', '10', '11'],
+      ['29-', '30-', '31-', '1', '2', '3', '4'],
+      ['5', '6', '7', '8', '9', '10', '11'],
       ['12', '13', '14', '15', '16', '17', '18'],
       ['19', '20', '21', '22', '23', '24', '25'],
-      ['26', '27', '28', '29', '*30+', '01-', '02-'],
+      ['26', '27', '28', '29', '*30+', '1-', '2-'],
     ], 'Sep', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7' ]);
     });
@@ -379,21 +382,21 @@ describe('`Datepicker` Component', () => {
     `);
 
     expectCalendar(fixture, [
-      ['30-', '31-', '01', '02', '03', '04', '05'],
-      ['06', '07', '08', '09', '10', '11', '12'],
+      ['30-', '31-', '1', '2', '3', '4', '5'],
+      ['6', '7', '8', '9', '10', '11', '12'],
       ['13', '14', '15', '16', '17', '18', '19'],
       ['20', '21', '22', '23', '24', '25', '26'],
-      ['27', '28', '29', '*30+', '01-', '02-', '03-'],
+      ['27', '28', '29', '*30+', '1-', '2-', '3-'],
     ], 'September', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]);
 
       fixture.componentInstance.firstDayOfWeek = 2;
       expectCalendar(fixture, [
-        ['31-', '01', '02', '03', '04', '05', '06'],
-        ['07', '08', '09', '10', '11', '12', '13'],
+        ['31-', '1', '2', '3', '4', '5', '6'],
+        ['7', '8', '9', '10', '11', '12', '13'],
         ['14', '15', '16', '17', '18', '19', '20'],
         ['21', '22', '23', '24', '25', '26', '27'],
-        ['28', '29', '*30+', '01-', '02-', '03-', '04-'],
+        ['28', '29', '*30+', '1-', '2-', '3-', '4-'],
       ], 'September', '2010').then(() => {
         expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon' ]);
       });
@@ -404,11 +407,11 @@ describe('`Datepicker` Component', () => {
     const fixture = createTestComponent(`<ngl-datepicker [date]="date" firstDayOfWeek="1" showToday="false"></ngl-datepicker>`);
 
     expectCalendar(fixture, [
-      ['30-', '31-', '01', '02', '03', '04', '05'],
-      ['06', '07', '08', '09', '10', '11', '12'],
+      ['30-', '31-', '1', '2', '3', '4', '5'],
+      ['6', '7', '8', '9', '10', '11', '12'],
       ['13', '14', '15', '16', '17', '18', '19'],
       ['20', '21', '22', '23', '24', '25', '26'],
-      ['27', '28', '29', '*30+', '01-', '02-', '03-'],
+      ['27', '28', '29', '*30+', '1-', '2-', '3-'],
     ], 'September', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]);
     });
@@ -421,22 +424,22 @@ describe('`Datepicker` Component', () => {
 
     fixture.componentInstance.firstDayOfWeek = 3;
     expectCalendar(fixture, [
-      ['01', '02', '03', '04', '05', '06', '07'],
-      ['08', '09', '10', '11', '12', '13', '14'],
+      ['1', '2', '3', '4', '5', '6', '7'],
+      ['8', '9', '10', '11', '12', '13', '14'],
       ['15', '16', '17', '18', '19', '20', '21'],
       ['22', '23', '24', '25', '26', '27', '28'],
-      ['29', '*30+', '01-', '02-', '03-', '04-', '05-'],
+      ['29', '*30+', '1-', '2-', '3-', '4-', '5-'],
     ], 'September', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue' ]);
 
       fixture.componentInstance.firstDayOfWeek = 4;
       expectCalendar(fixture, [
-        ['26-', '27-', '28-', '29-', '30-', '31-', '01'],
-        ['02', '03', '04', '05', '06', '07', '08'],
-        ['09', '10', '11', '12', '13', '14', '15'],
+        ['26-', '27-', '28-', '29-', '30-', '31-', '1'],
+        ['2', '3', '4', '5', '6', '7', '8'],
+        ['9', '10', '11', '12', '13', '14', '15'],
         ['16', '17', '18', '19', '20', '21', '22'],
         ['23', '24', '25', '26', '27', '28', '29'],
-        ['*30+', '01-', '02-', '03-', '04-', '05-', '06-'],
+        ['*30+', '1-', '2-', '3-', '4-', '5-', '6-'],
       ], 'September', '2010').then(() => {
         expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed' ]);
       });

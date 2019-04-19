@@ -1,17 +1,29 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { uniqueId } from '../util/util';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChildren, QueryList, NgZone } from '@angular/core';
+import { ENTER, UP_ARROW, LEFT_ARROW, DOWN_ARROW, RIGHT_ARROW, PAGE_UP, PAGE_DOWN, HOME, END } from '@angular/cdk/keycodes';
+import { take } from 'rxjs/operators';
+import { uniqueId, trapEvent } from '../util/util';
 import { InputBoolean } from '../util/convert';
+import { NglDay } from './day';
 
 export interface NglInternalDate { year: number; month: number; day: number; disabled?: boolean; }
+
+const KEYBOARD_MOVES = {
+  [UP_ARROW]:    ['Move', -7],
+  [LEFT_ARROW]:  ['Move', -1],
+  [DOWN_ARROW]:  ['Move', 7],
+  [RIGHT_ARROW]: ['Move', 1],
+  [PAGE_UP]:     ['MoveMonth', -1],
+  [PAGE_DOWN]:   ['MoveMonth', 1],
+  [HOME]:        ['MoveTo', 1],
+  [END]:         ['MoveTo', 31],
+};
 
 @Component({
   selector: 'ngl-datepicker',
   templateUrl: './datepicker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'aria-hidden': 'false',
     '[class.slds-datepicker]': 'true',
-    'tabindex': '0',
   },
   styles: [`:host { display: block; }`],
 })
@@ -43,45 +55,39 @@ export class NglDatepicker {
   uid = uniqueId('datepicker');
   monthLabel: string;
 
+  @ViewChildren(NglDay) days: QueryList<NglDay>;
+
+  constructor(private ngZone: NgZone) {}
+
   moveYear(year: string | number) {
     this.current.year = +year;
     this.render();
   }
 
-  @HostListener('keydown.Enter', ['$event', '"Enter"'])
-  @HostListener('keydown.ArrowUp', ['$event', '"Move"', '-7'])
-  @HostListener('keydown.ArrowLeft', ['$event', '"Move"', '-1'])
-  @HostListener('keydown.ArrowDown', ['$event', '"Move"', '7'])
-  @HostListener('keydown.ArrowRight', ['$event', '"Move"', '1'])
-  @HostListener('keydown.PageUp', ['$event', '"MoveMonth"', '-1'])
-  @HostListener('keydown.PageDown', ['$event', '"MoveMonth"', '1'])
-  @HostListener('keydown.Home', ['$event', '"MoveTo"', '1'])
-  @HostListener('keydown.End', ['$event', '"MoveTo"', '31'])
-  keyboardHandler($event: KeyboardEvent, code: string, param?: number | string) {
-    if ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-    }
+  moveMonth(diff: number) {
+    this.moveCalendar('MoveMonth', diff);
+  }
 
-    if (code === 'Enter') {
+  keyboardHandler(evt: KeyboardEvent) {
+    const keyCode = evt.keyCode;
+
+    if (keyCode === ENTER) {
+      trapEvent(evt);
       this.select();
       return;
     }
 
-    // Change current date
-    const {year, month, day} = this.current;
-    const date = new Date(year, month, day, 12);
-
-    if (code === 'Move') {
-      date.setDate(day + (+param));
-      this.current = { year: date.getFullYear(), month: date.getMonth(), day: date.getDate() };
-    } else if (code === 'MoveMonth') {
-      date.setMonth(month + (+param), 1);
-      this.current = { year: date.getFullYear(), month: date.getMonth(), day };
-    } else if (code === 'MoveTo') {
-      this.current.day = +param;
+    const move = KEYBOARD_MOVES[keyCode];
+    if (!move) {
+      return;
     }
-    this.render();
+
+    // Handle keyboard event inside datepicker
+    trapEvent(evt);
+
+    const [code, param] = move;
+    this.moveCalendar(code, param);
+    this.focusActiveDay();
   }
 
   isSelected(date: NglInternalDate) {
@@ -105,6 +111,41 @@ export class NglDatepicker {
 
   selectToday() {
     this.dateChange.emit(new Date());
+  }
+
+  dateTrackBy(index: number, date: NglInternalDate) {
+    return `${date.day}-${date.month}-${date.year}`;
+  }
+
+  isToday(date: NglInternalDate) {
+    return this.isEqualDate(date, this.today);
+  }
+
+  private focusActiveDay() {
+    this.ngZone.runOutsideAngular(() => {
+      this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
+        const active = this.days.find((d) => this.isActive(d.date));
+        if (active) {
+          active.focus();
+        }
+      });
+    });
+  }
+
+  private moveCalendar(code: 'Move' | 'MoveMonth' | 'MoveTo', param: number) {
+    const { year, month, day } = this.current;
+    const date = new Date(year, month, day, 12);
+
+    if (code === 'Move') {
+      date.setDate(day + (+param));
+      this.current = { year: date.getFullYear(), month: date.getMonth(), day: date.getDate() };
+    } else if (code === 'MoveMonth') {
+      date.setMonth(month + (+param), 1);
+      this.current = { year: date.getFullYear(), month: date.getMonth(), day };
+    } else if (code === 'MoveTo') {
+      this.current.day = +param;
+    }
+    this.render();
   }
 
   private parseDate(date: Date): NglInternalDate {
