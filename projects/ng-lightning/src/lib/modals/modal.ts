@@ -2,7 +2,7 @@ import { Component, Input, Output, ElementRef, EventEmitter, HostListener, Conte
          ChangeDetectionStrategy, Inject, OnChanges, SimpleChanges, AfterContentInit, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
-import { BlockScrollStrategy, ViewportRuler } from '@angular/cdk/overlay';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { uniqueId } from '../util/util';
 import { InputBoolean } from '../util/convert';
 import { NglModalHeaderTemplate, NglModalTaglineTemplate, NglModalFooterTemplate } from './templates';
@@ -52,11 +52,7 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
   /** Element that was focused before the dialog was opened. Save this to restore upon close. */
   private elementFocusedBeforeDialogWasOpened: HTMLElement | null = null;
 
-  private scrollStrategy: BlockScrollStrategy;
-
-  constructor(private focusTrapFactory: FocusTrapFactory, viewportRuler: ViewportRuler, @Inject(DOCUMENT) private document: any, private element: ElementRef) {
-    this.scrollStrategy = new BlockScrollStrategy(viewportRuler, document);
-  }
+  constructor(private focusTrapFactory: FocusTrapFactory, @Inject(DOCUMENT) private document: any, private element: ElementRef) {}
 
   @HostListener('keydown.esc', ['$event'])
   close(evt?: Event) {
@@ -90,7 +86,6 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
 
   ngOnDestroy() {
     this.handleOpen(false);
-    this.scrollStrategy = null;
   }
 
   modalClass() {
@@ -123,7 +118,7 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
 
       this.focusTrap = this.focusTrapFactory.create(this.element.nativeElement);
       this.focusTrap.focusInitialElementWhenReady();
-      this.scrollStrategy.enable();
+      disableBodyScroll(undefined, { reserveScrollBarGap: true });
     } else {
       if (this.elementFocusedBeforeDialogWasOpened && typeof this.elementFocusedBeforeDialogWasOpened.focus === 'function') {
         this.elementFocusedBeforeDialogWasOpened.focus();
@@ -131,7 +126,7 @@ export class NglModal implements OnChanges, AfterContentInit, OnDestroy {
       if (this.focusTrap) {
         this.focusTrap.destroy();
       }
-      this.scrollStrategy.disable();
+      enableBodyScroll();
     }
   }
 }
