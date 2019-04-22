@@ -1,7 +1,8 @@
 button(type="button", nglButton, (click)="open()") Open modal
-ngl-modal([header]="noHeader ? '' : 'Modal Header'", [(open)]="opened", [size]="size", [directional]="directional")
+ngl-modal([header]="noHeader ? '' : 'Modal Header'", [(open)]="opened", [directional]="directional")
   ng-template(nglModalTagline, *ngIf="hasTagline")
-    | Here's a tagline if you need it. It is allowed to extend across mulitple lines, so I'm making up content to show that to you. It is allowed to
+    | Here's a tagline if you need it. It is allowed to extend across multiple lines, so I'm making up content to show that to you. It is allowed to
+    |
     a(href="javascript:void(0);") contain links or be a link
     | .
   |
@@ -18,18 +19,14 @@ ngl-modal([header]="noHeader ? '' : 'Modal Header'", [(open)]="opened", [size]="
     button.slds-button.slds-button_neutral((click)="cancel()") Cancel
     |
     button.slds-button.slds-button_brand Save
-ngl-checkbox.slds-m-top_small(label="No header")
-  input(ngl, type="checkbox", [(ngModel)]="noHeader")
-ngl-checkbox.slds-m-top_small(label="Tagline")
-  input(ngl, type="checkbox", [(ngModel)]="hasTagline", [disabled]="noHeader")
-ngl-checkbox.slds-m-top_small(label="No footer")
-  input(ngl, type="checkbox", [(ngModel)]="noFooter")
-ngl-checkbox.slds-m-top_small(label="Directional footer")
-  input(ngl, type="checkbox", [(ngModel)]="directional", [disabled]="noFooter")
-.slds-text-title_caps.slds-m-top_medium.slds-m-bottom_small Size
-.slds-button-group([(nglPick)]="size", nglPickActiveClass="slds-button_brand", role="group")
-  button(type="button", nglPickOption, nglButton) Default
-  |
-  button(type="button", nglPickOption="medium", nglButton) Medium
-  |
-  button(type="button", nglPickOption="large", nglButton) Large
+|
+|
+.slds-m-top_medium
+  ngl-checkbox.slds-m-top_small(label="No header")
+    input(ngl, type="checkbox", [(ngModel)]="noHeader")
+  ngl-checkbox.slds-m-top_small(label="Tagline")
+    input(ngl, type="checkbox", [(ngModel)]="hasTagline", [disabled]="noHeader")
+  ngl-checkbox.slds-m-top_small(label="No footer")
+    input(ngl, type="checkbox", [(ngModel)]="noFooter")
+  ngl-checkbox.slds-m-top_small(label="Directional footer")
+    input(ngl, type="checkbox", [(ngModel)]="directional", [disabled]="noFooter")

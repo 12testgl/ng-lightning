@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 export class DemoModalsBasic {
 
   opened = false;
-  size = '';
 
   noHeader = false;
   hasTagline = false;
