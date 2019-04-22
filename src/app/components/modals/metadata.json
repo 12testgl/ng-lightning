@@ -1,6 +1,7 @@
 {
   "examples": {
     "basic": "Basic Usage",
-    "size": "Size"
+    "size": "Size",
+    "header": "Header template"
   }
 }

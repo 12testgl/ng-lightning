@@ -10,6 +10,7 @@ import { DemoModalsComponent } from './modals.component';
 // Examples
 import { DemoModalsBasic } from './examples/basic';
 import { DemoModalsSize } from './examples/size';
+import { DemoModalsHeader } from './examples/header';
 
 const routes: Routes = [
   { path: '', component: DemoModalsComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     DemoModalsComponent,
     DemoModalsBasic,
     DemoModalsSize,
+    DemoModalsHeader,
   ],
 })
 export class NglDemoModalsModule {}
