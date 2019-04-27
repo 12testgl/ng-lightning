@@ -85,14 +85,13 @@ export class NglComboboxInput {
   onKeyboard(evt: KeyboardEvent) {
     const keyCode = evt.keyCode;
 
+    if (keyCode === ESCAPE) {
+      // This is handled by CDK, and detaches overlay
+      return;
+    }
+
     if (this.combobox.open) {
       switch (keyCode) {
-        // Collapse when the user presses the `Escape`
-        case ESCAPE:
-          trapEvent(evt);
-          this.combobox.openChange.emit(false);
-          return;
-
         // User selects currently active option by pressing the `Enter` key
         case ENTER:
           trapEvent(evt);

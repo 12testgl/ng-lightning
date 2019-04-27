@@ -17,6 +17,10 @@ const createLookupTestComponent = (html: string = `
 `, detectChanges?: boolean) =>
   createTestComponent(html, detectChanges) as ComponentFixture<TestComponent>;
 
+function getMenu(): HTMLInputElement {
+  return document.querySelector('.slds-dropdown.slds-dropdown_fluid');
+}
+
 function isOpen(fixture: ComponentFixture<TestComponent>) {
   return fixture.nativeElement.querySelector('.slds-combobox').classList.contains('slds-is-open');
 }
@@ -33,18 +37,20 @@ function getLabel(element: HTMLElement): HTMLLabelElement {
   return element.querySelector('label');
 }
 
-function getOptionElements(element: HTMLElement): HTMLElement[] {
-  return selectElements(element, 'li');
+function getOptionElements(): HTMLElement[] {
+  const menuEl = getMenu();
+  return selectElements(menuEl, 'li');
 }
 
-function expectActiveOption(inputEl: HTMLInputElement, option: HTMLElement) {
+function expectActiveOption(inputEl: HTMLInputElement, index: number) {
+  const option = getOptionElements()[index];
   const el = option.firstElementChild;
   expect(el).toHaveCssClass('slds-has-focus');
   expect(inputEl.getAttribute('aria-activedescendant')).toEqual(el.getAttribute('id'));
 }
 
-function expectOptions(element: HTMLElement, expected: any[]) {
-  const options = getOptionElements(element);
+function expectOptions(expected: any[]) {
+  const options = getOptionElements();
   expect(options.map(e => e.textContent.trim())).toEqual(expected.map(e => e.replace('+', 'Current Selection:')));
 }
 
@@ -65,12 +71,7 @@ describe('`NglCombobox`', () => {
 
     expect(labelEl.textContent).toEqual('Combobox label');
     expect(labelEl.getAttribute('for')).toEqual(inputEl.getAttribute('id'));
-
-    expect(nativeElement.querySelector('.slds-dropdown')).toHaveCssClass('slds-dropdown_length-5');
-
     expect(isOpen(fixture)).toBe(false);
-
-    expectOptions(fixture.nativeElement, ['Antonis', 'Kostis', 'Evie']);
   });
 
   it('should not override input element given ID', () => {
@@ -94,6 +95,16 @@ describe('`NglCombobox`', () => {
     fixture.componentInstance.open = false;
     fixture.detectChanges();
     expect(isOpen(fixture)).toBe(false);
+  });
+
+  it('should render menu correctly', () => {
+    const fixture = createTestComponent();
+    fixture.componentInstance.open = true;
+    fixture.detectChanges();
+
+    const menuEl = getMenu();
+    expect(menuEl).toHaveCssClass('slds-dropdown_length-5');
+    expectOptions(['Antonis', 'Kostis', 'Evie']);
   });
 
   it('should open/close on input element interactions', () => {
@@ -134,11 +145,10 @@ describe('`NglCombobox`', () => {
     const fixture = createTestComponent();
     const { nativeElement, componentInstance } = fixture;
     const inputEl = getInput(nativeElement);
-    const options = getOptionElements(nativeElement);
 
     componentInstance.open = true;
     fixture.detectChanges();
-    expectActiveOption(inputEl, options[0]);
+    expectActiveOption(inputEl, 0);
 
     componentInstance.open = false;
     fixture.detectChanges();
@@ -148,48 +158,46 @@ describe('`NglCombobox`', () => {
   it('should activate selected option when opening', () => {
     const fixture = createTestComponent();
     const { nativeElement, componentInstance } = fixture;
-    const inputEl = getInput(nativeElement);
-    const options = getOptionElements(nativeElement);
     componentInstance.selection = 2;
     fixture.detectChanges();
 
     componentInstance.open = true;
     fixture.detectChanges();
-    expectActiveOption(inputEl, options[1]);
+
+    const inputEl = getInput(nativeElement);
+    expectActiveOption(inputEl, 1);
   });
 
   it('should activate first option if active option is destroyed when options change', () => {
     const fixture = createTestComponent();
     const { nativeElement, componentInstance } = fixture;
     const inputEl = getInput(nativeElement);
-    const options = getOptionElements(nativeElement);
 
     componentInstance.open = true;
     fixture.detectChanges();
-    expectActiveOption(inputEl, options[0]);
+
+    expectActiveOption(inputEl, 0);
 
     componentInstance.options = [componentInstance.options[1], componentInstance.options[2]];
     fixture.detectChanges();
-    const newOptions = getOptionElements(nativeElement);
-    expectActiveOption(inputEl, newOptions[0]);
+    expectActiveOption(inputEl, 0);
   });
 
   it('should not activate other option if active option is not destroyed when options change', () => {
     const fixture = createTestComponent();
     const { nativeElement, componentInstance } = fixture;
     const inputEl = getInput(nativeElement);
-    const options = getOptionElements(nativeElement);
 
     componentInstance.open = true;
     fixture.detectChanges();
 
-    dispatchEvent(options[2], 'mouseover');
-    expectActiveOption(inputEl, options[2]);
+    const options = getOptionElements();
+    dispatchEvent(options[2], 'mouseenter');
+    expectActiveOption(inputEl, 2);
 
     componentInstance.options = [componentInstance.options[1], componentInstance.options[2]];
     fixture.detectChanges();
-    const newOptions = getOptionElements(nativeElement);
-    expectActiveOption(inputEl, newOptions[1]);
+    expectActiveOption(inputEl, 1);
   });
 
   it('should update selected items based on input value', () => {
@@ -197,26 +205,27 @@ describe('`NglCombobox`', () => {
     const { componentInstance, nativeElement } = fixture;
     const inputEl = getInput(nativeElement);
 
+    componentInstance.open = true;
     componentInstance.selection = 1;
     fixture.detectChanges();
-    expectOptions(fixture.nativeElement, ['+Antonis', 'Kostis', 'Evie']);
+    expectOptions(['+Antonis', 'Kostis', 'Evie']);
     expect(inputEl.value).toEqual('Antonis');
 
     componentInstance.selection = 2;
     fixture.detectChanges();
-    expectOptions(fixture.nativeElement, ['Antonis', '+Kostis', 'Evie']);
+    expectOptions(['Antonis', '+Kostis', 'Evie']);
     expect(inputEl.value).toEqual('Kostis');
   });
 
   it('should toggle option selection', () => {
     const fixture = createTestComponent();
-    const { componentInstance, nativeElement } = fixture;
+    const { componentInstance } = fixture;
 
     componentInstance.open = true;
     componentInstance.selection = 1;
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
+    const options = getOptionElements();
 
     dispatchEvent(options[2], 'mousedown');
     fixture.detectChanges();
@@ -238,13 +247,13 @@ describe('`NglCombobox`', () => {
                     [selection]="selection" (selectionChange)="onSelection($event)">
         <input nglCombobox />
       </ngl-combobox>`);
-    const { componentInstance, nativeElement } = fixture;
+    const { componentInstance } = fixture;
 
     componentInstance.open = true;
     componentInstance.closeOnSelection = false;
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
+    const options = getOptionElements();
 
     dispatchEvent(options[2], 'mousedown');
     fixture.detectChanges();
@@ -265,30 +274,32 @@ describe('`NglCombobox`', () => {
     const { componentInstance, nativeElement } = fixture;
     const inputEl = getInput(nativeElement);
 
+    componentInstance.open = true;
     componentInstance.multiple = true;
     componentInstance.selection = [1, 3];
     fixture.detectChanges();
-    expectOptions(fixture.nativeElement, ['+Antonis', 'Kostis', '+Evie']);
+    expectOptions(['+Antonis', 'Kostis', '+Evie']);
     expect(inputEl.value).toEqual('2 options selected');
 
     componentInstance.selection = [2];
     fixture.detectChanges();
-    expectOptions(fixture.nativeElement, ['Antonis', '+Kostis', 'Evie']);
+    expectOptions(['Antonis', '+Kostis', 'Evie']);
     expect(inputEl.value).toEqual('Kostis');
 
     componentInstance.selection = [2, 3];
     fixture.detectChanges();
-    expectOptions(fixture.nativeElement, ['Antonis', '+Kostis', '+Evie']);
+    expectOptions(['Antonis', '+Kostis', '+Evie']);
     expect(inputEl.value).toEqual('2 options selected');
   });
 
   it('should ignore event on disabled options', () => {
     const fixture = createTestComponent(null, false);
-    const { componentInstance, nativeElement } = fixture;
+    const { componentInstance } = fixture;
+    componentInstance.open = true;
     componentInstance.options[0].disabled = true;
     fixture.detectChanges();
 
-    const disabledOption = getOptionElements(nativeElement)[0];
+    const disabledOption = getOptionElements()[0];
     dispatchEvent(disabledOption, 'mousedown');
     fixture.detectChanges();
     expect(componentInstance.onSelection).not.toHaveBeenCalled();
@@ -306,16 +317,15 @@ describe('`NglCombobox`', () => {
     componentInstance.open = true;
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
-    expectActiveOption(inputEl, options[0]);
+    expectActiveOption(inputEl, 0);
 
     dispatchKeyboardEvent(inputEl, 'keydown', DOWN_ARROW);
     dispatchKeyboardEvent(inputEl, 'keydown', DOWN_ARROW);
-    expectActiveOption(inputEl, options[2]);
+    expectActiveOption(inputEl, 2);
 
     dispatchKeyboardEvent(inputEl, 'keydown', DOWN_ARROW);
     dispatchKeyboardEvent(inputEl, 'keydown', DOWN_ARROW);
-    expectActiveOption(inputEl, options[1]);
+    expectActiveOption(inputEl, 1);
 
     dispatchKeyboardEvent(inputEl, 'keydown', ENTER);
     expect(componentInstance.onSelection).toHaveBeenCalledWith(2);
@@ -329,11 +339,11 @@ describe('`NglCombobox`', () => {
     componentInstance.open = true;
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
-    expectActiveOption(inputEl, options[0]);
+    const options = getOptionElements();
+    expectActiveOption(inputEl, 0);
 
-    dispatchEvent(options[1], 'mouseover');
-    expectActiveOption(inputEl, options[1]);
+    dispatchEvent(options[1], 'mouseenter');
+    expectActiveOption(inputEl, 1);
   });
 
   it('should activate option based on matching text', fakeAsync(() => {
@@ -345,19 +355,18 @@ describe('`NglCombobox`', () => {
     componentInstance.options[1].disabled = true;
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
     dispatchKeyboardEvent(inputEl, 'keypress', 'E'.charCodeAt(0));
     tick(300);
-    expectActiveOption(inputEl, options[2]);
+    expectActiveOption(inputEl, 2);
 
     // Should ignore disabled options
     dispatchKeyboardEvent(inputEl, 'keypress', 'K'.charCodeAt(0));
     tick(300);
-    expectActiveOption(inputEl, options[2]);
+    expectActiveOption(inputEl, 2);
 
     dispatchKeyboardEvent(inputEl, 'keypress', 'a'.charCodeAt(0));
     tick(300);
-    expectActiveOption(inputEl, options[0]);
+    expectActiveOption(inputEl, 0);
   }));
 
   it('should activate loop matching options if repeating search', fakeAsync(() => {
@@ -368,20 +377,19 @@ describe('`NglCombobox`', () => {
     componentInstance.options = [{ value: 'abc' }, { value: 'ade' }, { value: 'afg' }];
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
-    expectActiveOption(inputEl, options[0]);
+    expectActiveOption(inputEl, 0);
 
     dispatchKeyboardEvent(inputEl, 'keypress', 'a'.charCodeAt(0));
     tick(300);
-    expectActiveOption(inputEl, options[1]);
+    expectActiveOption(inputEl, 1);
 
     dispatchKeyboardEvent(inputEl, 'keypress', 'a'.charCodeAt(0));
     tick(300);
-    expectActiveOption(inputEl, options[2]);
+    expectActiveOption(inputEl, 2);
 
     dispatchKeyboardEvent(inputEl, 'keypress', 'a'.charCodeAt(0));
     tick(300);
-    expectActiveOption(inputEl, options[0]);
+    expectActiveOption(inputEl, 0);
   }));
 
   it('should not activate disabled option', () => {
@@ -393,14 +401,14 @@ describe('`NglCombobox`', () => {
     componentInstance.options[1].disabled = true;
     fixture.detectChanges();
 
-    const options = getOptionElements(nativeElement);
-    expectActiveOption(inputEl, options[0]);
+    const options = getOptionElements();
+    expectActiveOption(inputEl, 0);
 
-    dispatchEvent(options[1], 'mouseover');
-    expectActiveOption(inputEl, options[0]);
+    dispatchEvent(options[1], 'mouseenter');
+    expectActiveOption(inputEl, 0);
 
     dispatchKeyboardEvent(inputEl, 'keydown', DOWN_ARROW);
-    expectActiveOption(inputEl, options[2]);
+    expectActiveOption(inputEl, 2);
   });
 
   it('should support string options', () => {
@@ -412,21 +420,21 @@ describe('`NglCombobox`', () => {
 
     componentInstance.selection = 'bb';
     fixture.detectChanges();
-    expectOptions(fixture.nativeElement, ['aa', '+bb', 'cc']);
+    expectOptions(['aa', '+bb', 'cc']);
     expect(inputEl.value).toEqual('bb');
   });
 
   it('should change visible options based on input value', () => {
     const fixture = createTestComponent(`
-    <ngl-combobox [options]="options" [visibleLength]="length">
+    <ngl-combobox [options]="options" [visibleLength]="length" [open]="true">
         <input nglCombobox id="customid" />
       </ngl-combobox>`);
-    const { componentInstance, nativeElement } = fixture;
-
-    const dropdownEl = nativeElement.querySelector('.slds-dropdown');
+    const { componentInstance } = fixture;
 
     componentInstance.length = 7;
     fixture.detectChanges();
+
+    const dropdownEl = getMenu();
     expect(dropdownEl).toHaveCssClass('slds-dropdown_length-7');
 
     componentInstance.length = 10;
@@ -494,15 +502,16 @@ describe('`NglCombobox`', () => {
       const { componentInstance, nativeElement } = fixture;
       const inputEl = getInput(nativeElement);
 
+      componentInstance.open = true;
       componentInstance.multiple = true;
       componentInstance.selection = [1, 3];
       fixture.detectChanges();
-      expectOptions(fixture.nativeElement, ['+Antonis', 'Kostis', '+Evie']);
+      expectOptions(['+Antonis', 'Kostis', '+Evie']);
       expect(inputEl.value).toEqual('');
 
       componentInstance.selection = [2];
       fixture.detectChanges();
-      expectOptions(fixture.nativeElement, ['Antonis', '+Kostis', 'Evie']);
+      expectOptions(['Antonis', '+Kostis', 'Evie']);
       expect(inputEl.value).toEqual('');
     });
 
@@ -519,12 +528,12 @@ describe('`NglCombobox`', () => {
 
     it('should display appropriate message when no options exist', () => {
       const fixture = createLookupTestComponent();
-      const { componentInstance, nativeElement } = fixture;
+      const { componentInstance } = fixture;
 
       componentInstance.options = null;
       componentInstance.open = true;
       fixture.detectChanges();
-      expectOptions(nativeElement, ['No matches found.']);
+      expectOptions(['No matches found.']);
     });
   });
 });

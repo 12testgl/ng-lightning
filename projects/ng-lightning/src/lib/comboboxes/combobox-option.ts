@@ -70,7 +70,7 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
     }
   }
 
-  @HostListener('mouseover')
+  @HostListener('mouseenter')
   hover() {
     if (!this.disabled) {
       this.disableNextScrollIntoView = true;

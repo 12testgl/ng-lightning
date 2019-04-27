@@ -149,7 +149,7 @@ export const POSITION_MAP: { [ key: string ]: { position: ConnectionPositionPair
   }
 };
 
-export const DROPDOWN_POSITION_MAP = {
+const DROPDOWN_POSITION_MAP = {
   'top-left': {
     position: new ConnectionPositionPair(
       { originX: 'start', originY: 'top' },
@@ -174,6 +174,11 @@ export const DROPDOWN_POSITION_MAP = {
       { overlayX: 'end', overlayY: 'bottom' },
     ),
   },
+};
+
+export const DEFAULT_DROPDOWN_POSITIONS = {
+  left: [`bottom-left`, `top-left`].map((p) => DROPDOWN_POSITION_MAP[p].position),
+  right: [`bottom-right`, `top-right`].map((p) => DROPDOWN_POSITION_MAP[p].position),
 };
 
 export const DEFAULT_TOOLTIP_POSITIONS = ['top', 'right', 'bottom', 'left'].map((placement: Placement) => POSITION_MAP[placement].position);

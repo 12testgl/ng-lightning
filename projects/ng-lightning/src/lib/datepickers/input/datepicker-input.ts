@@ -11,7 +11,7 @@ import { InputBoolean } from '../../util/convert';
 import { HostService } from '../../common/host/host.service';
 import { NglDateAdapter } from '../adapters/date-fns-adapter';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
-import { DROPDOWN_POSITION_MAP } from '../../util/overlay-position';
+import { DEFAULT_DROPDOWN_POSITIONS } from '../../util/overlay-position';
 import { parseDate, isDisabled } from '../util';
 
 const NGL_DATEPICKER_INPUT_VALUE_ACCESSOR = {
@@ -314,7 +314,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   }
 
   private setPositions(align: 'left' | 'right') {
-    this.overlayPositions = [`bottom-${align}`, `top-${align}`].map((p) => DROPDOWN_POSITION_MAP[p].position);
+    this.overlayPositions = [...DEFAULT_DROPDOWN_POSITIONS[align]];
   }
 
   private formatInputValue() {
