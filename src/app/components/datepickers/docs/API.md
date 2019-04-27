@@ -4,6 +4,7 @@
 | -------- | ----------- | ---- | ------- |
 | `[date]` | Currently selected date. | Date | |
 | `[showToday]` | Whether to show `Today` option. | boolean | true |
+| `[dateDisabled]` | Function that can be used to disable dates. | (date: Date) => boolean | |
 | `[monthNames]` | Month names. | string[] | ['January', 'February', ...] |
 | `[dayNamesShort]` | Short form of weekdays. | string[] | ['Sun', 'Mon', ...] |
 | `[dayNamesLong]` | Long form of weekdays. | string[] | ['Sunday', 'Monday', ...] |

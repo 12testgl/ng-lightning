@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChildren, QueryList,
-         NgZone, ElementRef, AfterViewChecked, Optional, Inject } from '@angular/core';
+         NgZone, ElementRef, AfterViewInit, Optional, Inject } from '@angular/core';
 import { ENTER, UP_ARROW, LEFT_ARROW, DOWN_ARROW, RIGHT_ARROW, PAGE_UP, PAGE_DOWN, HOME, END } from '@angular/cdk/keycodes';
 import { take } from 'rxjs/operators';
 import { uniqueId, trapEvent } from '../util/util';
@@ -30,10 +30,11 @@ const KEYBOARD_MOVES = {
   },
   styles: [`:host { display: block; }`],
 })
-export class NglDatepicker implements AfterViewChecked {
+export class NglDatepicker implements AfterViewInit {
   @Input() monthNames: string[];
   @Input() dayNamesShort: string[];
   @Input() dayNamesLong: string[];
+  @Input() dateDisabled: (date: Date) => boolean | null = null;
 
   date: NglInternalDate;
   current: NglInternalDate;
@@ -86,7 +87,9 @@ export class NglDatepicker implements AfterViewChecked {
 
     if (keyCode === ENTER) {
       trapEvent(evt);
-      this.select();
+      if (!this.isDisabledDate(this.current)) {
+        this.select(this.current);
+      }
       return;
     }
 
@@ -111,7 +114,7 @@ export class NglDatepicker implements AfterViewChecked {
     return this.isEqualDate(date, this.current);
   }
 
-  select(date: NglInternalDate = this.current) {
+  select(date: NglInternalDate) {
     if (date.disabled) { return; }
 
     const {year, month, day} = date;
@@ -123,7 +126,13 @@ export class NglDatepicker implements AfterViewChecked {
   }
 
   selectToday() {
-    this.dateChange.emit(new Date());
+    const today = this.today;
+    if (this.isDisabledDate(today)) {
+      this.current = today;
+      this.render();
+    } else {
+      this.dateChange.emit(new Date());
+    }
   }
 
   dateTrackBy(index: number, date: NglInternalDate) {
@@ -134,7 +143,7 @@ export class NglDatepicker implements AfterViewChecked {
     return this.isEqualDate(date, this.today);
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     if (this.dtInput) {
       const el = this.element.nativeElement;
       this.dtInput.updateDatepickerSize(el.offsetWidth, el.offsetHeight);
@@ -219,10 +228,10 @@ export class NglDatepicker implements AfterViewChecked {
     return this.getDayObjects(year, month, 1, 7 - (numOfDays % 7), true);
   }
 
-  private getDayObjects(year: number, month: number, from: number, to: number, disabled = false) {
+  private getDayObjects(year: number, month: number, from: number, to: number, forceDisabled = false) {
     const days: NglInternalDate[] = [];
     for (let day = from; day <= to; day++) {
-      days.push({ year, month, day, disabled });
+      days.push({ year, month, day, disabled: forceDisabled ? true : this.isDisabledDate({ year, month, day}) });
     }
     return days;
   }
@@ -233,11 +242,16 @@ export class NglDatepicker implements AfterViewChecked {
   }
 
   // Split array into smaller arrays
-  private split = function(arr: any[], size = 7) {
+  private split(arr: any[], size = 7) {
     const arrays: any[] = [];
     while (arr.length > 0) {
       arrays.push(arr.splice(0, size));
     }
     return arrays;
-  };
+  }
+
+  /** Date filter for the month */
+  private isDisabledDate({ year, month, day }: NglInternalDate): boolean {
+    return (this.dateDisabled && this.dateDisabled(new Date(year, month, day)));
+  }
 }

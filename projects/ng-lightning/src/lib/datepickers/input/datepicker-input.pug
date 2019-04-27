@@ -33,5 +33,6 @@ ng-template(cdkConnectedOverlay,
                                [dayNamesShort]="dayNamesShort",
                                [dayNamesLong]="dayNamesLong",
                                [showToday]="showToday",
+                               [dateDisabled]="dateDisabled",
                                (dateChange)="pickerSelection($event)",
                                (nglClickOutside)="closeCalendar(false)")

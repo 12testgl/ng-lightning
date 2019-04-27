@@ -54,6 +54,10 @@ function getTableRows(element: HTMLElement) {
   return selectElements(element, 'tbody > tr');
 }
 
+function getTodayButton(fixture: ComponentFixture<any>): HTMLButtonElement {
+  return fixture.nativeElement.querySelector('button.slds-text-link');
+}
+
 function expectCalendar(fixture: ComponentFixture<TestComponent>, expectedDates: any[], expectedMonth: string, expectedYear: string) {
   const element = fixture.nativeElement;
 
@@ -348,14 +352,14 @@ describe('`Datepicker` Component', () => {
     fixture.componentInstance.showToday = true;
     fixture.detectChanges();
 
-    const todayEl = <HTMLAnchorElement>fixture.nativeElement.querySelector('button.slds-text-link');
+    const todayEl = getTodayButton(fixture);
     expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
     todayEl.click();
     expect(fixture.componentInstance.dateChange).toHaveBeenCalledWith(currentDate);
 
     fixture.componentInstance.showToday = false;
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('button.slds-text-link')).toBe(null);
+    expect(getTodayButton(fixture)).toBeFalsy();
   });
 
   it('should support custom month and day names', async(() => {
@@ -445,6 +449,58 @@ describe('`Datepicker` Component', () => {
       });
     });
   }));
+
+  describe('disabled dates', () => {
+
+    let fixture;
+
+    beforeEach(() => {
+      fixture = createTestComponent(`<ngl-datepicker [date]="date" (dateChange)="dateChange($event)" [dateDisabled]="dateDisabled"></ngl-datepicker>`, false);
+      const { componentInstance } = fixture;
+
+      componentInstance.dateDisabled = (d: Date) => {
+        const day = d.getDay();
+        // Disable Saturday and Sunday
+        return day === 0 || day === 6;
+      };
+      fixture.detectChanges();
+    });
+
+    it('should be defined via input callback', () => {
+      expectCalendar(fixture, [
+        ['29-', '30-', '31-', '1', '2', '3', '4-'],
+        ['5-', '6', '7', '8', '9', '10', '11-'],
+        ['12-', '13', '14', '15', '16', '17', '18-'],
+        ['19-', '20', '21', '22', '23', '24', '25-'],
+        ['26-', '27', '28', '29', '*30+', '1-', '2-'],
+      ], 'September', '2010');
+    });
+
+    it('should not be selected via click', () => {
+      const days = getDayElements(fixture.nativeElement);
+      days[6].click(); // 4th
+      expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
+    });
+
+    it('should not be selected via today button', () => {
+      jasmine.clock().mockDate(new Date(2013, 7, 11)); // Sunday
+
+      const todayEl = getTodayButton(fixture);
+      todayEl.click();
+      fixture.detectChanges();
+      expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
+
+      // Move current view to today though
+      expectCalendar(fixture, [
+        ['28-', '29-', '30-', '31-', '1', '2', '3-'],
+        ['4-', '5', '6', '7', '8', '9', '10-'],
+        ['11+-^', '12', '13', '14', '15', '16', '17-'],
+        ['18-', '19', '20', '21', '22', '23', '24-'],
+        ['25-', '26', '27', '28', '29', '30', '31-'],
+      ], 'August', '2013');
+    });
+
+  });
 });
 
 
@@ -459,4 +515,6 @@ export class TestComponent {
 
   customMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   customDays = [ 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7' ];
+
+  dateDisabled: (date: Date) => boolean;
 }

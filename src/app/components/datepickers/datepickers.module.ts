@@ -12,6 +12,7 @@ import { DemoDatepickersBasic } from './examples/basic';
 import { DemoDatepickersConfig } from './examples/config';
 import { DemoDatepickersDisabled } from './examples/disabled';
 import { DemoDatepickersInput } from './examples/input';
+import { DemoDatepickersFilter } from './examples/filter';
 import { DemoDatepickersFormat } from './examples/format';
 import { DemoDatepickersValidation } from './examples/validation';
 
@@ -32,6 +33,7 @@ const routes: Routes = [
     DemoDatepickersBasic,
     DemoDatepickersConfig,
     DemoDatepickersDisabled,
+    DemoDatepickersFilter,
     DemoDatepickersFormat,
     DemoDatepickersInput,
     DemoDatepickersValidation,
