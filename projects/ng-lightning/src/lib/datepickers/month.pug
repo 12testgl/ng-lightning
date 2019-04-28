@@ -1,0 +1,10 @@
+tr(*ngFor="let week of weeks; trackBy:indexTrackBy")
+  td(*ngFor="let date of week; trackBy:dateTrackBy",
+     [class.slds-is-today]="date.today",
+     [isActive]="date.active",
+     [nglDay]="date",
+     [nglDaySelected]="date.selected",
+     [nglDayDisabled]="date.disabled",
+     (click)="onSelect(date)",
+     role="gridcell")
+    span.slds-day {{ date.day }}

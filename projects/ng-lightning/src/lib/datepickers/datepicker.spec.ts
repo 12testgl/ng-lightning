@@ -456,9 +456,8 @@ describe('`Datepicker` Component', () => {
 
     beforeEach(() => {
       fixture = createTestComponent(`<ngl-datepicker [date]="date" (dateChange)="dateChange($event)" [dateDisabled]="dateDisabled"></ngl-datepicker>`, false);
-      const { componentInstance } = fixture;
 
-      componentInstance.dateDisabled = (d: Date) => {
+      fixture.componentInstance.dateDisabled = (d: Date) => {
         const day = d.getDay();
         // Disable Saturday and Sunday
         return day === 0 || day === 6;
@@ -473,7 +472,18 @@ describe('`Datepicker` Component', () => {
         ['12-', '13', '14', '15', '16', '17', '18-'],
         ['19-', '20', '21', '22', '23', '24', '25-'],
         ['26-', '27', '28', '29', '*30+', '1-', '2-'],
-      ], 'September', '2010');
+      ], 'September', '2010').then(() => {
+        fixture.componentInstance.dateDisabled = null;
+        fixture.detectChanges();
+
+        expectCalendar(fixture, [
+          ['29-', '30-', '31-', '1', '2', '3', '4'],
+          ['5', '6', '7', '8', '9', '10', '11'],
+          ['12', '13', '14', '15', '16', '17', '18'],
+          ['19', '20', '21', '22', '23', '24', '25'],
+          ['26', '27', '28', '29', '*30+', '1-', '2-'],
+        ], 'September', '2010');
+      });
     });
 
     it('should not be selected via click', () => {

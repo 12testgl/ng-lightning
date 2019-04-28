@@ -1,5 +1,5 @@
 import { Directive, Input, HostBinding, ElementRef } from '@angular/core';
-import { NglInternalDate } from './datepicker';
+import { NglInternalDate } from './util';
 
 @Directive({
   selector: 'td[nglDay]',

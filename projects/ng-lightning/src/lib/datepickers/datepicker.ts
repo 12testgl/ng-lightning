@@ -1,14 +1,11 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChildren, QueryList,
-         NgZone, ElementRef, AfterViewInit, Optional, Inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, AfterViewInit, Optional, Inject, ViewChild } from '@angular/core';
 import { ENTER, UP_ARROW, LEFT_ARROW, DOWN_ARROW, RIGHT_ARROW, PAGE_UP, PAGE_DOWN, HOME, END } from '@angular/cdk/keycodes';
-import { take } from 'rxjs/operators';
 import { uniqueId, trapEvent } from '../util/util';
-import { InputBoolean } from '../util/convert';
-import { NglDay } from './day';
+import { InputBoolean, InputNumber } from '../util/convert';
 import { NglDatepickerInput } from './input/datepicker-input';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from './config';
-
-export interface NglInternalDate { year: number; month: number; day: number; disabled?: boolean; }
+import { NglInternalDate, numberOfDaysInMonth, getToday, isDisabled } from './util';
+import { NglDatepickerMonth } from './month';
 
 const KEYBOARD_MOVES = {
   [UP_ARROW]:    ['Move', -7],
@@ -49,21 +46,16 @@ export class NglDatepicker implements AfterViewInit {
 
   @Input() @InputBoolean() showToday: boolean;
 
-  firstDayOfWeek = 0;
-  @Input('firstDayOfWeek') set _firstDayOfWeek(firstDayOfWeek: number) {
-    this.firstDayOfWeek = +firstDayOfWeek;
-    this.render();
-  }
+  @Input() @InputNumber() firstDayOfWeek = 0;
 
   weeks: NglInternalDate[];
   uid = uniqueId('datepicker');
   monthLabel: string;
 
-  @ViewChildren(NglDay) days: QueryList<NglDay>;
+  @ViewChild(NglDatepickerMonth) monthView: NglDatepickerMonth;
 
   constructor(@Optional() @Inject(NglDatepickerInput) private dtInput: NglDatepickerInput,
               @Optional() @Inject(NGL_DATEPICKER_CONFIG) defaultConfig: NglDatepickerConfig,
-              private ngZone: NgZone,
               private element: ElementRef) {
 
     const config = { ...new NglDatepickerConfig(), ...defaultConfig };
@@ -106,14 +98,6 @@ export class NglDatepicker implements AfterViewInit {
     this.focusActiveDay();
   }
 
-  isSelected(date: NglInternalDate) {
-    return this.isEqualDate(date, this.date);
-  }
-
-  isActive(date: NglInternalDate) {
-    return this.isEqualDate(date, this.current);
-  }
-
   select(date: NglInternalDate) {
     if (date.disabled) { return; }
 
@@ -121,26 +105,14 @@ export class NglDatepicker implements AfterViewInit {
     this.dateChange.emit(new Date(year, month, day));
   }
 
-  indexTrackBy(index: number) {
-    return index;
-  }
-
   selectToday() {
-    const today = this.today;
+    const today = getToday();
     if (this.isDisabledDate(today)) {
       this.current = today;
       this.render();
     } else {
       this.dateChange.emit(new Date());
     }
-  }
-
-  dateTrackBy(index: number, date: NglInternalDate) {
-    return `${date.day}-${date.month}-${date.year}`;
-  }
-
-  isToday(date: NglInternalDate) {
-    return this.isEqualDate(date, this.today);
   }
 
   ngAfterViewInit() {
@@ -153,14 +125,7 @@ export class NglDatepicker implements AfterViewInit {
   }
 
   private focusActiveDay() {
-    this.ngZone.runOutsideAngular(() => {
-      this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
-        const active = this.days.find((d) => this.isActive(d.date));
-        if (active) {
-          active.focus();
-        }
-      });
-    });
+    this.monthView.focusActiveDay();
   }
 
   private moveCalendar(code: 'Move' | 'MoveMonth' | 'MoveTo', param: number) {
@@ -184,74 +149,20 @@ export class NglDatepicker implements AfterViewInit {
     return { year: date.getFullYear(), month: date.getMonth(), day: date.getDate() };
   }
 
-  private isEqualDate(d1: NglInternalDate, d2: NglInternalDate) {
-    return d1 && d2 && d1.day === d2.day && d1.month === d2.month && d1.year === d2.year;
-  }
-
   private render() {
     if (!this.current) {
-      this.current = this.today;
+      this.current = getToday();
     }
 
     const { year, month, day } = this.current;
     this.monthLabel = this.monthNames[month];
 
-    const days = this.daysInMonth(year, month);
-
     // Keep current day inside limits of this month
-    this.current.day = Math.min(day, days.length);
-
-    Array.prototype.unshift.apply(days, this.daysInPreviousMonth(year, month));
-    const nextMonth = this.daysInNextMonth(year, month + 1, days.length);
-    if (nextMonth) {
-      Array.prototype.push.apply(days, nextMonth);
-    }
-
-    this.weeks = this.split(days);
-  }
-
-  private daysInMonth(year: number, month: number) {
-    const last = new Date(year, month + 1, 0).getDate();
-    return this.getDayObjects(year, month, 1, last);
-  }
-
-  private daysInPreviousMonth(year: number, month: number) {
-    const firstIndex = (new Date(year, month, 1)).getDay();
-    const last = new Date(year, month, 0).getDate();
-    const numDays = (7 + firstIndex - this.firstDayOfWeek) % 7;
-
-    return this.getDayObjects(year, month - 1, last - numDays + 1, last, true);
-  }
-
-  private daysInNextMonth(year: number, month: number, numOfDays: number) {
-    if (numOfDays % 7 === 0) { return; }
-    return this.getDayObjects(year, month, 1, 7 - (numOfDays % 7), true);
-  }
-
-  private getDayObjects(year: number, month: number, from: number, to: number, forceDisabled = false) {
-    const days: NglInternalDate[] = [];
-    for (let day = from; day <= to; day++) {
-      days.push({ year, month, day, disabled: forceDisabled ? true : this.isDisabledDate({ year, month, day}) });
-    }
-    return days;
-  }
-
-  private get today() {
-    const today = new Date();
-    return { year: today.getFullYear(), month: today.getMonth(), day: today.getDate() };
-  }
-
-  // Split array into smaller arrays
-  private split(arr: any[], size = 7) {
-    const arrays: any[] = [];
-    while (arr.length > 0) {
-      arrays.push(arr.splice(0, size));
-    }
-    return arrays;
+    this.current.day = Math.min(day, numberOfDaysInMonth(year, month));
   }
 
   /** Date filter for the month */
-  private isDisabledDate({ year, month, day }: NglInternalDate): boolean {
-    return (this.dateDisabled && this.dateDisabled(new Date(year, month, day)));
+  private isDisabledDate(date: NglInternalDate): boolean {
+    return isDisabled(date, this.dateDisabled);
   }
 }

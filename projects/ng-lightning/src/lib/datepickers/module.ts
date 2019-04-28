@@ -12,6 +12,7 @@ import { NglDatepickerInput } from './input/datepicker-input';
 import { NglDatepickerWeekdays } from './weekdays';
 import { NglDay } from './day';
 import { NglDatepickerYear } from './year';
+import { NglDatepickerMonth } from './month';
 
 import { NglDateAdapter } from './adapters/date-fns-adapter';
 
@@ -20,7 +21,7 @@ const EXPORTS = [
 ];
 
 @NgModule({
-  declarations: [...EXPORTS, NglDay, NglDatepickerWeekdays, NglDatepickerYear],
+  declarations: [...EXPORTS, NglDay, NglDatepickerWeekdays, NglDatepickerYear, NglDatepickerMonth],
   exports: EXPORTS,
   imports: [CommonModule, FormsModule, NglIconsModule, NglInternalOutletModule, OverlayModule, NglClickOutsideModule],
   providers: [NglDateAdapter],

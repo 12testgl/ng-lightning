@@ -15,12 +15,12 @@
 table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'", (keydown)="keyboardHandler($event)")
   thead
     tr(nglWeekdays, [firstDayOfWeek]="firstDayOfWeek", [dayNamesShort]="dayNamesShort", [dayNamesLong]="dayNamesLong")
-  tbody
-    tr(*ngFor="let week of weeks; trackBy:indexTrackBy")
-      td(*ngFor="let date of week; trackBy:dateTrackBy", (click)="select(date)", [isActive]="isActive(date)",
-         [class.slds-is-today]="isToday(date)",
-         [nglDay]="date", [nglDaySelected]="isSelected(date)", [nglDayDisabled]="date.disabled",
-         role="gridcell")
-        span.slds-day {{ date.day }}
-
+  tbody(*ngIf="current", nglDatepickerMonth,
+        [year]="current.year",
+        [month]="current.month",
+        [day]="current.day",
+        [selected]="date",
+        [firstDayOfWeek]="firstDayOfWeek",
+        [dateDisabled]="dateDisabled",
+        (selectDate)="select($event)")
 button.slds-button.slds-align_absolute-center.slds-text-link(*ngIf="showToday", (click)="selectToday()") Today
