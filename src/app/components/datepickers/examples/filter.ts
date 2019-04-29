@@ -9,6 +9,10 @@ export class DemoDatepickersFilter {
 
   value = new Date();
 
+  minDate = new Date(2000, 4, 10);
+
+  maxDate = new Date(2020, 0, 1);
+
   dateDisabled = (d: Date): boolean => {
     const day = d.getDay();
     // Prevent Saturday and Sunday from being selected.

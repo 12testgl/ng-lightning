@@ -28,7 +28,6 @@ gulp.task('pug:compile', function libBuildHtml() {
   const path = require('path');
   const fs = require('fs');
   const _pug = require('pug');
-  const glob = require('glob');
   const md = require('markdown-it')({ breaks: true });
   const mdHtml = require('markdown-it')({
     html: true,    // Enable HTML tags in source
@@ -53,7 +52,14 @@ gulp.task('pug:compile', function libBuildHtml() {
     const pugSrc = _pug.renderFile(`${filepath}.pug`, { pretty: true, doctype: 'html' });
     const html = Prism.highlight(`${pugSrc}`.trim(), Prism.languages.markup);
 
-    return { ts, tsRaw: `${encodeURIComponent(tsRaw)}`, html, htmlRaw: `${encodeURIComponent(pugSrc)}` };
+    // Readme
+    let readme = null;
+    const readmeFile = `${filepath}.md`;
+    if (fs.existsSync(readmeFile)) {
+      readme = safe(mdHtml.render(fs.readFileSync(readmeFile, 'UTF-8')));
+    }
+
+    return { ts, tsRaw: `${encodeURIComponent(tsRaw)}`, html, htmlRaw: `${encodeURIComponent(pugSrc)}`, readme };
   }
 
   return gulp.src(pugSrc, { base: './' })

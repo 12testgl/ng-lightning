@@ -262,6 +262,52 @@ describe('`<ngl-datepicker-input>`', () => {
     });
   }));
 
+  it('should have validation for `min` input', async(() => {
+    const fixture = createTestComponent(`
+      <ngl-datepicker-input [(ngModel)]="date" [min]="min" #x="ngModel" [class.slds-has-error]="!x.valid"></ngl-datepicker-input>
+    `, false);
+    fixture.componentInstance.date = new Date(2010, 7, 11);
+    fixture.componentInstance.min = new Date(2013, 7, 11);
+    fixture.detectChanges();
+
+    const host = getHost(fixture);
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      expect(host).toHaveCssClass('slds-has-error');
+
+      fixture.componentInstance.date = new Date(2015, 7, 11);
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        expect(host).not.toHaveCssClass('slds-has-error');
+      });
+    });
+  }));
+
+  it('should have validation for `max` input', async(() => {
+    const fixture = createTestComponent(`
+      <ngl-datepicker-input [(ngModel)]="date" [max]="max" #x="ngModel" [class.slds-has-error]="!x.valid"></ngl-datepicker-input>
+    `, false);
+    fixture.componentInstance.date = new Date(2014, 9, 23);
+    fixture.componentInstance.max = new Date(2010, 9, 23);
+    fixture.detectChanges();
+
+    const host = getHost(fixture);
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      expect(host).toHaveCssClass('slds-has-error');
+
+      fixture.componentInstance.date = new Date(2005, 9, 23);
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        expect(host).not.toHaveCssClass('slds-has-error');
+      });
+    });
+  }));
+
   it('should handle appropriately disable state', async(() => {
     const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date" disabled></ngl-datepicker-input>`);
 
@@ -310,4 +356,6 @@ export class TestComponent {
 
   format: string;
   delimiter: string;
+  min: Date;
+  max: Date;
 }

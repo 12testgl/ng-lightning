@@ -1,18 +1,18 @@
 .slds-datepicker__filter.slds-grid
   .slds-datepicker__filter_month.slds-grid.slds-grid_align-spread.slds-grow
     .slds-align-middle
-      button.slds-button.slds-button_icon-container(type="button", (click)="moveMonth(-1)")
+      button.slds-button.slds-button_icon-container(type="button", (click)="moveMonth(-1)", [disabled]="previousDisabled()")
         svg.slds-button__icon(nglIconName="left")
         span.slds-assistive-text Previous Month
     h2.slds-align-middle([id]="uid + '_month'", aria-live="assertive", aria-atomic="true") {{ monthLabel }}
     .slds-align-middle
-      button.slds-button.slds-button_icon-container(type="button", (click)="moveMonth(1)")
+      button.slds-button.slds-button_icon-container(type="button", (click)="moveMonth(1)", [disabled]="nextDisabled()")
         svg.slds-button__icon(nglIconName="right")
         span.slds-assistive-text Next Month
 
   ngl-date-year.slds-shrink-none([year]="current.year",
-                                 [from]="relativeYearFrom",
-                                 [to]="relativeYearTo",
+                                 [from]="minDate",
+                                 [to]="maxDate",
                                  (yearChange)="moveYear($event)")
 
 table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'", (keydown)="keyboardHandler($event)")
@@ -22,8 +22,10 @@ table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'", (k
         [year]="current.year",
         [month]="current.month",
         [day]="current.day",
-        [selected]="date",
+        [selected]="_date",
         [firstDayOfWeek]="firstDayOfWeek",
+        [minDate]="minDate",
+        [maxDate]="maxDate",
         [dateDisabled]="dateDisabled",
         (selectDate)="select($event)")
 button.slds-button.slds-align_absolute-center.slds-text-link(*ngIf="showToday", (click)="selectToday()") Today

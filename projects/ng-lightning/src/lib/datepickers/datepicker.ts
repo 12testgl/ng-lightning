@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef, AfterViewInit, Optional, Inject, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef,
+         OnInit, OnChanges, AfterViewInit, Optional, Inject, ViewChild, SimpleChanges } from '@angular/core';
 import { ENTER, UP_ARROW, LEFT_ARROW, DOWN_ARROW, RIGHT_ARROW, PAGE_UP, PAGE_DOWN, HOME, END } from '@angular/cdk/keycodes';
 import { uniqueId, trapEvent } from '../util/util';
 import { InputBoolean, InputNumber } from '../util/convert';
 import { NglDatepickerInput } from './input/datepicker-input';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from './config';
-import { NglInternalDate, numberOfDaysInMonth, getToday, isDisabled } from './util';
+import { NglInternalDate, numberOfDaysInMonth, getToday, isDisabled, compareDate, isSameMonth, parseDate } from './util';
 import { NglDatepickerMonth } from './month';
 
 const KEYBOARD_MOVES = {
@@ -27,40 +28,50 @@ const KEYBOARD_MOVES = {
   },
   styles: [`:host { display: block; }`],
 })
-export class NglDatepicker implements AfterViewInit {
-  @Input() monthNames: string[];
-  @Input() dayNamesShort: string[];
-  @Input() dayNamesLong: string[];
+export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
+  @Input() readonly monthNames: string[];
+  @Input() readonly dayNamesShort: string[];
+  @Input() readonly dayNamesLong: string[];
   @Input() dateDisabled: (date: Date) => boolean | null = null;
 
-  date: NglInternalDate;
+  _date: NglInternalDate;
   current: NglInternalDate;
-  @Input('date') set _date(date: Date) {
-    this.date = this.parseDate(date);
-    if (this.date) {
-      this.current = Object.assign({}, this.date);
-    }
-    this.render();
+  @Input() set date(date: Date) {
+    this._date = parseDate(date);
   }
   @Output() dateChange = new EventEmitter();
 
-  @Input() @InputBoolean() showToday: boolean;
+  @Input() @InputBoolean() readonly showToday: boolean;
 
-  @Input() @InputNumber() firstDayOfWeek = 0;
+  @Input() @InputNumber() readonly firstDayOfWeek = 0;
 
   /**
    * Offset of year from current year, that can be the minimum option in the year selection dropdown.
    */
-  @Input() relativeYearFrom: number;
+  @Input() readonly relativeYearFrom: number;
 
   /**
    * Offset of year from current year, that can be the maximum option in the year selection dropdown.
    */
-  @Input() relativeYearTo: number;
+  @Input() readonly relativeYearTo: number;
+
+  /**
+   * The minimum date that can be selected.
+   */
+  @Input() readonly min: Date;
+
+  /**
+   * The maximum date that can be selected.
+   */
+  @Input() readonly max: Date;
 
   weeks: NglInternalDate[];
   uid = uniqueId('datepicker');
   monthLabel: string;
+
+  minDate: NglInternalDate;
+
+  maxDate: NglInternalDate;
 
   @ViewChild(NglDatepickerMonth) monthView: NglDatepickerMonth;
 
@@ -77,9 +88,24 @@ export class NglDatepicker implements AfterViewInit {
     this.relativeYearTo = config.relativeYearTo;
   }
 
+  ngOnInit() {
+    this.setMinMaxDates();
+    this.setCurrent(this._date || getToday());
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ((changes.date && changes.date.isFirstChange()) ||
+        changes.relativeYearFrom || changes.relativeYearTo ||
+        changes.min || changes.max) {
+      this.setMinMaxDates();
+    }
+    if (changes.date) {
+      this.setCurrent(this._date);
+    }
+  }
+
   moveYear(year: string | number) {
-    this.current.year = +year;
-    this.render();
+    this.setCurrent({ year: +year });
   }
 
   moveMonth(diff: number) {
@@ -120,8 +146,7 @@ export class NglDatepicker implements AfterViewInit {
   selectToday() {
     const today = getToday();
     if (this.isDisabledDate(today)) {
-      this.current = today;
-      this.render();
+      this.setCurrent(today);
     } else {
       this.dateChange.emit(new Date());
     }
@@ -136,6 +161,16 @@ export class NglDatepicker implements AfterViewInit {
     }
   }
 
+  /** Whether the previous period button is disabled. */
+  previousDisabled(): boolean {
+    return this.minDate && isSameMonth(this.current, this.minDate);
+  }
+
+  /** Whether the next period button is disabled. */
+  nextDisabled(): boolean {
+    return this.maxDate && isSameMonth(this.current, this.maxDate);
+  }
+
   private focusActiveDay() {
     this.monthView.focusActiveDay();
   }
@@ -146,35 +181,46 @@ export class NglDatepicker implements AfterViewInit {
 
     if (code === 'Move') {
       date.setDate(day + (+param));
-      this.current = { year: date.getFullYear(), month: date.getMonth(), day: date.getDate() };
+      this.setCurrent({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate() });
     } else if (code === 'MoveMonth') {
       date.setMonth(month + (+param), 1);
-      this.current = { year: date.getFullYear(), month: date.getMonth(), day };
+      this.setCurrent({ year: date.getFullYear(), month: date.getMonth(), day });
     } else if (code === 'MoveTo') {
-      this.current.day = +param;
+      this.setCurrent({ day: +param });
     }
-    this.render();
   }
 
-  private parseDate(date: Date): NglInternalDate {
-    if (!date) { return null; }
-    return { year: date.getFullYear(), month: date.getMonth(), day: date.getDate() };
+  private setCurrent(d: Partial<NglInternalDate>, doRender = true) {
+    this.current = { ...this.current, ...d };
+
+    // Keep current inside minimum/maximum range
+    if (compareDate(this.current, this.minDate) < 0) {
+      this.current = this.minDate;
+    } else if (compareDate(this.current, this.maxDate) > 0) {
+      this.current = this.maxDate;
+    }
+
+    if (doRender) {
+      this.render();
+    }
   }
 
   private render() {
-    if (!this.current) {
-      this.current = getToday();
-    }
-
     const { year, month, day } = this.current;
     this.monthLabel = this.monthNames[month];
 
     // Keep current day inside limits of this month
-    this.current.day = Math.min(day, numberOfDaysInMonth(year, month));
+    this.setCurrent({ day: Math.min(day, numberOfDaysInMonth(year, month)) }, false);
   }
 
   /** Date filter for the month */
   private isDisabledDate(date: NglInternalDate): boolean {
-    return isDisabled(date, this.dateDisabled);
+    return isDisabled(date, this.dateDisabled, this.minDate, this.maxDate);
+  }
+
+  private setMinMaxDates() {
+    const { year } = getToday();
+    this.minDate = this.min ? parseDate(this.min) : { year: year + this.relativeYearFrom, month: 0, day: 1 };
+    this.maxDate = this.max ? parseDate(this.max) : { year: year + this.relativeYearTo, month: 11, day: 31 };
   }
 }

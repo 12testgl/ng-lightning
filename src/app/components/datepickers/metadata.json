@@ -3,7 +3,7 @@
     "basic": "Inline",
     "input": "Input popup",
     "format": "Date format",
-    "filter": "Disabling dates",
+    "filter": "Min/Max & Disabling dates",
     "disabled": "Disabling parts of the datepicker",
     "validation": "Validation",
     "config": "Global configuration"

@@ -24,6 +24,9 @@ header.component__header.slds-border_bottom.slds-grid.slds-wrap.slds-m-bottom_me
         if exampleHeader
           .example__header.slds-text-heading_small #{exampleHeader}
 
+        if example.readme
+          .slds-m-bottom_small !{example.readme}
+
         #{'app-demo-'+ self.dir + '-' + example.id}
 
         ng-template(ngPreserveWhitespaces)&attributes({ ['#markup' + example.id]: '' })

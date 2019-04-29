@@ -9,8 +9,10 @@
 | `[dayNamesShort]` | Short form of weekdays. | string[] | ['Sun', 'Mon', ...] |
 | `[dayNamesLong]` | Long form of weekdays. | string[] | ['Sunday', 'Monday', ...] |
 | `[firstDayOfWeek]` | First day of the week. Sunday = 0, Monday = 1, ... | number | 0 |
-| `[relativeYearFrom]` | Offset of year from current year, that can be the minimum option in the year selection dropdown. | number | -100 |
-| `[relativeYearTo]` | Offset of year from current year, that can be the maximum option in the year selection dropdown. | number | 10 |
+| `[min]` | Minimum selectable date. It will override `relativeYearFrom` if defined. | Date | |
+| `[max]` | Maximum selectable date. It will override `relativeYearTo` if defined. | Date | |
+| `[relativeYearFrom]` | Offset of year from current year, that can be the minimum option in the year selection dropdown. For example, 2019 - 100 = 1/1/1019 is minimum selectable date. | number | -100 |
+| `[relativeYearTo]` | Offset of year from current year, that can be the maximum option in the year selection dropdown. For example, 2019 + 10 = 31/12/2029 is maximum selectable date. | number | 10 |
 | `(dateChange)` | Emits date upon selection. | EventEmitter<Date> | |
 
 

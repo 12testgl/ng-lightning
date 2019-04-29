@@ -1,1 +1,10 @@
-ngl-datepicker-input(label="Disable weekends", [(value)]="value", [dateDisabled]="dateDisabled")
+ngl-datepicker-input(label="Choose a valid date",
+                     [(ngModel)]="value", #dt="ngModel",
+                     [class.slds-has-error]="!dt.valid",
+                     [dateDisabled]="dateDisabled",
+                     [min]="minDate", [max]="maxDate")
+|
+|
+.slds-m-top_xx-small.slds-text-color_error(*ngIf="!dt.valid")
+  ng-container(*ngIf="dt.errors.nglDatepickerInput?.invalid") This is not a valid date.
+  ng-container(*ngIf="dt.errors.nglDatepickerInput?.disabled") The date you entered is disabled.

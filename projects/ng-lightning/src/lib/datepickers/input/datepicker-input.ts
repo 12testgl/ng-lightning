@@ -12,6 +12,7 @@ import { HostService } from '../../common/host/host.service';
 import { NglDateAdapter } from '../adapters/date-fns-adapter';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
 import { DROPDOWN_POSITION_MAP } from '../../util/overlay-position';
+import { parseDate, isDisabled } from '../util';
 
 const NGL_DATEPICKER_INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -98,6 +99,16 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   @ViewChild('cdkOverlay') cdkOverlay: CdkConnectedOverlay;
 
   /**
+   * The minimum valid date.
+   */
+  @Input() readonly min: Date;
+
+  /**
+   * The maximum valid date.
+   */
+  @Input() readonly max: Date;
+
+  /**
    * Datepicker inputs
    */
   @Input() monthNames: string[];
@@ -171,6 +182,13 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     if (!(this.value instanceof Date)) {
       return { 'nglDatepickerInput': { invalid: c.value } };
     }
+
+    const date = parseDate(value);
+    if (isDisabled(date, this.dateDisabled, parseDate(this.min), parseDate(this.max))) {
+      return { 'nglDatepickerInput': { disabled: c.value } };
+    }
+
+    return null;
   }
 
   writeValue(value: Date) {
@@ -184,7 +202,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
 
   registerOnValidatorChange(fn: () => void): void { this.validatorChange = fn; }
 
-  setDisabledState(isDisabled: boolean) { this.disabled = isDisabled; }
+  setDisabledState(disabled: boolean) { this.disabled = disabled; }
 
   onBlur() {
     if (this.value instanceof Date) {

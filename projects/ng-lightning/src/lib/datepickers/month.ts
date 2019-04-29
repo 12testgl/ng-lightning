@@ -18,17 +18,21 @@ interface INglDayCell extends NglInternalDate {
 })
 export class NglDatepickerMonth implements OnChanges {
 
-  @Input() selected: NglInternalDate;
+  @Input() readonly selected: NglInternalDate;
 
-  @Input() year: number;
+  @Input() readonly year: number;
 
-  @Input() month: number;
+  @Input() readonly month: number;
 
-  @Input() day: number;
+  @Input() readonly day: number;
 
-  @Input() firstDayOfWeek: number;
+  @Input() readonly firstDayOfWeek: number;
 
-  @Input() dateDisabled: (date: Date) => boolean | null = null;
+  @Input() readonly minDate: NglInternalDate;
+
+  @Input() readonly maxDate: NglInternalDate;
+
+  @Input() readonly dateDisabled: (date: Date) => boolean | null = null;
 
   @Output() selectDate = new EventEmitter<NglInternalDate>();
 
@@ -66,7 +70,7 @@ export class NglDatepickerMonth implements OnChanges {
       this.updateSelected();
     }
 
-    if (changes.dateDisabled) {
+    if (changes.minDate || changes.maxDate || changes.dateDisabled) {
       this.updateDisabled();
     }
   }
@@ -166,6 +170,6 @@ export class NglDatepickerMonth implements OnChanges {
 
   /** Date filter for the month */
   private isDisabled(d: INglDayCell): boolean {
-    return !d.isCurrentMonth || isDisabled(d, this.dateDisabled);
+    return !d.isCurrentMonth || isDisabled(d, this.dateDisabled, this.minDate, this.maxDate);
   }
 }
