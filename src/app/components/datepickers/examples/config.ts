@@ -8,7 +8,13 @@ import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from 'ng-lightning';
   providers: [
     {
       provide: NGL_DATEPICKER_CONFIG,
-      useValue: <NglDatepickerConfig>{format: 'middle-endian', delimiter: '-', showToday: false }
+      useValue: <NglDatepickerConfig>{
+        format: 'middle-endian',
+        delimiter: '-',
+        showToday: false,
+        relativeYearFrom: -5,
+        relativeYearTo: 5,
+      }
     },
   ],
 })

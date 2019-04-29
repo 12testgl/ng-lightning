@@ -91,7 +91,8 @@ function expectCalendar(fixture: ComponentFixture<TestComponent>, expectedDates:
   });
 }
 
-function expectYearOptions(element: HTMLElement, expectedYears: any[]) {
+export function expectYearOptions(element: HTMLElement, expectedYearFrom: number, expectedYearTo: number) {
+  const expectedYears = buildArray(expectedYearFrom, expectedYearTo);
   expect(getYearOptions(element).map((e: HTMLOptionElement) => e.value)).toEqual(expectedYears);
 }
 
@@ -113,7 +114,7 @@ describe('`Datepicker` Component', () => {
       ['26', '27', '28', '29', '*30+', '1-', '2-'],
     ], 'September', '2010').then(() => {
       expect(getDayHeaders(fixture.nativeElement)).toEqual([ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ]);
-      expectYearOptions(fixture.nativeElement, buildArray(1905, 2015));
+      expectYearOptions(fixture.nativeElement, 1905, 2015);
     });
   }));
 
@@ -256,7 +257,15 @@ describe('`Datepicker` Component', () => {
     jasmine.clock().mockDate(currentDate);
 
     const fixture = createTestComponent();
-    expectYearOptions(fixture.nativeElement, buildArray(1883, 2010));
+    expectYearOptions(fixture.nativeElement, 1883, 2010);
+  });
+
+  it('should change year range based on inputs', () => {
+    const currentDate = new Date(2005, 0, 1);
+    jasmine.clock().mockDate(currentDate);
+
+    const fixture = createTestComponent(`<ngl-datepicker [date]="date" [relativeYearFrom]="-5" [relativeYearTo]="5"></ngl-datepicker>`);
+    expectYearOptions(fixture.nativeElement, 2000, 2010);
   });
 
   describe('keyboard navigation', () => {

@@ -1,33 +1,37 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { uniqueId } from '../util/util';
+import { InputNumber } from '../util/convert';
 
 @Component({
   selector: 'ngl-date-year',
   templateUrl: './year.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglDatepickerYear {
+export class NglDatepickerYear implements OnChanges {
 
   uid = uniqueId('datepicker_year');
 
-  // How many years before and after the current one are selectable in dropdown
-  @Input() numYearsBefore = 100;
-  @Input() numYearsAfter = 10;
+  @Input() from: number;
+  @Input() to: number;
 
-  year: number;
-  @Input('year') set setYear(year: string | number) {
-    this.year = +year;
-  }
+  @Input() @InputNumber() year: number;
   @Output() yearChange = new EventEmitter();
 
-  get range(): number[] {
-    const currentYear = (new Date()).getFullYear();
-    const firstYear = Math.min(currentYear - this.numYearsBefore, this.year);
-    const size = Math.max(currentYear + this.numYearsAfter, this.year) - firstYear;
-    return Array.apply(null, {length: size + 1}).map((value: any, index: number) => firstYear + index);
-  }
+  range: number[];
 
   change($event: string) {
     this.yearChange.emit($event);
   }
+
+  ngOnChanges() {
+    this.range = this.getRange();
+  }
+
+  private getRange(): number[] {
+    const currentYear = (new Date()).getFullYear();
+    const firstYear = Math.min(currentYear + this.from, this.year);
+    const size = Math.max(currentYear + this.to, this.year) - firstYear;
+    return Array.apply(null, {length: size + 1}).map((value: any, index: number) => firstYear + index);
+  }
+
 }

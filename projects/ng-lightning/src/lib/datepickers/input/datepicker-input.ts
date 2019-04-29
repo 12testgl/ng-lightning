@@ -105,6 +105,8 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   @Input() dayNamesLong: string[];
   @Input() @InputBoolean() showToday: boolean;
   @Input() dateDisabled: (date: Date) => boolean | null = null;
+  @Input() relativeYearFrom: number;
+  @Input() relativeYearTo: number;
 
   date: Date;
 
@@ -149,6 +151,8 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     this.dayNamesShort = this.config.dayNamesShort;
     this.dayNamesLong = this.config.dayNamesLong;
     this.showToday = this.config.showToday;
+    this.relativeYearFrom = this.config.relativeYearFrom;
+    this.relativeYearTo = this.config.relativeYearTo;
   }
 
   onChange: Function | null = null;

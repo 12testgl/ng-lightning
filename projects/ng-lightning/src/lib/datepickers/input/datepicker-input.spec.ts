@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DOWN_ARROW, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, dispatchEvent, dispatchKeyboardEvent } from '../../../../test/util';
-import { getDayElements } from '../datepicker.spec';
+import { getDayElements, expectYearOptions } from '../datepicker.spec';
 import { NglDatepickersModule } from '../module';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
 
@@ -274,10 +274,12 @@ describe('`<ngl-datepicker-input>`', () => {
   describe('custom configuration', () => {
     const format = 'middle-endian';
     const delimiter = '.';
+    const relativeYearFrom = -50;
+    const relativeYearTo = 20;
 
     beforeEach(() => TestBed.configureTestingModule({
       providers: [
-        { provide: NGL_DATEPICKER_CONFIG, useValue: <NglDatepickerConfig>{ format, delimiter } },
+        { provide: NGL_DATEPICKER_CONFIG, useValue: <NglDatepickerConfig>{ format, delimiter, relativeYearFrom, relativeYearTo } },
       ],
     }));
 
@@ -285,6 +287,15 @@ describe('`<ngl-datepicker-input>`', () => {
       const fixture = createTestComponent();
       const inputEl = getInput(fixture);
       expect(inputEl.value).toEqual('09.30.2010');
+    });
+
+    it('should have configurable year options', () => {
+      const currentDate = new Date(2005, 0, 1);
+      jasmine.clock().mockDate(currentDate);
+
+      const fixture = createTestComponent();
+      openCalendar(fixture);
+      expectYearOptions(getDatepickerEl(), 1955, 2025);
     });
   });
 });

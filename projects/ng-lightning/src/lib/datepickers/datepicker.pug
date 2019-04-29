@@ -10,7 +10,10 @@
         svg.slds-button__icon(nglIconName="right")
         span.slds-assistive-text Next Month
 
-  ngl-date-year.slds-shrink-none([year]="current.year", (yearChange)="moveYear($event)")
+  ngl-date-year.slds-shrink-none([year]="current.year",
+                                 [from]="relativeYearFrom",
+                                 [to]="relativeYearTo",
+                                 (yearChange)="moveYear($event)")
 
 table.datepicker__month(role="grid", [attr.aria-labelledby]="uid + '_month'", (keydown)="keyboardHandler($event)")
   thead

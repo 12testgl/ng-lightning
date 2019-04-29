@@ -48,6 +48,16 @@ export class NglDatepicker implements AfterViewInit {
 
   @Input() @InputNumber() firstDayOfWeek = 0;
 
+  /**
+   * Offset of year from current year, that can be the minimum option in the year selection dropdown.
+   */
+  @Input() relativeYearFrom: number;
+
+  /**
+   * Offset of year from current year, that can be the maximum option in the year selection dropdown.
+   */
+  @Input() relativeYearTo: number;
+
   weeks: NglInternalDate[];
   uid = uniqueId('datepicker');
   monthLabel: string;
@@ -63,6 +73,8 @@ export class NglDatepicker implements AfterViewInit {
     this.dayNamesShort = config.dayNamesShort;
     this.dayNamesLong = config.dayNamesLong;
     this.showToday = config.showToday;
+    this.relativeYearFrom = config.relativeYearFrom;
+    this.relativeYearTo = config.relativeYearTo;
   }
 
   moveYear(year: string | number) {

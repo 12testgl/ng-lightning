@@ -19,4 +19,7 @@ export class NglDatepickerConfig<D = any> {
 
   showToday = true;
 
+  relativeYearFrom = -100;
+
+  relativeYearTo = 10;
 }

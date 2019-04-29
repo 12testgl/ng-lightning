@@ -9,6 +9,8 @@
 | `[dayNamesShort]` | Short form of weekdays. | string[] | ['Sun', 'Mon', ...] |
 | `[dayNamesLong]` | Long form of weekdays. | string[] | ['Sunday', 'Monday', ...] |
 | `[firstDayOfWeek]` | First day of the week. Sunday = 0, Monday = 1, ... | number | 0 |
+| `[relativeYearFrom]` | Offset of year from current year, that can be the minimum option in the year selection dropdown. | number | -100 |
+| `[relativeYearTo]` | Offset of year from current year, that can be the maximum option in the year selection dropdown. | number | 10 |
 | `(dateChange)` | Emits date upon selection. | EventEmitter<Date> | |
 
 
@@ -34,4 +36,4 @@ You can also use all the `<ngl-datepicker>` inputs, that will be proxied to to p
 
 Injection token that can be used to specify default options.
 
-Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`
+Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `relativeYearFrom`, `relativeYearTo`
