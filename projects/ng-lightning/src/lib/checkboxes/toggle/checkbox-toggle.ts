@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, ContentChild, ChangeDetectorRef, AfterContentInit,
-         TemplateRef, HostBinding, OnDestroy, OnChanges } from '@angular/core';
+         TemplateRef, HostBinding, OnDestroy } from '@angular/core';
 import { NglCheckboxInput } from '../input/input';
 import { toBoolean } from '../../util/convert';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
     '[class.slds-form-element]': 'true',
   },
 })
-export class NglCheckboxToggle implements OnChanges, AfterContentInit, OnDestroy {
+export class NglCheckboxToggle implements AfterContentInit, OnDestroy {
   @ContentChild(NglCheckboxInput) input: NglCheckboxInput;
 
   @Input() label: string | TemplateRef<any>;
@@ -29,23 +29,15 @@ export class NglCheckboxToggle implements OnChanges, AfterContentInit, OnDestroy
 
   required: boolean;
 
-  _uid: string;
-
-  get errorId() {
-    return `error_${this._uid}`;
-  }
+  uid: string;
 
   private ɵRequiredSubscription: Subscription;
 
   constructor(private cd: ChangeDetectorRef) {}
 
-  ngOnChanges() {
-    this.input.describedBy = this.error ? this.errorId : null;
-  }
-
   ngAfterContentInit() {
     if (!this.input) {
-      throw Error(`[ng-lightning] Couldn't find an <input type="checkbox"> with [ngl] attribute inside NglCheckbox`);
+      throw Error(`[ng-lightning] Couldn't find an <input type="checkbox"> with [ngl] attribute inside NglCheckboxToggle`);
     }
 
     this.ɵRequiredSubscription = this.input.ɵRequiredSubject.subscribe((required) => {
@@ -53,7 +45,8 @@ export class NglCheckboxToggle implements OnChanges, AfterContentInit, OnDestroy
       this.cd.detectChanges();
     });
 
-    this._uid = this.input.id;
+    this.uid = `${this.input.id}_toggle`;
+    this.input.describedBy = this.uid;
     this.cd.detectChanges();
   }
 

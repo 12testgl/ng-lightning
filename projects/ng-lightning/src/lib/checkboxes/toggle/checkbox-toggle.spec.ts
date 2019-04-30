@@ -40,6 +40,15 @@ describe('`NglCheckboxToggle`', () => {
     expect(getErrorElement(fixture.nativeElement)).toBeFalsy();
   });
 
+  it('should set `aria-describedby` correctly', () => {
+    const fixture = createTestComponent();
+    const { nativeElement } = fixture;
+
+    const inputEl = getInputElement(fixture.nativeElement);
+    const containerEl = nativeElement.querySelector('span.slds-checkbox_faux_container');
+    expect(containerEl.id).toEqual(inputEl.getAttribute('aria-describedby'));
+  });
+
   it('should hook label indication on input required', () => {
     const fixture = createTestComponent(`<ngl-checkbox-toggle><input ngl type="checkbox" [required]="required" /></ngl-checkbox-toggle>`);
     expect(getRequiredElement(fixture.nativeElement)).toBeFalsy();
@@ -60,9 +69,7 @@ describe('`NglCheckboxToggle`', () => {
     fixture.detectChanges();
 
     const errorEl = getErrorElement(fixture.nativeElement);
-    const inputEl = getInputElement(fixture.nativeElement);
     expect(errorEl).toHaveText('An error');
-    expect(errorEl.id).toEqual(inputEl.getAttribute('aria-describedby'));
   });
 
   it('should be able to configure enabled/disabled text correctly', () => {

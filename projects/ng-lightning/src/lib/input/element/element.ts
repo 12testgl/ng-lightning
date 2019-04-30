@@ -4,7 +4,7 @@ import { toBoolean } from '../../util/convert';
 import { uniqueId } from '../../util/util';
 
 @Directive({
-  selector: 'input[ngl]:not([type=checkbox]), input[ngl]:not([type=radio])',
+  selector: 'input[ngl]:not([type=checkbox]):not([type=radio])',
   host: {
     '[class.slds-input]': 'true',
   }

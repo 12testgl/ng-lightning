@@ -1,4 +1,4 @@
-import { Directive, HostBinding, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { toBoolean } from '../../util/convert';
 import { uniqueId } from '../../util/util';
@@ -10,7 +10,9 @@ export class NglCheckboxInput {
 
   ɵRequiredSubject = new BehaviorSubject<boolean>(false);
 
-  @HostBinding('attr.aria-describedby') describedBy: string;
+  set describedBy(value: string) {
+    this.renderer.setAttribute(this.el.nativeElement, 'aria-describedby', value);
+  }
 
   @Input() set required(required: any) {
     this.ɵRequiredSubject.next(toBoolean(required));
