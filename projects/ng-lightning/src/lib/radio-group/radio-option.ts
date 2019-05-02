@@ -1,4 +1,7 @@
-import { Component, TemplateRef, Input, ContentChild, ChangeDetectionStrategy, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { Component, TemplateRef, Input, ContentChild, ChangeDetectionStrategy, ChangeDetectorRef,
+         HostBinding, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { NglRadioGroup } from './radio-group';
 import { NglRadioInput } from './input/input';
 
 @Component({
@@ -6,20 +9,14 @@ import { NglRadioInput } from './input/input';
   templateUrl: './radio-option.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NglRadioOption {
+export class NglRadioOption implements OnInit, AfterContentInit, OnDestroy {
   @Input() label: string | TemplateRef<any>;
 
   @ContentChild(NglRadioInput) input: NglRadioInput;
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private radioGroup: NglRadioGroup, private cd: ChangeDetectorRef) {}
 
-  set type(type: string) {
-    this._type = type;
-    this.cd.detectChanges();
-  }
-  get type() {
-    return this._type;
-  }
+  type: 'list' | 'button';
 
   @HostBinding('class.slds-radio')
   get isTypeList() {
@@ -32,10 +29,25 @@ export class NglRadioOption {
     return this.type === 'button';
   }
 
-  private _type: string;
+  private subscriptions: Subscription[] = [];
 
-  setError(id: string) {
-    this.input.describedBy = id;
+  ngOnInit() {
+    this.subscriptions.push(
+      this.radioGroup.type$.subscribe((type: 'list' | 'button') => {
+        this.type = type;
+        this.cd.detectChanges();
+      }),
+      this.radioGroup.error$.subscribe((errorId: string | null) => {
+        this.input.describedBy = errorId;
+      }),
+    );
   }
 
+  ngAfterContentInit() {
+    this.input.name = this.radioGroup.uid;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((s: Subscription) => s.unsubscribe());
+  }
 }

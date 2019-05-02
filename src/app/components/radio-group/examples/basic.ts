@@ -11,4 +11,6 @@ export class DemoRadioGroupBasic {
   error = 'The input has an error!';
 
   disabled = false;
+
+  options = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 }

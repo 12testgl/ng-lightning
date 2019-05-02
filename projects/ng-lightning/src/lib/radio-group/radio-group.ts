@@ -1,9 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy, TemplateRef, HostBinding,
-         AfterContentInit, OnChanges, ContentChildren, QueryList, SimpleChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, TemplateRef, HostBinding, OnChanges, SimpleChanges } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { toBoolean, InputBoolean } from '../util/convert';
 import { uniqueId } from '../util/util';
 import { isRequired } from '../util/isRequired';
-import { NglRadioOption } from './radio-option';
 
 @Component({
   selector: 'ngl-radio-group,[ngl-radio-group]',
@@ -13,9 +12,7 @@ import { NglRadioOption } from './radio-option';
     '[class.slds-form-element]': 'true',
   },
 })
-export class NglRadioGroup implements OnChanges, AfterContentInit {
-
-  @ContentChildren(NglRadioOption) options: QueryList<NglRadioOption>;
+export class NglRadioGroup implements OnChanges {
 
   @isRequired
   @Input() label: string | TemplateRef<any>;
@@ -33,44 +30,20 @@ export class NglRadioGroup implements OnChanges, AfterContentInit {
     return `error_${this.uid}`;
   }
 
-  @Input() set type(type: 'list' | 'button') {
-    this._type = type;
-    this.updateChildrenType();
-  }
-  get type() {
-    return this._type;
-  }
+  @Input() type: 'list' | 'button' = 'list';
 
-  private uid = uniqueId('radio-group');
+  uid = uniqueId('radio-group');
 
-  private _type: 'list' | 'button' = 'list';
+  type$ = new BehaviorSubject<'list' | 'button'>(this.type);
+
+  error$ = new BehaviorSubject<string | null>(this.error);
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.error && this.options) {
-      this.options.forEach((option: NglRadioOption) => {
-        option.setError(this.error ? this.errorId : null);
-      });
+    if (changes.type) {
+      this.type$.next(this.type);
     }
-  }
-
-  ngAfterContentInit() {
-    this.setChildrenName();
-    this.updateChildrenType();
-  }
-
-  private setChildrenName() {
-    this.options.forEach((option: NglRadioOption) => {
-      option.input.name = this.uid;
-    });
-  }
-
-  private updateChildrenType() {
-    if (!this.options) {
-      return;
+    if (changes.error) {
+      this.error$.next(this.hasError ? this.errorId : null);
     }
-
-    this.options.forEach((option: NglRadioOption) => {
-      option.type = this.type;
-    });
   }
 }

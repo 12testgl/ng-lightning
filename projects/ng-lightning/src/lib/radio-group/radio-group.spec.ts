@@ -129,6 +129,30 @@ describe('`NglRadioGroup`', () => {
     });
   });
 
+  it('should render dynamic options', () => {
+    const fixture = createTestComponent(`
+      <fieldset ngl-radio-group [label]="label">
+        <ngl-radio-option *ngFor="let o of options" [label]="o">
+          <input ngl type="radio">
+        </ngl-radio-option>
+      </fieldset>
+    `);
+
+    const labelEls = getOptionLabelElements(fixture.nativeElement);
+    expect(labelEls.map(e => e.textContent.trim())).toEqual(['A', 'B', 'C']);
+
+    labelEls.forEach(e => {
+      expect(e).toHaveCssClass('slds-radio__label');
+    });
+
+    const inputEls = getInputElements(fixture.nativeElement);
+    const name = inputEls[0].getAttribute('name');
+    expect(name).toBeDefined();
+    inputEls.forEach(e => {
+      expect(e.getAttribute('name')).toEqual(name);
+    });
+  });
+
 });
 
 @Component({
@@ -146,4 +170,6 @@ export class TestComponent {
   label = 'Group Label';
   error: string;
   required: boolean;
+
+  options = ['A', 'B', 'C'];
 }
