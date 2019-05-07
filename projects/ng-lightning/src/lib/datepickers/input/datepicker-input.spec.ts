@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DOWN_ARROW, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, dispatchEvent, dispatchKeyboardEvent } from '../../../../test/util';
-import { getDayElements, expectYearOptions } from '../datepicker.spec';
+import { getDayElements, expectYearOptions, getDayHeaders } from '../datepicker.spec';
 import { NglDatepickersModule } from '../module';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
 
@@ -322,10 +322,14 @@ describe('`<ngl-datepicker-input>`', () => {
     const delimiter = '.';
     const relativeYearFrom = -50;
     const relativeYearTo = 20;
+    const firstDayOfWeek = 2;
 
     beforeEach(() => TestBed.configureTestingModule({
       providers: [
-        { provide: NGL_DATEPICKER_CONFIG, useValue: <NglDatepickerConfig>{ format, delimiter, relativeYearFrom, relativeYearTo } },
+        {
+          provide: NGL_DATEPICKER_CONFIG,
+          useValue: <NglDatepickerConfig>{ format, delimiter, relativeYearFrom, relativeYearTo, firstDayOfWeek }
+        },
       ],
     }));
 
@@ -342,6 +346,12 @@ describe('`<ngl-datepicker-input>`', () => {
       const fixture = createTestComponent();
       openCalendar(fixture);
       expectYearOptions(getDatepickerEl(), 1955, 2025);
+    });
+
+    it('should have configurable first day of week', () => {
+      const fixture = createTestComponent();
+      openCalendar(fixture);
+      expect(getDayHeaders(getDatepickerEl())).toEqual(['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon']);
     });
   });
 });

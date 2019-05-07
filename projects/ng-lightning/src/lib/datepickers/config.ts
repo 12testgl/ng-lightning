@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { FormStyle, getLocaleDayNames, getLocaleMonthNames, TranslationWidth, getLocaleFirstDayOfWeek } from '@angular/common';
 
 /** Injection token that can be used to specify default options. */
 export const NGL_DATEPICKER_CONFIG = new InjectionToken<NglDatepickerConfig>('ngl-datepicker-config');
@@ -11,15 +12,24 @@ export class NglDatepickerConfig<D = any> {
 
   dropdownAlign: 'left' | 'right' = 'left';
 
-  monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  monthNames: string[];
 
-  dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  dayNamesShort: string[];
 
-  dayNamesLong = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  dayNamesLong: string[];
+
+  firstDayOfWeek: number;
 
   showToday = true;
 
   relativeYearFrom = -100;
 
   relativeYearTo = 10;
+
+  constructor(locale: string) {
+    this.monthNames = getLocaleMonthNames(locale, FormStyle.Standalone, TranslationWidth.Wide);
+    this.dayNamesShort = getLocaleDayNames(locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
+    this.dayNamesLong = getLocaleDayNames(locale, FormStyle.Standalone, TranslationWidth.Wide);
+    this.firstDayOfWeek = getLocaleFirstDayOfWeek(locale);
+  }
 }

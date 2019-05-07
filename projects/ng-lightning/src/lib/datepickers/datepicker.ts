@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef,
-         OnInit, OnChanges, AfterViewInit, Optional, Inject, ViewChild, SimpleChanges } from '@angular/core';
+         OnInit, OnChanges, AfterViewInit, Optional, Inject, ViewChild, SimpleChanges, LOCALE_ID } from '@angular/core';
 import { ENTER, UP_ARROW, LEFT_ARROW, DOWN_ARROW, RIGHT_ARROW, PAGE_UP, PAGE_DOWN, HOME, END } from '@angular/cdk/keycodes';
 import { uniqueId, trapEvent } from '../util/util';
 import { InputBoolean, InputNumber } from '../util/convert';
@@ -43,7 +43,7 @@ export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
 
   @Input() @InputBoolean() readonly showToday: boolean;
 
-  @Input() @InputNumber() readonly firstDayOfWeek = 0;
+  @Input() @InputNumber() readonly firstDayOfWeek: number;
 
   /**
    * Offset of year from current year, that can be the minimum option in the year selection dropdown.
@@ -77,12 +77,14 @@ export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
 
   constructor(@Optional() @Inject(NglDatepickerInput) private dtInput: NglDatepickerInput,
               @Optional() @Inject(NGL_DATEPICKER_CONFIG) defaultConfig: NglDatepickerConfig,
+              @Inject(LOCALE_ID) locale: string,
               private element: ElementRef) {
 
-    const config = { ...new NglDatepickerConfig(), ...defaultConfig };
+    const config = { ...new NglDatepickerConfig(locale), ...defaultConfig };
     this.monthNames = config.monthNames;
     this.dayNamesShort = config.dayNamesShort;
     this.dayNamesLong = config.dayNamesLong;
+    this.firstDayOfWeek = config.firstDayOfWeek;
     this.showToday = config.showToday;
     this.relativeYearFrom = config.relativeYearFrom;
     this.relativeYearTo = config.relativeYearTo;

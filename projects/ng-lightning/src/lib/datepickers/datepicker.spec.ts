@@ -1,5 +1,7 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { DOWN_ARROW, LEFT_ARROW, UP_ARROW, RIGHT_ARROW, HOME, END, ENTER } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, selectElements, dispatchEvent, dispatchKeyboardEvent } from '../../../test/util';
 import { NglDatepickersModule } from './module';
@@ -16,7 +18,7 @@ export function getDayElements(element: HTMLElement): HTMLElement[] {
   return selectElements(element, '.slds-day');
 }
 
-function getDayHeaders(element: HTMLElement) {
+export function getDayHeaders(element: HTMLElement) {
   return selectElements(element, 'th').map(e => e.textContent.trim()).map(removeNonPrintable);
 }
 
@@ -623,6 +625,26 @@ describe('`Datepicker` Component', () => {
       fixture.componentInstance.max = new Date(2100, 10, 9);
       fixture.detectChanges();
       expectYearOptions(fixture.nativeElement, 1905, 2100);
+    });
+  });
+
+  describe('i18n', () => {
+    registerLocaleData(localeFr);
+
+    beforeEach(() => TestBed.configureTestingModule({
+      providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
+    }));
+
+    it('should change day names, month names and first day of week', () => {
+      const fixture = createTestComponent();
+      expectCalendar(fixture, [
+        ['30-', '31-', '1', '2', '3', '4', '5'],
+        ['6', '7', '8', '9', '10', '11', '12'],
+        ['13', '14', '15', '16', '17', '18', '19'],
+        ['20', '21', '22', '23', '24', '25', '26'],
+        ['27', '28', '29', '*30+', '1-', '2-', '3-'],
+      ], 'septembre', '2010');
+      expect(getDayHeaders(fixture.nativeElement)).toEqual(['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.']);
     });
   });
 });

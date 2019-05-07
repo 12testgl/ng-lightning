@@ -11,6 +11,7 @@ import { DemoDatepickersComponent } from './datepickers.component';
 import { DemoDatepickersBasic } from './examples/basic';
 import { DemoDatepickersConfig } from './examples/config';
 import { DemoDatepickersDisabled } from './examples/disabled';
+import { DemoDatepickersI18n } from './examples/i18n';
 import { DemoDatepickersInput } from './examples/input';
 import { DemoDatepickersFilter } from './examples/filter';
 import { DemoDatepickersFormat } from './examples/format';
@@ -35,6 +36,7 @@ const routes: Routes = [
     DemoDatepickersDisabled,
     DemoDatepickersFilter,
     DemoDatepickersFormat,
+    DemoDatepickersI18n,
     DemoDatepickersInput,
     DemoDatepickersValidation,
   ],

@@ -5,10 +5,10 @@
 | `[date]` | Currently selected date. | Date | |
 | `[showToday]` | Whether to show `Today` option. | boolean | true |
 | `[dateDisabled]` | Function that can be used to disable dates. | (date: Date) => boolean | |
-| `[monthNames]` | Month names. | string[] | ['January', 'February', ...] |
-| `[dayNamesShort]` | Short form of weekdays. | string[] | ['Sun', 'Mon', ...] |
-| `[dayNamesLong]` | Long form of weekdays. | string[] | ['Sunday', 'Monday', ...] |
-| `[firstDayOfWeek]` | First day of the week. Sunday = 0, Monday = 1, ... | number | 0 |
+| `[monthNames]` | Month names based on application locale. | string[] | e.g. ['January', 'February', ...] for `en-US` |
+| `[dayNamesShort]` | Short form of weekdays based on application locale. | string[] | e.g. ['Sun', 'Mon', ...] for `en-US` |
+| `[dayNamesLong]` | Long form of weekdays based on application locale. | string[] | e.g. ['Sunday', 'Monday', ...] for `en-US` |
+| `[firstDayOfWeek]` | First day of the week based on application locale. Sunday = 0, Monday = 1, ... | number | e.g. 0 for `en-US` |
 | `[min]` | Minimum selectable date. It will override `relativeYearFrom` if defined. | Date | |
 | `[max]` | Maximum selectable date. It will override `relativeYearTo` if defined. | Date | |
 | `[relativeYearFrom]` | Offset of year from current year, that can be the minimum option in the year selection dropdown. For example, 2019 - 100 = 1/1/1019 is minimum selectable date. | number | -100 |
@@ -38,4 +38,4 @@ You can also use all the `<ngl-datepicker>` inputs, that will be proxied to to p
 
 Injection token that can be used to specify default options.
 
-Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `relativeYearFrom`, `relativeYearTo`
+Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `firstDayOfWeek`, `relativeYearFrom`, `relativeYearTo`

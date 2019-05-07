@@ -6,6 +6,7 @@
     "filter": "Min/Max & Disabling dates",
     "disabled": "Disabling parts of the datepicker",
     "validation": "Validation",
+    "i18n": "Internationalization (i18n)",
     "config": "Global configuration"
   }
 }

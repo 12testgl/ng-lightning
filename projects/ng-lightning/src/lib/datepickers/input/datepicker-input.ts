@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, TemplateRef, forwardRef, ChangeDetectorRef,
-         Output, EventEmitter, ViewChild, OnInit, Inject, OnChanges, SimpleChanges, OnDestroy, Optional, NgZone } from '@angular/core';
+         Output, EventEmitter, ViewChild, OnInit, Inject, OnChanges, SimpleChanges, OnDestroy, Optional, NgZone, LOCALE_ID } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CdkConnectedOverlay, ConnectionPositionPair } from '@angular/cdk/overlay';
 import { FocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
@@ -114,6 +114,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   @Input() monthNames: string[];
   @Input() dayNamesShort: string[];
   @Input() dayNamesLong: string[];
+  @Input() firstDayOfWeek: number;
   @Input() @InputBoolean() showToday: boolean;
   @Input() dateDisabled: (date: Date) => boolean | null = null;
   @Input() relativeYearFrom: number;
@@ -143,6 +144,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   private focusTrap: FocusTrap;
 
   constructor(@Optional() @Inject(NGL_DATEPICKER_CONFIG) defaultConfig: NglDatepickerConfig,
+              @Inject(LOCALE_ID) locale: string,
               private element: ElementRef,
               private renderer: Renderer2,
               private cd: ChangeDetectorRef,
@@ -154,13 +156,14 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     this.renderer.addClass(this.element.nativeElement, 'slds-dropdown-trigger');
     this.renderer.addClass(this.element.nativeElement, 'slds-dropdown-trigger_click');
 
-    this.config = { ...new NglDatepickerConfig(), ...defaultConfig };
+    this.config = { ...new NglDatepickerConfig(locale), ...defaultConfig };
     this.format = this.config.format;
     this.delimiter = this.config.delimiter;
     this.setPositions(this.config.dropdownAlign);
     this.monthNames = this.config.monthNames;
     this.dayNamesShort = this.config.dayNamesShort;
     this.dayNamesLong = this.config.dayNamesLong;
+    this.firstDayOfWeek = this.config.firstDayOfWeek;
     this.showToday = this.config.showToday;
     this.relativeYearFrom = this.config.relativeYearFrom;
     this.relativeYearTo = this.config.relativeYearTo;
