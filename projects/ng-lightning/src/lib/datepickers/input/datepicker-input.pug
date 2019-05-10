@@ -10,13 +10,14 @@ label.slds-form-element__label(*ngIf="label", [attr.for]="uid", [nglInternalOutl
                    [placeholder]="placeholder",
                    [disabled]="disabled",
                    [readOnly]="readonlyInput",
+                   (click)="onTriggerClick($event, 'input')",
                    (keydown)="onKeyboardInput($event)",
                    (input)="onInputChange($event.target.value)",
                    (blur)="onBlur()")
   button.slds-button.slds-button_icon.slds-input__icon.slds-input__icon_right(type="button",
                                                                               title="Select a date",
                                                                               [disabled]="disabled",
-                                                                              (click)="openCalendar()")
+                                                                              (click)="onTriggerClick($event, 'button')")
     svg.slds-button__icon(nglIconName="utility:event")
     span.slds-assistive-text Select a date
 

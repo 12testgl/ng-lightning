@@ -14,7 +14,7 @@ export class NglClickOutsideDirective implements AfterViewInit, OnDestroy {
   constructor(@Inject(DOCUMENT) private document: any, private element: ElementRef) {}
 
   ngAfterViewInit() {
-    this.subscription = fromEvent(this.document, 'mousedown').subscribe((e: MouseEvent) => {
+    this.subscription = fromEvent(this.document, 'click').subscribe((e: MouseEvent) => {
       if (this.shouldClose(e)) {
         this.clickOutside.emit();
       }

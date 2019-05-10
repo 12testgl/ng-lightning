@@ -134,6 +134,19 @@ describe('`<ngl-datepicker-input>`', () => {
     expectOpen(fixture, false);
   });
 
+  it('should open calendar on input click and close on next click', () => {
+    const fixture = createTestComponent();
+    const inputEl = getInput(fixture);
+
+    inputEl.click();
+    fixture.detectChanges();
+    expectOpen(fixture, true);
+
+    inputEl.click();
+    fixture.detectChanges();
+    expectOpen(fixture, false);
+  });
+
   it('should open calendar with up/down arrow keys on input', () => {
     const fixture = createTestComponent();
     const input = getInput(fixture);
@@ -158,11 +171,11 @@ describe('`<ngl-datepicker-input>`', () => {
     const input = getInput(fixture);
     const datepickerEl = getDatepickerEl();
 
-    dispatchEvent(datepickerEl, 'mousedown');
+    dispatchEvent(datepickerEl, 'click');
     fixture.detectChanges();
     expectOpen(fixture, true);
 
-    dispatchEvent(input, 'mousedown');
+    dispatchEvent(input, 'click');
     fixture.detectChanges();
     expectOpen(fixture, false);
   });

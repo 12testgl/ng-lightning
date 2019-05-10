@@ -30,6 +30,7 @@ Also supports `[(ngModel)]` and `[formControl]`, instead of `[(value)]`.
 | `[delimiter]` | Delimiter to use on pre-defined formats. | string | '/' |
 | `[disabled]` | Disable input and calendar. | boolean | false |
 | `[readonlyInput]` | Whether input is readonly and calendar is available for date selection. | boolean | false |
+| `[openOnInputClick]` | Whether to open the datepicker when a mouse user clicks on the input. | boolean | true |
 | `(valueChange)` | Emits the selected date. | EventEmitter<Date> | |
 
 You can also use all the `<ngl-datepicker>` inputs, that will be proxied to to popup calendar.
@@ -38,4 +39,4 @@ You can also use all the `<ngl-datepicker>` inputs, that will be proxied to to p
 
 Injection token that can be used to specify default options.
 
-Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `firstDayOfWeek`, `relativeYearFrom`, `relativeYearTo`
+Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `firstDayOfWeek`, `relativeYearFrom`, `relativeYearTo`, `openOnInputClick`

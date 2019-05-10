@@ -6,7 +6,7 @@ import { FocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { uniqueId } from '../../util/util';
+import { uniqueId, trapEvent } from '../../util/util';
 import { InputBoolean } from '../../util/convert';
 import { HostService } from '../../common/host/host.service';
 import { NglDateAdapter } from '../adapters/date-fns-adapter';
@@ -90,6 +90,11 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   }
 
   /**
+   * Whether to open the datepicker when a mouse user clicks on the input.
+   */
+  @Input() @InputBoolean() openOnInputClick: boolean;
+
+  /**
    * Emits when selected date changes.
    */
   @Output() valueChange = new EventEmitter<Date | string | null>();
@@ -167,6 +172,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     this.showToday = this.config.showToday;
     this.relativeYearFrom = this.config.relativeYearFrom;
     this.relativeYearTo = this.config.relativeYearTo;
+    this.openOnInputClick = this.config.openOnInputClick;
   }
 
   onChange: Function | null = null;
@@ -275,6 +281,19 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
 
     if (focusInput) {
       this.inputEl.nativeElement.focus();
+    }
+  }
+
+  onTriggerClick(evt: MouseEvent, origin: 'input' | 'button') {
+    if (origin === 'input' && !this.openOnInputClick) {
+      return;
+    }
+
+    trapEvent(evt);
+    if (!this.open) {
+      this.openCalendar();
+    } else {
+      this.closeCalendar(false);
     }
   }
 
