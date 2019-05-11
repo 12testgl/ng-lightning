@@ -32,7 +32,8 @@ label([nglFormLabel]="label", [attr.for]="inputEl.id")
           span.slds-icon_container.slds-input__icon.slds-input__icon_right
             svg.slds-icon.slds-icon_x-small.slds-icon-text-default([nglIconName]="inputIconRight()")
 
-      .slds-dropdown.slds-dropdown_fluid([attr.id]="uid", role="listbox", [ngClass]="dropdownClass()")
+      //- (mousedown) handler will prevent input blur when clicking inside it
+      .slds-dropdown.slds-dropdown_fluid([attr.id]="uid", role="listbox", [ngClass]="dropdownClass()", (mousedown)="$event.preventDefault()")
         ul.slds-listbox.slds-listbox_vertical(role="presentation")
           li(*ngFor="let d of data; trackBy: trackByOption", nglComboboxOption,
              [value]="d.value",
