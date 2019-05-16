@@ -1,6 +1,7 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, dispatchEvent, dispatchKeyboardEvent } from '../../../../test/util';
 import { getDayElements, expectYearOptions, getDayHeaders } from '../datepicker.spec';
@@ -314,6 +315,23 @@ describe('`<ngl-datepicker-input>`', () => {
     });
   }));
 
+  it('should update validity if `min` changes', fakeAsync(() => {
+    const fixture = createTestComponent(`
+      <form>
+        <ngl-datepicker-input [(ngModel)]="date" [min]="min" name="dp"></ngl-datepicker-input>
+      </form>`);
+    const form = fixture.debugElement.query(By.directive(NgForm)).injector.get(NgForm);
+
+    fixture.detectChanges();
+    tick();
+    expect(form.control.valid).toBeTruthy();
+
+    fixture.componentInstance.min = new Date(2013, 7, 11);
+    fixture.detectChanges();
+    tick();
+    expect(form.control.valid).toBeFalsy();
+  }));
+
   it('should have validation for `max` input', async(() => {
     const fixture = createTestComponent(`
       <ngl-datepicker-input [(ngModel)]="date" [max]="max" #x="ngModel" [class.slds-has-error]="!x.valid"></ngl-datepicker-input>
@@ -335,6 +353,23 @@ describe('`<ngl-datepicker-input>`', () => {
         expect(host).not.toHaveCssClass('slds-has-error');
       });
     });
+  }));
+
+  it('should update validity if `max` changes', fakeAsync(() => {
+    const fixture = createTestComponent(`
+      <form>
+        <ngl-datepicker-input [(ngModel)]="date" [max]="max" name="dp"></ngl-datepicker-input>
+      </form>`);
+    const form = fixture.debugElement.query(By.directive(NgForm)).injector.get(NgForm);
+
+    fixture.detectChanges();
+    tick();
+    expect(form.control.valid).toBeTruthy();
+
+    fixture.componentInstance.max = new Date(2003, 7, 11);
+    fixture.detectChanges();
+    tick();
+    expect(form.control.valid).toBeFalsy();
   }));
 
   it('should handle appropriately disable state', async(() => {

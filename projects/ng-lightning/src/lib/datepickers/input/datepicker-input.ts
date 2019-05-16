@@ -238,6 +238,10 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     if (changes.dropdownAlign) {
       this.setPositions(this.dropdownAlign);
     }
+
+    if (changes.min || changes.max) {
+      this.validatorChange();
+    }
   }
 
   ngOnDestroy() {
