@@ -147,6 +147,22 @@ describe('`<ngl-datepicker-input>`', () => {
     expectOpen(fixture, false);
   });
 
+  it('should not open multiple calendars at the same time', () => {
+    const fixture = createTestComponent(`
+      <ngl-datepicker-input [value]="date"></ngl-datepicker-input>
+      <ngl-datepicker-input [value]="date"></ngl-datepicker-input>
+    `);
+    const inputs = fixture.nativeElement.querySelectorAll('input.slds-input');
+
+    inputs[0].click();
+    fixture.detectChanges();
+    expect(document.querySelectorAll('ngl-datepicker').length).toEqual(1);
+
+    inputs[1].click();
+    fixture.detectChanges();
+    expect(document.querySelectorAll('ngl-datepicker').length).toEqual(1);
+  });
+
   it('should open calendar with up/down arrow keys on input', () => {
     const fixture = createTestComponent();
     const input = getInput(fixture);

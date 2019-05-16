@@ -1,4 +1,4 @@
-import { Directive, Output, EventEmitter, AfterViewInit, OnDestroy, Inject, ElementRef } from '@angular/core';
+import { Directive, Output, EventEmitter, AfterViewInit, OnDestroy, Inject, ElementRef, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { fromEvent, Subscription } from 'rxjs';
 
@@ -8,6 +8,8 @@ import { fromEvent, Subscription } from 'rxjs';
 export class NglClickOutsideDirective implements AfterViewInit, OnDestroy {
 
   @Output('nglClickOutside') clickOutside: EventEmitter<void> = new EventEmitter();
+
+  @Input('nglClickOutsideIgnore') ignore: HTMLElement | HTMLElement[];
 
   private subscription: Subscription;
 
@@ -30,9 +32,16 @@ export class NglClickOutsideDirective implements AfterViewInit, OnDestroy {
 
   private shouldClose(event: MouseEvent | TouchEvent) {
     const element = event.target as HTMLElement;
-    if ((event instanceof MouseEvent && event.button === 2)) {
+    if ((event instanceof MouseEvent && event.button === 2) || isContainedIn(element, this.ignore)) {
       return false;
     }
-    return !this.element.nativeElement.contains(element);
+    return !isContainedIn(element, this.element.nativeElement);
   }
+}
+
+function isContainedIn(el: HTMLElement, container: HTMLElement | HTMLElement[]) {
+  if (!container) {
+    return false;
+  }
+  return Array.isArray(container) ? container.some(c => c.contains(el)) : container.contains(el);
 }

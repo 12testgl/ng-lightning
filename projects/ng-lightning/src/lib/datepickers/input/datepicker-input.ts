@@ -6,7 +6,7 @@ import { FocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { uniqueId, trapEvent } from '../../util/util';
+import { uniqueId } from '../../util/util';
 import { InputBoolean } from '../../util/convert';
 import { HostService } from '../../common/host/host.service';
 import { NglDateAdapter } from '../adapters/date-fns-adapter';
@@ -284,12 +284,11 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     }
   }
 
-  onTriggerClick(evt: MouseEvent, origin: 'input' | 'button') {
+  onTriggerClick(origin: 'input' | 'button') {
     if (origin === 'input' && !this.openOnInputClick) {
       return;
     }
 
-    trapEvent(evt);
     if (!this.open) {
       this.openCalendar();
     } else {

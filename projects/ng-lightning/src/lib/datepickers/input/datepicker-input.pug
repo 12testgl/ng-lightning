@@ -1,6 +1,6 @@
 label.slds-form-element__label(*ngIf="label", [attr.for]="uid", [nglInternalOutlet]="label")
 
-.slds-form-element__control.slds-input-has-icon.slds-input-has-icon_right()
+.slds-form-element__control.slds-input-has-icon.slds-input-has-icon_right(#formEl)
   input.slds-input(#inputEl,
                    cdkOverlayOrigin,
                    #overlayOrigin="cdkOverlayOrigin",
@@ -10,14 +10,14 @@ label.slds-form-element__label(*ngIf="label", [attr.for]="uid", [nglInternalOutl
                    [placeholder]="placeholder",
                    [disabled]="disabled",
                    [readOnly]="readonlyInput",
-                   (click)="onTriggerClick($event, 'input')",
+                   (click)="onTriggerClick('input')",
                    (keydown)="onKeyboardInput($event)",
                    (input)="onInputChange($event.target.value)",
                    (blur)="onBlur()")
   button.slds-button.slds-button_icon.slds-input__icon.slds-input__icon_right(type="button",
                                                                               title="Select a date",
                                                                               [disabled]="disabled",
-                                                                              (click)="onTriggerClick($event, 'button')")
+                                                                              (click)="onTriggerClick('button')")
     svg.slds-button__icon(nglIconName="utility:event")
     span.slds-assistive-text Select a date
 
@@ -41,4 +41,5 @@ ng-template(cdkConnectedOverlay,
                                [relativeYearTo]="relativeYearTo",
                                [dateDisabled]="dateDisabled",
                                (dateChange)="pickerSelection($event)",
-                               (nglClickOutside)="closeCalendar(false)")
+                               (nglClickOutside)="closeCalendar(false)",
+                               [nglClickOutsideIgnore]="formEl")
