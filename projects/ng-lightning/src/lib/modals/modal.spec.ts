@@ -1,6 +1,7 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent, dispatchFixtureKeyEvent } from '../../../test/util';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { By } from '@angular/platform-browser';
 import { NglModal } from './modal';
 import { NglModalsModule } from './module';
@@ -276,6 +277,16 @@ describe('`NglModal`', () => {
     fixture.detectChanges();
     expect(header).not.toHaveCssClass('slds-theme_error');
     expect(header).toHaveCssClass('slds-theme_success');
+  });
+
+  it('should mark body content as a scrollable container', () => {
+    const fixture = createTestComponent();
+    const modal = getModal();
+    const bodyContent = modal.querySelector('.slds-modal__content');
+    const scrollable = fixture.debugElement.query(By.directive(CdkScrollable));
+
+    expect(scrollable).toBeTruthy();
+    expect(scrollable.nativeElement).toBe(bodyContent);
   });
 });
 

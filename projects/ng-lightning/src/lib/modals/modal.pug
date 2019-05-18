@@ -18,7 +18,7 @@ section.slds-modal([ngClass]="modalClass()",
       p.slds-m-top_x-small(*ngIf="hasHeader && taglineTpl"): ng-template([ngTemplateOutlet]="taglineTpl.templateRef")
 
     //- Body
-    .slds-modal__content([id]="contentId")
+    .slds-modal__content([id]="contentId", cdkScrollable)
       ng-content
 
     //- Footer
