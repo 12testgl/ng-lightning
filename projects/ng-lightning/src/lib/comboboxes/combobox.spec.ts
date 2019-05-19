@@ -1,9 +1,10 @@
 import { TestBed, ComponentFixture, tick, fakeAsync, flush } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ESCAPE, ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, selectElements, dispatchKeyboardEvent, dispatchEvent } from '../../../test/util';
 import { NglComboboxesModule } from './module';
 import { NglComboboxOptionItem } from './combobox';
-import { ESCAPE, ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -56,7 +57,7 @@ function expectOptions(expected: any[]) {
 
 describe('`NglCombobox`', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglComboboxesModule] }));
+  beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglComboboxesModule, OverlayModule] }));
 
   it('should render correctly', () => {
     const fixture = createTestComponent();
@@ -538,6 +539,25 @@ describe('`NglCombobox`', () => {
       fixture.detectChanges();
       expectOptions(['No matches found.']);
     });
+  });
+
+  it('should close menu if input is scrolled outside of view', () => {
+    const fixture = createTestComponent(`
+      <div cdkScrollable style="padding: 100px; margin: 300px;
+                                height: 200px; width: 200px; overflow: auto;">
+        <ngl-combobox [options]="options" [open]="true" (openChange)="onOpen($event)" style="display: block; margin-bottom: 600px;">
+          <input nglCombobox />
+        </ngl-combobox>
+      </div>`);
+    const { componentInstance, nativeElement } = fixture;
+
+    const scrollingContainerEl = nativeElement.firstElementChild;
+    expect(componentInstance.onOpen).not.toHaveBeenCalled();
+
+    scrollingContainerEl.scrollTop = 250;
+    dispatchEvent(scrollingContainerEl, 'scroll');
+    fixture.detectChanges();
+    expect(componentInstance.onOpen).toHaveBeenCalledWith(false);
   });
 });
 

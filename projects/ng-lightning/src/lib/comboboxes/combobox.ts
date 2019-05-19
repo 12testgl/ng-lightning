@@ -158,7 +158,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   onDetach() {
     if (this.open) {
-      this.openChange.emit(false);
+      this.close();
       return;
     }
 
@@ -190,7 +190,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
     const selection = addOptionToSelection(option.value, this.selection, this.multiple);
     this.selectionChange.emit(selection);
     if (this.closeOnSelection) {
-      this.openChange.emit(false);
+      this.close();
     }
   }
 
@@ -211,6 +211,10 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.detach();
+  }
+
+  close() {
+    this.openChange.emit(false);
   }
 
   private detach() {

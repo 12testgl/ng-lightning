@@ -40,6 +40,7 @@ ng-template(cdkConnectedOverlay,
             [cdkConnectedOverlayOrigin]="overlayOrigin",
             [cdkConnectedOverlayMinWidth]="overlayWidth",
             [cdkConnectedOverlayOpen]="open",
+            (nglOverlayScrolledOutsideView)="close()",
             (attach)="onAttach()",
             (detach)="onDetach()")
   //- (mousedown) handler will prevent input blur when clicking inside it
