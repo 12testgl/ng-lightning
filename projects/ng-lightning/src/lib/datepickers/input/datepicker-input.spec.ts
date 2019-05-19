@@ -2,6 +2,7 @@ import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { DOWN_ARROW, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, dispatchEvent, dispatchKeyboardEvent } from '../../../../test/util';
 import { getDayElements, expectYearOptions, getDayHeaders } from '../datepicker.spec';
@@ -12,7 +13,7 @@ const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
 function getHost({ nativeElement }: ComponentFixture<any>): HTMLInputElement {
-  return nativeElement.firstElementChild;
+  return nativeElement.querySelector('ngl-datepicker-input');
 }
 
 function getInput({ nativeElement }: ComponentFixture<any>): HTMLInputElement {
@@ -52,7 +53,7 @@ describe('`<ngl-datepicker-input>`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [TestComponent],
-    imports: [NglDatepickersModule, FormsModule, ReactiveFormsModule],
+    imports: [NglDatepickersModule, FormsModule, ReactiveFormsModule, OverlayModule],
   }));
 
   it('should render correctly', () => {
@@ -417,6 +418,23 @@ describe('`<ngl-datepicker-input>`', () => {
       openCalendar(fixture);
       expect(getDayHeaders(getDatepickerEl())).toEqual(['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon']);
     });
+  });
+
+  it('should close calendar if input is scrolled outside of view', () => {
+    const fixture = createTestComponent(`
+      <div cdkScrollable style="padding: 100px; margin: 300px;
+                                height: 200px; width: 200px; overflow: auto;">
+        <ngl-datepicker-input [value]="date" style="margin-bottom: 600px;"></ngl-datepicker-input>
+      </div>`);
+    openCalendar(fixture);
+
+    const scrollingContainerEl = fixture.nativeElement.firstElementChild;
+
+    expectOpen(fixture, true);
+    scrollingContainerEl.scrollTop = 250;
+    dispatchEvent(scrollingContainerEl, 'scroll');
+    fixture.detectChanges();
+    expectOpen(fixture, false);
   });
 });
 

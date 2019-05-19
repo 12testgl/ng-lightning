@@ -26,6 +26,7 @@ ng-template(cdkConnectedOverlay,
             [cdkConnectedOverlayPositions]="overlayPositions",
             [cdkConnectedOverlayOrigin]="overlayOrigin",
             [cdkConnectedOverlayOpen]="open",
+            (nglOverlayScrolledOutsideView)="closeCalendar(false)",
             (attach)="onAttach()",
             (detach)="onDetach()")
   ngl-datepicker.slds-dropdown([attr.aria-hidden]="!open",
