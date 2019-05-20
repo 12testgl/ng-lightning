@@ -190,17 +190,14 @@ describe('`NglModal`', () => {
 
     beforeEach(() => {
       fixture = createTestComponent(`
-        <ngl-modal [open]="open" style="display:block; height: 1000px;">
-          <div style="height: 100000000px">Loooooong body</div>
-        </ngl-modal>
+        <div style="height: 110vh"></div>
+        <ngl-modal [open]="open"></ngl-modal>
       `, false);
 
       containerEl = fixture.nativeElement;
       while (containerEl.tagName !== 'HTML') {
         containerEl = containerEl.parentNode;
       }
-
-      containerEl.style.height = '500px';
     });
 
     afterEach(() => {

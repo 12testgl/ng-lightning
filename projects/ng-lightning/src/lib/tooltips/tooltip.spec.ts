@@ -365,11 +365,11 @@ describe('Tooltips', () => {
       ],
     }));
 
-    it('should have configurable on/off color', () => {
-      fixture = createTestComponent(`<button nglTooltip="Config works"></button>`);
+    it('should have configurable "placement" and "openAuto"', () => {
+      fixture = createTestComponent(`<div style="padding: 200px"><button nglTooltip="Config works"></button></div>`);
       expect(getTooltipElement()).toBeFalsy();
 
-      const triggerEl = fixture.nativeElement.firstElementChild;
+      const triggerEl = fixture.nativeElement.querySelector('button');
       dispatchEvent(triggerEl, 'mouseenter');
       fixture.detectChanges();
 

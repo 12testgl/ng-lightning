@@ -46,6 +46,8 @@ module.exports = function (config) {
     singleRun: false,
 
     files: [
+      '../../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css',
+      '../../node_modules/@angular/cdk/overlay-prebuilt.css',
       // fixtures
       { pattern: 'test/fixtures/**', watched: false, included: false, served: true },
     ],
