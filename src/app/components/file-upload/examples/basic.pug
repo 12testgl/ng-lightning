@@ -1,0 +1,20 @@
+ngl-file-upload(label="Attachment",
+                [formControl]="ctrl",
+                [accept]="['image/*', 'application/pdf', '.mp3']",
+                maxFiles="2",
+                maxFilesize="1048576",
+                [error]="ctrl.invalid ? errorTpl : null")
+|
+|
+.slds-text-heading_small.slds-m-top_large.slds-text-color_success(*ngIf="ctrl.valid")
+  div(*ngFor="let file of ctrl.value") {{ file.name }}
+|
+|
+ng-template(#errorTpl)
+  ng-container(*ngIf="ctrl.errors['required']") Please select a file.
+  ng-container(*ngIf="ctrl.errors.nglFileUpload?.invalidType as file")
+    | Oh no, invalid type
+    b  {{ file.type }}
+    |  for "{{ file.name}}"!
+  ng-container(*ngIf="ctrl.errors.nglFileUpload?.maxFilesize as file") "{{ file.name}}" is bigger than 1MB!
+  ng-container(*ngIf="ctrl.errors.nglFileUpload?.maxFiles") Too many files selected!

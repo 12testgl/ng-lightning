@@ -1,0 +1,1 @@
+A `<ngl-file-upload>` component provides an easy and integrated way for users to select one or multiple files for upload. The file uploader includes drag-and-drop functionality, filtering and validation by file types and size validation if required.

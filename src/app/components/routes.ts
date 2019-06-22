@@ -14,6 +14,7 @@ export const routes = [
   { path: 'datepickers', loadChildren: './datepickers/datepickers.module#NglDemoDatepickersModule' },
   { path: 'dynamicicons', loadChildren: './dynamicicons/dynamicicons.module#NglDemoDynamicIconsModule', label: 'Dynamic Icons' },
   { path: 'files', loadChildren: './files/files.module#NglDemoFilesModule' },
+  { path: 'file-upload', loadChildren: './file-upload/file-upload.module#NglDemoFileUploadModule', label: 'File Selector' },
   { path: 'icons', loadChildren: './icons/icons.module#NglDemoIconsModule' },
   { path: 'input', loadChildren: './input/input.module#NglDemoInputModule' },
   { path: 'lookups', loadChildren: './lookups/lookups.module#NglDemoLookupsModule' },

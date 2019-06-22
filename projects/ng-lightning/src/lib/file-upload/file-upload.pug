@@ -1,0 +1,19 @@
+span.slds-form-element__label(*ngIf="label", [id]="uid + '-primary-label'", [nglInternalOutlet]="label")
+.slds-form-element__control
+  .slds-file-selector.slds-file-selector_files
+    .slds-file-selector__dropzone([class.slds-has-drag-over]="isDragOver",
+                                  (dragover)="onDropZone($event)", (dragleave)="onDropZone($event)",
+                                  (drop)="onDropZone($event)")
+      input.slds-file-selector__input.slds-assistive-text(type="file", [id]="uid",
+                                          [attr.accept]="accept",
+                                          [disabled]="disabled",
+                                          [multiple]="maxFiles !== 1",
+                                          [attr.aria-describedby]="error ? uid + '-error' : null",
+                                          [attr.aria-labelledby]="uid + '-primary-label ' + uid + '-secondary-label'",
+                                          (change)="onInputChange($event.target.files)")
+      label.slds-file-selector__body([attr.for]="uid", [id]="uid + '-secondary-label'")
+        span.slds-file-selector__button.slds-button.slds-button_neutral
+          svg.slds-button__icon.slds-button__icon_left(nglIconName="utility:upload")
+          | {{ uploadButtonLabel }}
+        span.slds-file-selector__text.slds-medium-show {{ dropZoneLabel }}
+.slds-form-element__help(*ngIf="error", [id]="uid + '-error'", [nglInternalOutlet]="error")
