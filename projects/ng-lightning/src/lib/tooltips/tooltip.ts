@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef, TemplateRef, Ele
 import { Placement, POSITION_MAP, getPlacementStyles } from '../util/overlay-position';
 import { HostService } from '../common/host/host.service';
 import { OnChange } from '../util/property-watch-decorator';
+import { ngClassCombine } from '../util/util';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,6 +18,8 @@ export class NglTooltip {
   @OnChange() placement: Placement;
 
   @OnChange()  uid: string;
+
+  @OnChange()  tooltipClass: any;
 
   private nubbin: Placement;
 
@@ -37,13 +40,15 @@ export class NglTooltip {
       this.setHostClass();
     } else if (prop === 'template') {
       this.cd.markForCheck();
+    } else if (prop === 'tooltipClass') {
+      this.setHostClass();
     }
-  }
+}
 
   private setHostClass() {
-    this.hostService.updateClass(this.element, {
+    this.hostService.updateClass(this.element, ngClassCombine(this.tooltipClass, {
       [`slds-nubbin_${this.nubbin}`]: true,
-    });
+    }));
 
     this.hostService.updateStyle(this.element, getPlacementStyles(this.nubbin));
   }

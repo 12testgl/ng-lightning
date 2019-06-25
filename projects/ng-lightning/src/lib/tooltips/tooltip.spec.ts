@@ -355,6 +355,30 @@ describe('Tooltips', () => {
     expect(getTooltipElement()).toBeFalsy();
   });
 
+  it('should support custom classes', () => {
+    fixture = createTestComponent(`<button
+      [nglTooltip]="tip"
+      [nglTooltipClass]="tooltipClass"
+      [nglTooltipOpen]="true"></button>`);
+
+    const tooltipEl = getTooltipElement();
+    fixture.componentInstance.tooltipClass = ['cl1', 'cl2'];
+    fixture.detectChanges();
+    expect(tooltipEl).toHaveCssClass('slds-popover');
+    expect(tooltipEl).toHaveCssClass('slds-popover_tooltip');
+    expect(tooltipEl).toHaveCssClass('slds-nubbin_bottom');
+    expect(tooltipEl).toHaveCssClass('cl1');
+    expect(tooltipEl).toHaveCssClass('cl2');
+
+    fixture.componentInstance.tooltipClass = { cl1: true, cl3: true, cl4: false };
+    fixture.detectChanges();
+    expect(tooltipEl).toHaveCssClass('slds-nubbin_bottom');
+    expect(tooltipEl).toHaveCssClass('cl1');
+    expect(tooltipEl).not.toHaveCssClass('cl2');
+    expect(tooltipEl).toHaveCssClass('cl3');
+    expect(tooltipEl).not.toHaveCssClass('cl4');
+  });
+
   describe('custom configuration', () => {
     const placement = 'left';
     const openAuto = true;

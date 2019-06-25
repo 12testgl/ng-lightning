@@ -75,6 +75,11 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
   @Input('nglTooltipInteractive') @InputBoolean() interactive: boolean;
 
   /**
+   * Extra class(es) you want to apply to tooltip host element.
+   */
+  @Input('nglTooltipClass') tooltipClass: any;
+
+  /**
    * Emit an event when actual tooltip is shown or hidden.
    */
   @Output() nglTooltipOpenChange = new EventEmitter<boolean>();
@@ -86,6 +91,7 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
     'template',
     'placement',
     'uid',
+    'tooltipClass',
   ]);
   private _placement: Placement;
   private _open: boolean;
