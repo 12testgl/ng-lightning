@@ -1,4 +1,5 @@
-# [nglButtonIcon]
+### [nglButtonIcon]
+#### NglButtonIcon
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -9,7 +10,8 @@
 | `[svgClass]` | Extra class(es) you want to apply to SVG element. | ngClass | |
 
 
-# [nglButtonIconStateful]
+### [nglButtonIconStateful]
+#### NglButtonIconStateful
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

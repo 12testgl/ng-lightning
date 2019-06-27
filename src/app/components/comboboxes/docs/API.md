@@ -1,4 +1,5 @@
-# <ngl-combobox>
+### <ngl-combobox>
+#### NglCombobox
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -16,6 +17,7 @@
 | `(openChange)` | Emits event when the menu should show or hide. | EventEmitter<boolean> | |
 | `(selectionChange)` | Emits with the newly selected items based on user's actions. | EventEmitter | |
 
-# <input nglCombobox>
+### <input nglCombobox>
+#### NglComboboxInput
 
 Used inside `ngl-combobox`.

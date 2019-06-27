@@ -1,4 +1,5 @@
-# <table ngl-datatable>
+### <table ngl-datatable>
+#### NglDatatable
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -9,7 +10,8 @@
 | `(sortChange)` | Requested sort event as `{ key: '<column key>', order: '<asc|desc>'}`. | INglDatatableSort | |
 | `(rowClick)` | Invoked when a row is clicked passing original `Event` and row's data, as `{event: Event, data: any}`. | INglDatatableRowClick | |
 
-# <ngl-datatable-column>
+### <ngl-datatable-column>
+#### NglDatatableColumn
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -22,7 +24,8 @@
 | `[cellClass]` | Style class(es) for each cell of of this column. Use as `ngClass`. | string \| Array \| Object | |
 
 
-# <ng-template nglDatatableCell>
+### <ng-template nglDatatableCell>
+#### NglDatatableCell
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -30,10 +33,12 @@
 | `row` | Object data for this row. | any | |
 | `index` | Row index number, starting from `0`. | number | |
 
-# <ng-template nglLoadingOverlay>
+### <ng-template nglLoadingOverlay>
+#### NglDatatableLoadingOverlay
 
   * Display a custom overlay template while `[loading]` is `true`. 
 
-# <ng-template nglNoRowsOverlay>
+### <ng-template nglNoRowsOverlay>
+#### NglDatatableNoRowsOverlay
 
   * Display a custom template while `[data]` is empty. 

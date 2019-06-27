@@ -1,4 +1,5 @@
-# [nglPick]
+### [nglPick]
+#### NglPick
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -8,7 +9,8 @@
 | `(nglPickChange)` | The value that is going to be selected when a `nglPickOption` is selected. | EventEmitter | |
 | `(nglOptionDestroyed)` | Emits the value of any *selected* option that is destroyed (ie `*ngIf`). | EventEmitter | |
 
-# [nglPickOption]
+### [nglPickOption]
+#### NglPickOption
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

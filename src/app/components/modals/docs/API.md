@@ -1,4 +1,5 @@
-# <ngl-modal>
+### <ngl-modal>
+#### NglModal
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -11,16 +12,19 @@
 | `[closeButtonAssistiveText]` | Text read aloud by screen readers when the user focuses on the Close Button. | string | 'Close' |
 | `(openChange)` | Emitted when modal's visibility is going to change to `false`. | EventEmitter<boolean> | |
 
-# <ng-template nglModalTagline>
-  
+### <ng-template nglModalTagline>
+#### nglModalTagline
+
 Content underneath the title in the modal header.
 
-# <ng-template nglModalFooter>
+### <ng-template nglModalFooter>
+#### nglModalFooter
 
 Contains buttons displayed on modal's footer.
 
-# <ng-template nglModalHeader>
+### <ng-template nglModalHeader>
 
+#### nglModalHeader
 Custom header content template
 
 | Variable | Description | Type |

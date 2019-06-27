@@ -1,4 +1,5 @@
-# <ngl-alert>
+### <ngl-alert>
+#### NglAlert
 
 `<ngl-alert>` is exported to the containing scope as `nglAlert`
 

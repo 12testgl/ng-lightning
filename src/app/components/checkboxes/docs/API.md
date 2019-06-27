@@ -1,4 +1,5 @@
-# <ngl-checkbox>
+### <ngl-checkbox>
+#### NglCheckbox
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -8,7 +9,8 @@
 Highlights label as a required (does not perform any validation) based onto `<input>`'s `required` property.  
 
 
-# <ngl-checkbox-toggle>
+### <ngl-checkbox-toggle>
+#### NglCheckboxToggle
 
 Same API as `<ngl-checkbox>` plus the below:
 
@@ -18,12 +20,14 @@ Same API as `<ngl-checkbox>` plus the below:
 | `[disabledText]` | Label for the *disabled* state. | string | 'Disabled' |
 
 
-# <ngl-checkbox-button>
+### <ngl-checkbox-button>
+#### NglCheckboxButton
 
 Same API as `<ngl-checkbox>` but SLDS doesn't support `[error]`.
 
 
-# <fieldset ngl-checkbox-group>
+### <fieldset ngl-checkbox-group>
+#### NglCheckboxGroup
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

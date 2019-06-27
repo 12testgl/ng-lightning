@@ -1,4 +1,5 @@
-# <ngl-textarea>
+### <ngl-textarea>
+#### NglTextarea
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

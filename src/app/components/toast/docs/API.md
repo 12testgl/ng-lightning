@@ -1,4 +1,5 @@
-# <ngl-toast>
+### <ngl-toast>
+#### NglToast
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -10,7 +11,7 @@
 | `[dismissible]` | It can suppress the appearance of close button, even if `(close)` is bound. | boolean | |
 | `(close)` | Emits the close event reason, like `'button'` and `'timeout'`. If not bound or if `dismissible` is false, the close button will not be shown. | EventEmitter<string> | |
 
-# Export API
+### Export API
 
 `<ngl-toast>` is exported to the containing scope as `nglToast`.
 

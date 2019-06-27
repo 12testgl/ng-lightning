@@ -1,4 +1,5 @@
-# <ngl-file-upload>
+### <ngl-file-upload>
+#### NglFileUpload
 
 Supports `[(ngModel)]` and `[formControl]`.
 

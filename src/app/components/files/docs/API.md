@@ -1,4 +1,5 @@
-# <ngl-file>
+### <ngl-file>
+#### NglFile
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -6,7 +7,8 @@
 | `[iconName]` | Icon to specify the type of attachment, ie `doctype:pdf`. | string | |
 
 
-# nglFileCrop
+### [nglFileCrop]
+#### NglFileCrop
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

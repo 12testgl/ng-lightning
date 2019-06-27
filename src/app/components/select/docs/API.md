@@ -1,4 +1,5 @@
-# <ngl-select>
+### <ngl-select>
+#### NglSelect
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

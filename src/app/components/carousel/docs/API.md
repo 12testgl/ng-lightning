@@ -1,4 +1,5 @@
-# <ngl-carousel>
+### <ngl-carousel>
+#### NglCarousel
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -9,7 +10,8 @@
 | `(activeChange)` | Emits the index of the image to be activated.  | EventEmitter<number> | |
 
 
-# <ngl-carousel-image>
+### <ngl-carousel-image>
+#### NglCarouselImage
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

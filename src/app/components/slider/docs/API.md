@@ -1,4 +1,5 @@
-# <ngl-slider>
+### <ngl-slider>
+#### NglSlider
 
 Also supports `[(ngModel)]` and `[formControl]`, instead of `[(value)]`.
 

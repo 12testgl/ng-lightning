@@ -1,4 +1,5 @@
-# <ngl-colorpicker>
+### <ngl-colorpicker>
+#### NglColorpicker
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -17,7 +18,7 @@
 | `[invalidColorLabel]` | Error message when hex color input is invalid. | string \| TemplateRef | 'Please ensure value is correct' |
 
 
-# NGL_COLORPICKER_CONFIG<NglColorpickerConfig>
+### NGL_COLORPICKER_CONFIG<NglColorpickerConfig>
 
 Injection token that can be used to specify default options.
 

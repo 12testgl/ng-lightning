@@ -1,4 +1,5 @@
-# <ngl-accordion>
+### <ngl-accordion>
+#### NglAccordion
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -7,7 +8,8 @@
 | `(activeNameChange)` | Emits when the open sections are going to change, it contains all open sections. | EventEmitter<string \| string[]> | |
 
 
-# <ng-template nglAccordionSection>
+### <ng-template nglAccordionSection>
+#### NglAccordionSection
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

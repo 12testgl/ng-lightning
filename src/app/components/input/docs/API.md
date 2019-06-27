@@ -1,4 +1,5 @@
-# <ngl-input>
+### <ngl-input>
+#### NglInput
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

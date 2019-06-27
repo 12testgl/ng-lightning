@@ -2,10 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, OnInit, OnChanges, ElementRe
 import { HostService } from '../common/host/host.service';
 import { isRequired } from '../util/isRequired';
 import { ngClassCombine } from '../util/util';
-
-export function normalizeIconName(iconName: string) {
-  return iconName.indexOf(':') > -1 ? iconName : `utility:${iconName}`;
-}
+import { normalizeIconName } from './util';
 
 @Component({
   selector: 'ngl-icon, [ngl-icon]',

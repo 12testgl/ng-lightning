@@ -1,4 +1,5 @@
-# [nglPopover]
+### [nglPopover]
+#### NglPopoverTrigger
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

@@ -1,4 +1,5 @@
-# <ngl-section>
+### <ngl-expandable-section>
+#### NglExpandableSection
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

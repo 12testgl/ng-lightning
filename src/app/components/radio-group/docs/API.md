@@ -1,4 +1,5 @@
-# <fieldset ngl-radio-group>
+### <fieldset ngl-radio-group>
+#### NglRadioGroup
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

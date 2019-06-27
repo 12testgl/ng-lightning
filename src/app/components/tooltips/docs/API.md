@@ -1,4 +1,5 @@
-# [nglTooltip]
+### [nglTooltip]
+#### NglTooltipTrigger
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -11,7 +12,7 @@
 | `[nglTooltipClass]` | Extra class(es) you want to apply to tooltip host element. | ngClass | |
 | `(nglTooltipOpenChange)` | Emit an event when the tooltip should show or hide. | boolean | |
 
-# Export (nglTooltip)
+### Export (nglTooltip)
 | Name | Description | Type |
 | -------- | ----------- | ---- |
 | `open` | "Manually" trigger open. Optionally specify a `delay` different than `nglTooltipDelay`. | (delay: number) => void |
@@ -19,7 +20,7 @@
 | `toggle` | Toggles the tooltip. | () => void |
 
 
-# NGL_TOOLTIP_CONFIG<NglTooltipConfig>
+### NGL_TOOLTIP_CONFIG<NglTooltipConfig>
 
 Injection token that can be used to specify default rating options.
 

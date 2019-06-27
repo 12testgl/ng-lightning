@@ -1,4 +1,5 @@
-# <ngl-pagination>
+### <ngl-pagination>
+#### NglPagination
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -15,7 +16,7 @@
 | `[lastText]` | Displayed string for Last button. | string | 'Last' |
 | `(pageChange)` | The page clicked in order to select. | EventEmitter<number> | |
 
-# Export API
+### Export API
 
 | Name | Description | Type |
 | -------- | ----------- | ---- |

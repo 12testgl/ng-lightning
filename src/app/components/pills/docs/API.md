@@ -1,4 +1,5 @@
-# <ngl-pill>
+### <ngl-pill>
+#### NglPill
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

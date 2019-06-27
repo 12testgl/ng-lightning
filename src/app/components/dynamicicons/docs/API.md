@@ -1,4 +1,5 @@
-# <ngl-dynamic-icon>
+### <ngl-dynamic-icon>
+#### NglDynamicIcon
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

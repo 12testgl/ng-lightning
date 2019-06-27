@@ -1,4 +1,5 @@
-# [nglDropdown]
+### [nglDropdown]
+#### NglDropdown
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -6,7 +7,8 @@
 | `[handlePageEvents]` | Whether the dropdown should handle page events (e.g., clicking on the page closes the dropdown). | boolean | |
 | `(openChange)` | Emits an event whether the dropdown is going to open or not. | EventEmitter<boolean> | |
 
-# [nglDropdownTrigger]
+### [nglDropdownTrigger]
+#### NglDropdownTrigger
 
-
-# [nglDropdownItem]
+### [nglDropdownItem]
+#### NglDropdownItem

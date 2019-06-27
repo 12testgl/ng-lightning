@@ -1,4 +1,5 @@
-# [nglButton]
+### [nglButton]
+#### NglButton
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -7,7 +8,8 @@
 | `[iconPosition]` | Position of the icon with respect to `ng-content`. | 'left' \| 'right' | 'left' |
 
 
-# [nglButtonStateful]
+### [nglButtonStateful]
+#### NglButtonStateful
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -16,7 +18,14 @@
 | `(stateChange)` | Emits the inverted state when clicked. |  boolean | |
 
 
-# <ngl-state-on>, <ngl-state-of>, <ngl-state-hover>
+### <ngl-state-on>
+#### NglButtonStateOn
+
+### <ngl-state-off>
+#### NglButtonStateOff
+
+### <ngl-state-hover>
+#### NglButtonStateHover
 
 Content children of `nglButtonStateful`
 

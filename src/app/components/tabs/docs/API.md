@@ -1,4 +1,5 @@
-# <ngl-tabset>
+### <ngl-tabset>
+#### NglTabs
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -8,7 +9,8 @@
 | `(selectedChange)` | Emits when a tab is selected. | EventEmitter<NglTab> | |
 
 
-# <ng-template ngl-tab> | <ngl-tab>
+### <ng-template ngl-tab> | <ngl-tab>
+#### NglTab
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

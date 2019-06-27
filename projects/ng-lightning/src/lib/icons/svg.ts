@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, ElementRef, Renderer2, Inject, Optional } from '@angular/core';
-import { normalizeIconName } from './icon';
+import { normalizeIconName } from './util';
 import { NglIconConfig, NGL_ICON_CONFIG } from './config';
 
 @Component({

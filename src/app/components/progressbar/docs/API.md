@@ -1,4 +1,5 @@
-# <ngl-progress-bar>
+### <ngl-progress-bar>
+#### NglProgressBar
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

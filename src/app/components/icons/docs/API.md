@@ -1,4 +1,5 @@
-# <ngl-icon>
+### <ngl-icon>
+#### NglIcon
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -9,14 +10,15 @@
 | `[svgClass]` | Extra class(es) you want to apply to SVG element. | ngClass | |
 
 
-# <svg nglIconName>
+### <svg nglIconName>
+#### NglIconSvg
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | `[iconName]` | LDS name of the icon in `utility:info` format. | string | |
 
 
-# NGL_ICON_CONFIG<NglIconConfig>
+### NGL_ICON_CONFIG<NglIconConfig>
 
 Injection token that can be used to specify default icon options.
 

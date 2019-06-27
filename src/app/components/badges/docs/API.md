@@ -1,4 +1,5 @@
-# <ngl-badge>
+### <ngl-badge>
+#### NglBadge
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

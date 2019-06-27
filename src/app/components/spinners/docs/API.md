@@ -1,4 +1,5 @@
-# <ngl-spinner>
+### <ngl-spinner>
+#### NglSpinner
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

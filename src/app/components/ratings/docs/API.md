@@ -1,4 +1,5 @@
-# <ngl-rating>
+### <ngl-rating>
+#### NglRating
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -12,7 +13,8 @@
 | `(rateChange)` | The clicked rate. | EventEmitter<number> | |
 | `(hover)` | The currently hovered rate. | EventEmitter<number> | |
 
-# <ng-template nglRatingIcon>
+### <ng-template nglRatingIcon>
+#### NglRatingIconTemplate
 
 | Variable | Description | Type |
 | -------- | ----------- | ---- |
@@ -21,7 +23,7 @@
 | `fill` | Fill percentage. An integer value between 0 and 100. | number |
 
 
-# NGL_RATING_CONFIG<NglRatingConfig>
+### NGL_RATING_CONFIG<NglRatingConfig>
 
 Injection token that can be used to specify default rating options.
 

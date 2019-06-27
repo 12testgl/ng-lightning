@@ -1,4 +1,5 @@
-# <ngl-avatar>
+### <ngl-avatar>
+#### NglAvatar
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |

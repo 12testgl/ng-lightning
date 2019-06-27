@@ -1,4 +1,5 @@
-# <ngl-datepicker>
+### <ngl-datepicker>
+#### NglDatepicker
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -19,7 +20,8 @@
 | `(dateChange)` | Emits date upon selection. | EventEmitter<Date> | |
 
 
-# <ngl-datepicker-input>
+### <ngl-datepicker-input>
+#### NglDatepickerInput
 
 Also supports `[(ngModel)]` and `[formControl]`, instead of `[(value)]`.
 
@@ -39,7 +41,7 @@ Also supports `[(ngModel)]` and `[formControl]`, instead of `[(value)]`.
 
 You can also use all the `<ngl-datepicker>` inputs, that will be proxied to to popup calendar.
 
-# NGL_DATEPICKER_CONFIG<NglDatepickerConfig>
+### NGL_DATEPICKER_CONFIG<NglDatepickerConfig>
 
 Injection token that can be used to specify default options.
 
