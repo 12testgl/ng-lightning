@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglRadiosModule, NglCheckboxesModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoRadioGroupComponent } from './radio-group.component';
@@ -19,7 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),
-    NglModule,
+    NglRadiosModule,
+    NglCheckboxesModule,
     NglDemoExampleModule,
   ],
   declarations: [

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglTabsModule, NglButtonsModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoTabsComponent } from './tabs.component';
@@ -17,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NglModule,
+    NglTabsModule,
+    NglButtonsModule,
     NglDemoExampleModule,
   ],
   declarations: [

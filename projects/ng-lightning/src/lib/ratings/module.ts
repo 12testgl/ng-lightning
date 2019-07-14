@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NglRating } from './rating';
 import { NglRatingIconTemplate } from './icons';
-import { NglIconsModule } from '../icons/module';
+import { NglIconsModule } from '../icons';
 
 const DIRECTIVES = [
   NglRating,

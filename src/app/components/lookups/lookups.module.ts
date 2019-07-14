@@ -3,7 +3,7 @@ import { CommonModule, } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NglModule } from 'ng-lightning';
+import { NglComboboxesModule, NglPillsModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoLookupsComponent } from './lookups.component';
@@ -23,7 +23,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    NglModule,
+    NglComboboxesModule,
+    NglPillsModule,
     NglDemoExampleModule,
   ],
   declarations: [

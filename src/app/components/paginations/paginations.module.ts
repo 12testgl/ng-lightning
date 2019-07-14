@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NglModule } from 'ng-lightning';
+import { NglPaginationsModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoPaginationsComponent } from './paginations.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    NglModule,
+    NglPaginationsModule,
     NglDemoExampleModule,
   ],
   declarations: [

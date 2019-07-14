@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglFileUploadModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoFileUploadComponent } from './file-upload.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    NglModule,
+    NglFileUploadModule,
     NglDemoExampleModule,
   ],
   declarations: [

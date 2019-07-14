@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglDynamicIconsModule, NglButtonsModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoDynamicIconsComponent } from './dynamicicons.component';
@@ -17,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NglModule,
+    NglDynamicIconsModule,
+    NglButtonsModule,
     NglDemoExampleModule,
   ],
   declarations: [

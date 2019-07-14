@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NglModule } from 'ng-lightning';
+import { NglColorpickerModule, NglButtonsModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoColorpickerComponent } from './colorpicker.component';
@@ -23,7 +23,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    NglModule,
+    NglColorpickerModule,
+    NglButtonsModule,
     NglDemoExampleModule,
   ],
   declarations: [

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NglModule } from 'ng-lightning';
+import { NglModalsModule, NglButtonsModule, NglRadiosModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoPromptComponent } from './prompt.component';
@@ -19,7 +19,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    NglModule,
+    NglModalsModule,
+    NglButtonsModule,
+    NglRadiosModule,
     NglDemoExampleModule,
   ],
   declarations: [

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglDatatablesModule, NglButtonsModule, NglBadgesModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoDatatablesComponent } from './datatables.component';
@@ -17,7 +17,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NglModule,
+    NglDatatablesModule,
+    NglButtonsModule,
+    NglBadgesModule,
     NglDemoExampleModule,
   ],
   declarations: [

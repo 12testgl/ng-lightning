@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { NglModule } from 'ng-lightning';
+import { NglSliderModule, NglButtonsModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
 
 import { DemoSliderComponent } from './slider.component';
@@ -23,7 +23,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule, ReactiveFormsModule,
     RouterModule.forChild(routes),
-    NglModule,
+    NglSliderModule,
+    NglButtonsModule,
     NglDemoExampleModule,
   ],
   declarations: [

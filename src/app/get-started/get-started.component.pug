@@ -54,11 +54,13 @@ div
 div
   h2.callout Usage
   |
-  p
-    | Once installed you need to import our main module into your application module. You should end up with code similar to this:
+  p Once installed you need to import our main module into your application module. You should end up with code similar to this:
 
   pre.language-typescript
     code !{self.usage}
+
+  |
+  p Alternatively you could only import (sub)modules with components you need. For example, if you only want to use the <span class="code">&lt;ngl-modal&gt;</span> component, you can import just <span class="code">NglModalsModule</span> instead of <span class="code">NglModule</span>. The resulting bundle will be smaller in this case.
 
 //- Configuration
 div

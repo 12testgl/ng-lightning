@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NglToast } from './toast';
 import { NglToastClose } from './toast-close';
-import { NglIconsModule } from '../icons/module';
+import { NglIconsModule } from '../icons';
 
 const NGL_TOAST_DIRECTIVES = [
   NglToast,
