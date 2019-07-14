@@ -2,4 +2,4 @@ label([nglFormLabel]="label", [attr.for]="_uid", [required]="required")
 ngl-form-help(*ngIf="fieldLevelHelpTooltip", [content]="fieldLevelHelpTooltip")
 .slds-form-element__control
   ng-content
-.slds-form-element__help(*ngIf="error", [id]="errorId") {{error}}
+.slds-form-element__help(*ngIf="error", [id]="errorId", [nglInternalOutlet]="error")
