@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, TemplateRef, OnDestroy,
-         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
+         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef, ContentChildren } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { ConnectionPositionPair, CdkOverlayOrigin, CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 import { DEFAULT_DROPDOWN_POSITIONS } from '../util/overlay-position';
 import { uniqueId, isOptionSelected, addOptionToSelection } from '../util/util';
 import { InputBoolean, InputNumber } from '../util/convert';
+import { NglInternalComboboxOption } from './combobox-option-internal';
 import { NglComboboxOption } from './combobox-option';
 import { NglComboboxInput } from './combobox-input';
 
@@ -52,9 +53,11 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   @Input() @InputBoolean() readonly closeOnSelection = true;
 
-  @ViewChildren(NglComboboxOption) readonly options: QueryList<NglComboboxOption>;
+  @ViewChildren(NglInternalComboboxOption) readonly options: QueryList<NglInternalComboboxOption>;
 
-  @Input('options') set data(data: any[]) {
+  @ContentChildren(NglComboboxOption) readonly fromContentOptions: QueryList<NglComboboxOption>;
+
+  @Input('options') set fromDataSourceOptions(data: any[]) {
     this._data = (data || []).map((d) => {
       if (typeof d === 'string') {
         // Support array of strings as options, by mapping to NglComboboxOptionItem
@@ -66,8 +69,8 @@ export class NglCombobox implements OnChanges, OnDestroy {
       return d;
     });
   }
-  get data() {
-    return this._data;
+  get data(): NglComboboxOptionItem[] {
+    return this._data || this.fromContentOptions.toArray();
   }
 
   @ViewChild('overlayOrigin') overlayOrigin: CdkOverlayOrigin;
@@ -81,7 +84,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
   overlayPositions: ConnectionPositionPair[] = [...DEFAULT_DROPDOWN_POSITIONS['left']];
 
   /** Manages active item in option list based on key events. */
-  keyManager: ActiveDescendantKeyManager<NglComboboxOption>;
+  keyManager: ActiveDescendantKeyManager<NglInternalComboboxOption>;
 
   private optionChangesSubscription: Subscription;
 
@@ -99,7 +102,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
     return '';
   }
 
-  get activeOption(): NglComboboxOption | null {
+  get activeOption(): NglInternalComboboxOption | null {
     return this.keyManager ? this.keyManager.activeItem : null;
   }
 
@@ -168,7 +171,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
     this.detach();
   }
 
-  trackByOption(index, option: NglComboboxOption) {
+  trackByOption(index, option: NglInternalComboboxOption) {
     return option.value;
   }
 
@@ -186,7 +189,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
     return this.isLookup && this.data.length === 0 && !this.loadingMore;
   }
 
-  onOptionSelection(option: NglComboboxOption = this.activeOption) {
+  onOptionSelection(option: NglInternalComboboxOption = this.activeOption) {
     const selection = addOptionToSelection(option.value, this.selection, this.multiple);
     this.selectionChange.emit(selection);
     if (this.closeOnSelection) {

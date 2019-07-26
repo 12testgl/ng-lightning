@@ -7,6 +7,7 @@ import { NglOverlayModule } from '../common/overlay/overlay.module';
 
 import { NglCombobox } from './combobox';
 import { NglComboboxOption } from './combobox-option';
+import { NglInternalComboboxOption } from './combobox-option-internal';
 import { NglComboboxInput } from './combobox-input';
 import { OverlayModule } from '@angular/cdk/overlay';
 
@@ -17,7 +18,7 @@ const DIRECTIVES = [
 ];
 
 @NgModule({
-  declarations: DIRECTIVES,
+  declarations: [DIRECTIVES, NglInternalComboboxOption],
   exports: DIRECTIVES,
   imports: [CommonModule, NglInternalOutletModule, NglIconsModule, NglFormsModule, OverlayModule, NglOverlayModule],
 })

@@ -8,6 +8,10 @@ export class DemoComboboxesBasic {
   options = ['One', 'Two', 'Three'];
 
   selection: string = null;
+  
+  selection1: string = null;
 
   open = false;
+
+  open1 = false;
 }

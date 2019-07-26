@@ -4,3 +4,11 @@ ngl-combobox(label="Make a choice",
              [(selection)]="selection")
   input(nglCombobox, placeholder="Select an Option")
 
+
+ngl-combobox(label="Make a choice",
+             [(open)]="open1",
+             [(selection)]="selection1")
+  input(nglCombobox, placeholder="Select an Option")
+  ngl-combobox-option(value="one", label="one")
+  ngl-combobox-option(value="two", label="two")
+  ngl-combobox-option(value="three", label="three")
