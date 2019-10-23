@@ -5,8 +5,6 @@
 [![npm version](https://badge.fury.io/js/ng-lightning.svg)](https://www.npmjs.com/package/ng-lightning)
 [![npm](https://img.shields.io/npm/dm/ng-lightning.svg?maxAge=2592000)](https://www.npmjs.com/package/ng-lightning)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/ng-lightning.svg)](https://saucelabs.com/u/ng-lightning)
-
 This library contains native [Angular](https://angular.io/) components and directives written from scratch in TypeScript using the [Lightning Design System](https://www.lightningdesignsystem.com/) CSS framework.
 
 We are looking for community help to find and fix bugs, improve demo site and create new components.
