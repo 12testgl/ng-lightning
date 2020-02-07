@@ -340,13 +340,6 @@ describe('`NglDatatable`', () => {
       expect(rows[i]).toBe(newRows[ii - i - 1]);
     }
   });
-
-  it('should throw if required input is not provided', () => {
-    expect(() => createTestComponent(`
-      <table ngl-datatable [data]="data">
-        <ngl-datatable-column></ngl-datatable-column>
-      </table>`)).toThrowError();
-  });
 });
 
 @Component({

@@ -3,7 +3,6 @@ import { Component, Input, ChangeDetectionStrategy, ContentChildren, QueryList,
 import { DOCUMENT } from '@angular/common';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { InputBoolean, InputNumber } from '../util/convert';
-import { isRequired } from '../util/isRequired';
 import { NglCarouselImage } from './carousel-image';
 import { NglCarouselIndicator } from './carousel-indicator';
 
@@ -17,7 +16,6 @@ import { NglCarouselIndicator } from './carousel-indicator';
 })
 export class NglCarousel implements OnChanges {
 
-  @isRequired
   @Input() @InputNumber() readonly active;
 
   @Output() activeChange = new EventEmitter<number>();

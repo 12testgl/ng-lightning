@@ -2,7 +2,6 @@ import { Component, Input, ChangeDetectionStrategy, ContentChild, TemplateRef, H
          AfterContentInit, ChangeDetectorRef, OnChanges, OnDestroy } from '@angular/core';
 import { NglInputElement } from '../element/element';
 import { toBoolean, InputBoolean } from '../../util/convert';
-import { isRequired } from '../../util/isRequired';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +15,6 @@ import { Subscription } from 'rxjs';
 export class NglInput implements OnChanges, AfterContentInit, OnDestroy {
   @ContentChild(NglInputElement, { static: true }) input: NglInputElement;
 
-  @isRequired
   @Input() label: string | TemplateRef<any>;
 
   @Input() error: string | TemplateRef<any>;

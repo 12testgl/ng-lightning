@@ -2,7 +2,6 @@ import { Component, Input, ChangeDetectionStrategy, ContentChild, TemplateRef, H
          AfterContentInit, ChangeDetectorRef, OnChanges, OnDestroy } from '@angular/core';
 import { NglTextareaInput } from '../input/input';
 import { toBoolean } from '../../util/convert';
-import { isRequired } from '../../util/isRequired';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +15,6 @@ import { Subscription } from 'rxjs';
 export class NglTextarea implements OnChanges, AfterContentInit, OnDestroy {
   @ContentChild(NglTextareaInput, { static: true }) input: NglTextareaInput;
 
-  @isRequired
   @Input() label: string | TemplateRef<any>;
 
   @Input() fieldLevelHelpTooltip: string | TemplateRef<any>;

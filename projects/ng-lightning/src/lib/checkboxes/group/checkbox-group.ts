@@ -2,7 +2,6 @@ import { Component, Input, ChangeDetectionStrategy, TemplateRef, HostBinding,
          AfterContentInit, OnChanges, ContentChildren, QueryList, SimpleChanges } from '@angular/core';
 import { toBoolean, InputBoolean } from '../../util/convert';
 import { uniqueId } from '../../util/util';
-import { isRequired } from '../../util/isRequired';
 import { NglCheckboxOption } from './checkbox-option';
 
 @Component({
@@ -17,7 +16,6 @@ export class NglCheckboxGroup implements OnChanges, AfterContentInit {
 
   @ContentChildren(NglCheckboxOption) options: QueryList<NglCheckboxOption>;
 
-  @isRequired
   @Input() label: string | TemplateRef<any>;
 
   @Input() error: string | TemplateRef<any>;

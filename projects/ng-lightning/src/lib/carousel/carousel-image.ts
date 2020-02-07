@@ -1,6 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, TemplateRef, Renderer2, ElementRef } from '@angular/core';
 import { uniqueId } from '../util/util';
-import { isRequired } from '../util/isRequired';
 
 @Component({
   selector: 'ngl-carousel-image',
@@ -12,13 +11,11 @@ export class NglCarouselImage {
   /**
    * 	The path to the image.
    */
-  @isRequired
   @Input() src: string;
 
   /**
    * Text for the label that's displayed under the image.
    */
-  @isRequired
   @Input() header: string;
 
   /**

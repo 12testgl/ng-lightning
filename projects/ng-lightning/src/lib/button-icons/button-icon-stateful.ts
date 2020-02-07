@@ -2,7 +2,6 @@ import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, OnIni
          Output, EventEmitter, HostListener, HostBinding } from '@angular/core';
 import { HostService } from '../common/host/host.service';
 import { InputBoolean } from '../util/convert';
-import { isRequired } from '../util/isRequired';
 
 const DEFAULT_VARIANT = 'border';
 
@@ -18,7 +17,6 @@ export class NglButtonIconStateful implements OnInit, OnChanges {
   /**
    * Specifies whether button is in selected state or not.
    */
-  @isRequired
   @HostBinding('class.slds-is-selected')
   @HostBinding('attr.aria-pressed')
   @Input() @InputBoolean() selected = false;

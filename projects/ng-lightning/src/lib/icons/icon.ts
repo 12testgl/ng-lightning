@@ -1,6 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, OnInit, OnChanges, ElementRef } from '@angular/core';
 import { HostService } from '../common/host/host.service';
-import { isRequired } from '../util/isRequired';
 import { ngClassCombine } from '../util/util';
 import { normalizeIconName } from './util';
 
@@ -12,7 +11,6 @@ import { normalizeIconName } from './util';
 })
 export class NglIcon implements OnInit, OnChanges {
 
-  @isRequired
   @Input() set iconName(iconName: string) {
     this._iconName = normalizeIconName(iconName);
   }

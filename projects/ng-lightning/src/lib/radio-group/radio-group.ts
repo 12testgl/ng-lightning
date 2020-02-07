@@ -2,7 +2,6 @@ import { Component, Input, ChangeDetectionStrategy, TemplateRef, HostBinding, On
 import { BehaviorSubject } from 'rxjs';
 import { toBoolean, InputBoolean } from '../util/convert';
 import { uniqueId } from '../util/util';
-import { isRequired } from '../util/isRequired';
 
 @Component({
   selector: 'ngl-radio-group,[ngl-radio-group]',
@@ -14,7 +13,6 @@ import { isRequired } from '../util/isRequired';
 })
 export class NglRadioGroup implements OnChanges {
 
-  @isRequired
   @Input() label: string | TemplateRef<any>;
 
   @Input() error: string;

@@ -2,7 +2,6 @@ import { Component, Input, ChangeDetectionStrategy, ContentChild, TemplateRef, H
          AfterContentInit, ChangeDetectorRef, OnChanges, OnDestroy } from '@angular/core';
 import { NglSelectInput } from '../input/input';
 import { toBoolean } from '../../util/convert';
-import { isRequired } from '../../util/isRequired';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +15,6 @@ import { Subscription } from 'rxjs';
 export class NglSelect implements OnChanges, AfterContentInit, OnDestroy {
   @ContentChild(NglSelectInput, { static: true }) input: NglSelectInput;
 
-  @isRequired
   @Input() label: string | TemplateRef<any>;
 
   @Input() fieldLevelHelpTooltip: string | TemplateRef<any>;
