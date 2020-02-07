@@ -101,7 +101,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
 
   @ViewChild('inputEl', { static: true }) inputEl: ElementRef;
 
-  @ViewChild('cdkOverlay', { static: false }) cdkOverlay: CdkConnectedOverlay;
+  @ViewChild('cdkOverlay') cdkOverlay: CdkConnectedOverlay;
 
   /**
    * The minimum valid date.

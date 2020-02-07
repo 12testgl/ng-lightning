@@ -11,7 +11,7 @@ const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
 export function getTooltipElement(): HTMLElement {
-  return document.querySelector('[ngl-tooltip]');
+  return document.querySelector('.slds-popover_tooltip');
 }
 
 describe('Tooltips', () => {
@@ -31,7 +31,6 @@ describe('Tooltips', () => {
     fixture = createTestComponent();
     const tooltipEl = getTooltipElement();
     expect(tooltipEl).toHaveCssClass('slds-popover');
-    expect(tooltipEl).toHaveCssClass('slds-popover_tooltip');
     expect(tooltipEl.getAttribute('role')).toBe('tooltip');
     expect(tooltipEl).toHaveCssClass('slds-nubbin_bottom'); // Top placement
     expect(tooltipEl.textContent.trim()).toBe('I am a tooltip');
@@ -284,7 +283,7 @@ describe('Tooltips', () => {
     fixture.detectChanges();
     dispatchEvent(triggerEl, 'mouseenter');
     fixture.detectChanges();
-    expect(document.querySelectorAll('[ngl-tooltip]').length).toBe(1);
+    expect(document.querySelectorAll('.slds-popover_tooltip').length).toBe(1);
   });
 
   it('should support interaction with content', fakeAsync(() => {
@@ -443,7 +442,7 @@ describe('Tooltips', () => {
   `,
 })
 export class TestComponent {
-  @ViewChild(NglTooltipTrigger, { static: false }) tooltip: NglTooltipTrigger;
+  @ViewChild(NglTooltipTrigger) tooltip: NglTooltipTrigger;
   placement: string;
   open = true;
   exists: boolean;

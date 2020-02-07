@@ -74,9 +74,9 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   @ViewChild('overlayOrigin', { static: true }) overlayOrigin: CdkOverlayOrigin;
 
-  @ViewChild('cdkOverlay', { static: false }) cdkOverlay: CdkConnectedOverlay;
+  @ViewChild('cdkOverlay') cdkOverlay: CdkConnectedOverlay;
 
-  @ViewChild('dropdown', { static: false }) dropdownElementRef: ElementRef;
+  @ViewChild('dropdown') dropdownElementRef: ElementRef;
 
   overlayWidth = 0;
 

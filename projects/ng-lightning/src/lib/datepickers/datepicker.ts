@@ -89,7 +89,7 @@ export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
 
   maxDate: NglInternalDate;
 
-  @ViewChild(NglDatepickerMonth, { static: false }) monthView: NglDatepickerMonth;
+  @ViewChild(NglDatepickerMonth) monthView: NglDatepickerMonth;
 
   constructor(@Optional() @Inject(NglDatepickerInput) private dtInput: NglDatepickerInput,
               @Optional() @Inject(NGL_DATEPICKER_CONFIG) defaultConfig: NglDatepickerConfig,

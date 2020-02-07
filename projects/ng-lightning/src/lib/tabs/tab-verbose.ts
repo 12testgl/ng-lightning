@@ -28,8 +28,8 @@ export class NglTabContent {
 })
 export class NglTabVerbose extends NglTab implements AfterContentInit {
 
-  @ContentChild(NglTabContent, { static: false }) contentTemplate: NglTabContent;
-  @ContentChild(NglTabLabel, { static: false }) labelTemplate: NglTabLabel;
+  @ContentChild(NglTabContent) contentTemplate: NglTabContent;
+  @ContentChild(NglTabLabel) labelTemplate: NglTabLabel;
 
   ngAfterContentInit() {
     if (this.labelTemplate) {

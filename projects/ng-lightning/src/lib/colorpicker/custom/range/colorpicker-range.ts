@@ -24,8 +24,8 @@ export class NglColorpickerRange implements AfterViewInit, OnDestroy {
 
   @Output() hsvChange = new EventEmitter<IHSV>();
 
-  @ViewChild('rangeIndicator', { static: false }) rangeIndicator: ElementRef;
-  @ViewChild('rangeIndicatorContainer', { static: false }) rangeIndicatorContainer: ElementRef;
+  @ViewChild('rangeIndicator') rangeIndicator: ElementRef;
+  @ViewChild('rangeIndicatorContainer') rangeIndicatorContainer: ElementRef;
 
   uid = uniqueId('colorpicker-range');
 

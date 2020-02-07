@@ -43,13 +43,13 @@ export class NglDatatable implements AfterContentInit, OnDestroy {
   @HostBinding('class.slds-is-relative')
   @Input() loading = false;
 
-  @ContentChild(NglDatatableLoadingOverlay, { static: false }) loadingOverlay: NglDatatableLoadingOverlay;
+  @ContentChild(NglDatatableLoadingOverlay) loadingOverlay: NglDatatableLoadingOverlay;
 
   get showLoading() {
     return this.loading && this.loadingOverlay;
   }
 
-  @ContentChild(NglDatatableNoRowsOverlay, { static: false }) noRowsOverlay: NglDatatableNoRowsOverlay;
+  @ContentChild(NglDatatableNoRowsOverlay) noRowsOverlay: NglDatatableNoRowsOverlay;
 
   @ContentChildren(NglDatatableColumn) columns: QueryList<NglDatatableColumn>;
 

@@ -9,7 +9,7 @@ const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
 
 export function getPopoverElement(): HTMLElement {
-  return document.querySelector('[ngl-popover]');
+  return document.querySelector('.slds-popover');
 }
 
 function getBodyEl(element: HTMLElement): HTMLElement {
@@ -59,7 +59,6 @@ describe('Popovers', () => {
     fixture = createTestComponent();
     const popoverEl = getPopoverElement();
     const bodyEl = getBodyEl(popoverEl);
-    expect(popoverEl).toHaveCssClass('slds-popover');
     expect(popoverEl).toHaveCssClass('slds-nubbin_bottom'); // Top placement
     expect(popoverEl.getAttribute('role')).toBe('dialog');
     expect(getCloseButtonEl(popoverEl)).toBeTruthy();

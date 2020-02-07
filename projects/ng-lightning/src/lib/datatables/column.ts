@@ -22,7 +22,7 @@ export class NglDatatableColumn {
 
   @Input() @InputBoolean() truncate = false;
 
-  @ContentChild(NglDatatableCell, { static: false }) cellTpl: NglDatatableCell;
+  @ContentChild(NglDatatableCell) cellTpl: NglDatatableCell;
 
-  @ContentChild(NglDatatableHeadingTemplate, { static: false }) headingTpl: NglDatatableHeadingTemplate;
+  @ContentChild(NglDatatableHeadingTemplate) headingTpl: NglDatatableHeadingTemplate;
 }
