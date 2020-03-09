@@ -2,7 +2,8 @@ section.slds-accordion__section([class.slds-is-open]="isActive")
   .slds-accordion__summary
     h3.slds-accordion__summary-heading((click)="onToggle()")
       button.slds-button.slds-button_reset.slds-accordion__summary-action([attr.aria-controls]="uid",
-                                                                          [attr.aria-expanded]="isActive")
+                                                                          [attr.aria-expanded]="isActive",
+                                                                          type="button")
         svg.slds-accordion__summary-action-icon.slds-button__icon.slds-button__icon_left(nglIconName="utility:switch")
         span.slds-truncate([nglInternalOutlet]="section.label", [nglInternalOutletContext]="{$implicit: section.labelContext}")
   .slds-accordion__content([attr.hidden]="isActive ? null : ''", [id]="uid")
