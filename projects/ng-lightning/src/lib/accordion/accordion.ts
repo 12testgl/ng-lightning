@@ -29,7 +29,7 @@ export class NglAccordion {
   }
 
   toggle(section: NglAccordionSection) {
-    const active = addOptionToSelection(section.name, this.activeName, this.multiple);
+    const active = addOptionToSelection(section.name, this.activeName, this.multiple, true);
     this.activeNameChange.emit(active);
   }
 

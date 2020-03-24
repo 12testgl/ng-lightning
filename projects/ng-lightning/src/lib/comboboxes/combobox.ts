@@ -192,8 +192,10 @@ export class NglCombobox implements OnChanges, OnDestroy {
   }
 
   onOptionSelection(option: NglComboboxOption = this.activeOption) {
-    const selection = addOptionToSelection(option.value, this.selection, this.multiple);
-    this.selectionChange.emit(selection);
+    const selection = addOptionToSelection(option.value, this.selection, this.multiple, false);    
+    if ( this.selection != selection){
+      this.selectionChange.emit(selection);
+    }
     if (this.closeOnSelection) {
       this.close();
     }

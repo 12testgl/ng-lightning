@@ -228,6 +228,12 @@ describe('`NglCombobox`', () => {
 
     const options = getOptionElements();
 
+    dispatchEvent(options[0], 'mousedown');
+    fixture.detectChanges();
+    expect(componentInstance.onSelection).not.toHaveBeenCalled();
+    expect(componentInstance.onOpen).toHaveBeenCalledWith(false);
+    expect(isOpen(fixture)).toBe(true);
+
     dispatchEvent(options[2], 'mousedown');
     fixture.detectChanges();
     expect(componentInstance.onSelection).toHaveBeenCalledWith(3);

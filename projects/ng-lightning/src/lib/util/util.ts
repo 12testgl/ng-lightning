@@ -53,7 +53,7 @@ export function ngClassCombine(ngClasses: string | string[] | Set<string> | { [k
   // Convert string and Set to array
   if (typeof ngClasses === 'string') {
     ngClasses = ngClasses.split(/\s+/);
-  } else  if (ngClasses instanceof Set) {
+  } else if (ngClasses instanceof Set) {
     const a = [];
     ngClasses.forEach(v => a.push(v));
     ngClasses = a;
@@ -67,7 +67,7 @@ export function ngClassCombine(ngClasses: string | string[] | Set<string> | { [k
     }, {});
   }
 
-  return {...ngClasses, ...customClasses};
+  return { ...ngClasses, ...customClasses };
 }
 
 
@@ -89,7 +89,7 @@ export function isOptionSelected(value: string | number | any, selection: any | 
   return value === selection;
 }
 
-export function addOptionToSelection(value: string | number | any, selection: any | any[], multiple: boolean) {
+export function addOptionToSelection(value: string | number | any, selection: any | any[], multiple: boolean, clearable: boolean) {
   let next: any;
   if (multiple) {
     if (!selection) {
@@ -105,13 +105,13 @@ export function addOptionToSelection(value: string | number | any, selection: an
       next = Object.assign({}, selection, { [value]: !selection[value] });
     }
   } else {
-    next = selection === value ? null : value;
+    next = selection === value && clearable ? null : value;
   }
 
   return next;
 }
 
-export function menuItemScroll (container, domItem, scrollPadding = 4) {
+export function menuItemScroll(container, domItem, scrollPadding = 4) {
   if (
     domItem.offsetHeight - container.scrollTop + domItem.offsetTop >=
     container.offsetHeight
