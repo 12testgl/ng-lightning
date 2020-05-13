@@ -1,6 +1,6 @@
 A flexible and efficient datepicker that allows users to enter a date either through text input, or by choosing a date from the calendar.  It can be used either inline with `<ngl-datepicker>` component or as a popup on an input element with `<ngl-datepicker-input>` component.
 
-User can utilize the `format` and `delimiter` options, in order to match it's formatting requirements for the input field. There are 3 options for pre-defined formats: `big-endian` (YYYY/MM/DD), `middle-endian` (MM/DD/YYY) and `little-endian` (DD/MM/YYYY).
+User can utilize the `format` and `delimiter` options, in order to match its formatting requirements for the input field. There are 3 options for pre-defined formats: `big-endian` (YYYY/MM/DD), `middle-endian` (MM/DD/YYY) and `little-endian` (DD/MM/YYYY).
 
 **Keyboard interactions**:
 
