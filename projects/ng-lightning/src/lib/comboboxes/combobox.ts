@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, TemplateRef, OnDestroy,
-         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
+         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef, Optional, Inject } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { ConnectionPositionPair, CdkOverlayOrigin, CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import { InputBoolean, InputNumber } from '../util/convert';
 import { NglComboboxOption } from './combobox-option';
 import { NglComboboxInput } from './combobox-input';
 import { NglComboboxService } from './combobox.service';
+import { NglComboboxConfig, NGL_COMBOBOX_CONFIG } from './config';
 
 export interface NglComboboxOptionItem {
   value: number | string;
@@ -53,6 +54,21 @@ export class NglCombobox implements OnChanges, OnDestroy {
   @Input() @InputBoolean() readonly loadingMore: boolean;
 
   @Input() @InputBoolean() readonly closeOnSelection = true;
+
+  /**
+   * Text added to loading spinner.
+   */
+  @Input() loadingLabel: string;
+
+  /**
+   * Text message that renders when no matches found.
+   */
+  @Input() noOptionsFound: string;
+
+  /**
+   * Text for removing single selected option.
+   */
+  @Input() removeSelectedLabel: string;
 
   @ViewChildren(NglComboboxOption) readonly options: QueryList<NglComboboxOption>;
 
@@ -117,7 +133,15 @@ export class NglCombobox implements OnChanges, OnDestroy {
     return this.isLookup && !this.multiple && this.selectedOptions.length > 0;
   }
 
-  constructor(private ngZone: NgZone, private cd: ChangeDetectorRef, private service: NglComboboxService) {
+  constructor(@Optional() @Inject(NGL_COMBOBOX_CONFIG) defaultConfig: NglComboboxConfig,
+              private ngZone: NgZone,
+              private cd: ChangeDetectorRef,
+              private service: NglComboboxService) {
+    const config = { ...new NglComboboxConfig(), ...defaultConfig };
+    this.loadingLabel = config.loadingLabel;
+    this.noOptionsFound = config.noOptionsFound;
+    this.removeSelectedLabel = config.removeSelectedLabel;
+
     this.service.combobox = this;
     // this.service.openChange = this.openChange;
   }

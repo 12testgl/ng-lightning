@@ -14,7 +14,7 @@ label([nglFormLabel]="label", [attr.for]="inputEl.id")
 
         .slds-input__icon-group.slds-input__icon-group_right(*ngIf="loading; else iconRight")
           .slds-spinner.slds-spinner_brand.slds-spinner_x-small.slds-input__spinner(role="status")
-            span.slds-assistive-text Loading
+            span.slds-assistive-text {{ loadingLabel }}
             .slds-spinner__dot-a
             .slds-spinner__dot-b
 
@@ -25,9 +25,9 @@ label([nglFormLabel]="label", [attr.for]="inputEl.id")
           button.slds-button.slds-button_icon.slds-input__icon.slds-input__icon_right(*ngIf="hasLookupSingleSelection; else iconTpl",
                                                                                       type="button",
                                                                                       (click)="onClearSelection()",
-                                                                                      title="Remove selected option")
+                                                                                      [title]="removeSelectedLabel")
             svg.slds-button__icon(nglIconName="utility:close")
-            span.slds-assistive-text Remove selected option
+            span.slds-assistive-text {{ removeSelectedLabel }}
 
         ng-template(#iconTpl)
           span.slds-icon_container.slds-input__icon.slds-input__icon_right
@@ -56,11 +56,11 @@ ng-template(cdkConnectedOverlay,
       li.slds-listbox__item(*ngIf="loadingMore", role="presentation")
         .slds-align_absolute-center.slds-p-top_medium
           .slds-spinner.slds-spinner_x-small.slds-spinner_inline(role="status")
-            .slds-assistive-text Loading
+            .slds-assistive-text {{ loadingLabel }}
             .slds-spinner__dot-a
             .slds-spinner__dot-b
 
       //- No matches
       li.slds-listbox__item(*ngIf="hasNoMatches()", role="presentation", aria-live="polite")
         .slds-align_absolute-center
-          span(role="status") No matches found.
+          span(role="status") {{ noOptionsFound }}

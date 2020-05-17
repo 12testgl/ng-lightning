@@ -14,6 +14,9 @@
 | `[closeOnSelection]` | Whether a mouse/keyboard selection should close menu. | boolean | true |
 | `[options]` | Array of *unique* items in the menu. | string[] \| NglComboboxOptionItem[] | |
 | `[selectionValueFn]` | Function that calculates diplayed value on the input element. | (string[]): string | Function |
+| `[loadingLabel]` | Text added to loading spinner. | string | 'Loading' |
+| `[noOptionsFound]` | Text message that renders when no matches found. | string | 'No matches found.' |
+| `[removeSelectedLabel]` | Text for removing single selected option. | string | 'Remove selected option' |
 | `(openChange)` | Emits event when the menu should show or hide. | EventEmitter<boolean> | |
 | `(selectionChange)` | Emits with the newly selected items based on user's actions. | EventEmitter | |
 
@@ -21,3 +24,9 @@
 #### NglComboboxInput
 
 Used inside `ngl-combobox`.
+
+### NGL_COMBOBOX_CONFIG<NglComboboxConfig>
+
+Injection token that can be used to specify default options.
+
+Available properties: `loadingLabel`, `noOptionsFound`, `removeSelectedLabel`

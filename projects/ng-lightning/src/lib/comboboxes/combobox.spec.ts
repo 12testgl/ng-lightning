@@ -536,6 +536,16 @@ describe('`NglCombobox`', () => {
       fixture.detectChanges();
       expectOptions(['No matches found.']);
     });
+
+    it('should display custom appropriate message when no options exist', () => {
+      const customMessage = `Nothing matches!!`;
+      createLookupTestComponent(`
+        <ngl-combobox variant="lookup" noOptionsFound="${customMessage}" [options]="null" open="true">
+          <input nglCombobox />
+        </ngl-combobox>
+      `);
+      expectOptions([customMessage]);
+    });
   });
 
   it('should close menu if input is scrolled outside of view', () => {
