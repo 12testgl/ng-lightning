@@ -119,6 +119,11 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   @Input() readonly selectDateLabel = 'Select a date';
 
   /**
+   * Whether to use the accepted pattern as placeholder.
+   */
+  @Input() @InputBoolean() patternPlaceholder: boolean;
+
+  /**
    * Datepicker inputs
    */
   @Input() monthNames: string[];
@@ -144,6 +149,10 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   }
   get open() {
     return this._open.value;
+  }
+
+  get _placeholder() {
+    return this.patternPlaceholder ? this.getPattern().toLocaleUpperCase() : this.placeholder;
   }
 
   private _open = new BehaviorSubject(false);
@@ -184,6 +193,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     this.todayLabel = this.config.todayLabel;
     this.previousMonthLabel = this.config.previousMonthLabel;
     this.nextMonthLabel = this.config.nextMonthLabel;
+    this.patternPlaceholder = this.config.patternPlaceholder;
   }
 
   onChange: Function | null = null;

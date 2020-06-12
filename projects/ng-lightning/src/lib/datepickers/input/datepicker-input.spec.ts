@@ -61,6 +61,7 @@ describe('`<ngl-datepicker-input>`', () => {
 
     const inputEl = getInput(fixture);
     expect(inputEl.value).toEqual('2010/09/30');
+    expect(inputEl.getAttribute('placeholder')).toEqual('Custom placeholder');
 
     const labelEl = getLabel(fixture);
     expect(labelEl.textContent).toEqual('Select date');
@@ -114,6 +115,17 @@ describe('`<ngl-datepicker-input>`', () => {
     fixture.componentInstance.delimiter = null;
     fixture.detectChanges();
     expect(inputEl.value).toEqual('2010/09/30');
+  });
+
+  it('should be able to set pattern as placeholder if requested', () => {
+    const fixture = createTestComponent(`<ngl-datepicker-input patternPlaceholder [format]="format" [delimiter]="delimiter"></ngl-datepicker-input>`);
+    const inputEl = getInput(fixture);
+    expect(inputEl.getAttribute('placeholder')).toEqual('YYYY/MM/DD');
+
+    fixture.componentInstance.format = 'little-endian';
+    fixture.componentInstance.delimiter = '-';
+    fixture.detectChanges();
+    expect(inputEl.getAttribute('placeholder')).toEqual('DD-MM-YYYY');
   });
 
   it('should be able to set input as readonly', () => {
@@ -440,7 +452,9 @@ describe('`<ngl-datepicker-input>`', () => {
 
 
 @Component({
-  template: `<ngl-datepicker-input [value]="date" (valueChange)="dateChange($event)" label="Select date"></ngl-datepicker-input>`,
+  template: `
+    <ngl-datepicker-input [value]="date" (valueChange)="dateChange($event)" label="Select date" placeholder="Custom placeholder"></ngl-datepicker-input>
+  `,
 })
 export class TestComponent {
   date: Date | string = new Date(2010, 8, 30); // 30 September 2010

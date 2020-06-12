@@ -31,6 +31,7 @@ Also supports `[(ngModel)]` and `[formControl]`, instead of `[(value)]`.
 | `[dropdownAlign]` | Aligns the right or left side of the dropdown menu with the respective side of the input. | 'left' \| 'right' | 'left' |
 | `[label]` | Label that appears above the input. | string \| TemplateRef<any> | |
 | `[placeholder]` | Placeholder of input. | string | |
+| `[patternPlaceholder]` | Use the date pattern (format & delimiter) as placeholder of input, overriding `placeholder`. | boolean | false |
 | `[format]` | Pre-defined format to use. | 'big-endian' \| 'little-endian' \| 'middle-endian' | 'big-endian' |
 | `[delimiter]` | Delimiter to use on pre-defined formats. | string | '/' |
 | `[disabled]` | Disable input and calendar. | boolean | false |
@@ -45,4 +46,4 @@ You can also use all the `<ngl-datepicker>` inputs, that will be proxied to to p
 
 Injection token that can be used to specify default options.
 
-Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `firstDayOfWeek`, `relativeYearFrom`, `relativeYearTo`, `openOnInputClick`, `todayLabel`, `previousMonthLabel`, `nextMonthLabel`
+Available properties: `format`, `delimiter`, `dropdownAlign`, `showToday`, `monthNames`, `dayNamesShort`, `dayNamesLong`, `firstDayOfWeek`, `relativeYearFrom`, `relativeYearTo`, `openOnInputClick`, `todayLabel`, `previousMonthLabel`, `nextMonthLabel`, `patternPlaceholder`

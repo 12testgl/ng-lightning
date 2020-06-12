@@ -7,7 +7,7 @@ label.slds-form-element__label(*ngIf="label", [attr.for]="uid", [nglInternalOutl
                    [id]="uid",
                    type="text",
                    autocomplete="off",
-                   [placeholder]="placeholder",
+                   [placeholder]="_placeholder",
                    [disabled]="disabled",
                    [readOnly]="readonlyInput",
                    (click)="onTriggerClick('input')",

@@ -34,6 +34,8 @@ export class NglDatepickerConfig<D = any> {
 
   nextMonthLabel = 'Next Month';
 
+  patternPlaceholder = false;
+
   constructor(locale: string) {
     this.monthNames = getLocaleMonthNames(locale, FormStyle.Standalone, TranslationWidth.Wide);
     this.dayNamesShort = getLocaleDayNames(locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
