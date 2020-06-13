@@ -1,0 +1,1 @@
+You can combine the datepicker input with any masking library to provide better experience for your users. Here is an example utilizing the <a href="https://nosir.github.io/cleave.js/">Cleave</a> library.

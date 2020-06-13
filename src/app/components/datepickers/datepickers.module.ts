@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NglDatepickersModule, NglButtonsModule, NglCheckboxesModule } from 'ng-lightning';
 import { NglDemoExampleModule } from 'src/app/example/example.module';
+import { NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
 
 import { DemoDatepickersComponent } from './datepickers.component';
 
@@ -16,6 +17,7 @@ import { DemoDatepickersInput } from './examples/input';
 import { DemoDatepickersFilter } from './examples/filter';
 import { DemoDatepickersFormat } from './examples/format';
 import { DemoDatepickersValidation } from './examples/validation';
+import { DemoDatepickersMasking } from './examples/masking';
 
 const routes: Routes = [
   { path: '', component: DemoDatepickersComponent },
@@ -30,6 +32,7 @@ const routes: Routes = [
     NglButtonsModule,
     NglCheckboxesModule,
     NglDemoExampleModule,
+    NgxCleaveDirectiveModule,
   ],
   declarations: [
     DemoDatepickersComponent,
@@ -41,6 +44,7 @@ const routes: Routes = [
     DemoDatepickersI18n,
     DemoDatepickersInput,
     DemoDatepickersValidation,
+    DemoDatepickersMasking,
   ],
 })
 export class NglDemoDatepickersModule {}

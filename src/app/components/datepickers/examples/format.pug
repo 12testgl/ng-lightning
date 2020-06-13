@@ -1,9 +1,12 @@
 .slds-grid.slds-gutters_direct
   .slds-col
     ngl-datepicker-input(label="little-endian", [(value)]="value", format="little-endian", patternPlaceholder)
+      input(nglDatepickerInput, type="text")
 
   .slds-col
     ngl-datepicker-input(label="middle-endian with dashes", [(value)]="value", format="middle-endian", delimiter="-", patternPlaceholder)
+      input(nglDatepickerInput, type="text")
 
   .slds-col
     ngl-datepicker-input(label="big-endian with dots", [(value)]="value", format="big-endian", delimiter=".", patternPlaceholder)
+      input(nglDatepickerInput, type="text")

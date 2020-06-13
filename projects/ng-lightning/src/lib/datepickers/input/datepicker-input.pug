@@ -1,19 +1,7 @@
 label.slds-form-element__label(*ngIf="label", [attr.for]="uid", [nglInternalOutlet]="label")
 
-.slds-form-element__control.slds-input-has-icon.slds-input-has-icon_right(#formEl)
-  input.slds-input(#inputEl,
-                   cdkOverlayOrigin,
-                   #overlayOrigin="cdkOverlayOrigin",
-                   [id]="uid",
-                   type="text",
-                   autocomplete="off",
-                   [placeholder]="_placeholder",
-                   [disabled]="disabled",
-                   [readOnly]="readonlyInput",
-                   (click)="onTriggerClick('input')",
-                   (keydown)="onKeyboardInput($event)",
-                   (input)="onInputChange($event.target.value)",
-                   (blur)="onBlur()")
+.slds-form-element__control.slds-input-has-icon.slds-input-has-icon_right(#formEl, cdkOverlayOrigin, #overlayOrigin="cdkOverlayOrigin")
+  ng-content
   button.slds-button.slds-button_icon.slds-input__icon.slds-input__icon_right(type="button",
                                                                               [title]="selectDateLabel",
                                                                               [disabled]="disabled",

@@ -84,7 +84,7 @@ describe('`<ngl-datepicker-input>`', () => {
   });
 
   it('should apply the correct format', () => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [value]="date" [format]="format"></ngl-datepicker-input>`);
+    const fixture = createTestComponent(`<ngl-datepicker-input [value]="date" [format]="format"><input nglDatepickerInput></ngl-datepicker-input>`);
     const inputEl = getInput(fixture);
 
     fixture.componentInstance.format = 'little-endian';
@@ -101,7 +101,7 @@ describe('`<ngl-datepicker-input>`', () => {
   });
 
   it('should apply the correct delimiter', () => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [value]="date" [delimiter]="delimiter"></ngl-datepicker-input>`);
+    const fixture = createTestComponent(`<ngl-datepicker-input [value]="date" [delimiter]="delimiter"><input nglDatepickerInput></ngl-datepicker-input>`);
     const inputEl = getInput(fixture);
 
     fixture.componentInstance.delimiter = '-';
@@ -118,7 +118,10 @@ describe('`<ngl-datepicker-input>`', () => {
   });
 
   it('should be able to set pattern as placeholder if requested', () => {
-    const fixture = createTestComponent(`<ngl-datepicker-input patternPlaceholder [format]="format" [delimiter]="delimiter"></ngl-datepicker-input>`);
+    const fixture = createTestComponent(`
+      <ngl-datepicker-input patternPlaceholder [format]="format" [delimiter]="delimiter">
+        <input nglDatepickerInput>
+      </ngl-datepicker-input>`);
     const inputEl = getInput(fixture);
     expect(inputEl.getAttribute('placeholder')).toEqual('YYYY/MM/DD');
 
@@ -126,12 +129,6 @@ describe('`<ngl-datepicker-input>`', () => {
     fixture.componentInstance.delimiter = '-';
     fixture.detectChanges();
     expect(inputEl.getAttribute('placeholder')).toEqual('DD-MM-YYYY');
-  });
-
-  it('should be able to set input as readonly', () => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [value]="date" readonlyInput></ngl-datepicker-input>`);
-    const inputEl = getInput(fixture);
-    expect(inputEl.readOnly).toBe(true);
   });
 
   it('should open calendar on trigger click and close on Esc', () => {
@@ -163,8 +160,8 @@ describe('`<ngl-datepicker-input>`', () => {
 
   it('should not open multiple calendars at the same time', () => {
     const fixture = createTestComponent(`
-      <ngl-datepicker-input [value]="date"></ngl-datepicker-input>
-      <ngl-datepicker-input [value]="date"></ngl-datepicker-input>
+      <ngl-datepicker-input [value]="date"><input nglDatepickerInput></ngl-datepicker-input>
+      <ngl-datepicker-input [value]="date"><input nglDatepickerInput></ngl-datepicker-input>
     `);
     const inputs = fixture.nativeElement.querySelectorAll('input.slds-input');
 
@@ -222,92 +219,99 @@ describe('`<ngl-datepicker-input>`', () => {
     expectOpen(fixture, false);
   });
 
-  it('should emit new date when interacting with input', () => {
+  it('should emit new date when interacting with input', fakeAsync(() => {
     const fixture = createTestComponent();
     const input = getInput(fixture);
 
     input.value = '2013/08/11';
     dispatchEvent(input, 'input');
+    tick();
     expect(fixture.componentInstance.dateChange).toHaveBeenCalledWith(new Date(2013, 7, 11));
-  });
+  }));
 
-  it('should format input value on blur', () => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [(value)]="date"></ngl-datepicker-input>`);
+  it('should format input value on blur', fakeAsync(() => {
+    const fixture = createTestComponent(`<ngl-datepicker-input [(value)]="date"><input nglDatepickerInput></ngl-datepicker-input>`);
     const input = getInput(fixture);
 
     input.value = '2013/8/11';
     dispatchEvent(input, 'input');
+    tick();
     expect(fixture.componentInstance.date).toEqual(new Date(2013, 7, 11));
     expect(input.value).toEqual('2013/8/11');
 
     dispatchEvent(input, 'blur');
     fixture.detectChanges();
     expect(input.value).toEqual('2013/08/11');
-  });
+  }));
 
-  it('should emit input value if invalid', () => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [(value)]="date"></ngl-datepicker-input>`);
+  it('should emit input value if invalid', fakeAsync(() => {
+    const fixture = createTestComponent(`<ngl-datepicker-input [(value)]="date"><input nglDatepickerInput></ngl-datepicker-input>`);
     const input = getInput(fixture);
 
     input.value = 'abcd';
     dispatchEvent(input, 'input');
+    tick();
     expect(fixture.componentInstance.date).toEqual('abcd');
     expect(input.value).toEqual('abcd');
 
     dispatchEvent(input, 'blur');
     fixture.detectChanges();
     expect(input.value).toEqual('abcd');
-  });
-
-  it('should work correctly with `ngModel`', async(() => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date"></ngl-datepicker-input>`);
-    const input = getInput(fixture);
-
-    fixture.whenStable().then(() => {
-      expect(input.value).toEqual('2010/09/30');
-
-      input.value = '2013/8/11';
-      dispatchEvent(input, 'input');
-      expect(fixture.componentInstance.date).toEqual(new Date(2013, 7, 11));
-      expect(input.value).toEqual('2013/8/11');
-
-      fixture.componentInstance.date = new Date(2014, 9, 23);
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(input.value).toEqual('2014/10/23');
-
-        fixture.componentInstance.date = null;
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(input.value).toEqual('');
-        });
-      });
-    });
   }));
 
-  it('should have validation for invalid input', async(() => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date" #x="ngModel" [class.slds-has-error]="!x.valid"></ngl-datepicker-input>`);
+  it('should work correctly with `ngModel`', fakeAsync(async () => {
+    const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date"><input nglDatepickerInput></ngl-datepicker-input>`);
+    const input = getInput(fixture);
+
+    await fixture.whenStable();
+    expect(input.value).toEqual('2010/09/30');
+
+    input.value = '2013/8/11';
+    dispatchEvent(input, 'input');
+    tick();
+    expect(fixture.componentInstance.date).toEqual(new Date(2013, 7, 11));
+    expect(input.value).toEqual('2013/8/11');
+
+    fixture.componentInstance.date = new Date(2014, 9, 23);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(input.value).toEqual('2014/10/23');
+
+    fixture.componentInstance.date = null;
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(input.value).toEqual('');
+  }));
+
+  it('should have validation for invalid input', fakeAsync(async () => {
+    const fixture = createTestComponent(`
+      <ngl-datepicker-input [(ngModel)]="date" #x="ngModel" [class.slds-has-error]="!x.valid">
+        <input nglDatepickerInput>
+      </ngl-datepicker-input>`);
     const host = getHost(fixture);
     const input = getInput(fixture);
 
-    fixture.whenStable().then(() => {
-      expect(host).not.toHaveCssClass('slds-has-error');
+    await fixture.whenStable();
+    expect(host).not.toHaveCssClass('slds-has-error');
 
-      input.value = 'abc';
-      dispatchEvent(input, 'input');
-      fixture.detectChanges();
-      expect(host).toHaveCssClass('slds-has-error');
+    input.value = 'abc';
+    dispatchEvent(input, 'input');
+    tick();
+    fixture.detectChanges();
+    expect(host).toHaveCssClass('slds-has-error');
 
-      input.value = '';
-      dispatchEvent(input, 'input');
-      fixture.detectChanges();
-      expect(host).not.toHaveCssClass('slds-has-error');
-    });
+    input.value = '';
+    dispatchEvent(input, 'input');
+    tick();
+    fixture.detectChanges();
+    expect(host).not.toHaveCssClass('slds-has-error');
   }));
 
   it('should have validation for `min` input', async(() => {
     const fixture = createTestComponent(`
-      <ngl-datepicker-input [(ngModel)]="date" [min]="min" #x="ngModel" [class.slds-has-error]="!x.valid"></ngl-datepicker-input>
+      <ngl-datepicker-input [(ngModel)]="date" [min]="min" #x="ngModel" [class.slds-has-error]="!x.valid">
+        <input nglDatepickerInput>
+      </ngl-datepicker-input>
     `, false);
     fixture.componentInstance.date = new Date(2010, 7, 11);
     fixture.componentInstance.min = new Date(2013, 7, 11);
@@ -331,7 +335,9 @@ describe('`<ngl-datepicker-input>`', () => {
   it('should update validity if `min` changes', fakeAsync(() => {
     const fixture = createTestComponent(`
       <form>
-        <ngl-datepicker-input [(ngModel)]="date" [min]="min" name="dp"></ngl-datepicker-input>
+        <ngl-datepicker-input [(ngModel)]="date" [min]="min" name="dp">
+          <input nglDatepickerInput>
+        </ngl-datepicker-input>
       </form>`);
     const form = fixture.debugElement.query(By.directive(NgForm)).injector.get(NgForm);
 
@@ -347,7 +353,9 @@ describe('`<ngl-datepicker-input>`', () => {
 
   it('should have validation for `max` input', async(() => {
     const fixture = createTestComponent(`
-      <ngl-datepicker-input [(ngModel)]="date" [max]="max" #x="ngModel" [class.slds-has-error]="!x.valid"></ngl-datepicker-input>
+      <ngl-datepicker-input [(ngModel)]="date" [max]="max" #x="ngModel" [class.slds-has-error]="!x.valid">
+        <input nglDatepickerInput>
+      </ngl-datepicker-input>
     `, false);
     fixture.componentInstance.date = new Date(2014, 9, 23);
     fixture.componentInstance.max = new Date(2010, 9, 23);
@@ -371,7 +379,9 @@ describe('`<ngl-datepicker-input>`', () => {
   it('should update validity if `max` changes', fakeAsync(() => {
     const fixture = createTestComponent(`
       <form>
-        <ngl-datepicker-input [(ngModel)]="date" [max]="max" name="dp"></ngl-datepicker-input>
+        <ngl-datepicker-input [(ngModel)]="date" [max]="max" name="dp">
+          <input nglDatepickerInput>
+        </ngl-datepicker-input>
       </form>`);
     const form = fixture.debugElement.query(By.directive(NgForm)).injector.get(NgForm);
 
@@ -386,7 +396,7 @@ describe('`<ngl-datepicker-input>`', () => {
   }));
 
   it('should handle appropriately disable state', async(() => {
-    const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date" disabled></ngl-datepicker-input>`);
+    const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date" disabled><input nglDatepickerInput></ngl-datepicker-input>`);
 
     fixture.whenStable().then(() => {
       expect(getInput(fixture).disabled).toBe(true);
@@ -436,7 +446,7 @@ describe('`<ngl-datepicker-input>`', () => {
     const fixture = createTestComponent(`
       <div cdkScrollable style="padding: 100px; margin: 300px;
                                 height: 200px; width: 200px; overflow: auto;">
-        <ngl-datepicker-input [value]="date" style="margin-bottom: 600px;"></ngl-datepicker-input>
+        <ngl-datepicker-input [value]="date" style="margin-bottom: 600px;"><input nglDatepickerInput></ngl-datepicker-input>
       </div>`);
     openCalendar(fixture);
 
@@ -453,7 +463,9 @@ describe('`<ngl-datepicker-input>`', () => {
 
 @Component({
   template: `
-    <ngl-datepicker-input [value]="date" (valueChange)="dateChange($event)" label="Select date" placeholder="Custom placeholder"></ngl-datepicker-input>
+    <ngl-datepicker-input [value]="date" (valueChange)="dateChange($event)" label="Select date">
+      <input nglDatepickerInput placeholder="Custom placeholder">
+    </ngl-datepicker-input>
   `,
 })
 export class TestComponent {

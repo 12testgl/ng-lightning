@@ -13,6 +13,7 @@ import { NglDateAdapter } from '../adapters/date-fns-adapter';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
 import { DEFAULT_DROPDOWN_POSITIONS } from '../../util/overlay-position';
 import { parseDate, isDisabled } from '../util';
+import { IDatepickerInput } from './datepicker-input.interface';
 
 const NGL_DATEPICKER_INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -40,11 +41,6 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   @Input() label: string | TemplateRef<any>;
 
   /**
-   * Placeholder of input.
-   */
-  @Input() placeholder = '';
-
-  /**
    * Pre-defined format to use.
    */
   @Input() format: 'big-endian' | 'little-endian' | 'middle-endian';
@@ -58,11 +54,6 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
    * Disable input and calendar.
    */
   @Input() @InputBoolean() disabled: boolean;
-
-  /**
-   * Whether input is readonly and calendar is available for date selection.
-   */
-  @Input() @InputBoolean() readonlyInput = false;
 
   /**
    * Aligns the right or left side of the dropdown menu with the respective side of the input.
@@ -99,7 +90,9 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
    */
   @Output() valueChange = new EventEmitter<Date | string | null>();
 
-  @ViewChild('inputEl', { static: true }) inputEl: ElementRef;
+  inputEl: IDatepickerInput;
+
+  // @ContentChild('inputEl', { static: false }) inputEl: SquareConfig;
 
   @ViewChild('cdkOverlay') cdkOverlay: CdkConnectedOverlay;
 
@@ -149,10 +142,6 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   }
   get open() {
     return this._open.value;
-  }
-
-  get _placeholder() {
-    return this.patternPlaceholder ? this.getPattern().toLocaleUpperCase() : this.placeholder;
   }
 
   private _open = new BehaviorSubject(false);
@@ -263,6 +252,14 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     if (changes.min || changes.max) {
       this.validatorChange();
     }
+
+    if ((changes.patternPlaceholder || changes.format || changes.delimiter) && this.patternPlaceholder) {
+      this.inputEl.setPlaceholder(this.getPattern().toLocaleUpperCase());
+    }
+
+    if (changes.disabled) {
+      this.inputEl.setDisabled(this.disabled);
+    }
   }
 
   ngOnDestroy() {
@@ -277,7 +274,9 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     }
   }
 
-  onInputChange(value: string) {
+  onInputChange() {
+    const value = this.inputEl.element.nativeElement.value;
+
     const date = this.dateParse(value);
     this.emitSelection(date || value);
   }
@@ -305,7 +304,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     }
 
     if (focusInput) {
-      this.inputEl.nativeElement.focus();
+      this.inputEl.element.nativeElement.focus();
     }
   }
 
@@ -342,7 +341,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   }
 
   private formatInputValue() {
-    const inputValue = this.inputEl.nativeElement.value;
+    const inputValue = this.inputEl.element.nativeElement.value;
     if (!inputValue) {
       this.updateInputValue();
     } else {
@@ -356,7 +355,7 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   }
 
   private updateInputValue(value: string = this.dateFormat(<Date>this.value)) {
-    this.renderer.setProperty(this.inputEl.nativeElement, 'value', value || '');
+    this.renderer.setProperty(this.inputEl.element.nativeElement, 'value', value || '');
   }
 
   private dateParse(value: string) {

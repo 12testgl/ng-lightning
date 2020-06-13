@@ -1,0 +1,9 @@
+ngl-datepicker-input(label="Date", [(ngModel)]="value", #dt="ngModel", [class.slds-has-error]="!dt.valid", patternPlaceholder)
+  input(nglDatepickerInput, type="text", [cleave]="cleaveOptions")
+|
+|
+.slds-m-top_large
+  button(type="button", nglButton, variant="destructive", (click)="value = null") Clear
+|
+|
+.slds-m-top_large Selected: <b>{{value}}</b>

@@ -1,6 +1,8 @@
 .slds-grid.slds-gutters_direct
   .slds-col
     ngl-datepicker-input(label="Totally disabled", [(value)]="value", format="little-endian", disabled)
+      input(nglDatepickerInput, type="text")
 
   .slds-col
-    ngl-datepicker-input(label="Readonly input", [(value)]="value", format="little-endian", readonlyInput)
+    ngl-datepicker-input(label="Readonly input", [(value)]="value", format="little-endian")
+      input(nglDatepickerInput, type="text", readonly)

@@ -3,6 +3,7 @@ ngl-datepicker-input(label="Choose a valid date",
                      [class.slds-has-error]="!dt.valid",
                      [dateDisabled]="dateDisabled",
                      [min]="minDate", [max]="maxDate")
+  input(nglDatepickerInput, type="text")
 |
 |
 .slds-m-top_xx-small.slds-text-color_error(*ngIf="!dt.valid")

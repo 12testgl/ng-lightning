@@ -30,12 +30,10 @@ Also supports `[(ngModel)]` and `[formControl]`, instead of `[(value)]`.
 | `[value]` | The date value. | Date | |
 | `[dropdownAlign]` | Aligns the right or left side of the dropdown menu with the respective side of the input. | 'left' \| 'right' | 'left' |
 | `[label]` | Label that appears above the input. | string \| TemplateRef<any> | |
-| `[placeholder]` | Placeholder of input. | string | |
-| `[patternPlaceholder]` | Use the date pattern (format & delimiter) as placeholder of input, overriding `placeholder`. | boolean | false |
+| `[patternPlaceholder]` | Whether to use the date pattern (format & delimiter) as placeholder of the input, overriding it's own if exists. | boolean | false |
 | `[format]` | Pre-defined format to use. | 'big-endian' \| 'little-endian' \| 'middle-endian' | 'big-endian' |
 | `[delimiter]` | Delimiter to use on pre-defined formats. | string | '/' |
 | `[disabled]` | Disable input and calendar. | boolean | false |
-| `[readonlyInput]` | Whether input is readonly and calendar is available for date selection. | boolean | false |
 | `[openOnInputClick]` | Whether to open the datepicker when a mouse user clicks on the input. | boolean | true |
 | `[selectDateLabel]` | Text for button to open calendar. | string | 'Select a date' |
 | `(valueChange)` | Emits the selected date. | EventEmitter<Date> | |

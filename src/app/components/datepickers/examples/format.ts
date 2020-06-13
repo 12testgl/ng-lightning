@@ -7,6 +7,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class DemoDatepickersFormat {
 
-  value = new Date(2014, 9, 23);
+  value: Date;
 
 }

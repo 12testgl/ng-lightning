@@ -8,6 +8,7 @@ import { NglClickOutsideModule } from '../common/clickoutside.module';
 
 import { NglDatepicker } from './datepicker';
 import { NglDatepickerInput } from './input/datepicker-input';
+import { NglDatepickerInputDirective } from './input/datepicker-input.directive';
 
 import { NglDatepickerWeekdays } from './weekdays';
 import { NglDay } from './day';
@@ -18,7 +19,7 @@ import { NglDateAdapter } from './adapters/date-fns-adapter';
 import { NglOverlayModule } from '../common/overlay/overlay.module';
 
 const EXPORTS = [
-  NglDatepicker, NglDatepickerInput
+  NglDatepicker, NglDatepickerInput, NglDatepickerInputDirective,
 ];
 
 @NgModule({
