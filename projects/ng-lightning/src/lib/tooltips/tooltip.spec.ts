@@ -288,10 +288,33 @@ describe('Tooltips', () => {
 
   it('should support interaction with content', fakeAsync(() => {
     fixture = createTestComponent('<button nglTooltip="tip" nglTooltipInteractive="true" [nglTooltipDelay]="[0, 200]" [(nglTooltipOpen)]="open"></button>');
-    const overlayElement = fixture.componentInstance.tooltip.overlayRef.overlayElement;
+    let overlayElement = fixture.componentInstance.tooltip.overlayRef.overlayElement;
     const triggerEl = fixture.nativeElement.firstElementChild;
 
     expect(getTooltipElement()).toBeTruthy();
+
+    dispatchEvent(triggerEl, 'mouseleave');
+    fixture.detectChanges();
+
+    dispatchEvent(getTooltipElement(), 'mouseenter');
+    fixture.detectChanges();
+
+    tick(200);
+    fixture.detectChanges();
+    expect(getTooltipElement()).toBeTruthy();
+
+    dispatchEvent(overlayElement, 'mouseleave');
+    fixture.detectChanges();
+
+    tick(200);
+    fixture.detectChanges();
+    expect(getTooltipElement()).toBeFalsy();
+
+    // Open the tooltip again to check that interactivity still works
+    dispatchEvent(triggerEl, 'mouseenter');
+    fixture.detectChanges();
+    expect(getTooltipElement()).toBeTruthy();
+    overlayElement = fixture.componentInstance.tooltip.overlayRef.overlayElement;
 
     dispatchEvent(triggerEl, 'mouseleave');
     fixture.detectChanges();

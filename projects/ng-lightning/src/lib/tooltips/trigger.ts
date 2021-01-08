@@ -221,6 +221,11 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
     this.overlayListeners.forEach((unlisten) => unlisten());
     this.overlayListeners.clear();
 
+    // Clear the overlay reference used for interactive mode
+    if (this.interactive) {
+      this.overlayElement = null;
+    }
+
     if (this.positionChangesSubscription) {
       this.positionChangesSubscription.unsubscribe();
       this.positionChangesSubscription = null;
