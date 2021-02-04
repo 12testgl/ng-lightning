@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -307,7 +307,7 @@ describe('`<ngl-datepicker-input>`', () => {
     expect(host).not.toHaveCssClass('slds-has-error');
   }));
 
-  it('should have validation for `min` input', async(() => {
+  it('should have validation for `min` input', waitForAsync(() => {
     const fixture = createTestComponent(`
       <ngl-datepicker-input [(ngModel)]="date" [min]="min" #x="ngModel" [class.slds-has-error]="!x.valid">
         <input nglDatepickerInput>
@@ -351,7 +351,7 @@ describe('`<ngl-datepicker-input>`', () => {
     expect(form.control.valid).toBeFalsy();
   }));
 
-  it('should have validation for `max` input', async(() => {
+  it('should have validation for `max` input', waitForAsync(() => {
     const fixture = createTestComponent(`
       <ngl-datepicker-input [(ngModel)]="date" [max]="max" #x="ngModel" [class.slds-has-error]="!x.valid">
         <input nglDatepickerInput>
@@ -395,7 +395,7 @@ describe('`<ngl-datepicker-input>`', () => {
     expect(form.control.valid).toBeFalsy();
   }));
 
-  it('should handle appropriately disable state', async(() => {
+  it('should handle appropriately disable state', waitForAsync(() => {
     const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date" disabled><input nglDatepickerInput></ngl-datepicker-input>`);
 
     fixture.whenStable().then(() => {

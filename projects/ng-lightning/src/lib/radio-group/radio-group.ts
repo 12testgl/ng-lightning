@@ -15,7 +15,7 @@ export class NglRadioGroup implements OnChanges {
 
   @Input() label: string | TemplateRef<any>;
 
-  @Input() error: string;
+  @Input() error: string = null;
 
   @HostBinding('class.slds-has-error')
   get hasError(): boolean {
@@ -33,7 +33,6 @@ export class NglRadioGroup implements OnChanges {
   uid = uniqueId('radio-group');
 
   type$ = new BehaviorSubject<'list' | 'button'>(this.type);
-
   error$ = new BehaviorSubject<string | null>(this.error);
 
   ngOnChanges(changes: SimpleChanges) {

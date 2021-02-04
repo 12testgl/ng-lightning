@@ -1,5 +1,6 @@
-import { Input } from '@angular/core';
+import { Input, Directive } from '@angular/core';
 
+@Directive()
 export class NglCommonNotifyClose {
 
   @Input() set dismissible(dismissible: boolean) {

@@ -19,7 +19,8 @@
   "author": "Tasos Bekos <tbekos@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "date-fns": "^2.6.0"
+    "date-fns": "^2.6.0",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.0.0",

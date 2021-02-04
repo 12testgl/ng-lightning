@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component, Injectable, OnDestroy, ViewChild } from '@angular/core';
 import { dispatchKeyboardEvent, createGenericTestComponent } from '../../../test/util';
 import { NglPopoversModule } from './module';
@@ -291,7 +291,7 @@ describe('Popovers', () => {
     expect(fixture.componentInstance.cb).toHaveBeenCalledWith('x');
   });
 
-  it('should close if `backdrop` is clicked', async(() => {
+  it('should close if `backdrop` is clicked', waitForAsync(() => {
     fixture = createTestComponent();
     const outsideDropdownElement = getOutsidePopoverElement(fixture.nativeElement);
 

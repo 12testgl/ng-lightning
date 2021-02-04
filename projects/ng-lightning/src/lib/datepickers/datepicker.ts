@@ -97,9 +97,9 @@ export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
               private element: ElementRef) {
 
     const config = { ...new NglDatepickerConfig(locale), ...defaultConfig };
-    this.monthNames = config.monthNames;
-    this.dayNamesShort = config.dayNamesShort;
-    this.dayNamesLong = config.dayNamesLong;
+    this.monthNames = config.monthNames as string[];
+    this.dayNamesShort = config.dayNamesShort as string[];
+    this.dayNamesLong = config.dayNamesLong as  string[];
     this.firstDayOfWeek = config.firstDayOfWeek;
     this.showToday = config.showToday;
     this.relativeYearFrom = config.relativeYearFrom;

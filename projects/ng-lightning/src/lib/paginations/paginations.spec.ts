@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent } from '../../../test/util';
 import { NglPaginationsModule } from './module';
@@ -76,7 +76,7 @@ describe('Pagination Component', () => {
       expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '3', '+4', '-Next' ]);
     });
 
-    it('should move to first if none defined', async(() => {
+    it('should move to first if none defined', waitForAsync(() => {
       const fixture = createTestComponent(`<ngl-pagination [page]="unknown" [total]="total" (pageChange)="pageChange($event)"></ngl-pagination>`);
       expect(fixture.componentInstance.pageChange).not.toHaveBeenCalled();
       fixture.whenStable().then(() => {
@@ -84,7 +84,7 @@ describe('Pagination Component', () => {
       });
     }));
 
-    it('should keep current page inside limits when total page changes', async(() => {
+    it('should keep current page inside limits when total page changes', waitForAsync(() => {
       const fixture = createTestComponent();
       fixture.componentInstance.page = 4;
       fixture.detectChanges();
@@ -220,7 +220,7 @@ describe('Pagination Component', () => {
     expect(el).toHaveText('0 - 0');
   });
 
-  it('should support custom text in buttons', async(() => {
+  it('should support custom text in buttons', waitForAsync(() => {
     const fixture = createTestComponent(`<ngl-pagination page="1" total="1" boundaryLinks
       firstText="<<" previousText="<" nextText=">" [lastText]="lastText" ></ngl-pagination>`, false);
     fixture.componentInstance.lastText = '>>';

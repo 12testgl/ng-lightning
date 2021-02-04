@@ -171,9 +171,9 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
     this.format = this.config.format;
     this.delimiter = this.config.delimiter;
     this.setPositions(this.config.dropdownAlign);
-    this.monthNames = this.config.monthNames;
-    this.dayNamesShort = this.config.dayNamesShort;
-    this.dayNamesLong = this.config.dayNamesLong;
+    this.monthNames = this.config.monthNames as string[];
+    this.dayNamesShort = this.config.dayNamesShort as string[];
+    this.dayNamesLong = this.config.dayNamesLong as string[];
     this.firstDayOfWeek = this.config.firstDayOfWeek;
     this.showToday = this.config.showToday;
     this.relativeYearFrom = this.config.relativeYearFrom;

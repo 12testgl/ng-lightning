@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -123,7 +123,7 @@ describe('`Datepicker` Component', () => {
     jasmine.clock().mockDate(currentDate);
   });
 
-  it('should render correctly', async(() => {
+  it('should render correctly', waitForAsync(() => {
     const fixture = createTestComponent();
 
     expectCalendar(fixture, [
@@ -141,7 +141,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('render accessibility label for year select', async(() => {
+  it('render accessibility label for year select', waitForAsync(() => {
     const fixture = createTestComponent();
 
     const yearEl = (<HTMLSelectElement>fixture.nativeElement.querySelector('select.slds-select'));
@@ -149,7 +149,7 @@ describe('`Datepicker` Component', () => {
     expect(yearEl.id).toEqual(labelEl.getAttribute('for'));
   }));
 
-  it('should change view when input date is changing', async(() => {
+  it('should change view when input date is changing', waitForAsync(() => {
     const fixture = createTestComponent();
 
     fixture.componentInstance.date = new Date(2013, 7, 11); // 11 August 2013
@@ -172,7 +172,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('does not change current view when model is cleared', async(() => {
+  it('does not change current view when model is cleared', waitForAsync(() => {
     const fixture = createTestComponent();
 
     fixture.componentInstance.date = null;
@@ -185,7 +185,7 @@ describe('`Datepicker` Component', () => {
     ], 'September', '2010');
   }));
 
-  it('should show current date if none is set', async(() => {
+  it('should show current date if none is set', waitForAsync(() => {
     jasmine.clock().mockDate(new Date(2013, 7, 11)); // 11 August 2013
 
     const fixture = createTestComponent(null, false);
@@ -213,7 +213,7 @@ describe('`Datepicker` Component', () => {
     expect(fixture.componentInstance.dateChange).not.toHaveBeenCalled();
   });
 
-  it('moves to previous month correctly when button is clicked', async(() => {
+  it('moves to previous month correctly when button is clicked', waitForAsync(() => {
     const fixture = createTestComponent();
     clickButton(fixture.nativeElement, false);
 
@@ -228,7 +228,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('moves to next month correctly when button is clicked', async(() => {
+  it('moves to next month correctly when button is clicked', waitForAsync(() => {
     const fixture = createTestComponent();
     clickButton(fixture.nativeElement, true);
 
@@ -244,7 +244,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('should not "jump" months and keep current day in limits', async(() => {
+  it('should not "jump" months and keep current day in limits', waitForAsync(() => {
     const fixture = createTestComponent();
     fixture.componentInstance.date = new Date(2012, 0, 30); // 30 January 2012
     fixture.detectChanges();
@@ -259,7 +259,7 @@ describe('`Datepicker` Component', () => {
     ], 'February', '2012');
   }));
 
-  it('moves to selected year from dropdown', async(() => {
+  it('moves to selected year from dropdown', waitForAsync(() => {
     const fixture = createTestComponent();
 
     fixture.whenStable().then(() => {
@@ -289,7 +289,7 @@ describe('`Datepicker` Component', () => {
 
   describe('keyboard navigation', () => {
 
-    it('will be able to activate appropriate day', async(() => {
+    it('will be able to activate appropriate day', waitForAsync(() => {
       const fixture = createTestComponent();
 
       dispatchKey(fixture, DOWN_ARROW);
@@ -335,7 +335,7 @@ describe('`Datepicker` Component', () => {
       });
     }));
 
-    it('will be able to activate appropriate edge day', async(() => {
+    it('will be able to activate appropriate edge day', waitForAsync(() => {
       const fixture = createTestComponent();
 
       dispatchKey(fixture, HOME);
@@ -393,7 +393,7 @@ describe('`Datepicker` Component', () => {
     expect(getTodayButton(fixture)).toBeFalsy();
   });
 
-  it('should support custom month and day names', async(() => {
+  it('should support custom month and day names', waitForAsync(() => {
     jasmine.clock().mockDate(new Date(2005, 10, 9)); // 9 November 2005
 
     const fixture = createTestComponent(`
@@ -410,7 +410,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('should support custom week start', async(() => {
+  it('should support custom week start', waitForAsync(() => {
     const fixture = createTestComponent(`
       <ngl-datepicker [date]="date" [firstDayOfWeek]="firstDayOfWeek" showToday="false"></ngl-datepicker>
     `);
@@ -437,7 +437,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('should handle `firstDayOfWeek` as string attribute', async(() => {
+  it('should handle `firstDayOfWeek` as string attribute', waitForAsync(() => {
     const fixture = createTestComponent(`<ngl-datepicker [date]="date" firstDayOfWeek="1" showToday="false"></ngl-datepicker>`);
 
     expectCalendar(fixture, [
@@ -451,7 +451,7 @@ describe('`Datepicker` Component', () => {
     });
   }));
 
-  it('should handle when first day of week is after first day of month', async(() => {
+  it('should handle when first day of week is after first day of month', waitForAsync(() => {
     const fixture = createTestComponent(`
       <ngl-datepicker [date]="date" [firstDayOfWeek]="firstDayOfWeek" showToday="false"></ngl-datepicker>
     `, false);

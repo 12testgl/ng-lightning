@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NglDropdown } from './dropdown';
 import { createGenericTestComponent, dispatchFixtureKeyEvent } from '../../../test/util';
@@ -56,7 +56,7 @@ describe('`nglDropdown`', () => {
   });
 
   describe('when anything outside the dropdown is clicked', () => {
-    it('should close', async(() => {
+    it('should close', waitForAsync(() => {
       const fixture = createTestComponent(null, false);
       const outsideDropdownElement = getOutsideDropdownElement(fixture.nativeElement);
       fixture.componentInstance.open = true;
@@ -70,7 +70,7 @@ describe('`nglDropdown`', () => {
       });
     }));
 
-    it('should not close when handlePageEvents is false', async(() => {
+    it('should not close when handlePageEvents is false', waitForAsync(() => {
       const fixture = createTestComponent(`
         <div nglDropdown [open]="open" (openChange)="setOpen($event)" [handlePageEvents]="handlePageEvents">
           <button type="button" nglDropdownTrigger></button>
@@ -91,7 +91,7 @@ describe('`nglDropdown`', () => {
     }));
   });
 
-  it('should not close when something inside is clicked, and then removed from DOM', async(() => {
+  it('should not close when something inside is clicked, and then removed from DOM', waitForAsync(() => {
     const fixture = createTestComponent(`
       <div nglDropdown [open]="open" (openChange)="setOpen($event)">
         <button type="button" *ngIf="!disappear" (click)="disappear = true"></button>

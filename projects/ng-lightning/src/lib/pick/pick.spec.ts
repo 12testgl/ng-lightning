@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent, selectElements, dispatchFixtureKeyEvent } from '../../../test/util';
 import { By } from '@angular/platform-browser';
@@ -102,7 +102,7 @@ describe('`Pick`', () => {
     expectState(fixture.nativeElement, [false, false, false, false, true]);
   });
 
-  it('call `nglOptionDestroyed` when a selected option is removed', async(() => {
+  it('call `nglOptionDestroyed` when a selected option is removed', waitForAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>
@@ -122,7 +122,7 @@ describe('`Pick`', () => {
     });
   }));
 
-  it('not call `nglOptionDestroyed` when a not selected option is removed', async(() => {
+  it('not call `nglOptionDestroyed` when a not selected option is removed', waitForAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>

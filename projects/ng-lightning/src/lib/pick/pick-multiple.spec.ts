@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent, selectElements } from '../../../test/util';
 import { NglPickModule } from './module';
@@ -58,7 +58,7 @@ describe('Pick multiple array', () => {
     expectState(fixture.nativeElement, [false, false, false, false, true]);
   });
 
-  it('call `nglOptionDestroyed` when a selected option is removed', async(() => {
+  it('call `nglOptionDestroyed` when a selected option is removed', waitForAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickMultiple (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>
@@ -78,7 +78,7 @@ describe('Pick multiple array', () => {
     });
   }));
 
-  it('not call `nglOptionDestroyed` when a not selected option is removed', async(() => {
+  it('not call `nglOptionDestroyed` when a not selected option is removed', waitForAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickMultiple (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>
@@ -146,7 +146,7 @@ describe('Pick multiple object', () => {
     expectState(fixture.nativeElement, [false, false, false, false, true]);
   });
 
-  it('call `nglOptionDestroyed` when a selected option is removed', async(() => {
+  it('call `nglOptionDestroyed` when a selected option is removed', waitForAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" nglPickMultiple (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>

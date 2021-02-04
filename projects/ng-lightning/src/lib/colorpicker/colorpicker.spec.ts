@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createGenericTestComponent, selectElements, dispatchEvent } from '../../../test/util';
@@ -52,7 +52,7 @@ describe('`NglColorpicker`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglColorpickerModule, FormsModule, ReactiveFormsModule] }));
 
-  it('should render correctly', async(() => {
+  it('should render correctly', waitForAsync(() => {
     const fixture = createTestComponent();
     const { nativeElement } = fixture;
 
@@ -64,7 +64,7 @@ describe('`NglColorpicker`', () => {
     });
   }));
 
-  it('should support placeholder', async(() => {
+  it('should support placeholder', waitForAsync(() => {
     const fixture = createTestComponent(`<ngl-colorpicker [ngModel]="color" [placeholder]="placeholder"></ngl-colorpicker>`);
     const { nativeElement, componentInstance } = fixture;
 
@@ -80,7 +80,7 @@ describe('`NglColorpicker`', () => {
     expect(input.placeholder).toEqual('');
   }));
 
-  it('should update based on model changes', async(() => {
+  it('should update based on model changes', waitForAsync(() => {
     const fixture = createTestComponent();
     const { componentInstance, nativeElement } = fixture;
 
@@ -94,7 +94,7 @@ describe('`NglColorpicker`', () => {
     });
   }));
 
-  it('should update appropriately if model is empty', async(() => {
+  it('should update appropriately if model is empty', waitForAsync(() => {
     const fixture = createTestComponent(null, false);
     const { componentInstance, nativeElement } = fixture;
 
@@ -114,7 +114,7 @@ describe('`NglColorpicker`', () => {
     });
   }));
 
-  it('should send updates based on input box value', async(() => {
+  it('should send updates based on input box value', waitForAsync(() => {
     const fixture = createTestComponent();
     const { componentInstance, nativeElement } = fixture;
 
@@ -131,7 +131,7 @@ describe('`NglColorpicker`', () => {
     });
   }));
 
-  it('should handle invalid updates of input box value', async(() => {
+  it('should handle invalid updates of input box value', waitForAsync(() => {
     const fixture = createTestComponent();
     const { componentInstance, nativeElement } = fixture;
 
@@ -150,7 +150,7 @@ describe('`NglColorpicker`', () => {
     });
   }));
 
-  it('should handle appropriately disable state', async(() => {
+  it('should handle appropriately disable state', waitForAsync(() => {
     const fixture = createTestComponent(`<ngl-colorpicker [ngModel]="color" disabled></ngl-colorpicker>`);
     const { nativeElement } = fixture;
 
@@ -160,7 +160,7 @@ describe('`NglColorpicker`', () => {
     });
   }));
 
-  it('should handle appropriately disable state', async(() => {
+  it('should handle appropriately disable state', waitForAsync(() => {
     const fixture = createTestComponent(`<ngl-colorpicker [ngModel]="color" readonlyInput="true"></ngl-colorpicker>`);
     const { nativeElement } = fixture;
 
@@ -191,7 +191,7 @@ describe('`NglColorpicker`', () => {
       });
     });
 
-    it('should send pressed color from swatches on done', async(() => {
+    it('should send pressed color from swatches on done', waitForAsync(() => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const swatches = getSwatches(popover);
@@ -205,7 +205,7 @@ describe('`NglColorpicker`', () => {
       });
     }));
 
-    it('should not send pressed color from swatches on cancel', async(() => {
+    it('should not send pressed color from swatches on cancel', waitForAsync(() => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const swatches = getSwatches(popover);
@@ -216,7 +216,7 @@ describe('`NglColorpicker`', () => {
       });
     }));
 
-    it('should send custom color based on hex input', async(() => {
+    it('should send custom color based on hex input', waitForAsync(() => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const tabs = getTabs(popover);
@@ -238,7 +238,7 @@ describe('`NglColorpicker`', () => {
       });
     }));
 
-    it('should send custom color based on RGB inputs', async(() => {
+    it('should send custom color based on RGB inputs', waitForAsync(() => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const tabs = getTabs(popover);
@@ -274,7 +274,7 @@ describe('`NglColorpicker`', () => {
       ],
     }));
 
-    it('should have configurable swatch colors', async(() => {
+    it('should have configurable swatch colors', waitForAsync(() => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const swatches = getSwatches(popover);
@@ -282,7 +282,7 @@ describe('`NglColorpicker`', () => {
       });
     }));
 
-    it('should have configurable variant', async(() => {
+    it('should have configurable variant', waitForAsync(() => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const tabs = getTabs(popover);
