@@ -215,6 +215,10 @@ describe('Pagination Component', () => {
     fixture.detectChanges();
     expect(el).toHaveText('31 - 33');
 
+    fixture.componentInstance.page = undefined;
+    fixture.detectChanges();
+    expect(el).toHaveText('1 - 10');
+
     fixture.componentInstance.total = 0;
     fixture.detectChanges();
     expect(el).toHaveText('0 - 0');

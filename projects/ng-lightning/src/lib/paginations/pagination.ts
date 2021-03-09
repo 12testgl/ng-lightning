@@ -83,7 +83,7 @@ export class NglPagination implements OnChanges {
   }
 
   get start(): number {
-    return Math.min(Math.max(1 + (+this.current - 1) * +this.perPage, 0), +this.total);
+    return Math.min(Math.max(1 + ((+this.current || 1) - 1) * +this.perPage, 0), +this.total);
   }
 
   get end(): number {
