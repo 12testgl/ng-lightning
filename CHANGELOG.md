@@ -1,3 +1,9 @@
+## Next version
+
+### Features
+
+* **app:** support Angular v12
+
 ## [7.0.2](https://github.com/ng-lightning/ng-lightning/compare/v7.0.1...v7.0.2) (2021-03-16)
 
 

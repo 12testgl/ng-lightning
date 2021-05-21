@@ -12,11 +12,11 @@ export class NglDatepickerConfig<D = any> {
 
   dropdownAlign: 'left' | 'right' = 'left';
 
-  monthNames: string[];
+  monthNames: ReadonlyArray<string>;
 
-  dayNamesShort: string[];
+  dayNamesShort: ReadonlyArray<string>;
 
-  dayNamesLong: string[];
+  dayNamesLong: ReadonlyArray<string>;
 
   firstDayOfWeek: number;
 

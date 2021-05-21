@@ -119,9 +119,9 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   /**
    * Datepicker inputs
    */
-  @Input() monthNames: string[];
-  @Input() dayNamesShort: string[];
-  @Input() dayNamesLong: string[];
+  @Input() monthNames: ReadonlyArray<string>;
+  @Input() dayNamesShort: ReadonlyArray<string>;
+  @Input() dayNamesLong: ReadonlyArray<string>;
   @Input() firstDayOfWeek: number;
   @Input() @InputBoolean() showToday: boolean;
   @Input() dateDisabled: (date: Date) => boolean | null = null;

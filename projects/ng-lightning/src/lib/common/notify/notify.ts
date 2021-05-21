@@ -1,7 +1,8 @@
-import { Input, Output, EventEmitter, ElementRef, Renderer2, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
 import { isInt } from '../../util/util';
 
-export class NglCommonNotify implements OnDestroy {
+@Directive()
+export abstract class NglCommonNotify implements OnDestroy {
 
   /**
    * The type of alert.
@@ -50,7 +51,7 @@ export class NglCommonNotify implements OnDestroy {
 
   private _variant: 'error' | 'info' | 'success' | 'warning';
 
-  constructor(private element: ElementRef, private renderer: Renderer2, private cd: ChangeDetectorRef, type: 'alert' | 'toast') {
+  constructor(private element: ElementRef, private renderer: Renderer2, private cd: ChangeDetectorRef, @Inject('type') type: string) {
     this.renderer.addClass(this.element.nativeElement, 'slds-notify');
     this.renderer.addClass(this.element.nativeElement, `slds-notify_${type}`);
     this.toggleThemeClass(true, this.variant);

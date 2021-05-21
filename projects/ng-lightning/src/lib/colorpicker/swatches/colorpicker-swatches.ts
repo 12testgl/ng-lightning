@@ -11,6 +11,7 @@ import { NglColorpickerSwatchTrigger } from './trigger';
   styles: [`
     .ngl-color-picker__swatch-selected {
       box-shadow: rgb(117, 112, 112) 1px 1px 1px;
+    }
   `]
 })
 export class NglColorpickerSwatches implements OnChanges {

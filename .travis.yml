@@ -1,21 +1,16 @@
-dist: xenial
+dist: focal
 
 services:
   - xvfb
 
 language: node_js
 node_js:
-  - 12.3
+  - 14.17
 
 addons:
   firefox: "latest"
 
-install:
-  - yarn
-
-cache: yarn
-
 script:
-  - yarn lint
-  - xvfb-run -a yarn test
-  - yarn build
+  - npm run lint
+  - xvfb-run -a npm run test
+  - npm run build

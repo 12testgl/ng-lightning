@@ -29,9 +29,9 @@ const KEYBOARD_MOVES = {
   styles: [`:host { display: block; }`],
 })
 export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
-  @Input() readonly monthNames: string[];
-  @Input() readonly dayNamesShort: string[];
-  @Input() readonly dayNamesLong: string[];
+  @Input() monthNames: ReadonlyArray<string>;
+  @Input() dayNamesShort: ReadonlyArray<string>;
+  @Input() dayNamesLong: ReadonlyArray<string>;
   @Input() dateDisabled: (date: Date) => boolean | null = null;
 
   _date: NglInternalDate;

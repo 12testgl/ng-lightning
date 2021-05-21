@@ -15,7 +15,7 @@ export class NglRadioGroup implements OnChanges {
 
   @Input() label: string | TemplateRef<any>;
 
-  @Input() error: string;
+  @Input() error: string = null;
 
   @HostBinding('class.slds-has-error')
   get hasError(): boolean {
