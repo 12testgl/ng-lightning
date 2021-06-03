@@ -147,7 +147,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.selection) {
+    if (changes.selection || changes.data) {
       this.calculateDisplayValue();
     }
   }
