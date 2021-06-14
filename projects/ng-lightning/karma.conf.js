@@ -1,8 +1,7 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
-const isTravis = process.env.TRAVIS;
-const isSaucelabs = process.argv.indexOf('--saucelabs') !== -1 || (isTravis && process.env.TRAVIS_PULL_REQUEST === 'false');
+const isSaucelabs = process.argv.indexOf('--saucelabs') !== -1 ;
 
 if (isSaucelabs && !process.env.SAUCE_USERNAME) {
   try {
@@ -37,12 +36,12 @@ module.exports = function (config) {
       reports: ['text-summary', 'html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
-    reporters: isTravis ? ['dots'] : ['progress', 'kjhtml'],
-    port: isTravis ? 9876 : 23011,
+    reporters: ['progress', 'kjhtml'],
+    port: 23011,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: [isTravis ? 'Firefox' : 'Chrome'],
+    browsers: ['Chrome'],
     singleRun: false,
 
     files: [
@@ -66,7 +65,7 @@ module.exports = function (config) {
     cfg.browsers = Object.keys(cfg.customLaunchers);
     cfg.reporters.push('saucelabs');
     cfg.sauceLabs = {
-      tunnelIdentifier: isTravis ? process.env.TRAVIS_JOB_NUMBER : 'ng-lightning',
+      tunnelIdentifier: 'ng-lightning',
     };
     cfg.captureTimeout = 180000;
     cfg.browserDisconnectTimeout = 180000;
