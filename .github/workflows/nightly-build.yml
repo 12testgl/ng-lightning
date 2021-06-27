@@ -1,0 +1,25 @@
+name: Nightly build
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - run: npm ci
+      - run: npm run lib:build
+      - name: Pushes to nightly repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'dist/ng-lightning'
+          destination-github-username: 'ng-lightning'
+          destination-repository-name: 'builds'
+          user-email: tbekos@gmail.com
+          target-branch: main
