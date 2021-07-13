@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, TemplateRef, OnDestroy,
-         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef, Optional, Inject } from '@angular/core';
+import {
+  Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, TemplateRef, OnDestroy,
+  ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef, Optional, Inject
+} from '@angular/core';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { ConnectionPositionPair, CdkOverlayOrigin, CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
@@ -16,6 +18,7 @@ export interface NglComboboxOptionItem {
   value: number | string;
   label?: string;
   disabled?: boolean;
+  optionHeader?: boolean;
 }
 
 @Component({
@@ -25,7 +28,7 @@ export interface NglComboboxOptionItem {
   host: {
     'class.slds-form-element': 'true',
   },
-  providers: [ NglComboboxService ],
+  providers: [NglComboboxService],
 })
 export class NglCombobox implements OnChanges, OnDestroy {
 
@@ -72,17 +75,24 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   @ViewChildren(NglComboboxOption) readonly options: QueryList<NglComboboxOption>;
 
+  protected optionHeaderCount = 0;
   @Input('options') set data(data: any[]) {
-    this._data = (data || []).map((d) => {
+    this.optionHeaderCount = 0;
+    const _data = (data || []).map((d) => {
       if (typeof d === 'string') {
         // Support array of strings as options, by mapping to NglComboboxOptionItem
         return { value: d, label: d };
       } else if (!d.label) {
+        // Detect if option is option header
+        this.detectOptionHeader(d.optionHeader);
         // Use `value` if missing `label`
         return { ...d, label: d.value };
       }
+      this.detectOptionHeader(d.optionHeader);
       return d;
     });
+    this.originalData = JSON.parse(JSON.stringify(_data))
+    this.setupOptionsData(_data);
   }
   get data() {
     return this._data;
@@ -104,6 +114,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
   private optionChangesSubscription: Subscription;
 
   private _data: NglComboboxOptionItem[] | null;
+  private originalData: NglComboboxOptionItem[] | null;
 
   private keyboardSubscription: Subscription;
 
@@ -122,7 +133,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
   }
 
   get selectedOptions(): NglComboboxOptionItem[] {
-    return this.data ? this.data.filter(d => this.isSelected(d.value)) : [];
+    return this.originalData ? this.originalData.filter(d => this.isSelected(d.value)) : [];
   }
 
   get isLookup(): boolean {
@@ -202,7 +213,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
   }
 
   dropdownClass() {
-    return {
+    return this.optionHeaderCount > 1 ? null : {
       [`slds-dropdown_length-${this.visibleLength}`]: this.visibleLength > 0,
     };
   }
@@ -294,5 +305,36 @@ export class NglCombobox implements OnChanges, OnDestroy {
       });
       overlayRef.updatePosition();
     });
+  }
+
+  private detectOptionHeader(optionHeader) {
+    if (optionHeader === true) {
+      this.optionHeaderCount++;
+    }
+  }
+
+  hasOptionHeaderMoreThanOne() {
+    return this.optionHeaderCount > 1;
+  }
+
+  private setupOptionsData(data: any[]) {
+    if (this.optionHeaderCount > 1) {
+      // build new data contain option headers
+      data = data.slice(data.findIndex(d => d.optionHeader === true));
+      this._data = data.reduce((arr, el) => {
+        if (el.optionHeader === true) {
+          arr.push({...el, options: [{...el}]});
+        } else {
+          arr[arr.length -1].options.push({...el});
+        }
+        return arr;
+      }, []);
+    } else if (this.optionHeaderCount === 1) {
+      // option header count == 1, remove the single option header and return _data
+      this._data = data.filter(d => !d.optionHeader);
+    } else {
+      // option header count === 0, no extra action and return _data
+      this._data = data;
+    }
   }
 }

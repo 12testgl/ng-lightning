@@ -22,6 +22,8 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
 
   @Input() disabled = false;
 
+  @Input() optionHeader = false;
+
   uid = uniqueId('combo-option');
 
   // Whether or not the option is currently active and ready to be selected
