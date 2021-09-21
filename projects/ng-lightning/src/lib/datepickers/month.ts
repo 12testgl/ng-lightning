@@ -112,7 +112,7 @@ export class NglDatepickerMonth implements OnChanges {
   }
 
   private daysInNextMonth(year: number, month: number, numOfDays: number) {
-    if (numOfDays % 7 === 0) { return; }
+    if (numOfDays % 7 === 0) { return[]; }
     return this.getDayObjects(year, month, 1, 7 - (numOfDays % 7), false);
   }
 

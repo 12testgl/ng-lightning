@@ -29,31 +29,31 @@ export interface NglComboboxOptionItem {
 })
 export class NglCombobox implements OnChanges, OnDestroy {
 
-  @Input() readonly variant: 'base' | 'lookup' = 'base';
+  @Input() variant: 'base' | 'lookup' = 'base';
 
-  @Input() readonly label: string | TemplateRef<any>;
+  @Input() label?: string | TemplateRef<any>;
 
   readonly uid = uniqueId('combobox');
 
-  @Input() @InputBoolean() readonly open = false;
+  @Input() @InputBoolean() open = false;
 
   @Output() openChange = new EventEmitter<boolean>();
 
-  @Input() readonly selection: any;
+  @Input() selection: any;
 
   @Output() selectionChange = new EventEmitter();
 
-  @Input() @InputBoolean() readonly multiple = false;
+  @Input() @InputBoolean() multiple = false;
 
-  @Input() @InputNumber() readonly visibleLength: 5 | 7 | 10 = 5;
+  @Input() @InputNumber() visibleLength: 5 | 7 | 10 = 5;
 
-  @ContentChild(NglComboboxInput, { static: true }) inputEl: NglComboboxInput;
+  @ContentChild(NglComboboxInput, { static: true }) inputEl?: NglComboboxInput;
 
-  @Input() @InputBoolean() readonly loading: boolean;
+  @Input() @InputBoolean() loading?: boolean;
 
-  @Input() @InputBoolean() readonly loadingMore: boolean;
+  @Input() @InputBoolean() loadingMore?: boolean;
 
-  @Input() @InputBoolean() readonly closeOnSelection = true;
+  @Input() @InputBoolean() closeOnSelection = true;
 
   /**
    * Text added to loading spinner.
@@ -70,7 +70,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
    */
   @Input() removeSelectedLabel: string;
 
-  @ViewChildren(NglComboboxOption) readonly options: QueryList<NglComboboxOption>;
+  @ViewChildren(NglComboboxOption) readonly options?: QueryList<NglComboboxOption>;
 
   @Input('options') set data(data: any[]) {
     this._data = (data || []).map((d) => {
@@ -85,27 +85,27 @@ export class NglCombobox implements OnChanges, OnDestroy {
     });
   }
   get data() {
-    return this._data;
+    return this._data as any[];
   }
 
-  @ViewChild('overlayOrigin', { static: true }) overlayOrigin: CdkOverlayOrigin;
+  @ViewChild('overlayOrigin', { static: true }) overlayOrigin?: CdkOverlayOrigin;
 
-  @ViewChild('cdkOverlay') cdkOverlay: CdkConnectedOverlay;
+  @ViewChild('cdkOverlay') cdkOverlay?: CdkConnectedOverlay;
 
-  @ViewChild('dropdown') dropdownElementRef: ElementRef;
+  @ViewChild('dropdown') dropdownElementRef?: ElementRef;
 
   overlayWidth = 0;
 
   overlayPositions: ConnectionPositionPair[] = [...DEFAULT_DROPDOWN_POSITIONS['left']];
 
   /** Manages active item in option list based on key events. */
-  keyManager: ActiveDescendantKeyManager<NglComboboxOption>;
+  keyManager?: ActiveDescendantKeyManager<NglComboboxOption> | null;
 
-  private optionChangesSubscription: Subscription;
+  private optionChangesSubscription?: Subscription | null;
 
-  private _data: NglComboboxOptionItem[] | null;
+  private _data?: NglComboboxOptionItem[] | null;
 
-  private keyboardSubscription: Subscription;
+  private keyboardSubscription?: Subscription | null;
 
   @Input() selectionValueFn = (selection: string[]): string => {
     if (selection.length > 0) {
@@ -154,27 +154,27 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   onAttach() {
     // Same width as the trigger element
-    this.overlayWidth = this.overlayOrigin.elementRef.nativeElement.offsetWidth;
+    this.overlayWidth = this.overlayOrigin?.elementRef.nativeElement.offsetWidth;
     this.cd.detectChanges();
 
-    this.keyManager = new ActiveDescendantKeyManager(this.options).withWrap();
+    this.keyManager = this.options && new ActiveDescendantKeyManager(this.options).withWrap();
 
     // Activate selected item or first option
-    const selectedOption = this.options.find(o => o.selected);
+    const selectedOption = this.options?.find(o => o.selected);
     if (selectedOption) {
-      this.keyManager.setActiveItem(selectedOption);
+      this.keyManager?.setActiveItem(selectedOption);
     } else {
-      this.keyManager.setFirstItemActive();
+      this.keyManager?.setFirstItemActive();
     }
 
     // Listen to button presses if picklist to activate matching option
     this.keyboardSubscribe(this.variant === 'base');
 
     // When it is open we listen for option changes in order to fix active option and handle scroll
-    this.optionChangesSubscription = this.options.changes.subscribe(() => {
-      if (!this.activeOption || this.options.toArray().indexOf(this.activeOption) === -1) {
+    this.optionChangesSubscription = this.options?.changes.subscribe(() => {
+      if (!this.activeOption || this.options?.toArray().indexOf(this.activeOption) === -1) {
         // Activate first option if active one is destroyed
-        this.keyManager.setFirstItemActive();
+        this.keyManager?.setFirstItemActive();
       } else {
         this.activeOption.scrollIntoView();
       }
@@ -192,12 +192,12 @@ export class NglCombobox implements OnChanges, OnDestroy {
     }
 
     // Clear aria-activedescendant when menu is closed
-    this.inputEl.setAriaActiveDescendant(null);
+    this.inputEl?.setAriaActiveDescendant(null);
 
     this.detach();
   }
 
-  trackByOption(index, option: NglComboboxOption) {
+  trackByOption(_index: number, option: NglComboboxOption) {
     return option.value;
   }
 
@@ -215,18 +215,20 @@ export class NglCombobox implements OnChanges, OnDestroy {
     return this.isLookup && this.data.length === 0 && !this.loadingMore;
   }
 
-  onOptionSelection(option: NglComboboxOption = this.activeOption) {
-    const selection = addOptionToSelection(option.value, this.selection, this.multiple);
-    this.selectionChange.emit(selection);
-    if (this.closeOnSelection) {
-      this.close();
+  onOptionSelection(option: NglComboboxOption | null = this.activeOption) {
+    if (option) {
+      const selection = addOptionToSelection(option.value, this.selection, this.multiple);
+      this.selectionChange.emit(selection);
+      if (this.closeOnSelection) {
+        this.close();
+      }
     }
   }
 
   // Trigger by clear button on Lookup
   onClearSelection() {
     this.selectionChange.emit(null);
-    setTimeout(() => this.inputEl.focus(), 0);
+    setTimeout(() => this.inputEl?.focus(), 0);
   }
 
   /**
@@ -256,8 +258,8 @@ export class NglCombobox implements OnChanges, OnDestroy {
   }
 
   private calculateDisplayValue() {
-    const value = this.selectionValueFn(this.selectedOptions.map(option => option.label));
-    this.inputEl.setValue(value);
+    const value = this.selectionValueFn(this.selectedOptions.map(option => option.label || ''));
+    this.inputEl?.setValue(value);
   }
 
   private keyboardSubscribe(listen: boolean) {
@@ -266,19 +268,22 @@ export class NglCombobox implements OnChanges, OnDestroy {
       this.keyboardSubscription = null;
     }
 
-    if (listen) {
+    if (listen && this.inputEl) {
       this.keyboardSubscription = this.inputEl.keyboardBuffer$.subscribe((pattern) => {
-        pattern = pattern.toLocaleLowerCase();
+        if (this.options && this.keyManager) {
 
-        const options = this.options.toArray();
+          pattern = pattern.toLocaleLowerCase();
 
-        const activeIndex = this.activeOption ? this.keyManager.activeItemIndex + 1 : 0;
-        for (let i = 0, n = options.length; i < n; i++) {
-          const index = (activeIndex + i) % n;
-          const option = options[index];
-          if (!option.disabled && option.label.toLocaleLowerCase().substr(0, pattern.length) === pattern) {
-            this.keyManager.setActiveItem(option);
-            break;
+          const options = this.options.toArray();
+
+          const activeIndex = this.activeOption ? (this.keyManager.activeItemIndex || 0) + 1 : 0;
+          for (let i = 0, n = options.length; i < n; i++) {
+            const index = (activeIndex + i) % n;
+            const option = options[index];
+            if (!option.disabled && option.label.toLocaleLowerCase().substr(0, pattern.length) === pattern) {
+              this.keyManager.setActiveItem(option);
+              break;
+            }
           }
         }
       });
@@ -287,12 +292,14 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   private updateMenuHeight() {
     this.ngZone.onStable.asObservable().pipe(take(1)).subscribe(() => {
-      const { overlayRef } = this.cdkOverlay;
-      const height = this.dropdownElementRef.nativeElement.offsetHeight;
-      overlayRef.updateSize({
-        minHeight: height + 4,
-      });
-      overlayRef.updatePosition();
+      if (this.cdkOverlay && this.dropdownElementRef) {
+        const { overlayRef } = this.cdkOverlay;
+        const height = this.dropdownElementRef.nativeElement.offsetHeight;
+        overlayRef.updateSize({
+          minHeight: height + 4,
+        });
+        overlayRef.updatePosition();
+      }
     });
   }
 }

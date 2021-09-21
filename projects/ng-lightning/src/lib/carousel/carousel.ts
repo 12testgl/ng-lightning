@@ -16,7 +16,7 @@ import { NglCarouselIndicator } from './carousel-indicator';
 })
 export class NglCarousel implements OnChanges {
 
-  @Input() @InputNumber() readonly active;
+  @Input() @InputNumber() active;
 
   @Output() activeChange = new EventEmitter<number>();
 
@@ -41,7 +41,7 @@ export class NglCarousel implements OnChanges {
 
   @ViewChild('indicatorsEl', { static: true }) indicatorsEl: ElementRef<HTMLElement>;
 
-  @Input() readonly labels = {
+  @Input() labels = {
     startAutoPlay: 'Start auto-play',
     stopAutoPlay: 'Stop auto-play',
   };

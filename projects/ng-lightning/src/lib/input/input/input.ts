@@ -15,13 +15,13 @@ import { Subscription } from 'rxjs';
 export class NglInput implements OnChanges, AfterContentInit, OnDestroy {
   @ContentChild(NglInputElement, { static: true }) input: NglInputElement;
 
-  @Input() label: string | TemplateRef<any>;
+  @Input() label?: string | TemplateRef<any>;
 
-  @Input() error: string | TemplateRef<any>;
+  @Input() error?: string | TemplateRef<any>;
 
-  @Input() @InputBoolean() stacked: boolean;
+  @Input() @InputBoolean() stacked?: boolean;
 
-  @Input() fieldLevelHelpTooltip: string | TemplateRef<any>;
+  @Input() fieldLevelHelpTooltip?: string | TemplateRef<any>;
 
   @HostBinding('class.slds-has-error')
   get hasError(): boolean {

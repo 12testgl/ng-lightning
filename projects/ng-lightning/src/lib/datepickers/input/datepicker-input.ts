@@ -99,17 +99,17 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
   /**
    * The minimum valid date.
    */
-  @Input() readonly min: Date;
+  @Input() min: Date;
 
   /**
    * The maximum valid date.
    */
-  @Input() readonly max: Date;
+  @Input() max: Date;
 
   /**
    * Text for button to open calendar.
    */
-  @Input() readonly selectDateLabel = 'Select a date';
+  @Input() selectDateLabel = 'Select a date';
 
   /**
    * Whether to use the accepted pattern as placeholder.

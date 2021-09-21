@@ -194,6 +194,7 @@ export function getPlacementName(position: ConnectedOverlayPositionChange, initi
       return placement;
     }
   }
+  return '';
 }
 
 export function getPlacementStyles(nubbin: Placement) {

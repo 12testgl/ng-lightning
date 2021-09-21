@@ -41,44 +41,44 @@ export class NglDatepicker implements OnInit, OnChanges, AfterViewInit {
   }
   @Output() dateChange = new EventEmitter();
 
-  @Input() @InputBoolean() readonly showToday: boolean;
+  @Input() @InputBoolean() showToday: boolean;
 
-  @Input() @InputNumber() readonly firstDayOfWeek: number;
+  @Input() @InputNumber() firstDayOfWeek: number;
 
   /**
    * Offset of year from current year, that can be the minimum option in the year selection dropdown.
    */
-  @Input() readonly relativeYearFrom: number;
+  @Input() relativeYearFrom: number;
 
   /**
    * Offset of year from current year, that can be the maximum option in the year selection dropdown.
    */
-  @Input() readonly relativeYearTo: number;
+  @Input() relativeYearTo: number;
 
   /**
    * The minimum date that can be selected.
    */
-  @Input() readonly min: Date;
+  @Input() min: Date;
 
   /**
    * The maximum date that can be selected.
    */
-  @Input() readonly max: Date;
+  @Input() max: Date;
 
   /**
    * Label of shortcut to select current date.
    */
-  @Input() readonly todayLabel: string;
+  @Input() todayLabel: string;
 
   /**
    * Label for button to go to the previous month.
    */
-  @Input() readonly previousMonthLabel: string;
+  @Input() previousMonthLabel: string;
 
   /**
    * Label for button to go to the next month.
    */
-  @Input() readonly nextMonthLabel: string;
+  @Input() nextMonthLabel: string;
 
 
   weeks: NglInternalDate[];

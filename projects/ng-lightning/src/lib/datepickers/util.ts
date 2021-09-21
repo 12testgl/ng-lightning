@@ -51,6 +51,7 @@ export function compareDate(d1: NglInternalDate, d2: NglInternalDate) {
       return diff > 0 ? 1 : -1;
     }
   }
+  return 0;
 }
 
 export function isSameMonth(d1: NglInternalDate, d2: NglInternalDate): boolean {

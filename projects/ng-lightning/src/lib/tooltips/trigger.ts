@@ -67,12 +67,12 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
   /**
    * Open/close without two-way binding input.
    */
-  @Input('nglTooltipOpenAuto') @InputBoolean() openAuto: boolean;
+  @Input('nglTooltipOpenAuto') @InputBoolean() openAuto: boolean | string;
 
   /**
    * Gives the possibility to interact with the content of the popover.
    */
-  @Input('nglTooltipInteractive') @InputBoolean() interactive: boolean;
+  @Input('nglTooltipInteractive') @InputBoolean() interactive: boolean | string;
 
   /**
    * Extra class(es) you want to apply to tooltip host element.
