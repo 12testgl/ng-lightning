@@ -28,6 +28,10 @@ function getLabel({ nativeElement }: ComponentFixture<any>): HTMLLabelElement {
   return nativeElement.querySelector('label.slds-form-element__label');
 }
 
+function getRequiredElement(element: Element): HTMLDivElement {
+  return <HTMLDivElement>element.querySelector('abbr');
+}
+
 function getDatepickerEl(): HTMLInputElement {
   return document.querySelector('ngl-datepicker');
 }
@@ -457,6 +461,19 @@ describe('`<ngl-datepicker-input>`', () => {
     dispatchEvent(scrollingContainerEl, 'scroll');
     fixture.detectChanges();
     expectOpen(fixture, false);
+  });
+
+  it('should add required indication to label on input required', () => {
+    const fixture = createTestComponent(`<ngl-datepicker-input label="'Test'" [(ngModel)]="date" required><input nglDatepickerInput></ngl-datepicker-input>`);
+    expect(getRequiredElement(fixture.nativeElement)).not.toBeNull();
+    fixture.detectChanges();
+    const abbrEl = getRequiredElement(fixture.nativeElement);
+    expect(abbrEl).toHaveCssClass('slds-required');
+  });
+
+  it('should not have required indication on label when input not required', () => {
+    const fixture = createTestComponent();
+    expect(getRequiredElement(fixture.nativeElement)).toBeFalsy();
   });
 });
 

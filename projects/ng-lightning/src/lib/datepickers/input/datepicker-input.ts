@@ -7,7 +7,7 @@ import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { uniqueId } from '../../util/util';
-import { InputBoolean } from '../../util/convert';
+import { InputBoolean, toBoolean } from '../../util/convert';
 import { HostService } from '../../common/host/host.service';
 import { NglDateAdapter } from '../adapters/date-fns-adapter';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
@@ -106,6 +106,10 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
    */
   @Input() readonly max: Date;
 
+  @Input() set required(required: any) {
+    this.isRequired = toBoolean(required);
+  }
+  isRequired: Boolean;
   /**
    * Text for button to open calendar.
    */

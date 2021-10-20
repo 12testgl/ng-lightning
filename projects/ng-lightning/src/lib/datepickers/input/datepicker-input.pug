@@ -1,4 +1,4 @@
-label.slds-form-element__label(*ngIf="label", [attr.for]="uid", [nglInternalOutlet]="label")
+label(*ngIf="label", [nglFormLabel]="label", [attr.for]="uid", [required]="isRequired")
 
 .slds-form-element__control.slds-input-has-icon.slds-input-has-icon_right(#formEl, cdkOverlayOrigin, #overlayOrigin="cdkOverlayOrigin")
   ng-content
