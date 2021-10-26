@@ -10,6 +10,7 @@ import { DemoComboboxesComponent } from './comboboxes.component';
 // Examples
 import { DemoComboboxesBasic } from './examples/basic';
 import { DemoComboboxesDisabled } from './examples/disabled';
+import { DemoComboboxesRequired } from './examples/required';
 
 const routes: Routes = [
   { path: '', component: DemoComboboxesComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     DemoComboboxesComponent,
     DemoComboboxesBasic,
     DemoComboboxesDisabled,
+    DemoComboboxesRequired,
   ],
 })
 export class NglDemoComboboxesModule {}

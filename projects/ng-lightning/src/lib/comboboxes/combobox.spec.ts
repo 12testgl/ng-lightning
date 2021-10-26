@@ -591,6 +591,30 @@ describe('`NglCombobox`', () => {
     fixture.detectChanges();
     expect(componentInstance.onOpen).toHaveBeenCalledWith(false);
   });
+
+  it('should indicate when the combobox is required or not', () => {
+    const fixture = createLookupTestComponent(`
+      <ngl-combobox label="Combobox label" [options]="options" [selection]="selection">
+        <input nglCombobox [required]="required"/>
+      </ngl-combobox>
+      SelECTION {{selection | json}}
+    `);
+    const { componentInstance, nativeElement } = fixture;
+    fixture.detectChanges();
+
+    let label = getLabel(nativeElement);
+    let abbr = label.querySelector('abbr');
+
+    expect(abbr).toBeNull();
+
+    componentInstance.required = true;
+    fixture.detectChanges();
+
+    label = getLabel(nativeElement);
+    abbr = label.querySelector('abbr');
+
+    expect(abbr).not.toBeNull();
+  });
 });
 
 @Component({
@@ -608,6 +632,7 @@ export class TestComponent {
   multiple = false;
   closeOnSelection: boolean;
   length: number;
+  required: boolean;
 
   options: NglComboboxOptionItem[] = [
     { value: 1, label: 'Antonis' },

@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, TemplateRef, OnDestroy,
-         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef, Optional, Inject } from '@angular/core';
+         ViewChildren, QueryList, SimpleChanges, ContentChild, ViewChild, NgZone, ElementRef, ChangeDetectorRef,
+         Optional, Inject, HostBinding, AfterContentInit } from '@angular/core';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { ConnectionPositionPair, CdkOverlayOrigin, CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DEFAULT_DROPDOWN_POSITIONS } from '../util/overlay-position';
 import { uniqueId, isOptionSelected, addOptionToSelection } from '../util/util';
-import { InputBoolean, InputNumber } from '../util/convert';
+import { InputBoolean, InputNumber, toBoolean } from '../util/convert';
 import { NglComboboxOption } from './combobox-option';
 import { NglComboboxInput } from './combobox-input';
 import { NglComboboxService } from './combobox.service';
@@ -27,7 +28,7 @@ export interface NglComboboxOptionItem {
   },
   providers: [ NglComboboxService ],
 })
-export class NglCombobox implements OnChanges, OnDestroy {
+export class NglCombobox implements OnChanges, OnDestroy, AfterContentInit {
 
   @Input() variant: 'base' | 'lookup' = 'base';
 
@@ -72,6 +73,8 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   @ViewChildren(NglComboboxOption) readonly options?: QueryList<NglComboboxOption>;
 
+  @HostBinding('class.slds-has-error') hasErrors = false;
+
   @Input('options') set data(data: any[]) {
     this._data = (data || []).map((d) => {
       if (typeof d === 'string') {
@@ -103,9 +106,13 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   private optionChangesSubscription?: Subscription | null;
 
+  private ɵRequiredSubscription?: Subscription;
+
   private _data?: NglComboboxOptionItem[] | null;
 
   private keyboardSubscription?: Subscription | null;
+
+  required: boolean;
 
   @Input() selectionValueFn = (selection: string[]): string => {
     if (selection.length > 0) {
@@ -146,10 +153,22 @@ export class NglCombobox implements OnChanges, OnDestroy {
     // this.service.openChange = this.openChange;
   }
 
+  ngAfterContentInit() {
+    if (!this.inputEl) {
+      throw Error(`[ng-lightning] Couldn't find an <input> with [nglCombobox] attribute inside NglCombobox`);
+    }
+    this.ɵRequiredSubscription = this.inputEl.ɵRequiredSubject.subscribe((required) => {
+      this.required = required;
+      this.cd.detectChanges();
+    });
+    this.calculateErrors();
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.selection || (this.selection && changes.data)) {
       this.calculateDisplayValue();
     }
+    setTimeout(() => this.calculateErrors(), 0);
   }
 
   onAttach() {
@@ -242,6 +261,7 @@ export class NglCombobox implements OnChanges, OnDestroy {
 
   ngOnDestroy() {
     this.detach();
+    this.ɵRequiredSubscription?.unsubscribe();
   }
 
   close() {
@@ -301,5 +321,12 @@ export class NglCombobox implements OnChanges, OnDestroy {
         overlayRef.updatePosition();
       }
     });
+  }
+
+  private calculateErrors() {
+    if (this.required) {
+      this.hasErrors = !toBoolean(this.selection);
+    }
+    this.cd.detectChanges();
   }
 }
