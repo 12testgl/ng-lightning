@@ -18,6 +18,7 @@ import { DemoDatepickersFilter } from './examples/filter';
 import { DemoDatepickersFormat } from './examples/format';
 import { DemoDatepickersValidation } from './examples/validation';
 import { DemoDatepickersMasking } from './examples/masking';
+import { DemoDatepickersCustomAdapter } from './examples/customadapter';
 
 const routes: Routes = [
   { path: '', component: DemoDatepickersComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
     DemoDatepickersInput,
     DemoDatepickersValidation,
     DemoDatepickersMasking,
+    DemoDatepickersCustomAdapter
   ],
 })
 export class NglDemoDatepickersModule {}

@@ -1,0 +1,1 @@
+You can provide a custom <span class="code">NGL_DATE_ADAPTER</span> that will allow you to customize the pattern, parsing and formatting.

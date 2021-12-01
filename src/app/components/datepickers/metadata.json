@@ -3,6 +3,7 @@
     "basic": "Inline",
     "input": "Input popup",
     "format": "Date format",
+    "customadapter": "Custom Date Adapters",
     "masking": "Masking",
     "filter": "Min/Max & Disabling dates",
     "disabled": "Disabling parts of the datepicker",

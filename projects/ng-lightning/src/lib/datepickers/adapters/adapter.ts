@@ -1,4 +1,10 @@
-export abstract class NglDateAdapterBase {
+export interface INglDateAdapter {
+  parse: (value: string, format: string) => Date | null;
+  format: (date: Date, format: string) => string;
+  pattern: (name: 'big-endian' | 'little-endian' | 'middle-endian' | string, delimiter?: string) => string;
+}
+
+export abstract class NglDateAdapterBase implements INglDateAdapter {
   /**
    * Converts a user supplied string to a `Date` object based on the supplied `format`.
    * If conversion is invalid, it returns `null`.
@@ -15,3 +21,4 @@ export abstract class NglDateAdapterBase {
    */
   abstract pattern(name: 'big-endian' | 'little-endian' | 'middle-endian' | string, delimiter?: string): string;
 }
+
