@@ -1,9 +1,10 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { ApplicationRef, Component, ViewChild } from '@angular/core';
 import { NglDropdown } from './dropdown';
-import { createGenericTestComponent, dispatchFixtureKeyEvent } from '../../../test/util';
+import { createGenericTestComponent, dispatchEvent, dispatchFixtureKeyEvent } from '../../../test/util';
 import { By } from '@angular/platform-browser';
 import { NglMenusModule } from './module';
+import { NglDropdownItem } from './dropdown-item';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -136,6 +137,28 @@ describe('`nglDropdown`', () => {
     expect(<Element>dropdownItem).toEqual(document.activeElement);
     fixture.destroy();
   });
+
+  describe('change detection behavior', () => {
+    it('should not run change detection when the `nglDropdownItem` is focused and blurred', () => {
+      const fixture = createTestComponent();
+      const dropdownTrigger = getDropdownTrigger(fixture.nativeElement);
+      const dropdownItem = getDropdownItem(fixture.nativeElement);
+
+      dropdownTrigger.click();
+
+      const appRef = TestBed.inject(ApplicationRef);
+      spyOn(appRef, 'tick');
+
+      dispatchFixtureKeyEvent(fixture, By.directive(NglDropdown), 'keydown.arrowdown');
+      dispatchEvent(dropdownItem, new FocusEvent('focus'));
+
+      expect(document.activeElement).toEqual(dropdownItem);
+      expect(fixture.componentInstance.dropdownItem.hasFocus()).toEqual(true);
+      // Caretaker note: previously `ApplicationRef.tick()` would've been called since event listeners
+      // were added through the `HostListener`.
+      expect(appRef.tick).not.toHaveBeenCalled();
+    });
+  });
 });
 
 @Component({
@@ -151,4 +174,6 @@ export class TestComponent {
   handlePageEvents: boolean;
 
   setOpen = jasmine.createSpy('setOpenDropdown');
+
+  @ViewChild(NglDropdownItem, { static: true }) dropdownItem: NglDropdownItem;
 }
