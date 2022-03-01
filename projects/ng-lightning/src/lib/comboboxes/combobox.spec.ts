@@ -1,10 +1,11 @@
 import { TestBed, ComponentFixture, tick, fakeAsync, flush } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ESCAPE, ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, selectElements, dispatchKeyboardEvent, dispatchEvent } from '../../../test/util';
 import { NglComboboxesModule } from './module';
 import { NglComboboxOptionItem } from './combobox';
+import { NglCombobox } from '.';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -498,6 +499,28 @@ describe('`NglCombobox`', () => {
 
     });
 
+    it('should deselect option if options change does not contain value anymore', () => {
+      const fixture = createLookupTestComponent(undefined, true);
+      const { componentInstance } = fixture;
+      const combobox = componentInstance.combobox;
+
+      fixture.detectChanges();
+      componentInstance.options = [
+        { value: 'alpha', label: 'alpha' },
+        { value: 'beta', label: 'beta' },
+      ];
+      componentInstance.open = true;
+      fixture.detectChanges();
+
+      expect(combobox.activeOption).not.toBeNull();
+      expect(combobox.activeOption.value).toEqual('alpha');
+
+      componentInstance.options = [];
+      fixture.detectChanges();
+      expect(combobox.activeOption).toBeNull();
+
+    });
+
     it('should remove selection with clear button', () => {
       const fixture = createLookupTestComponent();
       const { componentInstance, nativeElement } = fixture;
@@ -627,6 +650,8 @@ describe('`NglCombobox`', () => {
   `,
 })
 export class TestComponent {
+  @ViewChild(NglCombobox, { static: false }) combobox: NglCombobox;
+
   open: boolean;
   selection: any;
   multiple = false;

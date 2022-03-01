@@ -183,7 +183,7 @@ export class NglCombobox implements OnChanges, OnDestroy, AfterContentInit {
     if (selectedOption) {
       this.keyManager?.setActiveItem(selectedOption);
     } else {
-      this.keyManager?.setFirstItemActive();
+        this.keyManager?.setFirstItemActive();
     }
 
     // Listen to button presses if picklist to activate matching option
@@ -191,9 +191,15 @@ export class NglCombobox implements OnChanges, OnDestroy, AfterContentInit {
 
     // When it is open we listen for option changes in order to fix active option and handle scroll
     this.optionChangesSubscription = this.options?.changes.subscribe(() => {
-      if (!this.activeOption || this.options?.toArray().indexOf(this.activeOption) === -1) {
-        // Activate first option if active one is destroyed
-        this.keyManager?.setFirstItemActive();
+
+      const options = this.options?.toArray() || [];
+
+      if (!this.activeOption || options.indexOf(this.activeOption) === -1) {
+        if (this.isLookup && options.length === 0) {
+          this.keyManager?.setActiveItem(null);
+        } else {
+          this.keyManager?.setFirstItemActive();
+        }
       } else {
         this.activeOption.scrollIntoView();
       }
