@@ -23,10 +23,10 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/cdk": "^9.0.0",
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/forms": "^9.0.0"
+    "@angular/cdk": "^15.2.9",
+    "@angular/common": "^15.2.9",
+    "@angular/core": "^15.2.9",
+    "@angular/forms": "^15.2.9"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

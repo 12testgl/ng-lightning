@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 @Component({
   templateUrl: './intro.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class.intro]': 'true',
-  },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IntroComponent {}
+export class IntroComponent {
+  @HostBinding('class.intro') introClass = true;
+}

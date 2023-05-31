@@ -8,7 +8,7 @@ import { IHSV, getHexFromHsv, getHsvFromHex } from '../util';
 })
 export class NglColorpickerCustom implements OnChanges {
 
-  @Input() readonly hsv: IHSV;
+  @Input() hsv: IHSV;
 
   @Output() hsvChange = new EventEmitter<IHSV>();
 

@@ -7,7 +7,7 @@ export function isInt(value: any): boolean {
     return false;
   }
   const x = parseFloat(value);
-  // tslint:disable-next-line:no-bitwise
+  // eslint-disable-next-line no-bitwise
   return (x | 0) === x;
 }
 
@@ -20,7 +20,7 @@ export function isObject(value: any): boolean {
 // Generate a unique id (unique within the entire client session).
 // Useful for temporary DOM ids.
 let idCounter = 0;
-export function uniqueId(prefix = 'uid') {
+export function uniqueId(prefix = 'uid'): string {
   return `ngl_${prefix}_${++idCounter}`;
 }
 
@@ -45,29 +45,43 @@ function setClass(instance: IReplaceClass, klasses: string | string[], isAdd: bo
   }
 }
 
-export function ngClassCombine(ngClasses: string | string[] | Set<string> | { [klass: string]: any }, customClasses: { [klass: string]: any }) {
+type NgClassType = string | string[] | Set<string> | { [klass: string]: any };
+
+function isString(value: NgClassType): value is string {
+  return typeof value === 'string';
+}
+
+function isSet(value: NgClassType): value is Set<string> {
+  return value instanceof Set;
+}
+
+function isArray(value: NgClassType): value is string[] {
+  return Array.isArray(value);
+}
+
+export function ngClassCombine(ngClasses: NgClassType, customClasses: { [klass: string]: any }) {
   if (!ngClasses) {
     return customClasses;
   }
 
-  // Convert string and Set to array
-  if (typeof ngClasses === 'string') {
-    ngClasses = ngClasses.split(/\s+/);
-  } else if (ngClasses instanceof Set) {
-    const a = [];
-    ngClasses.forEach(v => a.push(v));
-    ngClasses = a;
+  let ngClassesObj: { [klass: string]: any } = {};
+
+  const classesReducer = (obj: { [klass: string]: any }, klass: string) => {
+    obj[klass] = true;
+    return obj;
+  };
+
+  if (isString(ngClasses)) {
+    ngClassesObj = ngClasses.split(/\s+/).reduce(classesReducer, {});
+  } else if (isSet(ngClasses)) {
+    ngClassesObj = Array.from(ngClasses).reduce(classesReducer, {});
+  } else if (isArray(ngClasses)) {
+    ngClassesObj = ngClasses.reduce(classesReducer, {});
+  } else {
+    ngClassesObj = ngClasses;
   }
 
-  // Convert array to object
-  if (Array.isArray(ngClasses)) {
-    ngClasses = ngClasses.reduce((o: Object, klass: string) => {
-      o[klass] = true;
-      return o;
-    }, {});
-  }
-
-  return {...ngClasses, ...customClasses};
+  return { ...ngClassesObj, ...customClasses };
 }
 
 

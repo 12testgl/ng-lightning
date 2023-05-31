@@ -480,7 +480,7 @@ class SpyService {
   called = jasmine.createSpy('spyCall');
 }
 
-// tslint:disable-next-line:component-selector
+// eslint-disable-next-line @angular-eslint/component-selector
 @Component({selector: 'destroyable', template: 'Some content'})
 export class DestroyableComponent implements OnDestroy {
 

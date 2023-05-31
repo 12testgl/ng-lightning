@@ -1,7 +1,7 @@
 import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, HostBinding } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nglColorpickerSwatch]',
   templateUrl: './colorpicker-swatch.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

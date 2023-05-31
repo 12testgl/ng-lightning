@@ -17,7 +17,7 @@ export interface INglDatatableRowClick {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table[ngl-datatable]',
   templateUrl: './datatable.html',
   host: {

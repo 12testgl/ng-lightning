@@ -3,7 +3,7 @@ import { normalizeIconName } from './util';
 import { NglIconConfig, NGL_ICON_CONFIG } from './config';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'svg[nglIconName]',
   templateUrl: './svg.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

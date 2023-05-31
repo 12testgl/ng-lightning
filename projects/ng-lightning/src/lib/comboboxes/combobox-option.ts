@@ -1,11 +1,10 @@
 import {
   Component, Input, ChangeDetectionStrategy, OnDestroy,
-  ElementRef, Renderer2, HostListener, ChangeDetectorRef, NgZone
+  ElementRef, Renderer2, HostListener, ChangeDetectorRef, NgZone, Output, EventEmitter
 } from '@angular/core';
 import { Highlightable } from '@angular/cdk/a11y';
 import { uniqueId, trapEvent, menuItemScroll } from '../util/util';
 import { InputBoolean } from '../util/convert';
-import { NglComboboxService } from './combobox.service';
 
 @Component({
   selector: 'ngl-combobox-option, [nglComboboxOption]',
@@ -22,6 +21,10 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
 
   @Input() disabled = false;
 
+  @Output() ariaActiveDescendant = new EventEmitter<string>();
+  @Output() selectedOption = new EventEmitter<NglComboboxOption>();
+  @Output() activeOption = new EventEmitter<NglComboboxOption>();
+
   uid = uniqueId('combo-option');
 
   // Whether or not the option is currently active and ready to be selected
@@ -34,7 +37,7 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
     this.cd.detectChanges();
 
     if (active) {
-      this.service.combobox.inputEl.setAriaActiveDescendant(this.uid);
+      this.ariaActiveDescendant.emit(this.uid);
       this.scrollIntoView();
     } else {
       clearTimeout(this.scrollTimer);
@@ -54,7 +57,6 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
   private destroyed = false;
 
   constructor(private element: ElementRef,
-              private service: NglComboboxService,
               private cd: ChangeDetectorRef,
               private ngZone: NgZone,
               renderer: Renderer2) {
@@ -66,7 +68,7 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
   onSelectViaInteraction(evt: MouseEvent) {
     trapEvent(evt);
     if (!this.disabled) {
-      this.service.combobox.onOptionSelection(this);
+      this.selectedOption.emit(this);
     }
   }
 
@@ -74,7 +76,7 @@ export class NglComboboxOption implements Highlightable, OnDestroy {
   hover() {
     if (!this.disabled) {
       this.disableNextScrollIntoView = true;
-      this.service.combobox.keyManager.setActiveItem(this);
+      this.activeOption.emit(this);
     }
   }
 

@@ -28,7 +28,7 @@ describe('`<ngl-file-upload>`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [TestComponent],
-    imports: [NglFileUploadModule, FormsModule]
+    imports: [NglFileUploadModule, FormsModule.withConfig({callSetDisabledState: 'whenDisabledForLegacyCode'})]
   }));
 
   it('should render correctly', () => {

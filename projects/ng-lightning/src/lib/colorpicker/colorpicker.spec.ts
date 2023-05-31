@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createGenericTestComponent, selectElements, dispatchEvent } from '../../../test/util';
@@ -52,19 +52,18 @@ describe('`NglColorpicker`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({ declarations: [TestComponent], imports: [NglColorpickerModule, FormsModule, ReactiveFormsModule] }));
 
-  it('should render correctly', async(() => {
+  it('should render correctly', async () => {
     const fixture = createTestComponent();
     const { nativeElement } = fixture;
 
     expect(nativeElement.firstElementChild).toHaveCssClass('slds-color-picker');
 
-    fixture.whenStable().then(() => {
-      expect(getSummaryInput(nativeElement).value).toBe('#ffddee');
-      expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#ffddee'));
-    });
-  }));
+    await fixture.whenStable();
+    expect(getSummaryInput(nativeElement).value).toBe('#ffddee');
+    expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#ffddee'));
+  });
 
-  it('should support placeholder', async(() => {
+  it('should support placeholder', fakeAsync(() => {
     const fixture = createTestComponent(`<ngl-colorpicker [ngModel]="color" [placeholder]="placeholder"></ngl-colorpicker>`);
     const { nativeElement, componentInstance } = fixture;
 
@@ -80,96 +79,86 @@ describe('`NglColorpicker`', () => {
     expect(input.placeholder).toEqual('');
   }));
 
-  it('should update based on model changes', async(() => {
+  it('should update based on model changes', async () => {
     const fixture = createTestComponent();
     const { componentInstance, nativeElement } = fixture;
 
-    fixture.whenStable().then(() => {
-      componentInstance.color = '#111222';
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(getSummaryInput(nativeElement).value).toBe('#111222');
-        expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#111222'));
-      });
-    });
-  }));
+    await fixture.whenStable();
+    componentInstance.color = '#111222';
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(getSummaryInput(nativeElement).value).toBe('#111222');
+    expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#111222'));
+  });
 
-  it('should update appropriately if model is empty', async(() => {
+  it('should update appropriately if model is empty', async () => {
     const fixture = createTestComponent(null, false);
     const { componentInstance, nativeElement } = fixture;
 
     componentInstance.color = undefined;
     fixture.detectChanges();
 
-    fixture.whenStable().then(() => {
-      expect(getSummaryInput(nativeElement).value).toBe('');
-      expect(getSummaryButtonColor(nativeElement)).toEqual('');
+    await fixture.whenStable();
+    expect(getSummaryInput(nativeElement).value).toBe('');
+    expect(getSummaryButtonColor(nativeElement)).toEqual('');
 
-      componentInstance.color = null;
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(getSummaryInput(nativeElement).value).toBe('');
-        expect(getSummaryButtonColor(nativeElement)).toEqual('');
-      });
-    });
-  }));
+    componentInstance.color = null;
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(getSummaryInput(nativeElement).value).toBe('');
+    expect(getSummaryButtonColor(nativeElement)).toEqual('');
+  });
 
-  it('should send updates based on input box value', async(() => {
+  it('should send updates based on input box value', async () => {
     const fixture = createTestComponent();
     const { componentInstance, nativeElement } = fixture;
 
-    fixture.whenStable().then(() => {
-      const inputEl = getSummaryInput(nativeElement);
-      inputEl.value = '#111222';
-      dispatchEvent(inputEl, 'input');
+    await fixture.whenStable();
+    const inputEl = getSummaryInput(nativeElement);
+    inputEl.value = '#111222';
+    dispatchEvent(inputEl, 'input');
 
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#111222'));
-        expect(componentInstance.onChange).toHaveBeenCalledWith('#111222');
-      });
-    });
-  }));
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#111222'));
+    expect(componentInstance.onChange).toHaveBeenCalledWith('#111222');
+  });
 
-  it('should handle invalid updates of input box value', async(() => {
+  it('should handle invalid updates of input box value', async () => {
     const fixture = createTestComponent();
     const { componentInstance, nativeElement } = fixture;
 
-    fixture.whenStable().then(() => {
-      const inputEl = getSummaryInput(nativeElement);
-      inputEl.value = 'invalid';
-      dispatchEvent(inputEl, 'input');
+    await fixture.whenStable();
+    const inputEl = getSummaryInput(nativeElement);
+    inputEl.value = 'invalid';
+    dispatchEvent(inputEl, 'input');
 
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#ffddee')); // keep previous state
-        expect(componentInstance.onChange).toHaveBeenCalledWith(null);
-        expect(nativeElement.querySelector('.slds-color-picker__summary')).toHaveCssClass('slds-has-error');
-        expect(nativeElement.querySelector('.slds-form-error')).toHaveText('Please ensure value is correct');
-      });
-    });
-  }));
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#ffddee')); // keep previous state
+    expect(componentInstance.onChange).toHaveBeenCalledWith(null);
+    expect(nativeElement.querySelector('.slds-color-picker__summary')).toHaveCssClass('slds-has-error');
+    expect(nativeElement.querySelector('.slds-form-error')).toHaveText('Please ensure value is correct');
+  });
 
-  it('should handle appropriately disable state', async(() => {
+  it('should handle appropriately disable state', async () => {
     const fixture = createTestComponent(`<ngl-colorpicker [ngModel]="color" disabled></ngl-colorpicker>`);
     const { nativeElement } = fixture;
 
-    fixture.whenStable().then(() => {
-      expect(getSummaryInput(nativeElement).disabled).toBe(true);
-      expect(getSummaryButton(nativeElement).disabled).toBe(true);
-    });
-  }));
+    await fixture.whenStable();
+    expect(getSummaryInput(nativeElement).disabled).toBe(true);
+    expect(getSummaryButton(nativeElement).disabled).toBe(true);
+  }) ;
 
-  it('should handle appropriately disable state', async(() => {
+  it('should handle appropriately disable state', async () => {
     const fixture = createTestComponent(`<ngl-colorpicker [ngModel]="color" readonlyInput="true"></ngl-colorpicker>`);
     const { nativeElement } = fixture;
 
-    fixture.whenStable().then(() => {
-      expect(getSummaryInput(nativeElement).readOnly).toBe(true);
-      expect(getSummaryInput(nativeElement).disabled).toBe(false);
-      expect(getSummaryButton(nativeElement).disabled).toBe(false);
-    });
-  }));
+    await fixture.whenStable();
+    expect(getSummaryInput(nativeElement).readOnly).toBe(true);
+    expect(getSummaryInput(nativeElement).disabled).toBe(false);
+    expect(getSummaryButton(nativeElement).disabled).toBe(false);
+  });
 
   describe('popover', () => {
 
@@ -191,77 +180,73 @@ describe('`NglColorpicker`', () => {
       });
     });
 
-    it('should send pressed color from swatches on done', async(() => {
+    it('should send pressed color from swatches on done', async () => {
       const fixture = createTestComponent();
-      openPopover(fixture).then((popover) => {
-        const swatches = getSwatches(popover);
-        expect(swatches.length).toBe(28);
+      const popover = await openPopover(fixture);
+      const swatches = getSwatches(popover);
+      expect(swatches.length).toBe(28);
 
-        swatches[0].click(); // #e3abec
-        swatches[1].click(); // #c2dbf7
-        pressDone(popover);
-        expect(fixture.componentInstance.onChange).not.toHaveBeenCalledWith('#e3abec');
-        expect(fixture.componentInstance.onChange).toHaveBeenCalledWith('#c2dbf7');
-      });
-    }));
+      swatches[0].click(); // #e3abec
+      swatches[1].click(); // #c2dbf7
+      pressDone(popover);
+      expect(fixture.componentInstance.onChange).not.toHaveBeenCalledWith('#e3abec');
+      expect(fixture.componentInstance.onChange).toHaveBeenCalledWith('#c2dbf7');
+    });
 
-    it('should not send pressed color from swatches on cancel', async(() => {
+    it('should not send pressed color from swatches on cancel', async() => {
       const fixture = createTestComponent();
-      openPopover(fixture).then((popover) => {
-        const swatches = getSwatches(popover);
-        swatches[0].click();
-        swatches[1].click();
-        pressCancel(popover);
-        expect(fixture.componentInstance.onChange).not.toHaveBeenCalled();
-      });
-    }));
+      const popover = await openPopover(fixture);
+      const swatches = getSwatches(popover);
+      swatches[0].click();
+      swatches[1].click();
+      pressCancel(popover);
+      expect(fixture.componentInstance.onChange).not.toHaveBeenCalled();
+    });
 
-    it('should send custom color based on hex input', async(() => {
+    it('should send custom color based on hex input', async () => {
       const fixture = createTestComponent();
-      openPopover(fixture).then((popover) => {
-        const tabs = getTabs(popover);
-        tabs[1].click();
-        fixture.detectChanges();
+      const popover = await openPopover(fixture);
+      const tabs = getTabs(popover);
+      tabs[1].click();
+      fixture.detectChanges();
 
-        const hexInput = popover.querySelector('.slds-color-picker__input-custom-hex input');
-        expect(hexInput.value).toEqual('#ffddee');
+      const hexInput = popover.querySelector('.slds-color-picker__input-custom-hex input');
+      expect(hexInput.value).toEqual('#ffddee');
 
-        hexInput.value = '#0000ff';
-        dispatchEvent(hexInput, 'input');
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          pressDone(popover);
-          fixture.detectChanges();
-          expect(getSummaryButtonColor(fixture.nativeElement)).toContain(getRGBStyle('#0000ff'));
-          expect(fixture.componentInstance.onChange).toHaveBeenCalledWith('#0000ff');
-        });
-      });
-    }));
+      hexInput.value = '#0000ff';
+      dispatchEvent(hexInput, 'input');
+      fixture.detectChanges();
+      await fixture.whenStable();
 
-    it('should send custom color based on RGB inputs', async(() => {
+      pressDone(popover);
+      fixture.detectChanges();
+      expect(getSummaryButtonColor(fixture.nativeElement)).toContain(getRGBStyle('#0000ff'));
+      expect(fixture.componentInstance.onChange).toHaveBeenCalledWith('#0000ff');
+    });
+
+    it('should send custom color based on RGB inputs', async () => {
       const fixture = createTestComponent();
-      openPopover(fixture).then((popover) => {
-        const tabs = getTabs(popover);
-        tabs[1].click();
-        fixture.detectChanges();
+      const popover = await openPopover(fixture);
+      const tabs = getTabs(popover);
+      tabs[1].click();
+      fixture.detectChanges();
 
-        const rgbInputs = selectElements(popover, '.slds-input[maxlength="3"]') as HTMLInputElement[];
-        expect(rgbInputs.length).toBe(3);
-        expect(rgbInputs.map(e => e.value)).toEqual(['255', '221', '238']);
+      const rgbInputs = selectElements(popover, '.slds-input[maxlength="3"]') as HTMLInputElement[];
+      expect(rgbInputs.length).toBe(3);
+      expect(rgbInputs.map(e => e.value)).toEqual(['255', '221', '238']);
 
-        rgbInputs.forEach((e, index) => {
-          e.value = `${index}`;
-          dispatchEvent(e, 'input');
-        });
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          pressDone(popover);
-          fixture.detectChanges();
-          expect(getSummaryButtonColor(fixture.nativeElement)).toContain(getRGBStyle('#000102'));
-          expect(fixture.componentInstance.onChange).toHaveBeenCalledWith('#000102');
-        });
+      rgbInputs.forEach((e, index) => {
+        e.value = `${index}`;
+        dispatchEvent(e, 'input');
       });
-    }));
+      fixture.detectChanges();
+
+      await fixture.whenStable();
+      pressDone(popover);
+      fixture.detectChanges();
+      expect(getSummaryButtonColor(fixture.nativeElement)).toContain(getRGBStyle('#000102'));
+      expect(fixture.componentInstance.onChange).toHaveBeenCalledWith('#000102');
+    });
   });
 
   describe('custom configuration', () => {
@@ -274,23 +259,21 @@ describe('`NglColorpicker`', () => {
       ],
     }));
 
-    it('should have configurable swatch colors', async(() => {
+    it('should have configurable swatch colors', async () => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
         const swatches = getSwatches(popover);
         expect(swatches.map(s => s.querySelector('.slds-assistive-text').textContent)).toEqual(swatchColors);
       });
-    }));
+    });
 
-    it('should have configurable variant', async(() => {
+    it('should have configurable variant', async () => {
       const fixture = createTestComponent();
-      openPopover(fixture).then((popover) => {
-        const tabs = getTabs(popover);
-        expect(tabs.length).toBe(0);
-      });
-    }));
+      const popover = await openPopover(fixture);
+      const tabs = getTabs(popover);
+      expect(tabs.length).toBe(0);
+    });
   });
-
 });
 
 @Component({

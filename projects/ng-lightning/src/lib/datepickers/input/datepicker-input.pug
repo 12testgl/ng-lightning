@@ -34,4 +34,6 @@ ng-template(cdkConnectedOverlay,
                                [dateDisabled]="dateDisabled",
                                (dateChange)="pickerSelection($event)",
                                (nglClickOutside)="closeCalendar(false)",
-                               [nglClickOutsideIgnore]="formEl")
+                               [nglClickOutsideIgnore]="formEl",
+                               (updateSize)="updateDatepickerSize($event.width, $event.height)"
+                               )

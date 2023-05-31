@@ -5,7 +5,7 @@ import { OnChange } from '../util/property-watch-decorator';
 import { ngClassCombine } from '../util/util';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'div[ngl-tooltip]',
   templateUrl: './tooltip.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

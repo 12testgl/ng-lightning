@@ -4,7 +4,7 @@ import { NglDatatableHeadingTemplate } from './heading';
 import { InputBoolean } from '../util/convert';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'ngl-datatable-column',
 })
 export class NglDatatableColumn {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-demo-colorpicker-validation',
@@ -9,7 +9,7 @@ export class DemoColorpickerValidation {
 
   error = null;
 
-  ctrl = new FormControl('', (control: FormControl) => {
+  ctrl = new UntypedFormControl('', (control: UntypedFormControl) => {
     const value: string = control.value;
 
     if (!value) {

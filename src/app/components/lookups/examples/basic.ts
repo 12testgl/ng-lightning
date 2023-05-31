@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -13,7 +13,7 @@ export class DemoLookupsBasic {
   filteredHeroes$: Observable<any[]>;
   superhero: string = null;
 
-  inputCtrl = new FormControl();
+  inputCtrl = new UntypedFormControl();
 
   open: boolean;
 

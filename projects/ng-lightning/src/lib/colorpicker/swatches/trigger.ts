@@ -6,7 +6,7 @@ import { Directive, ElementRef, Renderer2, Input, Output, EventEmitter, HostList
 export class NglColorpickerSwatchTrigger {
 
   @HostBinding('class.ngl-color-picker__swatch-selected')
-  @Input() readonly selected: boolean;
+  @Input() selected: boolean;
 
   @Output() selectedChange = new EventEmitter();
 

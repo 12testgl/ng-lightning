@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent } from '../../../test/util';
 import { NglPaginationsModule } from './module';
@@ -76,15 +76,14 @@ describe('Pagination Component', () => {
       expectPages(fixture.nativeElement, [ 'Previous', '1', '2', '3', '+4', '-Next' ]);
     });
 
-    it('should move to first if none defined', async(() => {
+    it('should move to first if none defined', async () => {
       const fixture = createTestComponent(`<ngl-pagination [page]="unknown" [total]="total" (pageChange)="pageChange($event)"></ngl-pagination>`);
       expect(fixture.componentInstance.pageChange).not.toHaveBeenCalled();
-      fixture.whenStable().then(() => {
-        expect(fixture.componentInstance.pageChange).toHaveBeenCalledWith(1);
-      });
-    }));
+      await fixture.whenStable();
+      expect(fixture.componentInstance.pageChange).toHaveBeenCalledWith(1);
+    });
 
-    it('should keep current page inside limits when total page changes', async(() => {
+    it('should keep current page inside limits when total page changes', fakeAsync(() => {
       const fixture = createTestComponent();
       fixture.componentInstance.page = 4;
       fixture.detectChanges();
@@ -93,9 +92,8 @@ describe('Pagination Component', () => {
       fixture.detectChanges();
 
       expect(fixture.componentInstance.pageChange).not.toHaveBeenCalled();
-      setTimeout(() => {
-        expect(fixture.componentInstance.pageChange).toHaveBeenCalledWith(2);
-      });
+      tick(10);
+      expect(fixture.componentInstance.pageChange).toHaveBeenCalledWith(2);
     }));
   });
 
@@ -224,7 +222,7 @@ describe('Pagination Component', () => {
     expect(el).toHaveText('0 - 0');
   });
 
-  it('should support custom text in buttons', async(() => {
+  it('should support custom text in buttons', () => {
     const fixture = createTestComponent(`<ngl-pagination page="1" total="1" boundaryLinks
       firstText="<<" previousText="<" nextText=">" [lastText]="lastText" ></ngl-pagination>`, false);
     fixture.componentInstance.lastText = '>>';
@@ -236,7 +234,7 @@ describe('Pagination Component', () => {
     fixture.componentInstance.lastText = '>>>';
     fixture.detectChanges();
     expect(pageEls.map(el => el.textContent)).toEqual([ '<<', '<', '1', '>', '>>>' ]);
-  }));
+  });
 });
 
 @Component({

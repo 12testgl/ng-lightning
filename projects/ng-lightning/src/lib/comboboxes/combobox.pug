@@ -50,7 +50,10 @@ ng-template(cdkConnectedOverlay,
           [value]="d.value",
           [label]="d.label",
           [disabled]="d.disabled",
-          [selected]="isSelected(d.value)")
+          [selected]="isSelected(d.value)",
+          (ariaActiveDescendant)="inputEl.setAriaActiveDescendant($event)",
+          (selectedOption)="onOptionSelection($event)",
+          (activeOption)="keyManager.setActiveItem($event)")
 
       //- Loading
       li.slds-listbox__item(*ngIf="loadingMore", role="presentation")

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-demo-slider-validation',
@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 })
 export class DemSliderValidation {
 
-  ctrl = new FormControl(null, (control: FormControl) => {
+  ctrl = new UntypedFormControl(null, (control: UntypedFormControl) => {
     const value: number = control.value;
 
     if (value < 40) {

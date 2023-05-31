@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createGenericTestComponent, selectElements, dispatchFixtureKeyEvent } from '../../../test/util';
 import { By } from '@angular/platform-browser';
@@ -102,7 +102,7 @@ describe('`Pick`', () => {
     expectState(fixture.nativeElement, [false, false, false, false, true]);
   });
 
-  it('call `nglOptionDestroyed` when a selected option is removed', async(() => {
+  it('call `nglOptionDestroyed` when a selected option is removed', fakeAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>
@@ -116,13 +116,12 @@ describe('`Pick`', () => {
 
     fixture.componentInstance.exists = false;
     fixture.detectChanges();
-    setTimeout(() => {
-      expect(fixture.componentInstance.selectedChange).not.toHaveBeenCalled();
-      expect(fixture.componentInstance.destroyed).toHaveBeenCalledWith('option3');
-    });
+    tick(10);
+    expect(fixture.componentInstance.selectedChange).not.toHaveBeenCalled();
+    expect(fixture.componentInstance.destroyed).toHaveBeenCalledWith('option3');
   }));
 
-  it('not call `nglOptionDestroyed` when a not selected option is removed', async(() => {
+  it('not call `nglOptionDestroyed` when a not selected option is removed', fakeAsync(() => {
     const fixture = createTestComponent(`
       <div [nglPick]="selected" (nglPickChange)="selectedChange($event)" (nglOptionDestroyed)="destroyed($event)">
         <button type="button" nglPickOption="option1"></button>
@@ -137,10 +136,9 @@ describe('`Pick`', () => {
 
     fixture.componentInstance.exists = false;
     fixture.detectChanges();
-    setTimeout(() => {
-      expect(fixture.componentInstance.selectedChange).not.toHaveBeenCalled();
-      expect(fixture.componentInstance.destroyed).not.toHaveBeenCalled();
-    });
+    tick(10);
+    expect(fixture.componentInstance.selectedChange).not.toHaveBeenCalled();
+    expect(fixture.componentInstance.destroyed).not.toHaveBeenCalled();
   }));
 
   it('should allow picking from outside and expose state', () => {

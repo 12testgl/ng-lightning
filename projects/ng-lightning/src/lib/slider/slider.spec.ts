@@ -1,6 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createGenericTestComponent, dispatchEvent } from '../../../test/util';
 import { NglSliderModule } from './module';
 
@@ -25,8 +25,7 @@ function getSliderLabelRange(element: Element): string {
 
 describe('Slider Component', () => {
 
-  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglSliderModule, FormsModule]}));
-
+  beforeEach(() => TestBed.configureTestingModule({declarations: [TestComponent], imports: [NglSliderModule, FormsModule.withConfig({callSetDisabledState: 'whenDisabledForLegacyCode'})]}));
   it('should render correctly default values', () => {
     const fixture = createTestComponent();
 

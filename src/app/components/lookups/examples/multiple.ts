@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class DemoLookupsMultiple {
 
-  inputCtrl = new FormControl();
+  inputCtrl = new UntypedFormControl();
   open = false;
 
   filteredStates$: Observable<any[]>;

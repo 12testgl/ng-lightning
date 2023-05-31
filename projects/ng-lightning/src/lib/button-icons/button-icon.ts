@@ -3,7 +3,7 @@ import { HostService } from '../common/host/host.service';
 import { ngClassCombine } from '../util/util';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nglButtonIcon]',
   templateUrl: './button-icon.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

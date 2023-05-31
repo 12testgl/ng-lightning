@@ -9,20 +9,20 @@ import { NglTab } from './tab';
  *    </ng-template>
  * </ngl-tab>
  */
-// tslint:disable-next-line:directive-selector
+// eslint-disable-next-line @angular-eslint/directive-selector
 @Directive({selector: '[ngl-tab-label]'})
 export class NglTabLabel {
   constructor(public templateRef: TemplateRef<any>) {}
 }
 
-// tslint:disable-next-line:directive-selector
+// eslint-disable-next-line @angular-eslint/directive-selector
 @Directive({selector: '[ngl-tab-content]'})
 export class NglTabContent {
   constructor(public templateRef: TemplateRef<any>) {}
 }
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'ngl-tab',
   providers: [ {provide: NglTab, useExisting: NglTabVerbose} ],
 })
