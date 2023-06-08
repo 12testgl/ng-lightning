@@ -20,6 +20,7 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
+      require('karma-coverage'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
       require('karma-sauce-launcher'),
@@ -36,7 +37,7 @@ module.exports = function (config) {
       reports: ['text-summary', 'html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'coverage-istanbul'],
     port: 23011,
     colors: true,
     logLevel: config.LOG_INFO,
