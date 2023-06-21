@@ -1,0 +1,8 @@
+.slds-grid.slds-gutters_direct
+  .slds-col
+    ngl-datepicker-input(label="Using MM/DD/YY as the format", [(value)]="value", patternPlaceholder)
+      input(nglDatepickerInput, type="text")
+
+  .slds-col
+    ngl-datepicker-input(label="Using MMM DD YYYY as the format", [(value)]="value", format="little-endian", patternPlaceholder)
+      input(nglDatepickerInput, type="text")

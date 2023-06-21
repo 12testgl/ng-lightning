@@ -18,6 +18,7 @@ import { NglDatepickerMonth } from './month';
 import { NglDateAdapter } from './adapters/date-fns-adapter';
 import { NglOverlayModule } from '../common/overlay/overlay.module';
 import { NglFormsModule } from '../forms/module';
+import { NGL_DATE_ADAPTER } from './adapters/adapter.interface';
 
 const EXPORTS = [
   NglDatepicker, NglDatepickerInput, NglDatepickerInputDirective,
@@ -36,6 +37,6 @@ const EXPORTS = [
     NglOverlayModule,
     NglFormsModule
   ],
-  providers: [NglDateAdapter],
+  providers: [{provide: NGL_DATE_ADAPTER, useClass: NglDateAdapter}],
 })
 export class NglDatepickersModule {}

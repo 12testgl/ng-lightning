@@ -9,11 +9,12 @@ import { take } from 'rxjs/operators';
 import { uniqueId } from '../../util/util';
 import { InputBoolean, toBoolean } from '../../util/convert';
 import { HostService } from '../../common/host/host.service';
-import { NglDateAdapter } from '../adapters/date-fns-adapter';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
 import { DEFAULT_DROPDOWN_POSITIONS } from '../../util/overlay-position';
 import { parseDate, isDisabled } from '../util';
 import { IDatepickerInput } from './datepicker-input.interface';
+import { NGL_DATE_ADAPTER } from '../adapters/adapter.interface';
+import { INglDateAdapter } from '../adapters/adapter';
 
 const NGL_DATEPICKER_INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -160,13 +161,13 @@ export class NglDatepickerInput implements ControlValueAccessor, Validator, OnIn
 
   constructor(@Optional() @Inject(NGL_DATEPICKER_CONFIG) defaultConfig: NglDatepickerConfig,
               @Inject(LOCALE_ID) locale: string,
+              @Inject(NGL_DATE_ADAPTER) private adapter: INglDateAdapter,
               private element: ElementRef,
               private renderer: Renderer2,
               private cd: ChangeDetectorRef,
               private hostService: HostService,
               private ngZone: NgZone,
-              private focusTrapFactory: FocusTrapFactory,
-              private adapter: NglDateAdapter) {
+              private focusTrapFactory: FocusTrapFactory) {
     this.renderer.addClass(this.element.nativeElement, 'slds-form-element');
     this.renderer.addClass(this.element.nativeElement, 'slds-dropdown-trigger');
     this.renderer.addClass(this.element.nativeElement, 'slds-dropdown-trigger_click');

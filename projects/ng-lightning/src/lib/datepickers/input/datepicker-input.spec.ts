@@ -1,5 +1,5 @@
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
+import { Component, Injectable } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -8,6 +8,8 @@ import { createGenericTestComponent, dispatchEvent, dispatchKeyboardEvent } from
 import { getDayElements, expectYearOptions, getDayHeaders } from '../datepicker.spec';
 import { NglDatepickersModule } from '../module';
 import { NGL_DATEPICKER_CONFIG, NglDatepickerConfig } from '../config';
+import { NglDateAdapter } from '../adapters/date-fns-adapter';
+import { NGL_DATE_ADAPTER } from '../adapters/adapter.interface';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -472,6 +474,38 @@ describe('`<ngl-datepicker-input>`', () => {
     const fixture = createTestComponent();
     expect(getRequiredElement(fixture.nativeElement)).toBeFalsy();
   });
+
+  describe('custom adapter', () => {
+    beforeEach(() => TestBed.configureTestingModule({
+      providers: [{provide: NGL_DATE_ADAPTER, useClass: TestCustomDateAdapter}]
+    }));
+
+    it('should apply correct format', () => {
+      const fixture = createTestComponent();
+      fixture.detectChanges();
+      const inputEl = getInput(fixture);
+      expect(inputEl.value).toEqual('09/30/10');
+    });
+
+    it('should set correct placeholder from adapter', () => {
+      const fixture = createTestComponent(`
+      <ngl-datepicker-input patternPlaceholder [format]="format" [delimiter]="delimiter">
+        <input nglDatepickerInput>
+      </ngl-datepicker-input>`);
+      const inputEl = getInput(fixture);
+      expect(inputEl.getAttribute('placeholder')).toEqual('MM/DD/YY');
+    });
+
+    it('should emit new date when interacting with input', fakeAsync(() => {
+      const fixture = createTestComponent();
+      const input = getInput(fixture);
+
+      input.value = '08/11/13';
+      dispatchEvent(input, 'input');
+      tick();
+      expect(fixture.componentInstance.dateChange).toHaveBeenCalledWith(new Date(2013, 7, 11));
+    }));
+  });
 });
 
 
@@ -490,4 +524,11 @@ export class TestComponent {
   delimiter: string;
   min: Date;
   max: Date;
+}
+
+@Injectable()
+export class TestCustomDateAdapter extends NglDateAdapter {
+  pattern(name: 'big-endian' | 'little-endian' | 'middle-endian', delimiter: string): string {
+    return 'MM/dd/yy';
+  }
 }
