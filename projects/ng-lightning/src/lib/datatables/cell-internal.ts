@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, HostBinding, OnChanges } fro
 import { NglDatatableColumn } from './column';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'td[nglDatatatableCell_]',
   templateUrl: './cell-internal.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

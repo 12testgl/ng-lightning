@@ -9,7 +9,7 @@ import { isTemplateRef } from '../util/check';
 import { OnChange } from '../util/property-watch-decorator';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'section[ngl-popover]',
   templateUrl: './popover.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

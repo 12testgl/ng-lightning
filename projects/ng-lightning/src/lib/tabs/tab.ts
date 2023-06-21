@@ -7,7 +7,7 @@ import { uniqueId } from '../util/util';
  * </ng-template>
  */
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[ngl-tab]',
   exportAs: 'nglTab',
 })

@@ -34,7 +34,7 @@ export abstract class NglCommonNotify implements OnDestroy {
   /**
    * Triggered by close button or duration timeout.
    */
-  // tslint:disable-next-line:no-output-rename
+  // eslint-disable-next-line @angular-eslint/no-output-rename
   @Output('close') closeEventEmitter = new EventEmitter<string>();
 
   set dismissible(dismissible: boolean) {

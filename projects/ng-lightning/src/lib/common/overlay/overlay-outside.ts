@@ -1,6 +1,6 @@
 import { Directive, Output, EventEmitter, OnInit, OnDestroy, NgZone, Self } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CdkConnectedOverlay, ScrollDispatcher } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, ScrollDispatcher } from '@angular/cdk/overlay';
 
 @Directive({
   selector: '[nglOverlayScrolledOutsideView]'
@@ -16,7 +16,7 @@ export class NglOverlaynglOverlayScrolledOutsideViewDirective implements OnInit,
               private scrollDispatcher: ScrollDispatcher) {}
 
   ngOnInit() {
-    const elementRef = this.cdkOverlay.origin.elementRef;
+    const elementRef = (this.cdkOverlay.origin as CdkOverlayOrigin).elementRef;
     const scrollableAncestors = this.scrollDispatcher.getAncestorScrollContainers(elementRef).map(container => container.getElementRef());
 
     if (!scrollableAncestors || !scrollableAncestors.length) return;

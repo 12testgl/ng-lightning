@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-demo-datepickers-validation',
@@ -7,7 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class DemoDatepickersValidation {
 
-  ctrl = new FormControl('', [Validators.required, (control: FormControl) => {
+  ctrl = new UntypedFormControl('', [Validators.required, (control: UntypedFormControl) => {
     if (!(control.value instanceof Date)) {
       return null;
     }

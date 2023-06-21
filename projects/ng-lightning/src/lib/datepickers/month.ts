@@ -11,28 +11,28 @@ interface INglDayCell extends NglInternalDate {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nglDatepickerMonth]',
   templateUrl: './month.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NglDatepickerMonth implements OnChanges {
 
-  @Input() readonly selected: NglInternalDate;
+  @Input() selected: NglInternalDate;
 
-  @Input() readonly year: number;
+  @Input() year: number;
 
-  @Input() readonly month: number;
+  @Input() month: number;
 
-  @Input() readonly day: number;
+  @Input() day: number;
 
-  @Input() readonly firstDayOfWeek: number;
+  @Input() firstDayOfWeek: number;
 
-  @Input() readonly minDate: NglInternalDate;
+  @Input() minDate: NglInternalDate;
 
-  @Input() readonly maxDate: NglInternalDate;
+  @Input() maxDate: NglInternalDate;
 
-  @Input() readonly dateDisabled: (date: Date) => boolean | null = null;
+  @Input() dateDisabled: (date: Date) => boolean | null = null;
 
   @Output() selectDate = new EventEmitter<NglInternalDate>();
 

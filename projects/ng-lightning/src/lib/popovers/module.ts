@@ -14,9 +14,8 @@ const NGL_POPOVER_DIRECTIVES = [
 ];
 
 @NgModule({
-  declarations: [NGL_POPOVER_DIRECTIVES],
-  exports: [NGL_POPOVER_DIRECTIVES],
-  imports: [CommonModule, OverlayModule, A11yModule, NglInternalOutletModule, NglIconsModule],
-  entryComponents: [NglPopover],
+    declarations: [NGL_POPOVER_DIRECTIVES],
+    exports: [NGL_POPOVER_DIRECTIVES],
+    imports: [CommonModule, OverlayModule, A11yModule, NglInternalOutletModule, NglIconsModule]
 })
 export class NglPopoversModule {}

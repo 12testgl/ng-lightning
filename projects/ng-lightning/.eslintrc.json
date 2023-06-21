@@ -1,0 +1,47 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "projects/ng-lightning/tsconfig.(lib|spec).json"
+        ]
+      },
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "ngl",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "ngl",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/component-class-suffix": "warn",
+        "@angular-eslint/directive-class-suffix": "warn",
+        "@angular-eslint/no-host-metadata-property": "warn",
+        "@angular-eslint/no-input-rename": "warn",
+        "@angular-eslint/no-output-rename": "warn",
+        "@angular-eslint/no-output-native": "warn"
+      }
+    },
+    {
+      "files": ["*.html", "*.pug"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}

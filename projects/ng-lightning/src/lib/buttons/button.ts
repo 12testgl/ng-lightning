@@ -2,7 +2,7 @@ import { Component, Input, ElementRef, Renderer2, ChangeDetectionStrategy, OnIni
 import { HostService } from '../common/host/host.service';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nglButton]',
   templateUrl: './button.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

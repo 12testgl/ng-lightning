@@ -1,3 +1,20 @@
+# [9.0.0](https://github.com/ng-lightning/ng-lightning/compare/v8.0.0...v9.0.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* **app:** fix karma coverage reporter ([98a4db0](https://github.com/ng-lightning/ng-lightning/commit/98a4db06853071d7f1931a7f3e969f6a3b25e91d))
+* **combobox:** lookups stop selection of option when no matches closes [#575](https://github.com/ng-lightning/ng-lightning/issues/575) ([#576](https://github.com/ng-lightning/ng-lightning/issues/576)) ([85f6b31](https://github.com/ng-lightning/ng-lightning/commit/85f6b319c227a4d5fa2d1ba5ccce663bf8f4eade))
+* **combobox:** stop updating input if there is no selection ([#558](https://github.com/ng-lightning/ng-lightning/issues/558)) ([43242c5](https://github.com/ng-lightning/ng-lightning/commit/43242c56fe5892ec188bbbc2ae5fc429597f94d3))
+* **combobox:** update selection value when options change ([fe25ae4](https://github.com/ng-lightning/ng-lightning/commit/fe25ae4e11d5e2495b304d3e2a9b66f59584cefb))
+
+
+### Features
+
+* **app:** update project to angular 15 ([5dc8a91](https://github.com/ng-lightning/ng-lightning/commit/5dc8a9177a54e65c9aaabde907c265cb0a006c98))
+
+
+
 # [8.0.0](https://github.com/ng-lightning/ng-lightning/compare/v7.0.2...v8.0.0) (2021-06-27)
 
 

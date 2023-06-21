@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, TemplateRef, ElementRef, Ren
 import { InputBoolean } from '../util/convert';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'label[nglFormLabel]',
   templateUrl: './label.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

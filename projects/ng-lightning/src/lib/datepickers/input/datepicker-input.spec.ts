@@ -59,7 +59,7 @@ describe('`<ngl-datepicker-input>`', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [TestComponent],
-    imports: [NglDatepickersModule, FormsModule, ReactiveFormsModule, OverlayModule],
+    imports: [NglDatepickersModule, FormsModule.withConfig({callSetDisabledState: 'whenDisabledForLegacyCode'}), ReactiveFormsModule, OverlayModule],
   }));
 
   it('should render correctly', () => {
@@ -313,7 +313,7 @@ describe('`<ngl-datepicker-input>`', () => {
     expect(host).not.toHaveCssClass('slds-has-error');
   }));
 
-  it('should have validation for `min` input', async(() => {
+  it('should have validation for `min` input', async () => {
     const fixture = createTestComponent(`
       <ngl-datepicker-input [(ngModel)]="date" [min]="min" #x="ngModel" [class.slds-has-error]="!x.valid">
         <input nglDatepickerInput>
@@ -325,18 +325,17 @@ describe('`<ngl-datepicker-input>`', () => {
 
     const host = getHost(fixture);
 
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(host).toHaveCssClass('slds-has-error');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(host).toHaveCssClass('slds-has-error');
 
-      fixture.componentInstance.date = new Date(2015, 7, 11);
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(host).not.toHaveCssClass('slds-has-error');
-      });
-    });
-  }));
+    fixture.componentInstance.date = new Date(2015, 7, 11);
+    fixture.detectChanges();
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(host).not.toHaveCssClass('slds-has-error');
+  });
 
   it('should update validity if `min` changes', fakeAsync(() => {
     const fixture = createTestComponent(`
@@ -357,7 +356,7 @@ describe('`<ngl-datepicker-input>`', () => {
     expect(form.control.valid).toBeFalsy();
   }));
 
-  it('should have validation for `max` input', async(() => {
+  it('should have validation for `max` input', async () => {
     const fixture = createTestComponent(`
       <ngl-datepicker-input [(ngModel)]="date" [max]="max" #x="ngModel" [class.slds-has-error]="!x.valid">
         <input nglDatepickerInput>
@@ -369,18 +368,17 @@ describe('`<ngl-datepicker-input>`', () => {
 
     const host = getHost(fixture);
 
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(host).toHaveCssClass('slds-has-error');
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(host).toHaveCssClass('slds-has-error');
 
-      fixture.componentInstance.date = new Date(2005, 9, 23);
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(host).not.toHaveCssClass('slds-has-error');
-      });
-    });
-  }));
+    fixture.componentInstance.date = new Date(2005, 9, 23);
+    fixture.detectChanges();
+
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(host).not.toHaveCssClass('slds-has-error');
+  });
 
   it('should update validity if `max` changes', fakeAsync(() => {
     const fixture = createTestComponent(`
@@ -401,14 +399,13 @@ describe('`<ngl-datepicker-input>`', () => {
     expect(form.control.valid).toBeFalsy();
   }));
 
-  it('should handle appropriately disable state', async(() => {
+  it('should handle appropriately disable state', async () => {
     const fixture = createTestComponent(`<ngl-datepicker-input [(ngModel)]="date" disabled><input nglDatepickerInput></ngl-datepicker-input>`);
 
-    fixture.whenStable().then(() => {
-      expect(getInput(fixture).disabled).toBe(true);
-      expect(getTrigger(fixture).disabled).toBe(true);
-    });
-  }));
+    await fixture.whenStable();
+    expect(getInput(fixture).disabled).toBe(true);
+    expect(getTrigger(fixture).disabled).toBe(true);
+  });
 
   describe('custom configuration', () => {
     const format = 'middle-endian';

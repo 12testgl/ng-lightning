@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NglDropdown } from './dropdown';
 import { createGenericTestComponent, dispatchFixtureKeyEvent } from '../../../test/util';
@@ -56,21 +56,20 @@ describe('`nglDropdown`', () => {
   });
 
   describe('when anything outside the dropdown is clicked', () => {
-    it('should close', async(() => {
+    it('should close', fakeAsync(() => {
       const fixture = createTestComponent(null, false);
       const outsideDropdownElement = getOutsideDropdownElement(fixture.nativeElement);
       fixture.componentInstance.open = true;
       fixture.detectChanges();
 
-      setTimeout(() => { // Wait for document subsription
-        expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
-        outsideDropdownElement.click();
-        expect(fixture.componentInstance.setOpen).toHaveBeenCalledWith(false);
-        fixture.destroy();
-      });
+      tick(10);
+      expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
+      outsideDropdownElement.click();
+      expect(fixture.componentInstance.setOpen).toHaveBeenCalledWith(false);
+      fixture.destroy();
     }));
 
-    it('should not close when handlePageEvents is false', async(() => {
+    it('should not close when handlePageEvents is false', fakeAsync(() => {
       const fixture = createTestComponent(`
         <div nglDropdown [open]="open" (openChange)="setOpen($event)" [handlePageEvents]="handlePageEvents">
           <button type="button" nglDropdownTrigger></button>
@@ -82,16 +81,15 @@ describe('`nglDropdown`', () => {
       fixture.componentInstance.open = true;
       fixture.detectChanges();
 
-      setTimeout(() => { // Wait for document subsription
-        expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
-        outsideDropdownElement.click();
-        expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
-        fixture.destroy();
-      });
+      tick(10);
+      expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
+      outsideDropdownElement.click();
+      expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
+      fixture.destroy();
     }));
   });
 
-  it('should not close when something inside is clicked, and then removed from DOM', async(() => {
+  it('should not close when something inside is clicked, and then removed from DOM', fakeAsync(() => {
     const fixture = createTestComponent(`
       <div nglDropdown [open]="open" (openChange)="setOpen($event)">
         <button type="button" *ngIf="!disappear" (click)="disappear = true"></button>
@@ -99,14 +97,13 @@ describe('`nglDropdown`', () => {
     fixture.componentInstance.open = true;
     fixture.detectChanges();
 
-    setTimeout(() => { // Wait for document subsription
-      const disappearElement = fixture.nativeElement.querySelector('button');
-      disappearElement.click();
-      fixture.detectChanges();
-      expect(fixture.nativeElement.querySelector('button')).toBeNull();
-      expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
-      fixture.destroy();
-    });
+    tick(10);
+    const disappearElement = fixture.nativeElement.querySelector('button');
+    disappearElement.click();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('button')).toBeNull();
+    expect(fixture.componentInstance.setOpen).not.toHaveBeenCalled();
+    fixture.destroy();
   }));
 
   it('should be closed when the ESC key is pressed', () => {

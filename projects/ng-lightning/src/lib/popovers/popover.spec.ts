@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { Component, Injectable, OnDestroy, ViewChild } from '@angular/core';
 import { dispatchKeyboardEvent, createGenericTestComponent } from '../../../test/util';
 import { NglPopoversModule } from './module';
@@ -291,15 +291,14 @@ describe('Popovers', () => {
     expect(fixture.componentInstance.cb).toHaveBeenCalledWith('x');
   });
 
-  it('should close if `backdrop` is clicked', async(() => {
+  it('should close if `backdrop` is clicked', fakeAsync(() => {
     fixture = createTestComponent();
     const outsideDropdownElement = getOutsidePopoverElement(fixture.nativeElement);
 
-    setTimeout(() => {  // Wait for document subsription
-      expect(fixture.componentInstance.cb).not.toHaveBeenCalled();
-      outsideDropdownElement.click();
-      expect(fixture.componentInstance.cb).toHaveBeenCalledWith('backdrop');
-    });
+    tick(10);
+    expect(fixture.componentInstance.cb).not.toHaveBeenCalled();
+    outsideDropdownElement.click();
+    expect(fixture.componentInstance.cb).toHaveBeenCalledWith('backdrop');
   }));
 
   it('should NOT close if popover is clicked', () => {
@@ -421,7 +420,7 @@ class SpyService {
   called = jasmine.createSpy('spyCall');
 }
 
-// tslint:disable-next-line:component-selector
+// eslint-disable-next-line @angular-eslint/component-selector
 @Component({selector: 'destroyable', template: 'Some content'})
 export class DestroyableComponent implements OnDestroy {
 

@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NglPill } from './pill';
 
 @Component({
-  //  tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'a[nglPillAction]',
   templateUrl: './pill-link.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

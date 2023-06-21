@@ -6,7 +6,7 @@ import { InputBoolean } from '../util/convert';
 const DEFAULT_VARIANT = 'border';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nglButtonIconStateful]',
   templateUrl: './button-icon-stateful.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

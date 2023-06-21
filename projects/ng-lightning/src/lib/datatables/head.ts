@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, HostBinding, TemplateRef } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'th[nglDatatableHead]',
   templateUrl: './head.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

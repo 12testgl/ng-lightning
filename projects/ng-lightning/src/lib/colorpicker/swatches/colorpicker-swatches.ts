@@ -16,7 +16,7 @@ import { NglColorpickerSwatchTrigger } from './trigger';
 })
 export class NglColorpickerSwatches implements OnChanges {
 
-  @Input() readonly hex: string;
+  @Input() hex: string;
 
   @Output() hexChange = new EventEmitter<string>();
 

@@ -1,0 +1,1 @@
+The following example creates a required combobox, which has the required mark and validation failed styling.

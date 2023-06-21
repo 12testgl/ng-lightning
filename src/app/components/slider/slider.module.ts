@@ -21,7 +21,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     NglSliderModule,
     NglButtonsModule,

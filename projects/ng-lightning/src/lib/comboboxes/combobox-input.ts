@@ -1,9 +1,10 @@
-import { Directive, ElementRef, Renderer2, HostListener, HostBinding } from '@angular/core';
+import { Directive, ElementRef, Renderer2, HostListener, HostBinding, Input } from '@angular/core';
 import { uniqueId, trapEvent } from '../util/util';
 import { DOWN_ARROW, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-import { Observable, fromEvent } from 'rxjs';
+import { Observable, fromEvent, BehaviorSubject } from 'rxjs';
 import { buffer, debounceTime, map } from 'rxjs/operators';
 import { NglComboboxService } from './combobox.service';
+import { toBoolean } from '../util/convert';
 
 const MAX_INTERVAL_BETWEEN_KEYSTROKES = 300; // ms
 
@@ -13,6 +14,7 @@ const MAX_INTERVAL_BETWEEN_KEYSTROKES = 300; // ms
 export class NglComboboxInput {
 
   keyboardBuffer$: Observable<string>;
+  ɵRequiredSubject = new BehaviorSubject<boolean>(false);
 
   @HostBinding('readOnly')
   get isReadonly() {
@@ -27,6 +29,10 @@ export class NglComboboxInput {
   @HostBinding('class.slds-combobox__input-value')
   get hasReadonlyValue() {
     return this.service.combobox.hasLookupSingleSelection;
+  }
+
+  @Input() set required(required: any) {
+    this.ɵRequiredSubject.next(toBoolean(required));
   }
 
   get id() {

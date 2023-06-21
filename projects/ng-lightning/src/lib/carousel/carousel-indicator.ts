@@ -10,14 +10,14 @@ export class NglCarouselIndicator implements OnChanges {
 
   @HostBinding('class.slds-is-active')
   @HostBinding('attr.aria-selected')
-  @Input() @InputBoolean() readonly isActive;
+  @Input() @InputBoolean() isActive;
 
   @HostBinding('attr.tabindex')
   get tabindex() {
     return this.isActive ? 0 : -1;
   }
 
-  @Input() readonly image: NglCarouselImage;
+  @Input() image: NglCarouselImage;
 
   @HostBinding('attr.id')
   uid = uniqueId('carousel-indicator');

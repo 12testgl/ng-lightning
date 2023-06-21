@@ -3,7 +3,7 @@ import { NglAccordionSection } from './accordion-section';
 import { uniqueId } from '../util/util';
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'li[nglAccordionItem]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './accordion-item.html',

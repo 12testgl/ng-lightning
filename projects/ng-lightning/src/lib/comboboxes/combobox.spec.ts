@@ -1,10 +1,11 @@
 import { TestBed, ComponentFixture, tick, fakeAsync, flush } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ESCAPE, ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
 import { createGenericTestComponent, selectElements, dispatchKeyboardEvent, dispatchEvent } from '../../../test/util';
 import { NglComboboxesModule } from './module';
 import { NglComboboxOptionItem } from './combobox';
+import { NglCombobox } from '.';
 
 const createTestComponent = (html?: string, detectChanges?: boolean) =>
   createGenericTestComponent(TestComponent, html, detectChanges) as ComponentFixture<TestComponent>;
@@ -498,6 +499,28 @@ describe('`NglCombobox`', () => {
 
     });
 
+    it('should deselect option if options change does not contain value anymore', () => {
+      const fixture = createLookupTestComponent(undefined, true);
+      const { componentInstance } = fixture;
+      const combobox = componentInstance.combobox;
+
+      fixture.detectChanges();
+      componentInstance.options = [
+        { value: 'alpha', label: 'alpha' },
+        { value: 'beta', label: 'beta' },
+      ];
+      componentInstance.open = true;
+      fixture.detectChanges();
+
+      expect(combobox.activeOption).not.toBeNull();
+      expect(combobox.activeOption.value).toEqual('alpha');
+
+      componentInstance.options = [];
+      fixture.detectChanges();
+      expect(combobox.activeOption).toBeNull();
+
+    });
+
     it('should remove selection with clear button', () => {
       const fixture = createLookupTestComponent();
       const { componentInstance, nativeElement } = fixture;
@@ -591,6 +614,30 @@ describe('`NglCombobox`', () => {
     fixture.detectChanges();
     expect(componentInstance.onOpen).toHaveBeenCalledWith(false);
   });
+
+  it('should indicate when the combobox is required or not', () => {
+    const fixture = createLookupTestComponent(`
+      <ngl-combobox label="Combobox label" [options]="options" [selection]="selection">
+        <input nglCombobox [required]="required"/>
+      </ngl-combobox>
+      SelECTION {{selection | json}}
+    `);
+    const { componentInstance, nativeElement } = fixture;
+    fixture.detectChanges();
+
+    let label = getLabel(nativeElement);
+    let abbr = label.querySelector('abbr');
+
+    expect(abbr).toBeNull();
+
+    componentInstance.required = true;
+    fixture.detectChanges();
+
+    label = getLabel(nativeElement);
+    abbr = label.querySelector('abbr');
+
+    expect(abbr).not.toBeNull();
+  });
 });
 
 @Component({
@@ -603,11 +650,14 @@ describe('`NglCombobox`', () => {
   `,
 })
 export class TestComponent {
+  @ViewChild(NglCombobox, { static: false }) combobox: NglCombobox;
+
   open: boolean;
   selection: any;
   multiple = false;
   closeOnSelection: boolean;
   length: number;
+  required: boolean;
 
   options: NglComboboxOptionItem[] = [
     { value: 1, label: 'Antonis' },
