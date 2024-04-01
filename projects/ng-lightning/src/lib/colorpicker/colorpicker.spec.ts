@@ -56,7 +56,7 @@ describe('`NglColorpicker`', () => {
     const fixture = createTestComponent();
     const { nativeElement } = fixture;
 
-    expect(nativeElement.firstElementChild).toHaveCssClass('slds-color-picker');
+    expect(nativeElement.firstElementChild).toHaveClass('slds-color-picker');
 
     await fixture.whenStable();
     expect(getSummaryInput(nativeElement).value).toBe('#ffddee');
@@ -137,8 +137,8 @@ describe('`NglColorpicker`', () => {
     await fixture.whenStable();
     expect(getSummaryButtonColor(nativeElement)).toContain(getRGBStyle('#ffddee')); // keep previous state
     expect(componentInstance.onChange).toHaveBeenCalledWith(null);
-    expect(nativeElement.querySelector('.slds-color-picker__summary')).toHaveCssClass('slds-has-error');
-    expect(nativeElement.querySelector('.slds-form-error')).toHaveText('Please ensure value is correct');
+    expect(nativeElement.querySelector('.slds-color-picker__summary')).toHaveClass('slds-has-error');
+    expect(nativeElement.querySelector('.slds-form-error').textContent).toEqual('Please ensure value is correct');
   });
 
   it('should handle appropriately disable state', async () => {
@@ -175,8 +175,8 @@ describe('`NglColorpicker`', () => {
     it('should render correctly', () => {
       const fixture = createTestComponent();
       openPopover(fixture).then((popover) => {
-        expect(popover).toHaveCssClass('slds-popover');
-        expect(popover).toHaveCssClass('slds-color-picker__selector');
+        expect(popover).toHaveClass('slds-popover');
+        expect(popover).toHaveClass('slds-color-picker__selector');
       });
     });
 

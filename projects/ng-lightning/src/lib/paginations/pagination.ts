@@ -109,7 +109,7 @@ export class NglPagination implements OnChanges {
   private limits() {
     let start = 1, end = this.totalPages;
 
-    if (this.limit < 1) { return {start, end}; }
+    if (typeof this.limit === 'number' && this.limit < 1) { return {start, end}; }
 
     // Current page is displayed in the middle of the visible ones
     start = Math.max(+this.current - Math.floor(+this.limit / 2), 1);
