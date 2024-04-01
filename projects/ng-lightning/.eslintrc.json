@@ -39,8 +39,13 @@
       }
     },
     {
-      "files": ["*.html", "*.pug"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html",
+        "*.pug"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]

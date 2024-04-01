@@ -67,7 +67,7 @@ export class NglRating implements OnInit, AfterContentInit {
   }
 
   update(value: number) {
-    if (value < 1 || value > this.max || this.readonly || value === this.inputRate) { return; }
+    if (value < 1 || (typeof this.max === 'number' && value > this.max) || this.readonly || value === this.inputRate) { return; }
     this.rateChange.emit(value);
   }
 

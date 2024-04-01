@@ -36,7 +36,8 @@ gulp.task('pug:compile', function libBuildHtml() {
 
   function safe(string) {
     const replaceChars = { '{': `{{ '{' }}`, '}': `{{ '}' }}` };
-    return string.replace(/{|}/g, function (match) { return replaceChars[match]; });
+    const ret = string.replace(/{|}/g, function (match) { return replaceChars[match]; });
+    return ret.replaceAll('@', '&#64;');
   }
 
   function highlightTS(src, language = 'typescript') {
@@ -79,7 +80,7 @@ gulp.task('pug:compile', function libBuildHtml() {
         ].forEach(({file, lang, safe}) => {
           const src = fs.readFileSync(`${directory}/${file}.md`, 'UTF-8');
           const md = src;
-          docs[file] = safe ? highlightTS(md, lang) : Prism.highlight(`${md}`, Prism.languages[lang]);
+          docs[file] = safe ? highlightTS(md, lang) : Prism.highlight(`${md}`.replaceAll('@', '&#64;'), Prism.languages[lang]);
         });
         return { ...docs };
       }
