@@ -450,6 +450,21 @@ describe('Tooltips', () => {
       fixture.detectChanges();
       expect(componentInstance.cb).toHaveBeenCalledWith(true);
     }));
+
+    it('should close the tooltip when Escape key is pressed', fakeAsync(() => {
+      fixture = createTestComponent();
+      const triggerEl = fixture.nativeElement.firstElementChild;
+      triggerEl.dispatchEvent(new MouseEvent('mouseenter')); // Open the tooltip
+      expect(getTooltipElement()).toBeTruthy(); // Tooltip is open
+      
+      // Simulate Escape key press
+      const escapeEvent = new KeyboardEvent('keyup', { key: 'Escape' });
+      document.dispatchEvent(escapeEvent);
+      tick();
+      fixture.detectChanges();
+      
+      expect(getTooltipElement()).toBeFalsy(); // Tooltip should be closed
+    }));
   });
 });
 
