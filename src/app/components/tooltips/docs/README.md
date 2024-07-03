@@ -7,3 +7,5 @@ Use a `string` or a `<ng-template #ref>` to host your tooltip's content. `#` ref
 If you want to delay the opening and closing of the popover/tooltip, you can use the `nglTooltipDelay` to specify the amount of time in milliseconds.
 
 In case you don't care to handle open/close state of tooltips using `[(nglTooltipOpen)]`, you can opt-in to use `nglTooltipOpenAuto`, and if you want to make it the default behavior you can take advantage of `NGL_TOOLTIP_CONFIG`.
+
+**Note:** The tooltips can be dismissed with an `Escape` key press without moving pointer hover or keyboard focus, following [WCAG2.1](https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html) accessibility standards.

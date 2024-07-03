@@ -149,6 +149,12 @@ export class NglTooltipTrigger implements OnChanges, OnDestroy {
     }
   }
 
+  @HostListener("document:keyup.escape", ["$event"])
+  onEscapePress(event: KeyboardEvent) {
+    event.stopPropagation();
+    this.close(0);
+  }
+
   ngOnDestroy(): void {
     this.detach();
     this.close(0);
